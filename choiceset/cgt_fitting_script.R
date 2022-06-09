@@ -1,6 +1,8 @@
 rm(list = ls()); # clear the workspace
 setwd('/Users/sokolhessner/Documents/gitrepos/cgt/choiceset/');
 
+library(tictoc)
+
 # Code to load choiceset
 choiceset = read.csv('CGT-choice-set.csv')
 
@@ -40,7 +42,7 @@ choice_probability <- function(parameters, choiceset) {
   return(p)
 }
 
-choiceP = choice_probability(c(.8,20), choiceset)
+choiceP = choice_probability(c(.8,10), choiceset)
 simulatedchoices = as.integer(runif(n = length(choiceP)) < choiceP);
 
 # Likelihood function
@@ -57,7 +59,7 @@ negLLprospect_cgt <- function(parameters,choiceset,choices) {
 
   choiceP = choice_probability(parameters, choiceset);
   
-  likelihood = choices * choiceP + (1 - choices) * 1-choiceP;
+  likelihood = choices * choiceP + (1 - choices) * (1-choiceP);
   likelihood[likelihood == 0] = eps;
   
   nll <- -sum(log(likelihood));
@@ -68,46 +70,17 @@ negLLprospect_cgt <- function(parameters,choiceset,choices) {
 
 
 negLLprospect_cgt(c(1.2, 20), choiceset, simulatedchoices)
-
-
-
-
-
-
-
-##### CODE BELOW HERE IS NON-FUNCTIONAL #####
-
+# It works!
 
 eps = .Machine$double.eps;
-lower_bounds = c(eps, eps, eps); # L, R, M
-upper_bounds = c(5,2,50); 
-
-# Initial values
-initial_values = c(3,1,20); # pick something within 
-# "support" (btwn lower_bounds 
-# and upper_bounds)
-
-# Call optim()
-output = optim(initial_values, pt_nll, 
-               riskygain = data_subject1$riskygain,
-               riskyloss = data_subject1$riskyloss,
-               cert = data_subject1$cert,
-               choice = data_subject1$choice,
-               lower = lower_bounds,
-               upper = upper_bounds,
-               method = 'L-BFGS-B',
-               hessian = T)
-
-# Look at the output!
-output$par
-se = sqrt(diag(solve(output$hessian)));
-
-#### Make Fitting More Robust: Iterations ####
+lower_bounds = c(eps, eps); # R, M
+upper_bounds = c(2,50); 
+number_of_parameters = length(lower_bounds);
 
 # Create placeholders for parameters, errors, NLL (and anything else you want)
 number_of_iterations = 200; # 100 or more
-temp_parameters = array(dim = c(number_of_iterations,3));
-temp_hessians = array(dim = c(number_of_iterations,3,3));
+temp_parameters = array(dim = c(number_of_iterations,number_of_parameters));
+temp_hessians = array(dim = c(number_of_iterations,number_of_parameters,number_of_parameters));
 temp_NLLs = array(dim = c(number_of_iterations,1));
 
 tic() # start the timer
@@ -116,15 +89,11 @@ for(iter in 1:number_of_iterations){
   # Randomly set initial values within supported values
   # using uniformly-distributed values. Many ways to do this!
   
-  # initial_values = 
-  #   runif(3)*(upper_bounds - lower_bounds) + lower_bounds;
-  initial_values = runif(3, min = lower_bounds, max = upper_bounds)
+  initial_values = runif(number_of_parameters, min = lower_bounds, max = upper_bounds)
   
-  temp_output = optim(initial_values, pt_nll,
-                      riskygain = data_subject1$riskygain,
-                      riskyloss = data_subject1$riskyloss,
-                      cert = data_subject1$cert,
-                      choice = data_subject1$choice,
+  temp_output = optim(initial_values, negLLprospect_cgt,
+                      choiceset = choiceset,
+                      choices = simulatedchoices,
                       lower = lower_bounds,
                       upper = upper_bounds,
                       method = "L-BFGS-B",
@@ -142,10 +111,10 @@ toc() # stop the timer; how long did it take? Use this to plan!
 unique(temp_NLLs) # they look the same but are not...
 
 # Compare output; select the best one
-s1_nll = min(temp_NLLs); # the best NLL for this person
-s1_best_ind = which(temp_NLLs == s1_nll); # the index of that NLL
+sim_nll = min(temp_NLLs); # the best NLL for this person
+sim_best_ind = which(temp_NLLs == sim_nll)[1]; # the index of that NLL
 
-s1_parameters = temp_parameters[s1_best_ind,] # the parameters
-s1_parameter_errors = sqrt(diag(solve(temp_hessians[s1_best_ind,,]))); # the SEs
+sim_parameters = temp_parameters[sim_best_ind,] # the parameters
+sim_parameter_errors = sqrt(diag(solve(temp_hessians[sim_best_ind,,]))); # the SEs
 
 
