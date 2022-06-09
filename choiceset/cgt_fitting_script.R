@@ -42,7 +42,9 @@ choice_probability <- function(parameters, choiceset) {
   return(p)
 }
 
-choiceP = choice_probability(c(.8,10), choiceset)
+true_vals = c(0.8, 20); # rho (risk attitudes), mu (choice consistency)
+
+choiceP = choice_probability(true_vals, choiceset)
 simulatedchoices = as.integer(runif(n = length(choiceP)) < choiceP);
 
 # Likelihood function
@@ -73,7 +75,7 @@ negLLprospect_cgt(c(1.2, 20), choiceset, simulatedchoices)
 # It works!
 
 eps = .Machine$double.eps;
-lower_bounds = c(eps, eps); # R, M
+lower_bounds = c(eps, 0); # R, M
 upper_bounds = c(2,50); 
 number_of_parameters = length(lower_bounds);
 
@@ -116,5 +118,11 @@ sim_best_ind = which(temp_NLLs == sim_nll)[1]; # the index of that NLL
 
 sim_parameters = temp_parameters[sim_best_ind,] # the parameters
 sim_parameter_errors = sqrt(diag(solve(temp_hessians[sim_best_ind,,]))); # the SEs
+
+true_vals
+sim_parameters
+sim_parameter_errors
+
+
 
 
