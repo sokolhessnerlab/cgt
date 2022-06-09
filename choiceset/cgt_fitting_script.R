@@ -3,6 +3,8 @@ setwd('/Users/sokolhessner/Documents/gitrepos/cgt/choiceset/');
 
 library(tictoc)
 
+tic()
+
 # Code to load choiceset
 choiceset = read.csv('CGT-choice-set.csv')
 
@@ -85,7 +87,7 @@ temp_parameters = array(dim = c(number_of_iterations,number_of_parameters));
 temp_hessians = array(dim = c(number_of_iterations,number_of_parameters,number_of_parameters));
 temp_NLLs = array(dim = c(number_of_iterations,1));
 
-tic() # start the timer
+# tic() # start the timer
 
 for(iter in 1:number_of_iterations){
   # Randomly set initial values within supported values
@@ -107,7 +109,7 @@ for(iter in 1:number_of_iterations){
   temp_NLLs[iter,] = temp_output$value; # the NLLs
 }
 
-toc() # stop the timer; how long did it take? Use this to plan!
+# toc() # stop the timer; how long did it take? Use this to plan!
 
 # How'd we do? Look at the NLLs to gauge quality of fit
 unique(temp_NLLs) # they look the same but are not...
@@ -125,4 +127,125 @@ sim_parameter_errors
 
 
 
+# Create choice set
+total_number_difficult = 60;
+total_number_easy = 60;
 
+choiceP_range_difficult = c(0.45, 0.55);
+choiceP_range_easy_lower = c(0, 0.10);
+choiceP_range_easy_upper = c(0.9, 1);
+
+possible_risky_value_range = c(0.25, 30);
+possible_safe_value_range = c(0.25, 12);
+
+newchoices_difficult = array(dim = c(total_number_difficult,3)); # 3 -> riskyoption1, riskyoption2, safeoption
+newchoices_easy = array(dim = c(total_number_easy,3));
+
+choiceP_difficult = array(dim = c(total_number_difficult,1));
+choiceP_easy = array(dim = c(total_number_easy,1));
+
+number_difficult = 0;
+number_easy = 0;
+
+newchoiceoption = array(dim = c(1,3));
+colnames(newchoiceoption) <- c('riskyoption1','riskyoption2','safeoption');
+newchoiceoption = as.data.frame(newchoiceoption);
+
+number_iterations = 0;
+
+while (number_difficult < total_number_difficult){
+  number_iterations = number_iterations + 1;
+  
+  newchoiceoption[] = c(runif(1, min = possible_risky_value_range[1], max = possible_risky_value_range[2]),
+                      0,
+                      runif(1, min = possible_safe_value_range[1], max = possible_safe_value_range[2]));
+  
+  choiceP_temporary = choice_probability(sim_parameters,newchoiceoption);
+  
+  if((choiceP_temporary > choiceP_range_difficult[1]) & (choiceP_temporary < choiceP_range_difficult[2])){
+    number_difficult = number_difficult + 1;
+    newchoices_difficult[number_difficult,] = as.numeric(newchoiceoption);
+    choiceP_difficult[number_difficult] = choiceP_temporary;
+  }
+}
+
+while (number_easy < (total_number_easy/2)){
+  
+  newchoiceoption[] = c(runif(1, min = possible_risky_value_range[1], max = possible_risky_value_range[2]),
+                        0,
+                        runif(1, min = possible_safe_value_range[1], max = possible_safe_value_range[2]));
+  
+  choiceP_temporary = choice_probability(sim_parameters,newchoiceoption);
+  
+  if((choiceP_temporary > choiceP_range_easy_lower[1]) & (choiceP_temporary < choiceP_range_easy_lower[2])){
+    number_easy = number_easy + 1;
+    newchoices_easy[number_easy,] = as.numeric(newchoiceoption);
+    choiceP_easy[number_easy] = choiceP_temporary;
+  }
+}
+
+while (number_easy < total_number_easy){
+  
+  newchoiceoption[] = c(runif(1, min = possible_risky_value_range[1], max = possible_risky_value_range[2]),
+                        0,
+                        runif(1, min = possible_safe_value_range[1], max = possible_safe_value_range[2]));
+  
+  choiceP_temporary = choice_probability(sim_parameters,newchoiceoption);
+  
+  if((choiceP_temporary > choiceP_range_easy_upper[1]) & (choiceP_temporary < choiceP_range_easy_upper[2])){
+    number_easy = number_easy + 1;
+    newchoices_easy[number_easy,] = as.numeric(newchoiceoption);
+    choiceP_easy[number_easy] = choiceP_temporary;
+  }
+}
+
+new_choiceset = rbind(newchoices_easy,newchoices_difficult)
+new_choiceset = cbind(new_choiceset,c(rep(0,total_number_easy), rep(1, total_number_difficult)));
+colnames(new_choiceset) <- c('riskyoption1','riskyoption2','safeoption','easy0difficult1');
+new_choiceset = new_choiceset[sample(nrow(new_choiceset)),];
+new_choiceset = as.data.frame(new_choiceset);
+
+toc()
+
+
+
+
+#### VISUALIZATION BELOW HERE ####
+
+# Plot actual choices
+plot(choiceset$riskyoption1[simulatedchoices == 0], choiceset$safeoption[simulatedchoices == 0],col = 'red',
+     xlim = c(0,30), ylim = c(0,12))
+points(choiceset$riskyoption1[simulatedchoices == 1], choiceset$safeoption[simulatedchoices == 1],col = 'green')
+
+# Plot the probability of various choices + lines that define the probability regions
+pal = colorRampPalette(c('red','white','green'))
+choiceset$pal = pal(100)[as.numeric(cut(choiceP, breaks = 100))]
+# choiceset$pal = pal(100)[0:100/100]
+plot(choiceset$riskyoption1, choiceset$safeoption, col = 'black', bg = choiceset$pal, 
+     xlim = c(0,30), ylim = c(0,12), pch = 21)
+
+xval = 35;
+r = true_vals[1];
+m = true_vals[2];
+pval = c(choiceP_range_easy_lower[2], choiceP_range_difficult, choiceP_range_easy_upper[1])
+yval_true = array(dim = c(length(pval),1));
+
+for (i in 1:length(pval)){
+  yval_true[i] = ((log(1/pval[i] - 1)/(m/(max(choiceset[,1:3])^r)))+0.5*(xval^r))^(1/r)
+  lines(x = c(0,xval), y = c(0,yval_true[i]))
+}
+
+# Plot the new choice set
+plot(new_choiceset$riskyoption1[new_choiceset$easy0difficult1==0],
+     new_choiceset$safeoption[new_choiceset$easy0difficult1==0], col = 'blue',
+     xlim = c(0,30), ylim = c(0,12))
+points(new_choiceset$riskyoption1[new_choiceset$easy0difficult1==1],new_choiceset$safeoption[new_choiceset$easy0difficult1==1], col = 'red')
+
+r = sim_parameters[1];
+m = sim_parameters[2];
+yval_sim = array(dim = c(length(pval),1));
+
+for (i in 1:length(pval)){
+  yval_sim[i] = ((log(1/pval[i] - 1)/(m/(max(choiceset[,1:3])^r)))+0.5*(xval^r))^(1/r)
+  lines(x = c(0,xval), y = c(0,yval_sim[i]), lty = 'dashed')
+}
