@@ -253,6 +253,7 @@ for(r in 1:n_rho_values){
     new_choiceset = as.data.frame(new_choiceset);
     
     fname = sprintf('bespoke_choiceset_rhoInd%i_muInd%i.csv', r, m);
+    # Files are roughly 7.5 KB per. 2500 files would be ~18 MB.
     
     write.csv(new_choiceset, file = fname);
     
