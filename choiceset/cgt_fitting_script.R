@@ -36,7 +36,7 @@ choice_probability <- function(parameters, choiceset) {
   utility_safe_option = choiceset$safeoption^rho;
   
   # normalize values using this term
-  div <- max(choiceset)^rho; # decorrelates rho & mu
+  div <- max(choiceset[,1:3])^rho; # decorrelates rho & mu
   
   # calculate the probability of selecting the risky option
   p = 1/(1+exp(-mu/div*(utility_risky_option - utility_safe_option)));
@@ -75,6 +75,7 @@ n_mu_values = 11;
 
 rho_values = seq(from = 0.3, to = 1.9, length.out = n_rho_values);
 mu_values = seq(from = 8, to = 50, length.out = n_mu_values);
+# NOTE: in Python, `numpy.linspace` may accomplish this identical operation.
 
 grid_nll_values = array(dim = c(n_rho_values, n_mu_values));
 
@@ -172,8 +173,8 @@ for(r in 1:n_rho_values){
   for(m in 1:n_mu_values){
     temp_parameters = c(rho_values[r],mu_values[m]);
     
-    newchoices_difficult = array(dim = c(total_number_difficult,3)); # 3 -> riskyoption1, riskyoption2, safeoption
-    newchoices_easy = array(dim = c(total_number_easy,3));
+    newchoices_difficult = array(dim = c(total_number_difficult,5)); # 5 -> riskyoption1, riskyoption2, safeoption, choiceP, easy/difficult
+    newchoices_easy = array(dim = c(total_number_easy,5));
     
     choiceP_difficult = array(dim = c(total_number_difficult,1));
     choiceP_easy = array(dim = c(total_number_easy,1));
@@ -181,8 +182,8 @@ for(r in 1:n_rho_values){
     number_difficult = 0;
     number_easy = 0;
     
-    newchoiceoption = array(dim = c(1,3));
-    colnames(newchoiceoption) <- c('riskyoption1','riskyoption2','safeoption');
+    newchoiceoption = array(dim = c(1,5));
+    colnames(newchoiceoption) <- c('riskyoption1','riskyoption2','safeoption','choiceP','easy0difficult1');
     newchoiceoption = as.data.frame(newchoiceoption);
     
     number_iterations = 0;
@@ -191,11 +192,13 @@ for(r in 1:n_rho_values){
     while (number_difficult < total_number_difficult){
       number_iterations = number_iterations + 1;
       
-      newchoiceoption[] = c(runif(1, min = possible_risky_value_range[1], max = possible_risky_value_range[2]),
+      newchoiceoption[1:3] = c(runif(1, min = possible_risky_value_range[1], max = possible_risky_value_range[2]),
                             0,
                             runif(1, min = possible_safe_value_range[1], max = possible_safe_value_range[2]));
       
       choiceP_temporary = choice_probability(temp_parameters,newchoiceoption);
+      newchoiceoption[4] = choiceP_temporary;
+      newchoiceoption[5] = 1;
       
       if((choiceP_temporary > choiceP_range_difficult[1]) & (choiceP_temporary < choiceP_range_difficult[2])){
         number_difficult = number_difficult + 1;
@@ -210,11 +213,13 @@ for(r in 1:n_rho_values){
     while (number_easy < (total_number_easy/2)){
       number_iterations = number_iterations + 1;
       
-      newchoiceoption[] = c(runif(1, min = possible_risky_value_range[1], max = possible_risky_value_range[2]),
+      newchoiceoption[1:3] = c(runif(1, min = possible_risky_value_range[1], max = possible_risky_value_range[2]),
                             0,
                             runif(1, min = possible_safe_value_range[1], max = possible_safe_value_range[2]));
       
       choiceP_temporary = choice_probability(temp_parameters,newchoiceoption);
+      newchoiceoption[4] = choiceP_temporary;
+      newchoiceoption[5] = 0;
       
       if(choiceP_temporary < choiceP_range_easy_lower){
         number_easy = number_easy + 1;
@@ -226,12 +231,14 @@ for(r in 1:n_rho_values){
     while (number_easy < total_number_easy){
       number_iterations = number_iterations + 1;
       
-      newchoiceoption[] = c(runif(1, min = possible_risky_value_range[1], max = possible_risky_value_range[2]),
+      newchoiceoption[1:3] = c(runif(1, min = possible_risky_value_range[1], max = possible_risky_value_range[2]),
                             0,
                             runif(1, min = possible_safe_value_range[1], max = possible_safe_value_range[2]));
       
       choiceP_temporary = choice_probability(temp_parameters,newchoiceoption);
-
+      newchoiceoption[4] = choiceP_temporary;
+      newchoiceoption[5] = 0;
+      
       if(choiceP_temporary > choiceP_range_easy_upper){
         number_easy = number_easy + 1;
         newchoices_easy[number_easy,] = as.numeric(newchoiceoption);
@@ -241,8 +248,7 @@ for(r in 1:n_rho_values){
     print(sprintf('Easy iterations: %i',number_iterations))
     
     new_choiceset = rbind(newchoices_easy,newchoices_difficult)
-    new_choiceset = cbind(new_choiceset,c(rep(0,total_number_easy), rep(1, total_number_difficult)));
-    colnames(new_choiceset) <- c('riskyoption1','riskyoption2','safeoption','easy0difficult1');
+    colnames(new_choiceset) <- c('riskyoption1','riskyoption2','safeoption','choiceP','easy0difficult1');
     new_choiceset = new_choiceset[sample(nrow(new_choiceset)),];
     new_choiceset = as.data.frame(new_choiceset);
     
@@ -256,9 +262,7 @@ toc()
 
 # TO DO
 # - visualize choice probability for grid to ensure mu range is good enough.
-# - save out choice probabilities into the files.
 # - Run creation of high-resolution files for different parameter combinations. 
-# - get rid of R-specific code/function 
 
 
 
