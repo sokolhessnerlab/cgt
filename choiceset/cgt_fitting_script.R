@@ -70,8 +70,37 @@ negLLprospect_cgt <- function(parameters,choiceset,choices) {
   return(nll)
 }
 
+#### Do Grid Search Method ####
+
+n_rho_values = 10;
+n_mu_values = 11;
+
+rho_values = seq(from = 0.3, to = 1.9, length.out = n_rho_values);
+mu_values = seq(from = 8, to = 50, length.out = n_mu_values);
+
+grid_nll_values = array(dim = c(n_rho_values, n_mu_values));
+
+tic();
+for(r in 1:n_rho_values){
+  for(m in 1:n_mu_values){
+    grid_nll_values[r,m] = negLLprospect_cgt(c(rho_values[r],mu_values[m]), choiceset, simulatedchoices)
+  }
+}
+toc()
+
+min_nll = min(grid_nll_values);
+indexes = which(grid_nll_values == min_nll, arr.ind = T);
+
+best_rho = rho_values[indexes[1]];
+best_mu = mu_values[indexes[2]];
+
+c(best_rho, best_mu)
+true_vals
+
+fname = sprintf('bespoke_choiceset_rhoInd%i_muInd%i.csv', indexes[1], indexes[2]);
 
 
+#### Optimization code ####
 
 negLLprospect_cgt(c(1.2, 20), choiceset, simulatedchoices)
 # It works!
@@ -125,87 +154,113 @@ true_vals
 sim_parameters
 sim_parameter_errors
 
-
+#### Choice Set Creation ####
 
 # Create choice set
 total_number_difficult = 60;
 total_number_easy = 60;
 
 choiceP_range_difficult = c(0.45, 0.55);
-choiceP_range_easy_lower = c(0, 0.10);
-choiceP_range_easy_upper = c(0.9, 1);
+choiceP_range_easy_lower = 0.10;
+choiceP_range_easy_upper = 0.9;
 
-possible_risky_value_range = c(0.25, 30);
-possible_safe_value_range = c(0.25, 12);
+possible_risky_value_range = c(0.05, 30);
+possible_safe_value_range = c(0.05, 12);
 
-newchoices_difficult = array(dim = c(total_number_difficult,3)); # 3 -> riskyoption1, riskyoption2, safeoption
-newchoices_easy = array(dim = c(total_number_easy,3));
+setwd('/Users/sokolhessner/Documents/gitrepos/cgt/choiceset/bespoke_choicesets/');
 
-choiceP_difficult = array(dim = c(total_number_difficult,1));
-choiceP_easy = array(dim = c(total_number_easy,1));
+tic();
+for(r in 1:n_rho_values){
+  for(m in 1:n_mu_values){
+    temp_parameters = c(rho_values[r],mu_values[m]);
+    
+    newchoices_difficult = array(dim = c(total_number_difficult,3)); # 3 -> riskyoption1, riskyoption2, safeoption
+    newchoices_easy = array(dim = c(total_number_easy,3));
+    
+    choiceP_difficult = array(dim = c(total_number_difficult,1));
+    choiceP_easy = array(dim = c(total_number_easy,1));
+    
+    number_difficult = 0;
+    number_easy = 0;
+    
+    newchoiceoption = array(dim = c(1,3));
+    colnames(newchoiceoption) <- c('riskyoption1','riskyoption2','safeoption');
+    newchoiceoption = as.data.frame(newchoiceoption);
+    
+    number_iterations = 0;
+    
+    # Make DIFFICULT choices
+    while (number_difficult < total_number_difficult){
+      number_iterations = number_iterations + 1;
+      
+      newchoiceoption[] = c(runif(1, min = possible_risky_value_range[1], max = possible_risky_value_range[2]),
+                            0,
+                            runif(1, min = possible_safe_value_range[1], max = possible_safe_value_range[2]));
+      
+      choiceP_temporary = choice_probability(temp_parameters,newchoiceoption);
+      
+      if((choiceP_temporary > choiceP_range_difficult[1]) & (choiceP_temporary < choiceP_range_difficult[2])){
+        number_difficult = number_difficult + 1;
+        newchoices_difficult[number_difficult,] = as.numeric(newchoiceoption);
+        choiceP_difficult[number_difficult] = choiceP_temporary;
+      }
+    }
+    print(sprintf('Difficult iterations: %i',number_iterations))
+    
+    # Make EASY choices
+    number_iterations = 0;
+    while (number_easy < (total_number_easy/2)){
+      number_iterations = number_iterations + 1;
+      
+      newchoiceoption[] = c(runif(1, min = possible_risky_value_range[1], max = possible_risky_value_range[2]),
+                            0,
+                            runif(1, min = possible_safe_value_range[1], max = possible_safe_value_range[2]));
+      
+      choiceP_temporary = choice_probability(temp_parameters,newchoiceoption);
+      
+      if(choiceP_temporary < choiceP_range_easy_lower){
+        number_easy = number_easy + 1;
+        newchoices_easy[number_easy,] = as.numeric(newchoiceoption);
+        choiceP_easy[number_easy] = choiceP_temporary;
+      }
+    }
+    
+    while (number_easy < total_number_easy){
+      number_iterations = number_iterations + 1;
+      
+      newchoiceoption[] = c(runif(1, min = possible_risky_value_range[1], max = possible_risky_value_range[2]),
+                            0,
+                            runif(1, min = possible_safe_value_range[1], max = possible_safe_value_range[2]));
+      
+      choiceP_temporary = choice_probability(temp_parameters,newchoiceoption);
 
-number_difficult = 0;
-number_easy = 0;
-
-newchoiceoption = array(dim = c(1,3));
-colnames(newchoiceoption) <- c('riskyoption1','riskyoption2','safeoption');
-newchoiceoption = as.data.frame(newchoiceoption);
-
-number_iterations = 0;
-
-while (number_difficult < total_number_difficult){
-  number_iterations = number_iterations + 1;
-  
-  newchoiceoption[] = c(runif(1, min = possible_risky_value_range[1], max = possible_risky_value_range[2]),
-                      0,
-                      runif(1, min = possible_safe_value_range[1], max = possible_safe_value_range[2]));
-  
-  choiceP_temporary = choice_probability(sim_parameters,newchoiceoption);
-  
-  if((choiceP_temporary > choiceP_range_difficult[1]) & (choiceP_temporary < choiceP_range_difficult[2])){
-    number_difficult = number_difficult + 1;
-    newchoices_difficult[number_difficult,] = as.numeric(newchoiceoption);
-    choiceP_difficult[number_difficult] = choiceP_temporary;
+      if(choiceP_temporary > choiceP_range_easy_upper){
+        number_easy = number_easy + 1;
+        newchoices_easy[number_easy,] = as.numeric(newchoiceoption);
+        choiceP_easy[number_easy] = choiceP_temporary;
+      }
+    }
+    print(sprintf('Easy iterations: %i',number_iterations))
+    
+    new_choiceset = rbind(newchoices_easy,newchoices_difficult)
+    new_choiceset = cbind(new_choiceset,c(rep(0,total_number_easy), rep(1, total_number_difficult)));
+    colnames(new_choiceset) <- c('riskyoption1','riskyoption2','safeoption','easy0difficult1');
+    new_choiceset = new_choiceset[sample(nrow(new_choiceset)),];
+    new_choiceset = as.data.frame(new_choiceset);
+    
+    fname = sprintf('bespoke_choiceset_rhoInd%i_muInd%i.csv', r, m);
+    
+    write.csv(new_choiceset, file = fname);
+    
   }
 }
-
-while (number_easy < (total_number_easy/2)){
-  
-  newchoiceoption[] = c(runif(1, min = possible_risky_value_range[1], max = possible_risky_value_range[2]),
-                        0,
-                        runif(1, min = possible_safe_value_range[1], max = possible_safe_value_range[2]));
-  
-  choiceP_temporary = choice_probability(sim_parameters,newchoiceoption);
-  
-  if((choiceP_temporary > choiceP_range_easy_lower[1]) & (choiceP_temporary < choiceP_range_easy_lower[2])){
-    number_easy = number_easy + 1;
-    newchoices_easy[number_easy,] = as.numeric(newchoiceoption);
-    choiceP_easy[number_easy] = choiceP_temporary;
-  }
-}
-
-while (number_easy < total_number_easy){
-  
-  newchoiceoption[] = c(runif(1, min = possible_risky_value_range[1], max = possible_risky_value_range[2]),
-                        0,
-                        runif(1, min = possible_safe_value_range[1], max = possible_safe_value_range[2]));
-  
-  choiceP_temporary = choice_probability(sim_parameters,newchoiceoption);
-  
-  if((choiceP_temporary > choiceP_range_easy_upper[1]) & (choiceP_temporary < choiceP_range_easy_upper[2])){
-    number_easy = number_easy + 1;
-    newchoices_easy[number_easy,] = as.numeric(newchoiceoption);
-    choiceP_easy[number_easy] = choiceP_temporary;
-  }
-}
-
-new_choiceset = rbind(newchoices_easy,newchoices_difficult)
-new_choiceset = cbind(new_choiceset,c(rep(0,total_number_easy), rep(1, total_number_difficult)));
-colnames(new_choiceset) <- c('riskyoption1','riskyoption2','safeoption','easy0difficult1');
-new_choiceset = new_choiceset[sample(nrow(new_choiceset)),];
-new_choiceset = as.data.frame(new_choiceset);
-
 toc()
+
+# TO DO
+# - visualize choice probability for grid to ensure mu range is good enough.
+# - save out choice probabilities into the files.
+# - Run creation of high-resolution files for different parameter combinations. 
+# - get rid of R-specific code/function 
 
 
 
