@@ -59,12 +59,10 @@ negLLprospect_cgt <- function(parameters,choiceset,choices) {
   # Peter Sokol-Hessner
   # July 2021
   
-  eps = .Machine$double.eps;
-
   choiceP = choice_probability(parameters, choiceset);
   
   likelihood = choices * choiceP + (1 - choices) * (1-choiceP);
-  likelihood[likelihood == 0] = eps;
+  likelihood[likelihood == 0] = 0.000000000000001; # 1e-15, i.e. 14 zeros followed by a 1
   
   nll <- -sum(log(likelihood));
   return(nll)
