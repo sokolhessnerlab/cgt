@@ -1,3 +1,6 @@
+# CGT SCRIPT FOR FITTING PARTICIPANTS' CHOICES AND CREATING NOVEL CHOICE SETS
+
+#### Setup ####
 rm(list = ls()); # clear the workspace
 setwd('/Users/sokolhessner/Documents/gitrepos/cgt/choiceset/');
 
@@ -7,6 +10,8 @@ tic()
 
 # Code to load choiceset
 choiceset = read.csv('CGT-choice-set.csv')
+
+#### Function Creation ####
 
 # Function to calculate choice probabilities
 choice_probability <- function(parameters, choiceset) {
@@ -44,11 +49,6 @@ choice_probability <- function(parameters, choiceset) {
   return(p)
 }
 
-true_vals = c(0.8, 20); # rho (risk attitudes), mu (choice consistency)
-
-choiceP = choice_probability(true_vals, choiceset)
-simulatedchoices = as.integer(runif(n = length(choiceP)) < choiceP);
-
 # Likelihood function
 negLLprospect_cgt <- function(parameters,choiceset,choices) {
   # A negative log likelihood function for a prospect-theory estimation.
@@ -68,13 +68,24 @@ negLLprospect_cgt <- function(parameters,choiceset,choices) {
   return(nll)
 }
 
-#### Do Grid Search Method ####
+
+# Simulate one person's choices
+true_vals = c(0.8, 20); # rho (risk attitudes), mu (choice consistency)
+
+choiceP = choice_probability(true_vals, choiceset)
+simulatedchoices = as.integer(runif(n = length(choiceP)) < choiceP);
+
+
+
+#### Do Grid Search Method of identifying the best parameters ####
 
 n_rho_values = 10;
 n_mu_values = 11;
 
 rho_values = seq(from = 0.3, to = 1.9, length.out = n_rho_values);
 mu_values = seq(from = 8, to = 50, length.out = n_mu_values);
+# NOTE: may want to consider specifying mu values in log space to account for nonlinearity/skewness
+#   i.e. using exp(seq(from = log(3), to = log(100), length.out = 50)) or something like it.
 # NOTE: in Python, `numpy.linspace` may accomplish this identical operation.
 
 grid_nll_values = array(dim = c(n_rho_values, n_mu_values));
@@ -87,10 +98,10 @@ for(r in 1:n_rho_values){
 }
 toc()
 
-min_nll = min(grid_nll_values);
-indexes = which(grid_nll_values == min_nll, arr.ind = T);
+min_nll = min(grid_nll_values); # identify the single best value
+indexes = which(grid_nll_values == min_nll, arr.ind = T); # Get indices for that single best value
 
-best_rho = rho_values[indexes[1]];
+best_rho = rho_values[indexes[1]]; # what are the corresponding rho & mu values?
 best_mu = mu_values[indexes[2]];
 
 c(best_rho, best_mu)
@@ -99,71 +110,19 @@ true_vals
 fname = sprintf('bespoke_choiceset_rhoInd%03i_muInd%03i.csv', indexes[1], indexes[2]); # Use of %03i creates a three-digit text string with leading 0's as needed for the relevant index; this standardizes file name length
 
 
-#### Optimization code ####
-
-negLLprospect_cgt(c(1.2, 20), choiceset, simulatedchoices)
-# It works!
-
-eps = .Machine$double.eps;
-lower_bounds = c(eps, 0); # R, M
-upper_bounds = c(2,50); 
-number_of_parameters = length(lower_bounds);
-
-# Create placeholders for parameters, errors, NLL (and anything else you want)
-number_of_iterations = 200; # 100 or more
-temp_parameters = array(dim = c(number_of_iterations,number_of_parameters));
-temp_hessians = array(dim = c(number_of_iterations,number_of_parameters,number_of_parameters));
-temp_NLLs = array(dim = c(number_of_iterations,1));
-
-# tic() # start the timer
-
-for(iter in 1:number_of_iterations){
-  # Randomly set initial values within supported values
-  # using uniformly-distributed values. Many ways to do this!
-  
-  initial_values = runif(number_of_parameters, min = lower_bounds, max = upper_bounds)
-  
-  temp_output = optim(initial_values, negLLprospect_cgt,
-                      choiceset = choiceset,
-                      choices = simulatedchoices,
-                      lower = lower_bounds,
-                      upper = upper_bounds,
-                      method = "L-BFGS-B",
-                      hessian = T)
-  
-  # Store the output we need access to later
-  temp_parameters[iter,] = temp_output$par; # parameter values
-  temp_hessians[iter,,] = temp_output$hessian; # SEs
-  temp_NLLs[iter,] = temp_output$value; # the NLLs
-}
-
-# toc() # stop the timer; how long did it take? Use this to plan!
-
-# How'd we do? Look at the NLLs to gauge quality of fit
-unique(temp_NLLs) # they look the same but are not...
-
-# Compare output; select the best one
-sim_nll = min(temp_NLLs); # the best NLL for this person
-sim_best_ind = which(temp_NLLs == sim_nll)[1]; # the index of that NLL
-
-sim_parameters = temp_parameters[sim_best_ind,] # the parameters
-sim_parameter_errors = sqrt(diag(solve(temp_hessians[sim_best_ind,,]))); # the SEs
-
-true_vals
-sim_parameters
-sim_parameter_errors
-
 #### Choice Set Creation ####
 
-# Create choice set
-total_number_difficult = 60;
+# Set up variables defining choice set creation
+total_number_difficult = 60; # total number of choices in each type
 total_number_easy = 60;
 
+# Probability ranges for easy & difficult categories
 choiceP_range_difficult = c(0.45, 0.55);
-choiceP_range_easy_lower = 0.10;
-choiceP_range_easy_upper = 0.9;
+choiceP_range_easy_lower = 0.10; # implicitly between 0 and this value
+choiceP_range_easy_upper = 0.9; # implicitly between this value and 1
 
-possible_risky_value_range = c(0.05, 30);
+# allowable $ values
+possible_risky_value_range = c(0.05, 30); 
 possible_safe_value_range = c(0.05, 12);
 
 setwd('/Users/sokolhessner/Documents/gitrepos/cgt/choiceset/bespoke_choicesets/');
@@ -261,14 +220,104 @@ for(r in 1:n_rho_values){
 }
 toc()
 
-# TO DO
-# - visualize choice probability for grid to ensure mu range is good enough.
+
+#### Visualization of Choice Probability surface given different parameters ####
+
+riskyvals = seq(from = possible_risky_value_range[1], to = possible_risky_value_range[2],
+                length.out = 100);
+safevals = seq(from = possible_safe_value_range[1], to = possible_safe_value_range[2],
+               length.out = 101);
+
+choiceP_matrix = array(dim = c(length(riskyvals),length(safevals)));
+
+tempchoiceoption = array(dim = c(1,3));
+colnames(tempchoiceoption) <- c('riskyoption1','riskyoption2','safeoption');
+tempchoiceoption = as.data.frame(tempchoiceoption);
+
+visualization_rho = 2.2; # range is 0.3 - 1.89
+visualization_mu = 15; # expected range is 0-50?
+
+for(i in 1:length(riskyvals)){
+  for(j in 1:length(safevals)){
+    tempchoiceoption[] = c(riskyvals[i], 0, safevals[j]);
+
+    choiceP_matrix[i,j] = choice_probability(c(visualization_rho, visualization_mu), tempchoiceoption);
+  }
+}
+
+# Heatmap of the choiceProbability values
+pdf(file=sprintf('choice_probability_surface_rho%g_mu%g.pdf', visualization_rho, visualization_mu));
+image(riskyvals, safevals, choiceP_matrix,
+      col = hcl.colors(100, palette = "red-green", rev = F), 
+      breaks = seq(from = 0, to = 1, length.out = 101),
+      main = sprintf('Rho = %g, Mu = %g\n min(p) = %.2f, max(p) = %.2f', visualization_rho, visualization_mu, min(choiceP_matrix), max(choiceP_matrix)),
+      xlab = 'Risky values ($)', ylab = 'Safe values ($)')
+points(choiceset$riskyoption1[choiceset$ischecktrial == 0], choiceset$safeoption[choiceset$ischecktrial == 0])
+dev.off();
+
+
+#### TO DO ####
 # - Run final creation of high-resolution files for different parameter combinations. 
 
 
+#### APPENDIX ####
+
+#### Optimization code ####
+
+negLLprospect_cgt(c(1.2, 20), choiceset, simulatedchoices)
+# It works!
+
+eps = .Machine$double.eps;
+lower_bounds = c(eps, 0); # R, M
+upper_bounds = c(2,50); 
+number_of_parameters = length(lower_bounds);
+
+# Create placeholders for parameters, errors, NLL (and anything else you want)
+number_of_iterations = 200; # 100 or more
+temp_parameters = array(dim = c(number_of_iterations,number_of_parameters));
+temp_hessians = array(dim = c(number_of_iterations,number_of_parameters,number_of_parameters));
+temp_NLLs = array(dim = c(number_of_iterations,1));
+
+# tic() # start the timer
+
+for(iter in 1:number_of_iterations){
+  # Randomly set initial values within supported values
+  # using uniformly-distributed values. Many ways to do this!
+  
+  initial_values = runif(number_of_parameters, min = lower_bounds, max = upper_bounds)
+  
+  temp_output = optim(initial_values, negLLprospect_cgt,
+                      choiceset = choiceset,
+                      choices = simulatedchoices,
+                      lower = lower_bounds,
+                      upper = upper_bounds,
+                      method = "L-BFGS-B",
+                      hessian = T)
+  
+  # Store the output we need access to later
+  temp_parameters[iter,] = temp_output$par; # parameter values
+  temp_hessians[iter,,] = temp_output$hessian; # SEs
+  temp_NLLs[iter,] = temp_output$value; # the NLLs
+}
+
+# toc() # stop the timer; how long did it take? Use this to plan!
+
+# How'd we do? Look at the NLLs to gauge quality of fit
+unique(temp_NLLs) # they look the same but are not...
+
+# Compare output; select the best one
+sim_nll = min(temp_NLLs); # the best NLL for this person
+sim_best_ind = which(temp_NLLs == sim_nll)[1]; # the index of that NLL
+
+sim_parameters = temp_parameters[sim_best_ind,] # the parameters
+sim_parameter_errors = sqrt(diag(solve(temp_hessians[sim_best_ind,,]))); # the SEs
+
+true_vals
+sim_parameters
+sim_parameter_errors
 
 
-#### VISUALIZATION BELOW HERE ####
+#### Visualization of Estimated parameters, likelihoods, & easy/difficult lines ####
 
 # Plot actual choices
 plot(choiceset$riskyoption1[simulatedchoices == 0], choiceset$safeoption[simulatedchoices == 0],col = 'red',
@@ -293,7 +342,7 @@ for (i in 1:length(pval)){
   lines(x = c(0,xval), y = c(0,yval_true[i]))
 }
 
-# Plot the new choice set
+# Plot the new choice set (THIS MAY NOT WORK, GIVEN EDITS TO CHOICE SET CREATION ABOVE)
 plot(new_choiceset$riskyoption1[new_choiceset$easy0difficult1==0],
      new_choiceset$safeoption[new_choiceset$easy0difficult1==0], col = 'blue',
      xlim = c(0,30), ylim = c(0,12))
