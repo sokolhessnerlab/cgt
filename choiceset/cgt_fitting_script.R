@@ -96,7 +96,7 @@ best_mu = mu_values[indexes[2]];
 c(best_rho, best_mu)
 true_vals
 
-fname = sprintf('bespoke_choiceset_rhoInd%i_muInd%i.csv', indexes[1], indexes[2]);
+fname = sprintf('bespoke_choiceset_rhoInd%03i_muInd%03i.csv', indexes[1], indexes[2]); # Use of %03i creates a three-digit text string with leading 0's as needed for the relevant index; this standardizes file name length
 
 
 #### Optimization code ####
@@ -252,7 +252,7 @@ for(r in 1:n_rho_values){
     new_choiceset = new_choiceset[sample(nrow(new_choiceset)),];
     new_choiceset = as.data.frame(new_choiceset);
     
-    fname = sprintf('bespoke_choiceset_rhoInd%i_muInd%i.csv', r, m);
+    fname = sprintf('bespoke_choiceset_rhoInd%03i_muInd%03i.csv', r, m); # Use of %03i creates a three-digit text string with leading 0's as needed for the relevant index; this standardizes file name length
     # Files are roughly 7.5 KB per. 2500 files would be ~18 MB.
     
     write.csv(new_choiceset, file = fname);
@@ -263,7 +263,7 @@ toc()
 
 # TO DO
 # - visualize choice probability for grid to ensure mu range is good enough.
-# - Run creation of high-resolution files for different parameter combinations. 
+# - Run final creation of high-resolution files for different parameter combinations. 
 
 
 
