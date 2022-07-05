@@ -79,11 +79,13 @@ simulatedchoices = as.integer(runif(n = length(choiceP)) < choiceP);
 
 #### Do Grid Search Method of identifying the best parameters ####
 
-n_rho_values = 10;
-n_mu_values = 11;
+n_rho_values = 200; # SET THIS TO THE DESIRED DEGREE OF FINENESS
+n_mu_values = 201; # IBID
 
-rho_values = seq(from = 0.3, to = 1.9, length.out = n_rho_values);
-mu_values = seq(from = 8, to = 50, length.out = n_mu_values);
+print(sprintf('You have decided to make %i choice sets!',n_rho_values*n_mu_values))
+
+rho_values = seq(from = 0.3, to = 2.2, length.out = n_rho_values); # the range of fit-able values
+mu_values = seq(from = 7, to = 80, length.out = n_mu_values); # the range of fit-able values
 # NOTE: may want to consider specifying mu values in log space to account for nonlinearity/skewness
 #   i.e. using exp(seq(from = log(3), to = log(100), length.out = 50)) or something like it.
 # NOTE: in Python, `numpy.linspace` may accomplish this identical operation.
@@ -99,7 +101,7 @@ for(r in 1:n_rho_values){
 toc()
 
 min_nll = min(grid_nll_values); # identify the single best value
-indexes = which(grid_nll_values == min_nll, arr.ind = T); # Get indices for that single best value
+indexes = which(grid_nll_values == min_nll, arr.ind = T)[1]; # Get indices for that single best value
 
 best_rho = rho_values[indexes[1]]; # what are the corresponding rho & mu values?
 best_mu = mu_values[indexes[2]];
@@ -235,7 +237,7 @@ colnames(tempchoiceoption) <- c('riskyoption1','riskyoption2','safeoption');
 tempchoiceoption = as.data.frame(tempchoiceoption);
 
 visualization_rho = 2.2; # range is 0.3 - 1.89
-visualization_mu = 15; # expected range is 0-50?
+visualization_mu = 7; # expected range is 0-50?
 
 for(i in 1:length(riskyvals)){
   for(j in 1:length(safevals)){
