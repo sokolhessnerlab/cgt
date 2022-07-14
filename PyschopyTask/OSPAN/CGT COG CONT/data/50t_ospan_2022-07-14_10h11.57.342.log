@@ -1,0 +1,472 @@
+1.9578 	WARNING 	We strongly recommend you activate the PTB sound engine in PsychoPy prefs as the preferred audio engine. Its timing is vastly superior. Your prefs are currently set to use ['sounddevice', 'PTB', 'pyo', 'pygame'] (in that order).
+11.1619 	EXP 	Created window1 = Window(allowGUI=True, allowStencil=False, autoLog=True, backendConf=UNKNOWN, bitsMode=UNKNOWN, blendMode='avg', bpc=(8, 8, 8), color=array([0, 0, 0]), colorSpace='rgb', depthBits=8, fullscr=<method-wrapper '__getattribute__' of attributeSetter object at 0x7fa3150446d0>, gamma=None, gammaErrorPolicy='raise', lms=UNKNOWN, monitor=<psychopy.monitors.calibTools.Monitor object at 0x7fa3147ed970>, multiSample=False, name='window1', numSamples=2, pos=(560, 350), screen=0, size=array([2240, 1400]), stencilBits=0, stereo=False, units='height', useFBO=True, useRetina=True, viewOri=0.0, viewPos=None, viewScale=None, waitBlanking=True, winType='pyglet')
+11.1623 	EXP 	window1: mouseVisible = True
+11.1623 	EXP 	window1: Attempting to measure frame rate of screen (0) ...
+11.1624 	EXP 	window1: recordFrameIntervals = False
+11.3281 	EXP 	window1: recordFrameIntervals = True
+11.5103 	EXP 	Screen (0) actual frame rate measured at 60.46Hz
+11.5104 	EXP 	window1: recordFrameIntervals = False
+11.5556 	WARNING 	launchHubServer: If using the iohub mouse or eyetracker devices, fullScr should be True.
+14.6364 	EXP 	Created letterDisp = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=-1.0, flipHoriz=False, flipVert=False, font='Open Sans', fontFiles=[], height=0.05, italic=False, languageStyle='LTR', name='letterDisp', opacity=1.0, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text='', units='height', win=Window(...), wrapWidth=1)
+14.6736 	EXP 	Created isiText = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0.0, flipHoriz=False, flipVert=False, font='Open Sans', fontFiles=[], height=0.05, italic=False, languageStyle='LTR', name='isiText', opacity=1.0, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text='+', units='height', win=Window(...), wrapWidth=1)
+14.6774 	EXP 	Created text_2 = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0.0, flipHoriz=False, flipVert=False, font='Open Sans', fontFiles=[], height=0.05, italic=False, languageStyle='LTR', name='text_2', opacity=1.0, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text='+', units='height', win=Window(...), wrapWidth=1)
+14.6827 	EXP 	Created PBox = Rect(__class__=<class 'psychopy.visual.rect.Rect'>, anchor=('center', 'center'), autoDraw=False, autoLog=True, closeShape=True, color=method-wrapper(...), colorSpace='rgb', contrast=None, depth=0.0, fillColor=array([1, 1, 1]), fillColorSpace='rgb', fillRGB=array([1, 1, 1]), interpolate=True, lineColor=array([1., 1., 1.]), lineColorSpace='rgb', lineRGB=array([1, 1, 1]), lineWidth=1.0, name='PBox', opacity=1.0, ori=0.0, pos=array([-0.25,  0.15]), size=array([0.1, 0.1]), units='height', vertices=ndarray(...), win=Window(...))
+14.6852 	EXP 	Created NBox2 = Rect(__class__=<class 'psychopy.visual.rect.Rect'>, anchor=('center', 'center'), autoDraw=False, autoLog=True, closeShape=True, color=method-wrapper(...), colorSpace='rgb', contrast=None, depth=-1.0, fillColor=array([1, 1, 1]), fillColorSpace='rgb', fillRGB=array([1, 1, 1]), interpolate=True, lineColor=array([1., 1., 1.]), lineColorSpace='rgb', lineRGB=array([1, 1, 1]), lineWidth=1.0, name='NBox2', opacity=1.0, ori=0.0, pos=array([0.25, 0.  ]), size=array([0.1, 0.1]), units='height', vertices=ndarray(...), win=Window(...))
+14.6881 	EXP 	Created SBox2 = Rect(__class__=<class 'psychopy.visual.rect.Rect'>, anchor=('center', 'center'), autoDraw=False, autoLog=True, closeShape=True, color=method-wrapper(...), colorSpace='rgb', contrast=None, depth=-2.0, fillColor=array([1, 1, 1]), fillColorSpace='rgb', fillRGB=array([1, 1, 1]), interpolate=True, lineColor=array([1., 1., 1.]), lineColorSpace='rgb', lineRGB=array([1, 1, 1]), lineWidth=1.0, name='SBox2', opacity=1.0, ori=0.0, pos=array([-0.25,  0.  ]), size=array([0.1, 0.1]), units='height', vertices=ndarray(...), win=Window(...))
+14.6907 	EXP 	Created KBox2 = Rect(__class__=<class 'psychopy.visual.rect.Rect'>, anchor=('center', 'center'), autoDraw=False, autoLog=True, closeShape=True, color=method-wrapper(...), colorSpace='rgb', contrast=None, depth=-3.0, fillColor=array([1, 1, 1]), fillColorSpace='rgb', fillRGB=array([1, 1, 1]), interpolate=True, lineColor=array([1., 1., 1.]), lineColorSpace='rgb', lineRGB=array([1, 1, 1]), lineWidth=1.0, name='KBox2', opacity=1.0, ori=0.0, pos=array([0., 0.]), size=array([0.1, 0.1]), units='height', vertices=ndarray(...), win=Window(...))
+14.6932 	EXP 	Created HBox = Rect(__class__=<class 'psychopy.visual.rect.Rect'>, anchor=('center', 'center'), autoDraw=False, autoLog=True, closeShape=True, color=method-wrapper(...), colorSpace='rgb', contrast=None, depth=-4.0, fillColor=array([1, 1, 1]), fillColorSpace='rgb', fillRGB=array([1, 1, 1]), interpolate=True, lineColor=array([1., 1., 1.]), lineColorSpace='rgb', lineRGB=array([1, 1, 1]), lineWidth=1.0, name='HBox', opacity=1.0, ori=0.0, pos=array([0.25, 0.15]), size=array([0.1, 0.1]), units='height', vertices=ndarray(...), win=Window(...))
+14.6960 	EXP 	Created FBox = Rect(__class__=<class 'psychopy.visual.rect.Rect'>, anchor=('center', 'center'), autoDraw=False, autoLog=True, closeShape=True, color=method-wrapper(...), colorSpace='rgb', contrast=None, depth=-5.0, fillColor=array([1, 1, 1]), fillColorSpace='rgb', fillRGB=array([1, 1, 1]), interpolate=True, lineColor=array([1., 1., 1.]), lineColorSpace='rgb', lineRGB=array([1, 1, 1]), lineWidth=1.0, name='FBox', opacity=1.0, ori=0.0, pos=array([0.  , 0.15]), size=array([0.1, 0.1]), units='height', vertices=ndarray(...), win=Window(...))
+14.6985 	EXP 	Created QBox = Rect(__class__=<class 'psychopy.visual.rect.Rect'>, anchor=('center', 'center'), autoDraw=False, autoLog=True, closeShape=True, color=method-wrapper(...), colorSpace='rgb', contrast=None, depth=-6.0, fillColor=array([1, 1, 1]), fillColorSpace='rgb', fillRGB=array([1, 1, 1]), interpolate=True, lineColor=array([1., 1., 1.]), lineColorSpace='rgb', lineRGB=array([1, 1, 1]), lineWidth=1.0, name='QBox', opacity=1.0, ori=0.0, pos=array([ 0.  , -0.15]), size=array([0.1, 0.1]), units='height', vertices=ndarray(...), win=Window(...))
+14.7010 	EXP 	Created LBox = Rect(__class__=<class 'psychopy.visual.rect.Rect'>, anchor=('center', 'center'), autoDraw=False, autoLog=True, closeShape=True, color=method-wrapper(...), colorSpace='rgb', contrast=None, depth=-7.0, fillColor=array([1, 1, 1]), fillColorSpace='rgb', fillRGB=array([1, 1, 1]), interpolate=True, lineColor=array([1., 1., 1.]), lineColorSpace='rgb', lineRGB=array([1, 1, 1]), lineWidth=1.0, name='LBox', opacity=1.0, ori=0.0, pos=array([-0.25, -0.15]), size=array([0.1, 0.1]), units='height', vertices=ndarray(...), win=Window(...))
+14.7036 	EXP 	Created RBox = Rect(__class__=<class 'psychopy.visual.rect.Rect'>, anchor=('center', 'center'), autoDraw=False, autoLog=True, closeShape=True, color=method-wrapper(...), colorSpace='rgb', contrast=None, depth=-8.0, fillColor=array([1, 1, 1]), fillColorSpace='rgb', fillRGB=array([1, 1, 1]), interpolate=True, lineColor=array([1., 1., 1.]), lineColorSpace='rgb', lineRGB=array([1, 1, 1]), lineWidth=1.0, name='RBox', opacity=1.0, ori=0.0, pos=array([ 0.25, -0.15]), size=array([0.1, 0.1]), units='height', vertices=ndarray(...), win=Window(...))
+14.7062 	EXP 	Created TBox = Rect(__class__=<class 'psychopy.visual.rect.Rect'>, anchor=('center', 'center'), autoDraw=False, autoLog=True, closeShape=True, color=method-wrapper(...), colorSpace='rgb', contrast=None, depth=-9.0, fillColor=array([1, 1, 1]), fillColorSpace='rgb', fillRGB=array([1, 1, 1]), interpolate=True, lineColor=array([1., 1., 1.]), lineColorSpace='rgb', lineRGB=array([1, 1, 1]), lineWidth=1.0, name='TBox', opacity=1.0, ori=0.0, pos=array([ 0.25, -0.3 ]), size=array([0.1, 0.1]), units='height', vertices=ndarray(...), win=Window(...))
+14.7087 	EXP 	Created YBox = Rect(__class__=<class 'psychopy.visual.rect.Rect'>, anchor=('center', 'center'), autoDraw=False, autoLog=True, closeShape=True, color=method-wrapper(...), colorSpace='rgb', contrast=None, depth=-10.0, fillColor=array([1, 1, 1]), fillColorSpace='rgb', fillRGB=array([1, 1, 1]), interpolate=True, lineColor=array([1., 1., 1.]), lineColorSpace='rgb', lineRGB=array([1, 1, 1]), lineWidth=1.0, name='YBox', opacity=1.0, ori=0.0, pos=array([ 0. , -0.3]), size=array([0.1, 0.1]), units='height', vertices=ndarray(...), win=Window(...))
+14.7114 	EXP 	Created JBox = Rect(__class__=<class 'psychopy.visual.rect.Rect'>, anchor=('center', 'center'), autoDraw=False, autoLog=True, closeShape=True, color=method-wrapper(...), colorSpace='rgb', contrast=None, depth=-11.0, fillColor=array([1, 1, 1]), fillColorSpace='rgb', fillRGB=array([1, 1, 1]), interpolate=True, lineColor=array([1., 1., 1.]), lineColorSpace='rgb', lineRGB=array([1, 1, 1]), lineWidth=1.0, name='JBox', opacity=1.0, ori=0.0, pos=array([-0.25, -0.3 ]), size=array([0.1, 0.1]), units='height', vertices=ndarray(...), win=Window(...))
+14.7117 	EXP 	window1: mouseVisible = True
+14.7425 	EXP 	Created RecallINS = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=-14.0, flipHoriz=False, flipVert=False, font='Open Sans', fontFiles=[], height=0.035, italic=False, languageStyle='LTR', name='RecallINS', opacity=1.0, ori=0.0, pos=array([0. , 0.3]), rgb=UNKNOWN, text=str(...), units='height', win=Window(...), wrapWidth=1)
+14.7471 	EXP 	Created P = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([-1., -1., -1.]), colorSpace='rgb', contrast=1.0, depth=-15.0, flipHoriz=False, flipVert=False, font='Open Sans', fontFiles=[], height=0.05, italic=False, languageStyle='LTR', name='P', opacity=1.0, ori=0.0, pos=array([-0.25,  0.15]), rgb=UNKNOWN, text='P', units='height', win=Window(...), wrapWidth=1)
+14.7514 	EXP 	Created F_2 = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([-1., -1., -1.]), colorSpace='rgb', contrast=1.0, depth=-16.0, flipHoriz=False, flipVert=False, font='Open Sans', fontFiles=[], height=0.05, italic=False, languageStyle='LTR', name='F_2', opacity=1.0, ori=0.0, pos=array([0.  , 0.15]), rgb=UNKNOWN, text='F', units='height', win=Window(...), wrapWidth=1)
+14.7562 	EXP 	Created H = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([-1., -1., -1.]), colorSpace='rgb', contrast=1.0, depth=-17.0, flipHoriz=False, flipVert=False, font='Open Sans', fontFiles=[], height=0.05, italic=False, languageStyle='LTR', name='H', opacity=1.0, ori=0.0, pos=array([0.25, 0.15]), rgb=UNKNOWN, text='H', units='height', win=Window(...), wrapWidth=1)
+14.7607 	EXP 	Created S = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([-1., -1., -1.]), colorSpace='rgb', contrast=1.0, depth=-18.0, flipHoriz=False, flipVert=False, font='Open Sans', fontFiles=[], height=0.05, italic=False, languageStyle='LTR', name='S', opacity=1.0, ori=0.0, pos=array([-0.25,  0.  ]), rgb=UNKNOWN, text='S', units='height', win=Window(...), wrapWidth=1)
+14.7649 	EXP 	Created K = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([-1., -1., -1.]), colorSpace='rgb', contrast=1.0, depth=-19.0, flipHoriz=False, flipVert=False, font='Open Sans', fontFiles=[], height=0.05, italic=False, languageStyle='LTR', name='K', opacity=1.0, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text='K', units='height', win=Window(...), wrapWidth=1)
+14.7692 	EXP 	Created N = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([-1., -1., -1.]), colorSpace='rgb', contrast=1.0, depth=-20.0, flipHoriz=False, flipVert=False, font='Open Sans', fontFiles=[], height=0.05, italic=False, languageStyle='LTR', name='N', opacity=1.0, ori=0.0, pos=array([0.25, 0.  ]), rgb=UNKNOWN, text='N', units='height', win=Window(...), wrapWidth=1)
+14.7743 	EXP 	Created L = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([-1., -1., -1.]), colorSpace='rgb', contrast=1.0, depth=-21.0, flipHoriz=False, flipVert=False, font='Open Sans', fontFiles=[], height=0.05, italic=False, languageStyle='LTR', name='L', opacity=1.0, ori=0.0, pos=array([-0.25, -0.15]), rgb=UNKNOWN, text='L', units='height', win=Window(...), wrapWidth=1)
+14.7789 	EXP 	Created Q = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([-1., -1., -1.]), colorSpace='rgb', contrast=1.0, depth=-22.0, flipHoriz=False, flipVert=False, font='Open Sans', fontFiles=[], height=0.05, italic=False, languageStyle='LTR', name='Q', opacity=1.0, ori=0.0, pos=array([ 0.  , -0.15]), rgb=UNKNOWN, text='Q', units='height', win=Window(...), wrapWidth=1)
+14.7833 	EXP 	Created R = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([-1., -1., -1.]), colorSpace='rgb', contrast=1.0, depth=-23.0, flipHoriz=False, flipVert=False, font='Open Sans', fontFiles=[], height=0.05, italic=False, languageStyle='LTR', name='R', opacity=1.0, ori=0.0, pos=array([ 0.25, -0.15]), rgb=UNKNOWN, text='R', units='height', win=Window(...), wrapWidth=1)
+14.7878 	EXP 	Created J = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([-1., -1., -1.]), colorSpace='rgb', contrast=1.0, depth=-24.0, flipHoriz=False, flipVert=False, font='Open Sans', fontFiles=[], height=0.05, italic=False, languageStyle='LTR', name='J', opacity=1.0, ori=0.0, pos=array([-0.25, -0.3 ]), rgb=UNKNOWN, text='J', units='height', win=Window(...), wrapWidth=1)
+14.7931 	EXP 	Created Y = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([-1., -1., -1.]), colorSpace='rgb', contrast=1.0, depth=-25.0, flipHoriz=False, flipVert=False, font='Open Sans', fontFiles=[], height=0.05, italic=False, languageStyle='LTR', name='Y', opacity=1.0, ori=0.0, pos=array([ 0. , -0.3]), rgb=UNKNOWN, text='Y', units='height', win=Window(...), wrapWidth=1)
+14.7974 	EXP 	Created T_2 = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([-1., -1., -1.]), colorSpace='rgb', contrast=1.0, depth=-26.0, flipHoriz=False, flipVert=False, font='Open Sans', fontFiles=[], height=0.05, italic=False, languageStyle='LTR', name='T_2', opacity=1.0, ori=0.0, pos=array([ 0.25, -0.3 ]), rgb=UNKNOWN, text='T', units='height', win=Window(...), wrapWidth=1)
+14.8000 	EXP 	Created CLEAR = Rect(__class__=<class 'psychopy.visual.rect.Rect'>, anchor=('center', 'center'), autoDraw=False, autoLog=True, closeShape=True, color=method-wrapper(...), colorSpace='rgb', contrast=None, depth=-29.0, fillColor=array([ 1, -1, -1]), fillColorSpace='rgb', fillRGB=array([ 1, -1, -1]), interpolate=True, lineColor=array([1., 1., 1.]), lineColorSpace='rgb', lineRGB=array([1, 1, 1]), lineWidth=1.0, name='CLEAR', opacity=1.0, ori=0.0, pos=array([0.5 , 0.15]), size=array([0.25, 0.45]), units='height', vertices=ndarray(...), win=Window(...))
+14.8072 	EXP 	Created ClearText = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([-1., -1., -1.]), colorSpace='rgb', contrast=1.0, depth=-30.0, flipHoriz=False, flipVert=False, font='Open Sans', fontFiles=[], height=0.05, italic=False, languageStyle='LTR', name='ClearText', opacity=1.0, ori=0.0, pos=array([0.5 , 0.15]), rgb=UNKNOWN, text='CLEAR', units='height', win=Window(...), wrapWidth=1)
+14.8099 	EXP 	Created BLANK = Rect(__class__=<class 'psychopy.visual.rect.Rect'>, anchor=('center', 'center'), autoDraw=False, autoLog=True, closeShape=True, color=method-wrapper(...), colorSpace='rgb', contrast=None, depth=-31.0, fillColor=array([1, 1, 1]), fillColorSpace='rgb', fillRGB=array([1, 1, 1]), interpolate=True, lineColor=array([1., 1., 1.]), lineColorSpace='rgb', lineRGB=array([1, 1, 1]), lineWidth=1.0, name='BLANK', opacity=1.0, ori=0.0, pos=array([0.45, 0.  ]), size=array([0.25, 0.45]), units='height', vertices=ndarray(...), win=Window(...))
+14.8148 	EXP 	Created BlankText = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([-1., -1., -1.]), colorSpace='rgb', contrast=1.0, depth=-32.0, flipHoriz=False, flipVert=False, font='Open Sans', fontFiles=[], height=0.05, italic=False, languageStyle='LTR', name='BlankText', opacity=1.0, ori=0.0, pos=array([0.45, 0.  ]), rgb=UNKNOWN, text='BLANK', units='height', win=Window(...), wrapWidth=1)
+14.8176 	EXP 	Created ENTER = Rect(__class__=<class 'psychopy.visual.rect.Rect'>, anchor=('center', 'center'), autoDraw=False, autoLog=True, closeShape=True, color=method-wrapper(...), colorSpace='rgb', contrast=None, depth=-33.0, fillColor=array([-1.        ,  0.00392157, -1.        ]), fillColorSpace='rgb', fillRGB=array([-1.        ,  0.00392157, -1.        ]), interpolate=True, lineColor=array([1., 1., 1.]), lineColorSpace='rgb', lineRGB=array([1, 1, 1]), lineWidth=1.0, name='ENTER', opacity=1.0, ori=0.0, pos=array([ 0.45, -0.3 ]), size=array([0.25, 0.45]), units='height', vertices=ndarray(...), win=Window(...))
+14.8218 	EXP 	Created EnterText = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([-1., -1., -1.]), colorSpace='rgb', contrast=1.0, depth=-34.0, flipHoriz=False, flipVert=False, font='Open Sans', fontFiles=[], height=0.05, italic=False, languageStyle='LTR', name='EnterText', opacity=1.0, ori=0.0, pos=array([ 0.45, -0.3 ]), rgb=UNKNOWN, text='ENTER', units='height', win=Window(...), wrapWidth=1)
+14.8383 	EXP 	Created text_3 = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=-1.0, flipHoriz=False, flipVert=False, font='Open Sans', fontFiles=[], height=0.05, italic=False, languageStyle='LTR', name='text_3', opacity=1.0, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text=str(...), units='height', win=Window(...), wrapWidth=1)
+14.8468 	EXP 	Created RandAns = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0.0, flipHoriz=False, flipVert=False, font='Open Sans', fontFiles=[], height=0.05, italic=False, languageStyle='LTR', name='RandAns', opacity=1.0, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text='include the randomized answers ', units='height', win=Window(...), wrapWidth=1)
+14.8524 	EXP 	Created TrueFalse = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=-1.0, flipHoriz=False, flipVert=False, font='Open Sans', fontFiles=[], height=0.05, italic=False, languageStyle='LTR', name='TrueFalse', opacity=1.0, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text='True or False?', units='height', win=Window(...), wrapWidth=1)
+14.8628 	EXP 	Imported practiceletters.xlsx as conditions, 1 conditions, 1 params
+14.8635 	EXP 	Created sequence: random, trialTypes=1, nReps=1, seed=None
+14.8638 	EXP 	New trial (rep=0, index=0): {'letters': "K'"}
+14.8968 	EXP 	letterDisp: autoDraw = True
+15.8758 	EXP 	letterDisp: autoDraw = False
+15.8758 	EXP 	isiText: autoDraw = True
+16.1258 	EXP 	isiText: autoDraw = False
+16.1258 	EXP 	text_2: autoDraw = True
+17.1096 	EXP 	Created sequence: random, trialTypes=1, nReps=1, seed=None
+17.1098 	EXP 	New trial (rep=0, index=0): None
+17.1594 	EXP 	text_2: autoDraw = False
+17.1594 	EXP 	PBox: autoDraw = True
+17.1594 	EXP 	NBox2: autoDraw = True
+17.1594 	EXP 	SBox2: autoDraw = True
+17.1594 	EXP 	KBox2: autoDraw = True
+17.1594 	EXP 	HBox: autoDraw = True
+17.1594 	EXP 	FBox: autoDraw = True
+17.1594 	EXP 	QBox: autoDraw = True
+17.1594 	EXP 	LBox: autoDraw = True
+17.1594 	EXP 	RBox: autoDraw = True
+17.1594 	EXP 	TBox: autoDraw = True
+17.1594 	EXP 	YBox: autoDraw = True
+17.1594 	EXP 	JBox: autoDraw = True
+17.1594 	EXP 	RecallINS: autoDraw = True
+17.1594 	EXP 	P: autoDraw = True
+17.1594 	EXP 	F_2: autoDraw = True
+17.1594 	EXP 	H: autoDraw = True
+17.1594 	EXP 	S: autoDraw = True
+17.1594 	EXP 	K: autoDraw = True
+17.1594 	EXP 	N: autoDraw = True
+17.1594 	EXP 	L: autoDraw = True
+17.1594 	EXP 	Q: autoDraw = True
+17.1594 	EXP 	R: autoDraw = True
+17.1594 	EXP 	J: autoDraw = True
+17.1594 	EXP 	Y: autoDraw = True
+17.1594 	EXP 	T_2: autoDraw = True
+17.1594 	EXP 	CLEAR: autoDraw = True
+17.1594 	EXP 	ClearText: autoDraw = True
+17.1594 	EXP 	BLANK: autoDraw = True
+17.1594 	EXP 	BlankText: autoDraw = True
+17.1594 	EXP 	ENTER: autoDraw = True
+17.1594 	EXP 	EnterText: autoDraw = True
+31.6450 	DATA 	Mouse: Left button down, pos=(725,463)
+31.7626 	DATA 	Mouse:  Left button up, pos=(725,463)
+34.2303 	DATA 	Mouse: Left button down, pos=(580,354)
+34.4192 	DATA 	Mouse:  Left button up, pos=(580,354)
+35.2649 	DATA 	Mouse: Left button down, pos=(559,245)
+35.3131 	EXP 	YBox: color = 'blue'
+35.3518 	EXP 	YBox: color = 'blue'
+35.3919 	EXP 	YBox: color = 'blue'
+35.4284 	EXP 	YBox: color = 'blue'
+35.4665 	EXP 	YBox: color = 'blue'
+35.4680 	DATA 	Mouse:  Left button up, pos=(559,245)
+35.5042 	EXP 	YBox: color = 'blue'
+35.5400 	EXP 	YBox: color = 'blue'
+35.5771 	EXP 	YBox: color = 'blue'
+35.6123 	EXP 	YBox: color = 'blue'
+35.6480 	EXP 	YBox: color = 'blue'
+35.6845 	EXP 	YBox: color = 'blue'
+35.7195 	EXP 	YBox: color = 'blue'
+35.7550 	EXP 	YBox: color = 'blue'
+35.7931 	EXP 	YBox: color = 'blue'
+35.8273 	EXP 	YBox: color = 'blue'
+35.8637 	EXP 	YBox: color = 'blue'
+35.8994 	EXP 	YBox: color = 'blue'
+35.9352 	EXP 	YBox: color = 'blue'
+35.9703 	EXP 	YBox: color = 'blue'
+36.0091 	EXP 	YBox: color = 'blue'
+36.0439 	EXP 	YBox: color = 'blue'
+36.0806 	EXP 	YBox: color = 'blue'
+36.1158 	EXP 	YBox: color = 'blue'
+36.1508 	EXP 	YBox: color = 'blue'
+36.1872 	EXP 	YBox: color = 'blue'
+36.2221 	EXP 	YBox: color = 'blue'
+36.2585 	EXP 	YBox: color = 'blue'
+36.2936 	EXP 	YBox: color = 'blue'
+36.3300 	EXP 	YBox: color = 'blue'
+36.3662 	EXP 	YBox: color = 'blue'
+36.4027 	EXP 	YBox: color = 'blue'
+36.4387 	EXP 	YBox: color = 'blue'
+36.4758 	EXP 	YBox: color = 'blue'
+36.5105 	EXP 	YBox: color = 'blue'
+36.5466 	EXP 	YBox: color = 'blue'
+36.5823 	EXP 	YBox: color = 'blue'
+36.6171 	EXP 	YBox: color = 'blue'
+36.6538 	EXP 	YBox: color = 'blue'
+36.6890 	EXP 	YBox: color = 'blue'
+36.7277 	EXP 	YBox: color = 'blue'
+36.7644 	EXP 	YBox: color = 'blue'
+36.8028 	EXP 	YBox: color = 'blue'
+36.8440 	EXP 	YBox: color = 'blue'
+36.8823 	EXP 	YBox: color = 'blue'
+36.9199 	EXP 	YBox: color = 'blue'
+36.9584 	EXP 	YBox: color = 'blue'
+36.9940 	EXP 	YBox: color = 'blue'
+37.0321 	EXP 	YBox: color = 'blue'
+37.0696 	EXP 	YBox: color = 'blue'
+37.1049 	EXP 	YBox: color = 'blue'
+37.1428 	EXP 	YBox: color = 'blue'
+37.1793 	EXP 	YBox: color = 'blue'
+37.2167 	EXP 	YBox: color = 'blue'
+37.2522 	EXP 	YBox: color = 'blue'
+37.2820 	DATA 	Mouse: Left button down, pos=(388,356)
+37.2895 	EXP 	YBox: color = 'blue'
+37.3288 	EXP 	YBox: color = 'blue'
+37.3671 	EXP 	YBox: color = 'blue'
+37.4043 	EXP 	YBox: color = 'blue'
+37.4102 	DATA 	Mouse:  Left button up, pos=(388,356)
+37.4435 	EXP 	YBox: color = 'blue'
+37.4800 	EXP 	YBox: color = 'blue'
+37.5164 	EXP 	YBox: color = 'blue'
+37.5513 	EXP 	YBox: color = 'blue'
+37.5878 	EXP 	YBox: color = 'blue'
+37.6255 	EXP 	YBox: color = 'blue'
+37.6624 	EXP 	YBox: color = 'blue'
+37.6980 	EXP 	YBox: color = 'blue'
+37.7348 	EXP 	YBox: color = 'blue'
+37.7699 	EXP 	YBox: color = 'blue'
+37.8070 	EXP 	YBox: color = 'blue'
+37.8437 	EXP 	YBox: color = 'blue'
+37.8795 	EXP 	YBox: color = 'blue'
+37.9160 	EXP 	YBox: color = 'blue'
+37.9506 	EXP 	YBox: color = 'blue'
+37.9860 	EXP 	YBox: color = 'blue'
+38.0221 	EXP 	YBox: color = 'blue'
+38.0602 	EXP 	YBox: color = 'blue'
+38.0959 	EXP 	YBox: color = 'blue'
+38.1321 	EXP 	YBox: color = 'blue'
+38.1681 	EXP 	YBox: color = 'blue'
+38.2033 	EXP 	YBox: color = 'blue'
+38.2396 	EXP 	YBox: color = 'blue'
+38.2768 	EXP 	YBox: color = 'blue'
+38.3119 	EXP 	YBox: color = 'blue'
+38.3474 	EXP 	YBox: color = 'blue'
+38.3827 	EXP 	YBox: color = 'blue'
+38.4182 	EXP 	YBox: color = 'blue'
+38.4544 	EXP 	YBox: color = 'blue'
+38.4929 	EXP 	YBox: color = 'blue'
+38.5291 	EXP 	YBox: color = 'blue'
+38.5679 	EXP 	YBox: color = 'blue'
+38.6048 	EXP 	YBox: color = 'blue'
+38.6456 	EXP 	YBox: color = 'blue'
+38.6840 	EXP 	YBox: color = 'blue'
+38.7208 	EXP 	YBox: color = 'blue'
+38.7561 	EXP 	YBox: color = 'blue'
+38.7943 	EXP 	YBox: color = 'blue'
+38.8316 	EXP 	YBox: color = 'blue'
+38.8678 	EXP 	YBox: color = 'blue'
+38.9039 	EXP 	YBox: color = 'blue'
+38.9397 	EXP 	YBox: color = 'blue'
+38.9772 	EXP 	YBox: color = 'blue'
+39.0120 	EXP 	YBox: color = 'blue'
+39.0424 	DATA 	Mouse: Left button down, pos=(366,472)
+39.0508 	EXP 	YBox: color = 'blue'
+39.0899 	EXP 	YBox: color = 'blue'
+39.1297 	EXP 	YBox: color = 'blue'
+39.1670 	EXP 	YBox: color = 'blue'
+39.1987 	DATA 	Mouse:  Left button up, pos=(366,472)
+39.2084 	EXP 	YBox: color = 'blue'
+39.2432 	EXP 	YBox: color = 'blue'
+39.2801 	EXP 	YBox: color = 'blue'
+39.3152 	EXP 	YBox: color = 'blue'
+39.3522 	EXP 	YBox: color = 'blue'
+39.3872 	EXP 	YBox: color = 'blue'
+39.4256 	EXP 	YBox: color = 'blue'
+39.4600 	EXP 	YBox: color = 'blue'
+39.4968 	EXP 	YBox: color = 'blue'
+39.5336 	EXP 	YBox: color = 'blue'
+39.5695 	EXP 	YBox: color = 'blue'
+39.6059 	EXP 	YBox: color = 'blue'
+39.6420 	EXP 	YBox: color = 'blue'
+39.6777 	EXP 	YBox: color = 'blue'
+39.7170 	EXP 	YBox: color = 'blue'
+39.7562 	EXP 	YBox: color = 'blue'
+39.7946 	EXP 	YBox: color = 'blue'
+39.8345 	EXP 	YBox: color = 'blue'
+39.8698 	EXP 	YBox: color = 'blue'
+39.9062 	EXP 	YBox: color = 'blue'
+39.9431 	EXP 	YBox: color = 'blue'
+39.9778 	EXP 	YBox: color = 'blue'
+40.0148 	EXP 	YBox: color = 'blue'
+40.0522 	EXP 	YBox: color = 'blue'
+40.0928 	EXP 	YBox: color = 'blue'
+40.1295 	EXP 	YBox: color = 'blue'
+40.1677 	EXP 	YBox: color = 'blue'
+40.2055 	EXP 	YBox: color = 'blue'
+40.2408 	EXP 	YBox: color = 'blue'
+40.2790 	EXP 	YBox: color = 'blue'
+40.3153 	EXP 	YBox: color = 'blue'
+40.3526 	EXP 	YBox: color = 'blue'
+40.3888 	EXP 	YBox: color = 'blue'
+40.4182 	DATA 	Mouse: Left button down, pos=(731,246)
+40.4279 	EXP 	YBox: color = 'blue'
+40.4671 	EXP 	YBox: color = 'blue'
+40.5044 	EXP 	YBox: color = 'blue'
+40.5451 	EXP 	YBox: color = 'blue'
+40.5458 	DATA 	Mouse:  Left button up, pos=(731,246)
+40.5808 	EXP 	YBox: color = 'blue'
+40.6162 	EXP 	YBox: color = 'blue'
+40.6516 	EXP 	YBox: color = 'blue'
+40.6891 	EXP 	YBox: color = 'blue'
+40.7262 	EXP 	YBox: color = 'blue'
+40.7611 	EXP 	YBox: color = 'blue'
+40.7968 	EXP 	YBox: color = 'blue'
+40.8334 	EXP 	YBox: color = 'blue'
+40.8689 	EXP 	YBox: color = 'blue'
+40.9051 	EXP 	YBox: color = 'blue'
+40.9420 	EXP 	YBox: color = 'blue'
+40.9786 	EXP 	YBox: color = 'blue'
+41.0140 	EXP 	YBox: color = 'blue'
+41.0489 	EXP 	YBox: color = 'blue'
+41.0850 	EXP 	YBox: color = 'blue'
+41.1212 	EXP 	YBox: color = 'blue'
+41.1559 	EXP 	YBox: color = 'blue'
+41.1941 	EXP 	YBox: color = 'blue'
+41.2300 	EXP 	YBox: color = 'blue'
+41.2669 	EXP 	YBox: color = 'blue'
+41.3055 	EXP 	YBox: color = 'blue'
+41.3432 	EXP 	YBox: color = 'blue'
+41.3824 	EXP 	YBox: color = 'blue'
+41.4186 	EXP 	YBox: color = 'blue'
+41.4542 	EXP 	YBox: color = 'blue'
+41.4893 	EXP 	YBox: color = 'blue'
+41.5275 	EXP 	YBox: color = 'blue'
+41.5628 	EXP 	YBox: color = 'blue'
+41.5984 	EXP 	YBox: color = 'blue'
+41.6347 	EXP 	YBox: color = 'blue'
+41.6695 	EXP 	YBox: color = 'blue'
+41.7049 	EXP 	YBox: color = 'blue'
+41.7406 	EXP 	YBox: color = 'blue'
+41.7781 	EXP 	YBox: color = 'blue'
+41.8125 	EXP 	YBox: color = 'blue'
+41.8481 	EXP 	YBox: color = 'blue'
+41.8836 	EXP 	YBox: color = 'blue'
+41.9200 	EXP 	YBox: color = 'blue'
+41.9558 	EXP 	YBox: color = 'blue'
+41.9929 	EXP 	YBox: color = 'blue'
+42.0273 	EXP 	YBox: color = 'blue'
+42.0637 	EXP 	YBox: color = 'blue'
+42.0992 	EXP 	YBox: color = 'blue'
+42.1341 	EXP 	YBox: color = 'blue'
+42.1709 	EXP 	YBox: color = 'blue'
+42.2099 	EXP 	YBox: color = 'blue'
+42.2452 	EXP 	YBox: color = 'blue'
+42.2804 	EXP 	YBox: color = 'blue'
+42.3166 	EXP 	YBox: color = 'blue'
+42.3523 	EXP 	YBox: color = 'blue'
+42.3892 	EXP 	YBox: color = 'blue'
+42.4264 	EXP 	YBox: color = 'blue'
+42.4618 	EXP 	YBox: color = 'blue'
+42.4980 	EXP 	YBox: color = 'blue'
+42.5346 	EXP 	YBox: color = 'blue'
+42.5729 	EXP 	YBox: color = 'blue'
+42.6105 	EXP 	YBox: color = 'blue'
+42.6467 	EXP 	YBox: color = 'blue'
+42.6838 	EXP 	YBox: color = 'blue'
+42.7240 	EXP 	YBox: color = 'blue'
+42.7637 	EXP 	YBox: color = 'blue'
+42.8014 	EXP 	YBox: color = 'blue'
+42.8416 	EXP 	YBox: color = 'blue'
+42.8787 	EXP 	YBox: color = 'blue'
+42.9149 	EXP 	YBox: color = 'blue'
+42.9520 	EXP 	YBox: color = 'blue'
+42.9889 	EXP 	YBox: color = 'blue'
+43.0235 	EXP 	YBox: color = 'blue'
+43.0617 	EXP 	YBox: color = 'blue'
+43.0961 	EXP 	YBox: color = 'blue'
+43.1318 	EXP 	YBox: color = 'blue'
+43.1681 	EXP 	YBox: color = 'blue'
+43.2048 	EXP 	YBox: color = 'blue'
+43.2418 	EXP 	YBox: color = 'blue'
+43.2762 	EXP 	YBox: color = 'blue'
+43.3120 	EXP 	YBox: color = 'blue'
+43.3481 	EXP 	YBox: color = 'blue'
+43.3840 	EXP 	YBox: color = 'blue'
+43.4204 	EXP 	YBox: color = 'blue'
+43.4562 	EXP 	YBox: color = 'blue'
+43.4923 	EXP 	YBox: color = 'blue'
+43.5294 	EXP 	YBox: color = 'blue'
+43.5644 	EXP 	YBox: color = 'blue'
+43.6001 	EXP 	YBox: color = 'blue'
+43.6358 	EXP 	YBox: color = 'blue'
+43.6707 	EXP 	YBox: color = 'blue'
+43.7086 	EXP 	YBox: color = 'blue'
+43.7450 	EXP 	YBox: color = 'blue'
+43.7800 	EXP 	YBox: color = 'blue'
+43.8149 	EXP 	YBox: color = 'blue'
+43.8512 	EXP 	YBox: color = 'blue'
+43.8872 	EXP 	YBox: color = 'blue'
+43.9231 	EXP 	YBox: color = 'blue'
+43.9608 	EXP 	YBox: color = 'blue'
+43.9970 	EXP 	YBox: color = 'blue'
+44.0328 	EXP 	YBox: color = 'blue'
+44.0691 	EXP 	YBox: color = 'blue'
+44.1060 	EXP 	YBox: color = 'blue'
+44.1427 	EXP 	YBox: color = 'blue'
+44.1882 	EXP 	YBox: color = 'blue'
+44.2252 	EXP 	YBox: color = 'blue'
+44.2594 	EXP 	YBox: color = 'blue'
+44.2949 	EXP 	YBox: color = 'blue'
+44.3303 	EXP 	YBox: color = 'blue'
+44.3667 	EXP 	YBox: color = 'blue'
+44.4031 	EXP 	YBox: color = 'blue'
+44.4378 	EXP 	YBox: color = 'blue'
+44.4766 	EXP 	YBox: color = 'blue'
+44.5121 	EXP 	YBox: color = 'blue'
+44.5483 	EXP 	YBox: color = 'blue'
+44.5843 	EXP 	YBox: color = 'blue'
+44.6195 	EXP 	YBox: color = 'blue'
+44.6553 	EXP 	YBox: color = 'blue'
+44.6936 	EXP 	YBox: color = 'blue'
+44.7281 	EXP 	YBox: color = 'blue'
+44.7653 	EXP 	YBox: color = 'blue'
+44.8017 	EXP 	YBox: color = 'blue'
+44.8360 	EXP 	YBox: color = 'blue'
+44.8714 	EXP 	YBox: color = 'blue'
+44.9068 	EXP 	YBox: color = 'blue'
+44.9426 	EXP 	YBox: color = 'blue'
+44.9807 	EXP 	YBox: color = 'blue'
+45.0155 	EXP 	YBox: color = 'blue'
+45.0525 	EXP 	YBox: color = 'blue'
+45.0877 	EXP 	YBox: color = 'blue'
+45.1262 	EXP 	YBox: color = 'blue'
+45.1608 	EXP 	YBox: color = 'blue'
+45.1974 	EXP 	YBox: color = 'blue'
+45.2324 	EXP 	YBox: color = 'blue'
+45.2698 	EXP 	YBox: color = 'blue'
+45.3060 	EXP 	YBox: color = 'blue'
+45.3426 	EXP 	YBox: color = 'blue'
+45.3795 	EXP 	YBox: color = 'blue'
+45.4145 	EXP 	YBox: color = 'blue'
+45.4509 	EXP 	YBox: color = 'blue'
+45.4857 	EXP 	YBox: color = 'blue'
+45.5222 	EXP 	YBox: color = 'blue'
+45.5593 	EXP 	YBox: color = 'blue'
+45.5956 	EXP 	YBox: color = 'blue'
+45.6308 	EXP 	YBox: color = 'blue'
+45.6654 	EXP 	YBox: color = 'blue'
+45.7011 	EXP 	YBox: color = 'blue'
+45.7366 	EXP 	YBox: color = 'blue'
+45.7731 	EXP 	YBox: color = 'blue'
+45.8103 	EXP 	YBox: color = 'blue'
+45.8445 	EXP 	YBox: color = 'blue'
+45.8809 	EXP 	YBox: color = 'blue'
+45.9174 	EXP 	YBox: color = 'blue'
+45.9536 	EXP 	YBox: color = 'blue'
+45.9889 	EXP 	YBox: color = 'blue'
+46.0269 	EXP 	YBox: color = 'blue'
+46.0623 	EXP 	YBox: color = 'blue'
+46.0971 	EXP 	YBox: color = 'blue'
+46.1345 	EXP 	YBox: color = 'blue'
+46.1696 	EXP 	YBox: color = 'blue'
+46.2062 	EXP 	YBox: color = 'blue'
+46.2430 	EXP 	YBox: color = 'blue'
+46.2775 	EXP 	YBox: color = 'blue'
+46.3140 	EXP 	YBox: color = 'blue'
+46.3485 	EXP 	YBox: color = 'blue'
+46.3839 	EXP 	YBox: color = 'blue'
+46.4204 	EXP 	YBox: color = 'blue'
+46.4562 	EXP 	YBox: color = 'blue'
+46.4940 	EXP 	YBox: color = 'blue'
+46.5293 	EXP 	YBox: color = 'blue'
+46.5642 	EXP 	YBox: color = 'blue'
+46.6009 	EXP 	YBox: color = 'blue'
+46.6367 	EXP 	YBox: color = 'blue'
+46.6728 	EXP 	YBox: color = 'blue'
+46.7096 	EXP 	YBox: color = 'blue'
+46.7441 	EXP 	YBox: color = 'blue'
+46.7813 	EXP 	YBox: color = 'blue'
+46.8100 	DATA 	Keypress: f
+46.8166 	EXP 	YBox: color = 'blue'
+46.8166 	EXP 	PBox: autoDraw = False
+46.8166 	EXP 	NBox2: autoDraw = False
+46.8166 	EXP 	SBox2: autoDraw = False
+46.8166 	EXP 	KBox2: autoDraw = False
+46.8166 	EXP 	HBox: autoDraw = False
+46.8166 	EXP 	FBox: autoDraw = False
+46.8166 	EXP 	QBox: autoDraw = False
+46.8166 	EXP 	LBox: autoDraw = False
+46.8166 	EXP 	RBox: autoDraw = False
+46.8166 	EXP 	TBox: autoDraw = False
+46.8166 	EXP 	YBox: autoDraw = False
+46.8166 	EXP 	JBox: autoDraw = False
+46.8166 	EXP 	RecallINS: autoDraw = False
+46.8166 	EXP 	P: autoDraw = False
+46.8166 	EXP 	F_2: autoDraw = False
+46.8166 	EXP 	H: autoDraw = False
+46.8166 	EXP 	S: autoDraw = False
+46.8166 	EXP 	K: autoDraw = False
+46.8166 	EXP 	N: autoDraw = False
+46.8166 	EXP 	L: autoDraw = False
+46.8166 	EXP 	Q: autoDraw = False
+46.8166 	EXP 	R: autoDraw = False
+46.8166 	EXP 	J: autoDraw = False
+46.8166 	EXP 	Y: autoDraw = False
+46.8166 	EXP 	T_2: autoDraw = False
+46.8166 	EXP 	CLEAR: autoDraw = False
+46.8166 	EXP 	ClearText: autoDraw = False
+46.8166 	EXP 	BLANK: autoDraw = False
+46.8166 	EXP 	BlankText: autoDraw = False
+46.8166 	EXP 	ENTER: autoDraw = False
+46.8166 	EXP 	EnterText: autoDraw = False
+49.7943 	EXP 	text_3: autoDraw = True
+51.2828 	EXP 	Created sequence: random, trialTypes=1, nReps=5, seed=None
+51.2832 	EXP 	New trial (rep=0, index=0): None
+51.2959 	EXP 	text_3: autoDraw = False
+51.2959 	EXP 	text_3: autoDraw = False
+51.2959 	EXP 	RandAns: autoDraw = True
+51.2959 	EXP 	TrueFalse: autoDraw = True
+52.3109 	EXP 	RandAns: autoDraw = False
+61.9962 	EXP 	New trial (rep=1, index=0): None
+62.0107 	DATA 	Keypress: f
+62.0176 	EXP 	RandAns: autoDraw = False
+62.0176 	EXP 	TrueFalse: autoDraw = False
+62.0176 	EXP 	RandAns: autoDraw = True
+62.0176 	EXP 	TrueFalse: autoDraw = True
+62.5628 	EXP 	New trial (rep=2, index=0): None
+62.5675 	DATA 	Keypress: f
+62.5773 	EXP 	RandAns: autoDraw = False
+62.5773 	EXP 	TrueFalse: autoDraw = False
+62.5773 	EXP 	RandAns: autoDraw = True
+62.5773 	EXP 	TrueFalse: autoDraw = True
+63.5774 	EXP 	RandAns: autoDraw = False
+64.7804 	DATA 	Keypress: escape
+65.3186 	EXP 	window1: mouseVisible = True

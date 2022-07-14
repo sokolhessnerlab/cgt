@@ -1,0 +1,87 @@
+3.2381 	WARNING 	We strongly recommend you activate the PTB sound engine in PsychoPy prefs as the preferred audio engine. Its timing is vastly superior. Your prefs are currently set to use ['sounddevice', 'PTB', 'pyo', 'pygame'] (in that order).
+22.7417 	EXP 	Created window1 = Window(allowGUI=True, allowStencil=False, autoLog=True, backendConf=UNKNOWN, bitsMode=UNKNOWN, blendMode='avg', bpc=(8, 8, 8), color=array([0, 0, 0]), colorSpace='rgb', depthBits=8, fullscr=<method-wrapper '__getattribute__' of attributeSetter object at 0x7fe82793e730>, gamma=None, gammaErrorPolicy='raise', lms=UNKNOWN, monitor=<psychopy.monitors.calibTools.Monitor object at 0x7fe825c56760>, multiSample=False, name='window1', numSamples=2, pos=(560, 350), screen=0, size=array([2240, 1400]), stencilBits=0, stereo=False, units='height', useFBO=True, useRetina=True, viewOri=0.0, viewPos=None, viewScale=None, waitBlanking=True, winType='pyglet')
+22.7420 	EXP 	window1: mouseVisible = True
+22.7421 	EXP 	window1: Attempting to measure frame rate of screen (0) ...
+22.7421 	EXP 	window1: recordFrameIntervals = False
+22.9065 	EXP 	window1: recordFrameIntervals = True
+23.0903 	EXP 	Screen (0) actual frame rate measured at 59.73Hz
+23.0903 	EXP 	window1: recordFrameIntervals = False
+23.1459 	WARNING 	launchHubServer: If using the iohub mouse or eyetracker devices, fullScr should be True.
+27.2938 	EXP 	window1: mouseVisible = True
+27.2939 	EXP 	window1: mouseVisible = True
+27.2940 	EXP 	window1: mouseVisible = True
+27.3770 	EXP 	Created text = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0.0, flipHoriz=False, flipVert=False, font='Open Sans', fontFiles=[], height=0.05, italic=False, languageStyle='LTR', name='text', opacity=1.0, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text='+', units='height', win=Window(...), wrapWidth=1)
+27.3809 	EXP 	Created isiText = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0.0, flipHoriz=False, flipVert=False, font='Open Sans', fontFiles=[], height=0.05, italic=False, languageStyle='LTR', name='isiText', opacity=1.0, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text='+', units='height', win=Window(...), wrapWidth=1)
+27.3848 	EXP 	Created text_2 = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0.0, flipHoriz=False, flipVert=False, font='Open Sans', fontFiles=[], height=0.05, italic=False, languageStyle='LTR', name='text_2', opacity=1.0, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text='+', units='height', win=Window(...), wrapWidth=1)
+27.4152 	EXP 	Created RecallIns = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0.0, flipHoriz=False, flipVert=False, font='Open Sans', fontFiles=[], height=0.05, italic=False, languageStyle='LTR', name='RecallIns', opacity=1.0, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text=str(...), units='height', win=Window(...), wrapWidth=1)
+27.4279 	EXP 	Created text_3 = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=-1.0, flipHoriz=False, flipVert=False, font='Open Sans', fontFiles=[], height=0.05, italic=False, languageStyle='LTR', name='text_3', opacity=1.0, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text=str(...), units='height', win=Window(...), wrapWidth=1)
+27.4315 	EXP 	Created text_2 = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0.0, flipHoriz=False, flipVert=False, font='Open Sans', fontFiles=[], height=0.05, italic=False, languageStyle='LTR', name='text_2', opacity=1.0, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text='+', units='height', win=Window(...), wrapWidth=1)
+27.4629 	EXP 	Created MathPracIns1 = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0.0, flipHoriz=False, flipVert=False, font='Open Sans', fontFiles=[], height=0.05, italic=False, languageStyle='LTR', name='MathPracIns1', opacity=1.0, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text=str(...), units='height', win=Window(...), wrapWidth=1)
+27.4631 	EXP 	window1: mouseVisible = True
+27.5005 	EXP 	Created MathInsPrac2 = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0.0, flipHoriz=False, flipVert=False, font='Open Sans', fontFiles=[], height=0.05, italic=False, languageStyle='LTR', name='MathInsPrac2', opacity=1.0, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text=str(...), units='height', win=Window(...), wrapWidth=1)
+27.5006 	EXP 	window1: mouseVisible = True
+27.5197 	EXP 	Created PracMathIns3 = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0.0, flipHoriz=False, flipVert=False, font='Open Sans', fontFiles=[], height=0.05, italic=False, languageStyle='LTR', name='PracMathIns3', opacity=1.0, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text=str(...), units='height', win=Window(...), wrapWidth=1)
+27.5198 	EXP 	window1: mouseVisible = True
+27.5235 	EXP 	Created text = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0.0, flipHoriz=False, flipVert=False, font='Open Sans', fontFiles=[], height=0.05, italic=False, languageStyle='LTR', name='text', opacity=1.0, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text='+', units='height', win=Window(...), wrapWidth=1)
+27.5259 	EXP 	Created blank500 = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0.0, flipHoriz=False, flipVert=False, font='Open Sans', fontFiles=[], height=0.05, italic=False, languageStyle='LTR', name='blank500', opacity=1.0, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text='', units='height', win=Window(...), wrapWidth=1)
+27.5343 	EXP 	Created ContIns = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=-2.0, flipHoriz=False, flipVert=False, font='Open Sans', fontFiles=[], height=0.05, italic=False, languageStyle='LTR', name='ContIns', opacity=1.0, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text=str(...), units='height', win=Window(...), wrapWidth=1)
+27.5345 	EXP 	window1: mouseVisible = True
+27.5383 	EXP 	Created isiPracMath2 = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0.0, flipHoriz=False, flipVert=False, font='Open Sans', fontFiles=[], height=0.05, italic=False, languageStyle='LTR', name='isiPracMath2', opacity=1.0, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text='+', units='height', win=Window(...), wrapWidth=1)
+27.5451 	EXP 	Created testingText = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0.0, flipHoriz=False, flipVert=False, font='Open Sans', fontFiles=[], height=0.05, italic=False, languageStyle='LTR', name='testingText', opacity=1.0, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text='Experiment complete!', units='height', win=Window(...), wrapWidth=1)
+29.4998 	DATA 	Keypress: space
+36.5464 	DATA 	Mouse: Left button down, pos=(708,329)
+36.6294 	DATA 	Mouse:  Left button up, pos=(708,329)
+46.6124 	DATA 	Mouse: Left button down, pos=(636,479)
+46.7299 	DATA 	Mouse:  Left button up, pos=(636,479)
+47.0000 	DATA 	Keypress: space
+48.6269 	DATA 	Keypress: return
+48.6970 	DATA 	Mouse: Left button down, pos=(765,294)
+48.8064 	DATA 	Mouse:  Left button up, pos=(765,294)
+54.7468 	DATA 	Mouse: Left button down, pos=(498,348)
+54.7820 	EXP 	text: autoDraw = True
+54.8805 	DATA 	Mouse:  Left button up, pos=(499,348)
+55.8022 	EXP 	Imported practiceletters.xlsx as conditions, 1 conditions, 1 params
+55.8066 	EXP 	Created sequence: random, trialTypes=1, nReps=1, seed=None
+55.8072 	EXP 	New trial (rep=0, index=0): {'letters': "P'"}
+55.8171 	EXP 	text: autoDraw = False
+55.8171 	EXP 	isiText: autoDraw = True
+56.0775 	EXP 	isiText: autoDraw = False
+56.0775 	EXP 	text_2: autoDraw = True
+57.0773 	EXP 	text_2: autoDraw = False
+57.0773 	EXP 	RecallIns: autoDraw = True
+59.0767 	EXP 	RecallIns: autoDraw = False
+62.0435 	EXP 	text_3: autoDraw = True
+63.5441 	EXP 	text_3: autoDraw = False
+63.5441 	EXP 	text_3: autoDraw = False
+63.5441 	EXP 	text_2: autoDraw = True
+64.5442 	EXP 	text_2: autoDraw = False
+64.5442 	EXP 	text_2: autoDraw = False
+64.5442 	EXP 	MathPracIns1: autoDraw = True
+100.3784 	DATA 	Mouse: Left button down, pos=(406,158)
+100.3934 	EXP 	MathPracIns1: autoDraw = False
+100.3934 	EXP 	MathInsPrac2: autoDraw = True
+100.5130 	DATA 	Mouse:  Left button up, pos=(406,158)
+127.3776 	DATA 	Mouse: Left button down, pos=(868,119)
+127.3927 	EXP 	MathInsPrac2: autoDraw = False
+127.3927 	EXP 	PracMathIns3: autoDraw = True
+127.4621 	DATA 	Mouse:  Left button up, pos=(868,119)
+132.6291 	DATA 	Mouse: Left button down, pos=(794,139)
+132.6592 	EXP 	PracMathIns3: autoDraw = False
+132.6592 	EXP 	text: autoDraw = True
+132.7451 	DATA 	Mouse:  Left button up, pos=(794,139)
+133.6597 	EXP 	text: autoDraw = False
+133.6597 	EXP 	text: autoDraw = False
+133.6597 	EXP 	blank500: autoDraw = True
+134.1592 	EXP 	blank500: autoDraw = False
+134.6427 	EXP 	ContIns: autoDraw = True
+137.1960 	DATA 	Mouse: Left button down, pos=(682,253)
+137.2257 	EXP 	blank500: autoDraw = False
+137.2257 	EXP 	ContIns: autoDraw = False
+137.2257 	EXP 	isiPracMath2: autoDraw = True
+137.3620 	DATA 	Mouse:  Left button up, pos=(682,253)
+137.4260 	EXP 	isiPracMath2: autoDraw = False
+137.4260 	EXP 	isiPracMath2: autoDraw = False
+137.4260 	EXP 	testingText: autoDraw = True
+138.4260 	EXP 	testingText: autoDraw = False
+138.4260 	EXP 	testingText: autoDraw = False
+138.4499 	EXP 	window1: mouseVisible = True

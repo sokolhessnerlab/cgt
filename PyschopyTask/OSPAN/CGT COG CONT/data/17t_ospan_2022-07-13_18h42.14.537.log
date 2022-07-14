@@ -1,0 +1,365 @@
+3.3813 	WARNING 	We strongly recommend you activate the PTB sound engine in PsychoPy prefs as the preferred audio engine. Its timing is vastly superior. Your prefs are currently set to use ['sounddevice', 'PTB', 'pyo', 'pygame'] (in that order).
+15.0348 	EXP 	Created window1 = Window(allowGUI=True, allowStencil=False, autoLog=True, backendConf=UNKNOWN, bitsMode=UNKNOWN, blendMode='avg', bpc=(8, 8, 8), color=array([0, 0, 0]), colorSpace='rgb', depthBits=8, fullscr=<method-wrapper '__getattribute__' of attributeSetter object at 0x7fefebd80670>, gamma=None, gammaErrorPolicy='raise', lms=UNKNOWN, monitor=<psychopy.monitors.calibTools.Monitor object at 0x7fefec4508b0>, multiSample=False, name='window1', numSamples=2, pos=(560, 350), screen=0, size=array([2240, 1400]), stencilBits=0, stereo=False, units='height', useFBO=True, useRetina=True, viewOri=0.0, viewPos=None, viewScale=None, waitBlanking=True, winType='pyglet')
+15.0350 	EXP 	window1: mouseVisible = True
+15.0350 	EXP 	window1: Attempting to measure frame rate of screen (0) ...
+15.0350 	EXP 	window1: recordFrameIntervals = False
+15.2007 	EXP 	window1: recordFrameIntervals = True
+15.3834 	EXP 	Screen (0) actual frame rate measured at 60.30Hz
+15.3834 	EXP 	window1: recordFrameIntervals = False
+15.4398 	WARNING 	launchHubServer: If using the iohub mouse or eyetracker devices, fullScr should be True.
+19.4224 	EXP 	Created letterDisp = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=-1.0, flipHoriz=False, flipVert=False, font='Open Sans', fontFiles=[], height=0.05, italic=False, languageStyle='LTR', name='letterDisp', opacity=1.0, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text='', units='height', win=Window(...), wrapWidth=1)
+19.4685 	EXP 	Created isiText = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0.0, flipHoriz=False, flipVert=False, font='Open Sans', fontFiles=[], height=0.05, italic=False, languageStyle='LTR', name='isiText', opacity=1.0, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text='+', units='height', win=Window(...), wrapWidth=1)
+19.4720 	EXP 	Created text_2 = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0.0, flipHoriz=False, flipVert=False, font='Open Sans', fontFiles=[], height=0.05, italic=False, languageStyle='LTR', name='text_2', opacity=1.0, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text='+', units='height', win=Window(...), wrapWidth=1)
+19.5015 	EXP 	Created RecallIns = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0.0, flipHoriz=False, flipVert=False, font='Open Sans', fontFiles=[], height=0.05, italic=False, languageStyle='LTR', name='RecallIns', opacity=1.0, ori=0.0, pos=array([ 500., -500.]), rgb=UNKNOWN, text=str(...), units='height', win=Window(...), wrapWidth=1)
+19.5084 	EXP 	Created FBox = Rect(__class__=<class 'psychopy.visual.rect.Rect'>, anchor=('center', 'center'), autoDraw=False, autoLog=True, closeShape=True, color=method-wrapper(...), colorSpace='rgb', contrast=None, depth=-2.0, fillColor=array([1, 1, 1]), fillColorSpace='rgb', fillRGB=array([1, 1, 1]), interpolate=True, lineColor=array([1., 1., 1.]), lineColorSpace='rgb', lineRGB=array([1, 1, 1]), lineWidth=1.0, name='FBox', opacity=1.0, ori=0.0, pos=array([1000., 1000.]), size=array([0.5, 0.5]), units='height', vertices=ndarray(...), win=Window(...))
+19.5110 	EXP 	Created Kbox = Rect(__class__=<class 'psychopy.visual.rect.Rect'>, anchor=('center', 'center'), autoDraw=False, autoLog=True, closeShape=True, color=method-wrapper(...), colorSpace='rgb', contrast=None, depth=-3.0, fillColor=array([1, 1, 1]), fillColorSpace='rgb', fillRGB=array([1, 1, 1]), interpolate=True, lineColor=array([1., 1., 1.]), lineColorSpace='rgb', lineRGB=array([1, 1, 1]), lineWidth=1.0, name='Kbox', opacity=1.0, ori=0.0, pos=array([950., 950.]), size=array([0.5, 0.5]), units='height', vertices=ndarray(...), win=Window(...))
+19.5136 	EXP 	Created PBox = Rect(__class__=<class 'psychopy.visual.rect.Rect'>, anchor=('center', 'center'), autoDraw=False, autoLog=True, closeShape=True, color=method-wrapper(...), colorSpace='rgb', contrast=None, depth=-4.0, fillColor=array([1, 1, 1]), fillColorSpace='rgb', fillRGB=array([1, 1, 1]), interpolate=True, lineColor=array([1., 1., 1.]), lineColorSpace='rgb', lineRGB=array([1, 1, 1]), lineWidth=1.0, name='PBox', opacity=1.0, ori=0.0, pos=array([900., 900.]), size=array([0.5, 0.5]), units='height', vertices=ndarray(...), win=Window(...))
+19.5162 	EXP 	Created SBox = Rect(__class__=<class 'psychopy.visual.rect.Rect'>, anchor=('center', 'center'), autoDraw=False, autoLog=True, closeShape=True, color=method-wrapper(...), colorSpace='rgb', contrast=None, depth=-5.0, fillColor=array([1, 1, 1]), fillColorSpace='rgb', fillRGB=array([1, 1, 1]), interpolate=True, lineColor=array([1., 1., 1.]), lineColorSpace='rgb', lineRGB=array([1, 1, 1]), lineWidth=1.0, name='SBox', opacity=1.0, ori=0.0, pos=array([850., 850.]), size=array([0.5, 0.5]), units='height', vertices=ndarray(...), win=Window(...))
+19.5191 	EXP 	Created HBox = ShapeStim(__class__=<class 'psychopy.visual.shape.ShapeStim'>, anchor=('center', 'center'), autoDraw=False, autoLog=True, closeShape=True, color=method-wrapper(...), colorSpace='rgb', contrast=None, depth=-6.0, fillColor=array([1, 1, 1]), fillColorSpace='rgb', fillRGB=array([1, 1, 1]), interpolate=True, lineColor=array([1., 1., 1.]), lineColorSpace='rgb', lineRGB=array([1, 1, 1]), lineWidth=1.0, name='HBox', opacity=1.0, ori=0.0, pos=array([800., 800.]), size=array([0.5, 0.5]), units='height', vertices=ndarray(...), win=Window(...), windingRule=None)
+19.5217 	EXP 	Created LBox = Rect(__class__=<class 'psychopy.visual.rect.Rect'>, anchor=('center', 'center'), autoDraw=False, autoLog=True, closeShape=True, color=method-wrapper(...), colorSpace='rgb', contrast=None, depth=-7.0, fillColor=array([1, 1, 1]), fillColorSpace='rgb', fillRGB=array([1, 1, 1]), interpolate=True, lineColor=array([1., 1., 1.]), lineColorSpace='rgb', lineRGB=array([1, 1, 1]), lineWidth=1.0, name='LBox', opacity=1.0, ori=0.0, pos=array([750., 750.]), size=array([0.5, 0.5]), units='height', vertices=ndarray(...), win=Window(...))
+19.5242 	EXP 	Created QBox = Rect(__class__=<class 'psychopy.visual.rect.Rect'>, anchor=('center', 'center'), autoDraw=False, autoLog=True, closeShape=True, color=method-wrapper(...), colorSpace='rgb', contrast=None, depth=-8.0, fillColor=array([1, 1, 1]), fillColorSpace='rgb', fillRGB=array([1, 1, 1]), interpolate=True, lineColor=array([1., 1., 1.]), lineColorSpace='rgb', lineRGB=array([1, 1, 1]), lineWidth=1.0, name='QBox', opacity=1.0, ori=0.0, pos=array([750., 750.]), size=array([0.5, 0.5]), units='height', vertices=ndarray(...), win=Window(...))
+19.5269 	EXP 	Created TBox = ShapeStim(__class__=<class 'psychopy.visual.shape.ShapeStim'>, anchor=('center', 'center'), autoDraw=False, autoLog=True, closeShape=True, color=method-wrapper(...), colorSpace='rgb', contrast=None, depth=-9.0, fillColor=array([1, 1, 1]), fillColorSpace='rgb', fillRGB=array([1, 1, 1]), interpolate=True, lineColor=array([1., 1., 1.]), lineColorSpace='rgb', lineRGB=array([1, 1, 1]), lineWidth=1.0, name='TBox', opacity=1.0, ori=0.0, pos=array([600., 600.]), size=array([0.5, 0.5]), units='height', vertices=ndarray(...), win=Window(...), windingRule=None)
+19.5295 	EXP 	Created JBox = Rect(__class__=<class 'psychopy.visual.rect.Rect'>, anchor=('center', 'center'), autoDraw=False, autoLog=True, closeShape=True, color=method-wrapper(...), colorSpace='rgb', contrast=None, depth=-10.0, fillColor=array([1, 1, 1]), fillColorSpace='rgb', fillRGB=array([1, 1, 1]), interpolate=True, lineColor=array([1., 1., 1.]), lineColorSpace='rgb', lineRGB=array([1, 1, 1]), lineWidth=1.0, name='JBox', opacity=1.0, ori=0.0, pos=array([550., 550.]), size=array([0.5, 0.5]), units='height', vertices=ndarray(...), win=Window(...))
+19.5321 	EXP 	Created NBox = ShapeStim(__class__=<class 'psychopy.visual.shape.ShapeStim'>, anchor=('center', 'center'), autoDraw=False, autoLog=True, closeShape=True, color=method-wrapper(...), colorSpace='rgb', contrast=None, depth=-11.0, fillColor=array([1, 1, 1]), fillColorSpace='rgb', fillRGB=array([1, 1, 1]), interpolate=True, lineColor=array([1., 1., 1.]), lineColorSpace='rgb', lineRGB=array([1, 1, 1]), lineWidth=1.0, name='NBox', opacity=1.0, ori=0.0, pos=array([500., 500.]), size=array([0.5, 0.5]), units='height', vertices=ndarray(...), win=Window(...), windingRule=None)
+19.5348 	EXP 	Created RBox = ShapeStim(__class__=<class 'psychopy.visual.shape.ShapeStim'>, anchor=('center', 'center'), autoDraw=False, autoLog=True, closeShape=True, color=method-wrapper(...), colorSpace='rgb', contrast=None, depth=-12.0, fillColor=array([1, 1, 1]), fillColorSpace='rgb', fillRGB=array([1, 1, 1]), interpolate=True, lineColor=array([1., 1., 1.]), lineColorSpace='rgb', lineRGB=array([1, 1, 1]), lineWidth=1.0, name='RBox', opacity=1.0, ori=0.0, pos=array([400., 400.]), size=array([0.5, 0.5]), units='height', vertices=ndarray(...), win=Window(...), windingRule=None)
+19.5375 	EXP 	Created YBox = ShapeStim(__class__=<class 'psychopy.visual.shape.ShapeStim'>, anchor=('center', 'center'), autoDraw=False, autoLog=True, closeShape=True, color=method-wrapper(...), colorSpace='rgb', contrast=None, depth=-13.0, fillColor=array([1, 1, 1]), fillColorSpace='rgb', fillRGB=array([1, 1, 1]), interpolate=True, lineColor=array([1., 1., 1.]), lineColorSpace='rgb', lineRGB=array([1, 1, 1]), lineWidth=1.0, name='YBox', opacity=1.0, ori=0.0, pos=array([ 400., -400.]), size=array([0.5, 0.5]), units='height', vertices=ndarray(...), win=Window(...), windingRule=None)
+19.5484 	EXP 	Created text_3 = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=-1.0, flipHoriz=False, flipVert=False, font='Open Sans', fontFiles=[], height=0.05, italic=False, languageStyle='LTR', name='text_3', opacity=1.0, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text=str(...), units='height', win=Window(...), wrapWidth=1)
+19.5552 	EXP 	Created TrueFalse = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0.0, flipHoriz=False, flipVert=False, font='Open Sans', fontFiles=[], height=0.05, italic=False, languageStyle='LTR', name='TrueFalse', opacity=1.0, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text='True or False?', units='height', win=Window(...), wrapWidth=1)
+19.5682 	EXP 	Imported practiceletters.xlsx as conditions, 12 conditions, 1 params
+19.5728 	EXP 	Created sequence: random, trialTypes=12, nReps=4, seed=None
+19.5738 	EXP 	New trial (rep=0, index=0): {'letters': "T'"}
+19.5944 	EXP 	letterDisp: autoDraw = True
+20.5895 	EXP 	letterDisp: autoDraw = False
+20.5895 	EXP 	isiText: autoDraw = True
+20.8394 	EXP 	isiText: autoDraw = False
+20.8394 	EXP 	text_2: autoDraw = True
+21.8241 	EXP 	New trial (rep=0, index=1): {'letters': "Y'"}
+21.8393 	EXP 	text_2: autoDraw = False
+21.8393 	EXP 	letterDisp: autoDraw = True
+22.8393 	EXP 	letterDisp: autoDraw = False
+22.8393 	EXP 	isiText: autoDraw = True
+23.1117 	EXP 	isiText: autoDraw = False
+23.1117 	EXP 	text_2: autoDraw = True
+24.0586 	EXP 	New trial (rep=0, index=2): {'letters': "F'"}
+24.0755 	EXP 	text_2: autoDraw = False
+24.0755 	EXP 	letterDisp: autoDraw = True
+25.0748 	EXP 	letterDisp: autoDraw = False
+25.0748 	EXP 	isiText: autoDraw = True
+25.3231 	EXP 	isiText: autoDraw = False
+25.3231 	EXP 	text_2: autoDraw = True
+26.3089 	EXP 	New trial (rep=0, index=3): {'letters': "R'"}
+26.3261 	EXP 	text_2: autoDraw = False
+26.3261 	EXP 	letterDisp: autoDraw = True
+27.3231 	EXP 	letterDisp: autoDraw = False
+27.3231 	EXP 	isiText: autoDraw = True
+27.5737 	EXP 	isiText: autoDraw = False
+27.5737 	EXP 	text_2: autoDraw = True
+28.5577 	EXP 	New trial (rep=0, index=4): {'letters': "K'"}
+28.5732 	EXP 	text_2: autoDraw = False
+28.5732 	EXP 	letterDisp: autoDraw = True
+29.5745 	EXP 	letterDisp: autoDraw = False
+29.5745 	EXP 	isiText: autoDraw = True
+29.8245 	EXP 	isiText: autoDraw = False
+29.8245 	EXP 	text_2: autoDraw = True
+30.8689 	EXP 	New trial (rep=0, index=5): {'letters': "P'"}
+30.8965 	EXP 	text_2: autoDraw = False
+30.8965 	EXP 	letterDisp: autoDraw = True
+31.8386 	EXP 	letterDisp: autoDraw = False
+31.8386 	EXP 	isiText: autoDraw = True
+32.0885 	EXP 	isiText: autoDraw = False
+32.0885 	EXP 	text_2: autoDraw = True
+33.0722 	EXP 	New trial (rep=0, index=6): {'letters': "L'"}
+33.0882 	EXP 	text_2: autoDraw = False
+33.0882 	EXP 	letterDisp: autoDraw = True
+34.0887 	EXP 	letterDisp: autoDraw = False
+34.0887 	EXP 	isiText: autoDraw = True
+34.3368 	EXP 	isiText: autoDraw = False
+34.3368 	EXP 	text_2: autoDraw = True
+35.3224 	EXP 	New trial (rep=0, index=7): {'letters': "N'"}
+35.3385 	EXP 	text_2: autoDraw = False
+35.3385 	EXP 	letterDisp: autoDraw = True
+36.3388 	EXP 	letterDisp: autoDraw = False
+36.3388 	EXP 	isiText: autoDraw = True
+36.5882 	EXP 	isiText: autoDraw = False
+36.5882 	EXP 	text_2: autoDraw = True
+37.5722 	EXP 	New trial (rep=0, index=8): {'letters': "Q'"}
+37.5881 	EXP 	text_2: autoDraw = False
+37.5881 	EXP 	letterDisp: autoDraw = True
+38.5880 	EXP 	letterDisp: autoDraw = False
+38.5880 	EXP 	isiText: autoDraw = True
+38.8379 	EXP 	isiText: autoDraw = False
+38.8379 	EXP 	text_2: autoDraw = True
+39.8226 	EXP 	New trial (rep=0, index=9): {'letters': "J'"}
+39.8389 	EXP 	text_2: autoDraw = False
+39.8389 	EXP 	letterDisp: autoDraw = True
+40.8370 	EXP 	letterDisp: autoDraw = False
+40.8370 	EXP 	isiText: autoDraw = True
+41.0869 	EXP 	isiText: autoDraw = False
+41.0869 	EXP 	text_2: autoDraw = True
+42.0716 	EXP 	New trial (rep=0, index=10): {'letters': "H'"}
+42.0878 	EXP 	text_2: autoDraw = False
+42.0878 	EXP 	letterDisp: autoDraw = True
+43.0881 	EXP 	letterDisp: autoDraw = False
+43.0881 	EXP 	isiText: autoDraw = True
+43.3381 	EXP 	isiText: autoDraw = False
+43.3381 	EXP 	text_2: autoDraw = True
+44.3221 	EXP 	New trial (rep=0, index=11): {'letters': "S'"}
+44.3382 	EXP 	text_2: autoDraw = False
+44.3382 	EXP 	letterDisp: autoDraw = True
+45.3381 	EXP 	letterDisp: autoDraw = False
+45.3381 	EXP 	isiText: autoDraw = True
+45.5878 	EXP 	isiText: autoDraw = False
+45.5878 	EXP 	text_2: autoDraw = True
+46.5722 	EXP 	New trial (rep=1, index=0): {'letters': "L'"}
+46.5881 	EXP 	text_2: autoDraw = False
+46.5881 	EXP 	letterDisp: autoDraw = True
+47.5880 	EXP 	letterDisp: autoDraw = False
+47.5880 	EXP 	isiText: autoDraw = True
+47.8381 	EXP 	isiText: autoDraw = False
+47.8381 	EXP 	text_2: autoDraw = True
+48.8223 	EXP 	New trial (rep=1, index=1): {'letters': "R'"}
+48.8381 	EXP 	text_2: autoDraw = False
+48.8381 	EXP 	letterDisp: autoDraw = True
+49.8395 	EXP 	letterDisp: autoDraw = False
+49.8395 	EXP 	isiText: autoDraw = True
+50.0880 	EXP 	isiText: autoDraw = False
+50.0880 	EXP 	text_2: autoDraw = True
+51.0724 	EXP 	New trial (rep=1, index=2): {'letters': "T'"}
+51.0882 	EXP 	text_2: autoDraw = False
+51.0882 	EXP 	letterDisp: autoDraw = True
+52.0885 	EXP 	letterDisp: autoDraw = False
+52.0885 	EXP 	isiText: autoDraw = True
+52.3385 	EXP 	isiText: autoDraw = False
+52.3385 	EXP 	text_2: autoDraw = True
+53.3220 	EXP 	New trial (rep=1, index=3): {'letters': "S'"}
+53.3381 	EXP 	text_2: autoDraw = False
+53.3381 	EXP 	letterDisp: autoDraw = True
+54.3396 	EXP 	letterDisp: autoDraw = False
+54.3396 	EXP 	isiText: autoDraw = True
+54.5879 	EXP 	isiText: autoDraw = False
+54.5879 	EXP 	text_2: autoDraw = True
+55.5719 	EXP 	New trial (rep=1, index=4): {'letters': "Q'"}
+55.5877 	EXP 	text_2: autoDraw = False
+55.5877 	EXP 	letterDisp: autoDraw = True
+56.5869 	EXP 	letterDisp: autoDraw = False
+56.5869 	EXP 	isiText: autoDraw = True
+56.8369 	EXP 	isiText: autoDraw = False
+56.8369 	EXP 	text_2: autoDraw = True
+57.8205 	EXP 	New trial (rep=1, index=5): {'letters': "N'"}
+57.8367 	EXP 	text_2: autoDraw = False
+57.8367 	EXP 	letterDisp: autoDraw = True
+58.8367 	EXP 	letterDisp: autoDraw = False
+58.8367 	EXP 	isiText: autoDraw = True
+59.0867 	EXP 	isiText: autoDraw = False
+59.0867 	EXP 	text_2: autoDraw = True
+60.0709 	EXP 	New trial (rep=1, index=6): {'letters': "Y'"}
+60.0868 	EXP 	text_2: autoDraw = False
+60.0868 	EXP 	letterDisp: autoDraw = True
+61.0877 	EXP 	letterDisp: autoDraw = False
+61.0877 	EXP 	isiText: autoDraw = True
+61.3380 	EXP 	isiText: autoDraw = False
+61.3380 	EXP 	text_2: autoDraw = True
+62.3222 	EXP 	New trial (rep=1, index=7): {'letters': "H'"}
+62.3379 	EXP 	text_2: autoDraw = False
+62.3379 	EXP 	letterDisp: autoDraw = True
+63.3376 	EXP 	letterDisp: autoDraw = False
+63.3376 	EXP 	isiText: autoDraw = True
+63.5880 	EXP 	isiText: autoDraw = False
+63.5880 	EXP 	text_2: autoDraw = True
+64.5723 	EXP 	New trial (rep=1, index=8): {'letters': "F'"}
+64.5879 	EXP 	text_2: autoDraw = False
+64.5879 	EXP 	letterDisp: autoDraw = True
+65.5878 	EXP 	letterDisp: autoDraw = False
+65.5878 	EXP 	isiText: autoDraw = True
+65.8377 	EXP 	isiText: autoDraw = False
+65.8377 	EXP 	text_2: autoDraw = True
+66.8216 	EXP 	New trial (rep=1, index=9): {'letters': "P'"}
+66.8377 	EXP 	text_2: autoDraw = False
+66.8377 	EXP 	letterDisp: autoDraw = True
+67.8377 	EXP 	letterDisp: autoDraw = False
+67.8377 	EXP 	isiText: autoDraw = True
+68.0878 	EXP 	isiText: autoDraw = False
+68.0878 	EXP 	text_2: autoDraw = True
+69.0717 	EXP 	New trial (rep=1, index=10): {'letters': "J'"}
+69.0878 	EXP 	text_2: autoDraw = False
+69.0878 	EXP 	letterDisp: autoDraw = True
+70.0866 	EXP 	letterDisp: autoDraw = False
+70.0866 	EXP 	isiText: autoDraw = True
+70.3366 	EXP 	isiText: autoDraw = False
+70.3366 	EXP 	text_2: autoDraw = True
+71.3217 	EXP 	New trial (rep=1, index=11): {'letters': "K'"}
+71.3377 	EXP 	text_2: autoDraw = False
+71.3377 	EXP 	letterDisp: autoDraw = True
+72.3377 	EXP 	letterDisp: autoDraw = False
+72.3377 	EXP 	isiText: autoDraw = True
+72.5883 	EXP 	isiText: autoDraw = False
+72.5883 	EXP 	text_2: autoDraw = True
+73.5705 	EXP 	New trial (rep=2, index=0): {'letters': "K'"}
+73.5865 	EXP 	text_2: autoDraw = False
+73.5865 	EXP 	letterDisp: autoDraw = True
+74.5864 	EXP 	letterDisp: autoDraw = False
+74.5864 	EXP 	isiText: autoDraw = True
+74.8366 	EXP 	isiText: autoDraw = False
+74.8366 	EXP 	text_2: autoDraw = True
+75.8210 	EXP 	New trial (rep=2, index=1): {'letters': "J'"}
+75.8369 	EXP 	text_2: autoDraw = False
+75.8369 	EXP 	letterDisp: autoDraw = True
+76.8378 	EXP 	letterDisp: autoDraw = False
+76.8378 	EXP 	isiText: autoDraw = True
+77.0877 	EXP 	isiText: autoDraw = False
+77.0877 	EXP 	text_2: autoDraw = True
+78.0720 	EXP 	New trial (rep=2, index=2): {'letters': "Y'"}
+78.0877 	EXP 	text_2: autoDraw = False
+78.0877 	EXP 	letterDisp: autoDraw = True
+79.0876 	EXP 	letterDisp: autoDraw = False
+79.0876 	EXP 	isiText: autoDraw = True
+79.3377 	EXP 	isiText: autoDraw = False
+79.3377 	EXP 	text_2: autoDraw = True
+80.3202 	EXP 	New trial (rep=2, index=3): {'letters': "P'"}
+80.3363 	EXP 	text_2: autoDraw = False
+80.3363 	EXP 	letterDisp: autoDraw = True
+81.3381 	EXP 	letterDisp: autoDraw = False
+81.3381 	EXP 	isiText: autoDraw = True
+81.5882 	EXP 	isiText: autoDraw = False
+81.5882 	EXP 	text_2: autoDraw = True
+82.5716 	EXP 	New trial (rep=2, index=4): {'letters': "N'"}
+82.5875 	EXP 	text_2: autoDraw = False
+82.5875 	EXP 	letterDisp: autoDraw = True
+83.5876 	EXP 	letterDisp: autoDraw = False
+83.5876 	EXP 	isiText: autoDraw = True
+83.8377 	EXP 	isiText: autoDraw = False
+83.8377 	EXP 	text_2: autoDraw = True
+84.8220 	EXP 	New trial (rep=2, index=5): {'letters': "Q'"}
+84.8378 	EXP 	text_2: autoDraw = False
+84.8378 	EXP 	letterDisp: autoDraw = True
+85.8365 	EXP 	letterDisp: autoDraw = False
+85.8365 	EXP 	isiText: autoDraw = True
+86.0863 	EXP 	isiText: autoDraw = False
+86.0863 	EXP 	text_2: autoDraw = True
+87.0717 	EXP 	New trial (rep=2, index=6): {'letters': "L'"}
+87.0877 	EXP 	text_2: autoDraw = False
+87.0877 	EXP 	letterDisp: autoDraw = True
+88.0881 	EXP 	letterDisp: autoDraw = False
+88.0881 	EXP 	isiText: autoDraw = True
+88.3375 	EXP 	isiText: autoDraw = False
+88.3375 	EXP 	text_2: autoDraw = True
+89.3216 	EXP 	New trial (rep=2, index=7): {'letters': "F'"}
+89.3375 	EXP 	text_2: autoDraw = False
+89.3375 	EXP 	letterDisp: autoDraw = True
+90.3374 	EXP 	letterDisp: autoDraw = False
+90.3374 	EXP 	isiText: autoDraw = True
+90.5876 	EXP 	isiText: autoDraw = False
+90.5876 	EXP 	text_2: autoDraw = True
+91.5714 	EXP 	New trial (rep=2, index=8): {'letters': "S'"}
+91.5871 	EXP 	text_2: autoDraw = False
+91.5871 	EXP 	letterDisp: autoDraw = True
+92.5875 	EXP 	letterDisp: autoDraw = False
+92.5875 	EXP 	isiText: autoDraw = True
+92.8374 	EXP 	isiText: autoDraw = False
+92.8374 	EXP 	text_2: autoDraw = True
+93.8217 	EXP 	New trial (rep=2, index=9): {'letters': "H'"}
+93.8375 	EXP 	text_2: autoDraw = False
+93.8375 	EXP 	letterDisp: autoDraw = True
+94.8375 	EXP 	letterDisp: autoDraw = False
+94.8375 	EXP 	isiText: autoDraw = True
+95.0874 	EXP 	isiText: autoDraw = False
+95.0874 	EXP 	text_2: autoDraw = True
+96.0716 	EXP 	New trial (rep=2, index=10): {'letters': "T'"}
+96.0875 	EXP 	text_2: autoDraw = False
+96.0875 	EXP 	letterDisp: autoDraw = True
+97.0872 	EXP 	letterDisp: autoDraw = False
+97.0872 	EXP 	isiText: autoDraw = True
+97.3374 	EXP 	isiText: autoDraw = False
+97.3374 	EXP 	text_2: autoDraw = True
+98.3214 	EXP 	New trial (rep=2, index=11): {'letters': "R'"}
+98.3375 	EXP 	text_2: autoDraw = False
+98.3375 	EXP 	letterDisp: autoDraw = True
+99.3380 	EXP 	letterDisp: autoDraw = False
+99.3380 	EXP 	isiText: autoDraw = True
+99.5873 	EXP 	isiText: autoDraw = False
+99.5873 	EXP 	text_2: autoDraw = True
+100.5712 	EXP 	New trial (rep=3, index=0): {'letters': "L'"}
+100.5871 	EXP 	text_2: autoDraw = False
+100.5871 	EXP 	letterDisp: autoDraw = True
+101.7998 	EXP 	letterDisp: autoDraw = False
+101.7998 	EXP 	isiText: autoDraw = True
+101.8341 	EXP 	isiText: autoDraw = False
+101.8341 	EXP 	text_2: autoDraw = True
+102.8200 	EXP 	New trial (rep=3, index=1): {'letters': "Q'"}
+102.8361 	EXP 	text_2: autoDraw = False
+102.8361 	EXP 	letterDisp: autoDraw = True
+103.8377 	EXP 	letterDisp: autoDraw = False
+103.8377 	EXP 	isiText: autoDraw = True
+104.0873 	EXP 	isiText: autoDraw = False
+104.0873 	EXP 	text_2: autoDraw = True
+105.0726 	EXP 	New trial (rep=3, index=2): {'letters': "P'"}
+105.0874 	EXP 	text_2: autoDraw = False
+105.0874 	EXP 	letterDisp: autoDraw = True
+106.0872 	EXP 	letterDisp: autoDraw = False
+106.0872 	EXP 	isiText: autoDraw = True
+106.3373 	EXP 	isiText: autoDraw = False
+106.3373 	EXP 	text_2: autoDraw = True
+107.3214 	EXP 	New trial (rep=3, index=3): {'letters': "T'"}
+107.3374 	EXP 	text_2: autoDraw = False
+107.3374 	EXP 	letterDisp: autoDraw = True
+108.3379 	EXP 	letterDisp: autoDraw = False
+108.3379 	EXP 	isiText: autoDraw = True
+108.5871 	EXP 	isiText: autoDraw = False
+108.5871 	EXP 	text_2: autoDraw = True
+109.5722 	EXP 	New trial (rep=3, index=4): {'letters': "F'"}
+109.5879 	EXP 	text_2: autoDraw = False
+109.5879 	EXP 	letterDisp: autoDraw = True
+110.5861 	EXP 	letterDisp: autoDraw = False
+110.5861 	EXP 	isiText: autoDraw = True
+110.8362 	EXP 	isiText: autoDraw = False
+110.8362 	EXP 	text_2: autoDraw = True
+111.8198 	EXP 	New trial (rep=3, index=5): {'letters': "R'"}
+111.8363 	EXP 	text_2: autoDraw = False
+111.8363 	EXP 	letterDisp: autoDraw = True
+112.8371 	EXP 	letterDisp: autoDraw = False
+112.8371 	EXP 	isiText: autoDraw = True
+113.0873 	EXP 	isiText: autoDraw = False
+113.0873 	EXP 	text_2: autoDraw = True
+114.0713 	EXP 	New trial (rep=3, index=6): {'letters': "H'"}
+114.0869 	EXP 	text_2: autoDraw = False
+114.0869 	EXP 	letterDisp: autoDraw = True
+115.0871 	EXP 	letterDisp: autoDraw = False
+115.0871 	EXP 	isiText: autoDraw = True
+115.3377 	EXP 	isiText: autoDraw = False
+115.3377 	EXP 	text_2: autoDraw = True
+116.3212 	EXP 	New trial (rep=3, index=7): {'letters': "K'"}
+116.3368 	EXP 	text_2: autoDraw = False
+116.3368 	EXP 	letterDisp: autoDraw = True
+117.3378 	EXP 	letterDisp: autoDraw = False
+117.3378 	EXP 	isiText: autoDraw = True
+117.5871 	EXP 	isiText: autoDraw = False
+117.5871 	EXP 	text_2: autoDraw = True
+118.5713 	EXP 	New trial (rep=3, index=8): {'letters': "J'"}
+118.5873 	EXP 	text_2: autoDraw = False
+118.5873 	EXP 	letterDisp: autoDraw = True
+119.5872 	EXP 	letterDisp: autoDraw = False
+119.5872 	EXP 	isiText: autoDraw = True
+119.8380 	EXP 	isiText: autoDraw = False
+119.8380 	EXP 	text_2: autoDraw = True
+120.8211 	EXP 	New trial (rep=3, index=9): {'letters': "N'"}
+120.8371 	EXP 	text_2: autoDraw = False
+120.8371 	EXP 	letterDisp: autoDraw = True
+121.8373 	EXP 	letterDisp: autoDraw = False
+121.8373 	EXP 	isiText: autoDraw = True
+122.0871 	EXP 	isiText: autoDraw = False
+122.0871 	EXP 	text_2: autoDraw = True
+123.0713 	EXP 	New trial (rep=3, index=10): {'letters': "S'"}
+123.0868 	EXP 	text_2: autoDraw = False
+123.0868 	EXP 	letterDisp: autoDraw = True
+124.0870 	EXP 	letterDisp: autoDraw = False
+124.0870 	EXP 	isiText: autoDraw = True
+124.3384 	EXP 	isiText: autoDraw = False
+124.3384 	EXP 	text_2: autoDraw = True
+125.3216 	EXP 	New trial (rep=3, index=11): {'letters': "Y'"}
+125.3371 	EXP 	text_2: autoDraw = False
+125.3371 	EXP 	letterDisp: autoDraw = True
+126.3372 	EXP 	letterDisp: autoDraw = False
+126.3372 	EXP 	isiText: autoDraw = True
+126.5871 	EXP 	isiText: autoDraw = False
+126.5871 	EXP 	text_2: autoDraw = True
+127.7314 	EXP 	window1: mouseVisible = True

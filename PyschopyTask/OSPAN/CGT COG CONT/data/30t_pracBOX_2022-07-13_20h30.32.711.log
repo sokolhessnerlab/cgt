@@ -1,0 +1,26 @@
+3.0078 	WARNING 	We strongly recommend you activate the PTB sound engine in PsychoPy prefs as the preferred audio engine. Its timing is vastly superior. Your prefs are currently set to use ['sounddevice', 'PTB', 'pyo', 'pygame'] (in that order).
+17.2854 	WARNING 	User requested fullscreen with size [1024  768], but screen is actually [1680, 1050]. Using actual size
+18.9631 	EXP 	Created window1 = Window(allowGUI=False, allowStencil=False, autoLog=True, backendConf=UNKNOWN, bitsMode=UNKNOWN, blendMode='avg', bpc=(8, 8, 8), color=array([0, 0, 0]), colorSpace='rgb', depthBits=8, fullscr=<method-wrapper '__getattribute__' of attributeSetter object at 0x7f9f330a99a0>, gamma=None, gammaErrorPolicy='raise', lms=UNKNOWN, monitor=<psychopy.monitors.calibTools.Monitor object at 0x7f9f325706a0>, multiSample=False, name='window1', numSamples=2, pos=[420.0, 262.5], screen=0, size=array([3360, 2100]), stencilBits=0, stereo=False, units='height', useFBO=True, useRetina=True, viewOri=0.0, viewPos=None, viewScale=None, waitBlanking=True, winType='pyglet')
+18.9634 	EXP 	window1: mouseVisible = True
+18.9634 	EXP 	window1: Attempting to measure frame rate of screen (0) ...
+18.9634 	EXP 	window1: recordFrameIntervals = False
+19.1390 	EXP 	window1: recordFrameIntervals = True
+19.3090 	WARNING 	t of last frame was 48.46ms (=1/20)
+19.3442 	WARNING 	t of last frame was 25.76ms (=1/38)
+19.5097 	EXP 	Screen (0) actual frame rate measured at 60.55Hz
+19.5097 	EXP 	window1: recordFrameIntervals = False
+23.5156 	EXP 	Created NBox = Rect(__class__=<class 'psychopy.visual.rect.Rect'>, anchor=('right', 'bottom'), autoDraw=False, autoLog=True, closeShape=True, color=method-wrapper(...), colorSpace='rgb', contrast=None, depth=0.0, fillColor=array([1, 1, 1]), fillColorSpace='rgb', fillRGB=array([1, 1, 1]), interpolate=True, lineColor=array([1., 1., 1.]), lineColorSpace='rgb', lineRGB=array([1, 1, 1]), lineWidth=1.0, name='NBox', opacity=1.0, ori=0.0, pos=array([0.5, 0. ]), size=array([0.15, 0.15]), units='height', vertices=ndarray(...), win=Window(...))
+23.5183 	EXP 	Created SBox = Rect(__class__=<class 'psychopy.visual.rect.Rect'>, anchor=('left', 'bottom'), autoDraw=False, autoLog=True, closeShape=True, color=method-wrapper(...), colorSpace='rgb', contrast=None, depth=-1.0, fillColor=array([1, 1, 1]), fillColorSpace='rgb', fillRGB=array([1, 1, 1]), interpolate=True, lineColor=array([1., 1., 1.]), lineColorSpace='rgb', lineRGB=array([1, 1, 1]), lineWidth=1.0, name='SBox', opacity=1.0, ori=0.0, pos=array([-0.5,  0. ]), size=array([0.15, 0.15]), units='height', vertices=ndarray(...), win=Window(...))
+23.5210 	EXP 	Created KBox = Rect(__class__=<class 'psychopy.visual.rect.Rect'>, anchor=('center', 'bottom'), autoDraw=False, autoLog=True, closeShape=True, color=method-wrapper(...), colorSpace='rgb', contrast=None, depth=-2.0, fillColor=array([1, 1, 1]), fillColorSpace='rgb', fillRGB=array([1, 1, 1]), interpolate=True, lineColor=array([1., 1., 1.]), lineColorSpace='rgb', lineRGB=array([1, 1, 1]), lineWidth=1.0, name='KBox', opacity=1.0, ori=0.0, pos=array([0., 0.]), size=array([0.15, 0.15]), units='height', vertices=ndarray(...), win=Window(...))
+23.5239 	EXP 	Created HBox = Rect(__class__=<class 'psychopy.visual.rect.Rect'>, anchor=('center', 'center'), autoDraw=False, autoLog=True, closeShape=True, color=method-wrapper(...), colorSpace='rgb', contrast=None, depth=-3.0, fillColor=array([1, 1, 1]), fillColorSpace='rgb', fillRGB=array([1, 1, 1]), interpolate=True, lineColor=array([1., 1., 1.]), lineColorSpace='rgb', lineRGB=array([1, 1, 1]), lineWidth=1.0, name='HBox', opacity=1.0, ori=0.0, pos=array([0.5, 0. ]), size=array([0.15, 0.15]), units='height', vertices=ndarray(...), win=Window(...))
+23.5266 	EXP 	Created PBox = Rect(__class__=<class 'psychopy.visual.rect.Rect'>, anchor=('center', 'center'), autoDraw=False, autoLog=True, closeShape=True, color=method-wrapper(...), colorSpace='rgb', contrast=None, depth=-4.0, fillColor=array([1, 1, 1]), fillColorSpace='rgb', fillRGB=array([1, 1, 1]), interpolate=True, lineColor=array([1., 1., 1.]), lineColorSpace='rgb', lineRGB=array([1, 1, 1]), lineWidth=1.0, name='PBox', opacity=1.0, ori=0.0, pos=array([0.5, 0.5]), size=array([0.15, 0.15]), units='height', vertices=ndarray(...), win=Window(...))
+23.5294 	EXP 	Created FBox = Rect(__class__=<class 'psychopy.visual.rect.Rect'>, anchor=('center', 'center'), autoDraw=False, autoLog=True, closeShape=True, color=method-wrapper(...), colorSpace='rgb', contrast=None, depth=-5.0, fillColor=array([1, 1, 1]), fillColorSpace='rgb', fillRGB=array([1, 1, 1]), interpolate=True, lineColor=array([1., 1., 1.]), lineColorSpace='rgb', lineRGB=array([1, 1, 1]), lineWidth=1.0, name='FBox', opacity=1.0, ori=0.0, pos=array([ 0.5, -0.5]), size=array([0.15, 0.15]), units='height', vertices=ndarray(...), win=Window(...))
+23.5343 	EXP 	window1: mouseVisible = True
+23.5709 	EXP 	NBox: autoDraw = True
+23.5709 	EXP 	SBox: autoDraw = True
+23.5709 	EXP 	KBox: autoDraw = True
+23.5709 	EXP 	HBox: autoDraw = True
+23.5709 	EXP 	PBox: autoDraw = True
+23.5709 	EXP 	FBox: autoDraw = True
+32.8190 	DATA 	Keypress: escape
+33.6571 	EXP 	window1: mouseVisible = True

@@ -1,0 +1,8 @@
+﻿letters,trials.thisRepN,trials.thisTrialN,trials.thisN,trials.thisIndex,mouse_resp1.x,mouse_resp1.y,mouse_resp1.leftButton,mouse_resp1.midButton,mouse_resp1.rightButton,mouse_resp1.started,mouse_resp1.stopped,mouse_respo2.x,mouse_respo2.y,mouse_respo2.leftButton,mouse_respo2.midButton,mouse_respo2.rightButton,mouse_respo2.started,mouse_respo2.stopped,mouse_3.x,mouse_3.y,mouse_3.leftButton,mouse_3.midButton,mouse_3.rightButton,mouse_3.started,mouse_3.stopped,participant,session,date,expName,psychopyVersion,frameRate,
+,,,,,-0.36,-0.22857143,1,0,0,4.01212077063974,None,,,,,,,,,,,,,,,14t,001,2022-07-12_20h57.48.806,ospan,2022.1.4,60.27168133830074,
+,,,,,,,,,,,,-0.35714287,-0.21428572,1,0,0,4.014647684409283,None,,,,,,,,14t,001,2022-07-12_20h57.48.806,ospan,2022.1.4,60.27168133830074,
+,,,,,,,,,,,,,,,,,,,0.28,0.09428571,1,0,0,4.012944663292728,None,14t,001,2022-07-12_20h57.48.806,ospan,2022.1.4,60.27168133830074,
+P',0,0,0,0,,,,,,,,,,,,,,,,,,,,,,14t,001,2022-07-12_20h57.48.806,ospan,2022.1.4,60.27168133830074,
+P',1,0,1,0,,,,,,,,,,,,,,,,,,,,,,14t,001,2022-07-12_20h57.48.806,ospan,2022.1.4,60.27168133830074,
+P',2,0,2,0,,,,,,,,,,,,,,,,,,,,,,14t,001,2022-07-12_20h57.48.806,ospan,2022.1.4,60.27168133830074,
+P',3,0,3,0,,,,,,,,,,,,,,,,,,,,,,14t,001,2022-07-12_20h57.48.806,ospan,2022.1.4,60.27168133830074,
