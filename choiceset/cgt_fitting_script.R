@@ -75,7 +75,12 @@ true_vals = c(0.8, 20); # rho (risk attitudes), mu (choice consistency)
 choiceP = choice_probability(true_vals, choiceset)
 simulatedchoices = as.integer(runif(n = length(choiceP)) < choiceP);
 
-
+choiceset_temp = list();
+choiceset_temp$riskyoption1 = c(5, 8, 10, 12, 18, 4, 9);
+choiceset_temp$riskyoption2 = c(0, 0,  0,  0,  0, 0, 0);
+choiceset_temp$safeoption =   c(1, 5,  3,  8, 10, 2, 4);
+simulatedchoices =            c(1, 1,  1,  1,  0, 0, 1);
+choiceset = as.data.frame(choiceset_temp);
 
 #### Do Grid Search Method of identifying the best parameters ####
 
@@ -101,10 +106,12 @@ for(r in 1:n_rho_values){
 toc()
 
 min_nll = min(grid_nll_values); # identify the single best value
-indexes = which(grid_nll_values == min_nll, arr.ind = T)[1]; # Get indices for that single best value
+indexes = which(grid_nll_values == min_nll, arr.ind = T); # Get indices for that single best value
 
 best_rho = rho_values[indexes[1]]; # what are the corresponding rho & mu values?
 best_mu = mu_values[indexes[2]];
+
+sprintf('The best R index is %i while the best M indx is %i, with an NLL of %f', indexes[1], indexes[2], min_nll)
 
 c(best_rho, best_mu)
 true_vals
