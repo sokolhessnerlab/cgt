@@ -57,6 +57,9 @@ def negLLprospect_cgt(parameters, riskyGv, riskyLv, certv, choices):
     nll = -sum(loglikelihood);
     return nll
 
+
+### Grid Search Code
+
 # Prepare rho & mu values
 n_rho_values = 200;
 n_mu_values = 201;
@@ -79,17 +82,17 @@ for m in range(n_mu_values):
     mu_values += [mmin + m*mstep];
 
 # Execute the grid search
-best_nll_value = [1e10]; # a preposterously bad first NLL
+best_nll_value = 1e10; # a preposterously bad first NLL
 
 for r in range(n_rho_values):
     for m in range(n_mu_values):
         nll_new = negLLprospect_cgt([rho_values[r], mu_values[m]], riskygain_values, riskyloss_values, certain_values, choices);
-        if list([nll_new]) < best_nll_value:
-            best_nll_value = list([nll_new]);
+        if nll_new < best_nll_value:
+            best_nll_value = nll_new;
             bestR = r + 1; # "+1" corrects for diff. in python vs. R indexing
             bestM = m + 1; # "+1" corrects for diff. in python vs. R indexing
 
-print('The best R index is', bestR, 'while the best M index is', bestM, ', with an NLL of', best_nll_value[0]);
+print('The best R index is', bestR, 'while the best M index is', bestM, ', with an NLL of', best_nll_value);
 
 fname = "bespoke_choiceset_rhoInd%03i_muInd%03i.csv" % (bestR, bestM)
 
