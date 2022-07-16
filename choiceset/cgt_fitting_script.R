@@ -79,7 +79,7 @@ choiceset_temp = list();
 choiceset_temp$riskyoption1 = c(5, 8, 10, 12, 18, 4, 9);
 choiceset_temp$riskyoption2 = c(0, 0,  0,  0,  0, 0, 0);
 choiceset_temp$safeoption =   c(1, 5,  3,  8, 10, 2, 4);
-simulatedchoices =            c(1, 1,  1,  1,  0, 0, 1);
+simulatedchoices =            c(1, 0,  1,  1,  0, 0, 1);
 choiceset = as.data.frame(choiceset_temp);
 
 #### Do Grid Search Method of identifying the best parameters ####

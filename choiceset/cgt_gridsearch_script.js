@@ -1,9 +1,20 @@
+// CGT Grid Search Javascript Code
+// 
+// Code to implement a grid search algorithm to identify the best
+// choice set to use in phase 2 of the CGT experiment
+//
+// written by Peter Sokol-Hessner, July 2022
+
+// Execute in a UNIX terminal with "node cgt_gridsearch_script.js" (no
+// quotes).
+
+
 // Placeholders for the data assumed to be present from Phase 1.
 // Used for testing effectiveness of the below script across python, R, & javascript
 riskygain_values = [5, 8, 10, 12, 18, 4, 9];
 riskyloss_values = [0, 0,  0,  0,  0, 0, 0];
 certain_values =   [1, 5,  3,  8, 10, 2, 4];
-choices =          [1, 1,  1,  1,  0, 0, 1];
+choices =          [1, 0,  1,  1,  0, 0, 1];
 
 console.log("Risky Gain Values: ", riskygain_values) // check definitions worked
 
