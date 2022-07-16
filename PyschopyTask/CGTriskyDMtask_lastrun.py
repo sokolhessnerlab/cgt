@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2022.2.1),
-    on Sat Jul 16 08:46:34 2022
+    on Sat Jul 16 13:20:00 2022
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -309,6 +309,12 @@ isiTextReal = visual.TextStim(win=win, name='isiTextReal',
     depth=0.0);
 
 # --- Initialize components for Routine "feedbackReal" ---
+# Run 'Begin Experiment' code from codeFeedbackReal
+riskyGain = []
+riskyLoss = []
+safe = []
+choice = []
+outcome = []
 noRespTxtReal = visual.TextStim(win=win, name='noRespTxtReal',
     text='You did not respond in time\n',
     font='Arial',
@@ -359,6 +365,8 @@ text = visual.TextStim(win=win, name='text',
     color='white', colorSpace='rgb', opacity=1, 
     languageStyle='LTR',
     depth=0.0);
+# Run 'Begin Experiment' code from code
+finiteOutcomes=[]
 chooseOC = visual.TextStim(win=win, name='chooseOC',
     text='',
     font='Arial',
@@ -572,7 +580,7 @@ thisExp.nextEntry()
 routineTimer.reset()
 
 # set up handler to look after randomisation of conditions etc
-trials = data.TrialHandler(nReps=1, method='sequential', 
+trials = data.TrialHandler(nReps=0, method='sequential', 
     extraInfo=expInfo, originPath=-1,
     trialList=data.importConditions('cgtPractice.xlsx'),
     seed=None, name='trials')
@@ -1240,7 +1248,7 @@ for thisTrial in trials:
     routineTimer.reset()
     thisExp.nextEntry()
     
-# completed 1 repeats of 'trials'
+# completed 0 repeats of 'trials'
 
 
 # --- Prepare to start Routine "postPrac" ---
@@ -1341,7 +1349,7 @@ routineTimer.reset()
 # set up handler to look after randomisation of conditions etc
 realTrials = data.TrialHandler(nReps=1, method='random', 
     extraInfo=expInfo, originPath=-1,
-    trialList=data.importConditions('/Users/shlab/Documents/GitHub/cgt/choiceset/CGT-choice-set.csv', selection='0:6'),
+    trialList=data.importConditions('/Users/shlab/Documents/GitHub/cgt/choiceset/CGT-choice-set.csv', selection='0:1'),
     seed=None, name='realTrials')
 thisExp.addLoop(realTrials)  # add the loop to the experiment
 thisRealTrial = realTrials.trialList[0]  # so we can initialise stimuli with some values
@@ -1727,8 +1735,10 @@ for thisRealTrial in realTrials:
     # update component parameters for each repeat
     # Run 'Begin Routine' code from codeFeedbackReal
     import random
+    import math
     if not realChoice.keys:
-        realOutcome = " "
+        realOutcome = math.nan
+        choicetmp = math.nan
         noRespLoc = [0,0]
         ocLoc = [5,5]
         ocGambleLoc = [5,5]
@@ -1736,6 +1746,7 @@ for thisRealTrial in realTrials:
         hideGamLoc = [5,5]
     elif realChoice.keys == 'v' and loc == 1:
         realOutcome = random.choice([riskyoption1, riskyoption2])
+        choicetmp = 1
         if realOutcome == riskyoption1:
             ocLoc = [-.4,.1]
             ocGambleLoc = [-.4,0]
@@ -1750,6 +1761,7 @@ for thisRealTrial in realTrials:
              noRespLoc = [5,5]
     elif realChoice.keys == 'v' and loc == 2:
         realOutcome = safeoption
+        choicetmp = 0
         ocLoc = [-.4,0]
         ocGambleLoc = [5,5]
         ocSafeLoc = ocLoc
@@ -1757,6 +1769,7 @@ for thisRealTrial in realTrials:
         noRespLoc = [5,5]
     elif realChoice.keys == 'n' and loc ==1:
         realOutcome = safeoption
+        choicetmp = 0
         ocLoc = [.4,0]
         ocGambleLoc = [5,5]
         ocSafeLoc = ocLoc
@@ -1764,6 +1777,7 @@ for thisRealTrial in realTrials:
         noRespLoc = [5,5]
     elif realChoice.keys == 'n' and loc ==2:
         realOutcome = random.choice([riskyoption1, riskyoption2])
+        choicetmp = 1
         if realOutcome == riskyoption1:
             ocLoc = [.4,.1]
             ocGambleLoc = [.4,0]
@@ -1777,7 +1791,11 @@ for thisRealTrial in realTrials:
             hideGamLoc = [.4,.125]
             noRespLoc = [5,5]
     
-    
+    #outcome.append(realOutcome)
+    #choice.append(choicetmp)
+    #riskyLoss.append(riskyoption2)
+    #riskyGain.append(riskyoption1)
+    #safe.append(safeoption)
     noRespTxtReal.setPos(noRespLoc)
     ocGambleReal.setPos(ocGambleLoc)
     ocSafeReal.setPos(ocSafeLoc)
@@ -2012,13 +2030,38 @@ for thisRealTrial in realTrials:
 continueRoutine = True
 # update component parameters for each repeat
 # Run 'Begin Routine' code from code
-finiteOutcomes = 9
-outcome2payFull = 9999;
-outcome2payScaled = 1234;
+import random
+import math
 
-wrapUpText = "Randomly selected outcome: ${} \n\nYou will be paid an additional: ${} \n\nPress the 'space' bar when you are ready to proceed".format(outcome2payFull, outcome2payScaled);
 
-chooseOC.setText(wrapUpText)
+for o in range(len(outcomeReal)):
+    if math.isfinite(outcomeReal[o]):
+        finiteOutcomes.append(outcomeReal[o])
+
+outcomeToPay = random.choice(finiteOutcomes)
+
+
+#wrapUpText= "you will receive" + outcomeToPay
+#finiteOutcomes = 9
+#outcome2payFull = 9999;
+#outcome2payScaled = 1234;
+
+#wrapUpText = "Randomly selected outcome: ${} \n\nYou will be paid an additional: ${} \n\nPress the 'space' bar when you are ready to proceed".format(outcome2payFull, outcome2payScaled);
+
+
+#previous JS code
+#dat = psychoJS.experiment._trialsData
+#function random_items(items){
+#  return items[Math.floor(Math.random()*items.length)];
+#}
+#oc2choose = dat.filter((trial) => (trial['realChoice.keys'] =='v' || trial['realChoice.keys'] =='n'));
+#finiteOutcomes = oc2choose.map((trial) => trial['realOutcome']);
+#outcome2payFull = random_items(finiteOutcomes);
+#outcome2payScaled = outcome2payFull*.25;
+#wrapUpText = "Randomly selected outcome: $" + outcome2payFull + "\n\nYou will be paid an additional: $" + outcome2payScaled + "\n\nPress the 'space' bar when you are ready to proceed";
+
+#//wrapUp.setText(wrapUpText);
+chooseOC.setText("Randomly selected outcome: \$" + outcomeToPay)
 exitResponse.keys = []
 exitResponse.rt = []
 _exitResponse_allKeys = []
