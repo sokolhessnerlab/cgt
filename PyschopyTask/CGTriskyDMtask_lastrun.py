@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2022.2.1),
-    on Sat Jul 16 13:20:00 2022
+    on Tue Jul 19 08:16:41 2022
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -298,6 +298,15 @@ nRightReal = visual.TextStim(win=win, name='nRightReal',
     languageStyle='LTR',
     depth=-9.0);
 realChoice = keyboard.Keyboard()
+# Set experiment start values for variable component riskyGainGlobal
+riskyGainGlobal = ''
+riskyGainGlobalContainer = []
+# Set experiment start values for variable component riskyLossGlobal
+riskyLossGlobal = ''
+riskyLossGlobalContainer = []
+# Set experiment start values for variable component safeGlobal
+safeGlobal = ''
+safeGlobalContainer = []
 
 # --- Initialize components for Routine "isiReal" ---
 isiTextReal = visual.TextStim(win=win, name='isiTextReal',
@@ -367,13 +376,16 @@ text = visual.TextStim(win=win, name='text',
     depth=0.0);
 # Run 'Begin Experiment' code from code
 finiteOutcomes=[]
+# Set experiment start values for variable component outcomeToPay
+outcomeToPay = ''
+outcomeToPayContainer = []
 chooseOC = visual.TextStim(win=win, name='chooseOC',
     text='',
     font='Arial',
     pos=(0, 0), height=0.05, wrapWidth=None, ori=0, 
     color='white', colorSpace='rgb', opacity=1, 
     languageStyle='LTR',
-    depth=-2.0);
+    depth=-3.0);
 exitResponse = keyboard.Keyboard()
 
 # --- Initialize components for Routine "endOfTask" ---
@@ -1349,7 +1361,7 @@ routineTimer.reset()
 # set up handler to look after randomisation of conditions etc
 realTrials = data.TrialHandler(nReps=1, method='random', 
     extraInfo=expInfo, originPath=-1,
-    trialList=data.importConditions('/Users/shlab/Documents/GitHub/cgt/choiceset/CGT-choice-set.csv', selection='0:1'),
+    trialList=data.importConditions('/Users/shlab/Documents/GitHub/cgt/choiceset/CGT-choice-set.csv', selection='0:3'),
     seed=None, name='realTrials')
 thisExp.addLoop(realTrials)  # add the loop to the experiment
 thisRealTrial = realTrials.trialList[0]  # so we can initialise stimuli with some values
@@ -1394,6 +1406,12 @@ for thisRealTrial in realTrials:
     realChoice.keys = []
     realChoice.rt = []
     _realChoice_allKeys = []
+    riskyGainGlobal = riskyoption1  # Set routine start values for riskyGainGlobal
+    thisExp.addData('riskyGainGlobal.routineStartVal', riskyGainGlobal)  # Save exp start value
+    riskyLossGlobal = riskyoption2  # Set routine start values for riskyLossGlobal
+    thisExp.addData('riskyLossGlobal.routineStartVal', riskyLossGlobal)  # Save exp start value
+    safeGlobal = safeoption  # Set routine start values for safeGlobal
+    thisExp.addData('safeGlobal.routineStartVal', safeGlobal)  # Save exp start value
     # keep track of which components have finished
     realTaskComponents = [circleLeftReal, circleRightReal, lineLeftReal, orTextReal, lossTxtReal, gainTxtReal, safeTxtReal, vLeftReal, nRightReal, realChoice]
     for thisComponent in realTaskComponents:
@@ -1409,7 +1427,7 @@ for thisRealTrial in realTrials:
     frameN = -1
     
     # --- Run Routine "realTask" ---
-    while continueRoutine and routineTimer.getTime() < 4.0:
+    while continueRoutine:
         # get current time
         t = routineTimer.getTime()
         tThisFlip = win.getFutureFlipTime(clock=routineTimer)
@@ -1657,8 +1675,11 @@ for thisRealTrial in realTrials:
     realTrials.addData('realChoice.keys',realChoice.keys)
     if realChoice.keys != None:  # we had a response
         realTrials.addData('realChoice.rt', realChoice.rt)
-    # using non-slip timing so subtract the expected duration of this Routine
-    routineTimer.addTime(-4.000000)
+    thisExp.addData('riskyGainGlobal.routineEndVal', riskyGainGlobal)  # Save end routine value
+    thisExp.addData('riskyLossGlobal.routineEndVal', riskyLossGlobal)  # Save end routine value
+    thisExp.addData('safeGlobal.routineEndVal', safeGlobal)  # Save end routine value
+    # the Routine "realTask" was not non-slip safe, so reset the non-slip timer
+    routineTimer.reset()
     
     # --- Prepare to start Routine "isiReal" ---
     continueRoutine = True
@@ -2030,38 +2051,12 @@ for thisRealTrial in realTrials:
 continueRoutine = True
 # update component parameters for each repeat
 # Run 'Begin Routine' code from code
-import random
-import math
-
-
-for o in range(len(outcomeReal)):
-    if math.isfinite(outcomeReal[o]):
-        finiteOutcomes.append(outcomeReal[o])
-
-outcomeToPay = random.choice(finiteOutcomes)
-
-
-#wrapUpText= "you will receive" + outcomeToPay
-#finiteOutcomes = 9
-#outcome2payFull = 9999;
-#outcome2payScaled = 1234;
-
-#wrapUpText = "Randomly selected outcome: ${} \n\nYou will be paid an additional: ${} \n\nPress the 'space' bar when you are ready to proceed".format(outcome2payFull, outcome2payScaled);
-
-
-#previous JS code
-#dat = psychoJS.experiment._trialsData
-#function random_items(items){
-#  return items[Math.floor(Math.random()*items.length)];
-#}
-#oc2choose = dat.filter((trial) => (trial['realChoice.keys'] =='v' || trial['realChoice.keys'] =='n'));
-#finiteOutcomes = oc2choose.map((trial) => trial['realOutcome']);
-#outcome2payFull = random_items(finiteOutcomes);
-#outcome2payScaled = outcome2payFull*.25;
-#wrapUpText = "Randomly selected outcome: $" + outcome2payFull + "\n\nYou will be paid an additional: $" + outcome2payScaled + "\n\nPress the 'space' bar when you are ready to proceed";
-
-#//wrapUp.setText(wrapUpText);
-chooseOC.setText("Randomly selected outcome: \$" + outcomeToPay)
+#import random
+#random.choice(riskyGainGlobal) # this doesn't work because riskyGainGlobal has no value rn
+#outcome2payFull = random.choice(riskyGainGlobal)
+outcomeToPay = outcome2payFull  # Set routine start values for outcomeToPay
+thisExp.addData('outcomeToPay.routineStartVal', outcomeToPay)  # Save exp start value
+chooseOC.setText(outcomeToPay)
 exitResponse.keys = []
 exitResponse.rt = []
 _exitResponse_allKeys = []
@@ -2169,6 +2164,7 @@ thisExp.addData('finiteOutcomes', finiteOutcomes);
 thisExp.addData('outcome2payFull', outcome2payFull);
 thisExp.addData('outcome2payScaled', outcome2payScaled);
 
+thisExp.addData('outcomeToPay.routineEndVal', outcomeToPay)  # Save end routine value
 # check responses
 if exitResponse.keys in ['', [], None]:  # No response was made
     exitResponse.keys = None
