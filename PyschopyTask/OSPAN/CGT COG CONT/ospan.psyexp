@@ -63,144 +63,14 @@
     <Param val="" valType="str" updates="None" name="tbSerialNo"/>
   </Settings>
   <Routines>
-    <Routine name="MATH">
-      <CodeComponent name="code">
-        <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
-        <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
-        <Param val="hel;p" valType="extendedCode" updates="constant" name="Begin Experiment"/>
-        <Param val="hel;&amp;#10;p;&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
-        <Param val="" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
-        <Param val="" valType="extendedCode" updates="constant" name="Begin Routine"/>
-        <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
-        <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
-        <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
-        <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
-        <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
-        <Param val="" valType="extendedCode" updates="constant" name="End JS Routine"/>
-        <Param val="" valType="extendedCode" updates="constant" name="End Routine"/>
-        <Param val="False" valType="bool" updates="None" name="disabled"/>
-        <Param val="code" valType="code" updates="None" name="name"/>
-      </CodeComponent>
-      <TextComponent name="MathProb">
-        <Param val="white" valType="color" updates="constant" name="color"/>
-        <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
-        <Param val="1" valType="num" updates="constant" name="contrast"/>
-        <Param val="False" valType="bool" updates="None" name="disabled"/>
-        <Param val="" valType="code" updates="None" name="durationEstim"/>
-        <Param val="None" valType="str" updates="constant" name="flip"/>
-        <Param val="Open Sans" valType="str" updates="constant" name="font"/>
-        <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
-        <Param val="0.05" valType="num" updates="constant" name="letterHeight"/>
-        <Param val="MathProb" valType="code" updates="None" name="name"/>
-        <Param val="" valType="num" updates="constant" name="opacity"/>
-        <Param val="0" valType="num" updates="constant" name="ori"/>
-        <Param val="(0, 0)" valType="list" updates="constant" name="pos"/>
-        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
-        <Param val="" valType="code" updates="None" name="startEstim"/>
-        <Param val="time (s)" valType="str" updates="None" name="startType"/>
-        <Param val="0.0" valType="code" updates="None" name="startVal"/>
-        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
-        <Param val="2" valType="code" updates="constant" name="stopVal"/>
-        <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
-        <Param val="(link to chioceset?)" valType="str" updates="constant" name="text"/>
-        <Param val="from exp settings" valType="str" updates="None" name="units"/>
-        <Param val="" valType="num" updates="constant" name="wrapWidth"/>
-      </TextComponent>
-      <TextComponent name="Ans">
-        <Param val="white" valType="color" updates="constant" name="color"/>
-        <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
-        <Param val="1" valType="num" updates="constant" name="contrast"/>
-        <Param val="False" valType="bool" updates="None" name="disabled"/>
-        <Param val="" valType="code" updates="None" name="durationEstim"/>
-        <Param val="None" valType="str" updates="constant" name="flip"/>
-        <Param val="Open Sans" valType="str" updates="constant" name="font"/>
-        <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
-        <Param val="0.05" valType="num" updates="constant" name="letterHeight"/>
-        <Param val="Ans" valType="code" updates="None" name="name"/>
-        <Param val="" valType="num" updates="constant" name="opacity"/>
-        <Param val="0" valType="num" updates="constant" name="ori"/>
-        <Param val="(0, 0)" valType="list" updates="constant" name="pos"/>
-        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
-        <Param val="" valType="code" updates="None" name="startEstim"/>
-        <Param val="time (s)" valType="str" updates="None" name="startType"/>
-        <Param val="2" valType="code" updates="None" name="startVal"/>
-        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
-        <Param val="2" valType="code" updates="constant" name="stopVal"/>
-        <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
-        <Param val="(alternate between right and wrong answers (ranomdly assing these?)" valType="str" updates="constant" name="text"/>
-        <Param val="from exp settings" valType="str" updates="None" name="units"/>
-        <Param val="" valType="num" updates="constant" name="wrapWidth"/>
-      </TextComponent>
-      <TextComponent name="TorF">
-        <Param val="white" valType="color" updates="constant" name="color"/>
-        <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
-        <Param val="1" valType="num" updates="constant" name="contrast"/>
-        <Param val="False" valType="bool" updates="None" name="disabled"/>
-        <Param val="" valType="code" updates="None" name="durationEstim"/>
-        <Param val="None" valType="str" updates="constant" name="flip"/>
-        <Param val="Open Sans" valType="str" updates="constant" name="font"/>
-        <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
-        <Param val="0.05" valType="num" updates="constant" name="letterHeight"/>
-        <Param val="TorF" valType="code" updates="None" name="name"/>
-        <Param val="" valType="num" updates="constant" name="opacity"/>
-        <Param val="0" valType="num" updates="constant" name="ori"/>
-        <Param val="(0, 0)" valType="list" updates="constant" name="pos"/>
-        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
-        <Param val="" valType="code" updates="None" name="startEstim"/>
-        <Param val="time (s)" valType="str" updates="None" name="startType"/>
-        <Param val="2" valType="code" updates="None" name="startVal"/>
-        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
-        <Param val="4" valType="code" updates="constant" name="stopVal"/>
-        <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
-        <Param val="True or False&amp;#10;&amp;#10;Press 'V' for True and 'N' for False" valType="str" updates="constant" name="text"/>
-        <Param val="from exp settings" valType="str" updates="None" name="units"/>
-        <Param val="" valType="num" updates="constant" name="wrapWidth"/>
-      </TextComponent>
-      <KeyboardComponent name="T">
-        <Param val="'v'" valType="list" updates="constant" name="allowedKeys"/>
-        <Param val="" valType="str" updates="constant" name="correctAns"/>
-        <Param val="False" valType="bool" updates="None" name="disabled"/>
-        <Param val="True" valType="bool" updates="constant" name="discard previous"/>
-        <Param val="" valType="code" updates="None" name="durationEstim"/>
-        <Param val="True" valType="bool" updates="constant" name="forceEndRoutine"/>
-        <Param val="T" valType="code" updates="None" name="name"/>
-        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
-        <Param val="" valType="code" updates="None" name="startEstim"/>
-        <Param val="time (s)" valType="str" updates="None" name="startType"/>
-        <Param val="4" valType="code" updates="None" name="startVal"/>
-        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
-        <Param val="2" valType="code" updates="constant" name="stopVal"/>
-        <Param val="last key" valType="str" updates="constant" name="store"/>
-        <Param val="False" valType="bool" updates="constant" name="storeCorrect"/>
-        <Param val="True" valType="bool" updates="constant" name="syncScreenRefresh"/>
-      </KeyboardComponent>
-      <KeyboardComponent name="F">
-        <Param val="'n'" valType="list" updates="constant" name="allowedKeys"/>
-        <Param val="" valType="str" updates="constant" name="correctAns"/>
-        <Param val="False" valType="bool" updates="None" name="disabled"/>
-        <Param val="True" valType="bool" updates="constant" name="discard previous"/>
-        <Param val="" valType="code" updates="None" name="durationEstim"/>
-        <Param val="True" valType="bool" updates="constant" name="forceEndRoutine"/>
-        <Param val="F" valType="code" updates="None" name="name"/>
-        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
-        <Param val="" valType="code" updates="None" name="startEstim"/>
-        <Param val="time (s)" valType="str" updates="None" name="startType"/>
-        <Param val="4" valType="code" updates="None" name="startVal"/>
-        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
-        <Param val="2" valType="code" updates="constant" name="stopVal"/>
-        <Param val="last key" valType="str" updates="constant" name="store"/>
-        <Param val="False" valType="bool" updates="constant" name="storeCorrect"/>
-        <Param val="True" valType="bool" updates="constant" name="syncScreenRefresh"/>
-      </KeyboardComponent>
-    </Routine>
     <Routine name="LetterPrac">
       <CodeComponent name="Rand_Letter">
         <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
-        <Param val="# set location of the boxes and text&amp;#10;screensize = [1120,700]&amp;#10;&amp;#10;col1 = screensize[0]*-.3&amp;#10;col2 = screensize[0]*-.1&amp;#10;col3 = screensize[0]*.1&amp;#10;row1 = screensize[1]*.3&amp;#10;row2 = screensize[1]*.15&amp;#10;row3 = screensize[1]*0&amp;#10;row4 = screensize[1]*-.15&amp;#10;&amp;#10;specialBoxXaxis = screensize[0]*.4&amp;#10;blankBoxLoc = [specialBoxXaxis,screensize[1]*.35]&amp;#10;clearBoxLoc = [specialBoxXaxis, screensize[1]*0]&amp;#10;enterBoxLoc = [specialBoxXaxis, screensize[1]*-.35]&amp;#10;letterPractTextLoc = [0,screensize[1]*.4]&amp;#10;&amp;#10;boxSize = [90,90]&amp;#10;specialBoxSize = [250,115]&amp;#10;textHeight = 45&amp;#10;boxTextHeight = 80&amp;#10;wrap = screensize[0]*.9&amp;#10;&amp;#10;Fboxloc = [col1, row1]&amp;#10;Hboxloc = [col2, row1]&amp;#10;Jboxloc = [col3, row1]&amp;#10;Kboxloc = [col1, row2]&amp;#10;Lboxloc = [col2, row2]&amp;#10;Nboxloc = [col3, row2]&amp;#10;Pboxloc = [col1, row3]&amp;#10;Qboxloc = [col2, row3]&amp;#10;Rboxloc = [col3, row3]&amp;#10;Sboxloc = [col1, row4]&amp;#10;Tboxloc = [col2, row4]&amp;#10;Yboxloc = [col3, row4]" valType="extendedCode" updates="constant" name="Begin Experiment"/>
-        <Param val="screensize = [1120, 700];&amp;#10;col1 = (screensize[0] * (- 0.3));&amp;#10;col2 = (screensize[0] * (- 0.1));&amp;#10;col3 = (screensize[0] * 0.1);&amp;#10;row1 = (screensize[1] * 0.3);&amp;#10;row2 = (screensize[1] * 0.15);&amp;#10;row3 = (screensize[1] * 0);&amp;#10;row4 = (screensize[1] * (- 0.15));&amp;#10;specialBoxXaxis = (screensize[0] * 0.4);&amp;#10;blankBoxLoc = [specialBoxXaxis, (screensize[1] * 0.35)];&amp;#10;clearBoxLoc = [specialBoxXaxis, (screensize[1] * 0)];&amp;#10;enterBoxLoc = [specialBoxXaxis, (screensize[1] * (- 0.35))];&amp;#10;letterPractTextLoc = [0, (screensize[1] * 0.4)];&amp;#10;boxSize = [90, 90];&amp;#10;specialBoxSize = [250, 115];&amp;#10;textHeight = 45;&amp;#10;boxTextHeight = 80;&amp;#10;wrap = (screensize[0] * 0.9);&amp;#10;Fboxloc = [col1, row1];&amp;#10;Hboxloc = [col2, row1];&amp;#10;Jboxloc = [col3, row1];&amp;#10;Kboxloc = [col1, row2];&amp;#10;Lboxloc = [col2, row2];&amp;#10;Nboxloc = [col3, row2];&amp;#10;Pboxloc = [col1, row3];&amp;#10;Qboxloc = [col2, row3];&amp;#10;Rboxloc = [col3, row3];&amp;#10;Sboxloc = [col1, row4];&amp;#10;Tboxloc = [col2, row4];&amp;#10;Yboxloc = [col3, row4];&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
-        <Param val="/* Syntax Error: Fix Python code */" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
-        <Param val="#import string&amp;#10;#import random&amp;#10;#string.ascii_letters&amp;#10;#'FPQJHKTSNRYL'&amp;#10;&amp;#10;#random.choice(string.ascii_letters)&amp;#10;#'F'" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="import random&amp;#10;&amp;#10;# set location of the boxes and text&amp;#10;screensize = [1120,700]&amp;#10;&amp;#10;col1 = screensize[0]*-.3&amp;#10;col2 = screensize[0]*-.1&amp;#10;col3 = screensize[0]*.1&amp;#10;row1 = screensize[1]*.3&amp;#10;row2 = screensize[1]*.15&amp;#10;row3 = screensize[1]*0&amp;#10;row4 = screensize[1]*-.15&amp;#10;&amp;#10;specialBoxXaxis = screensize[0]*.4&amp;#10;blankBoxLoc = [specialBoxXaxis,screensize[1]*.35]&amp;#10;clearBoxLoc = [specialBoxXaxis, screensize[1]*0]&amp;#10;enterBoxLoc = [specialBoxXaxis, screensize[1]*-.35]&amp;#10;letterPractTextLoc = [0,screensize[1]*.4]&amp;#10;&amp;#10;boxSize = [90,90]&amp;#10;specialBoxSize = [250,115]&amp;#10;textHeight = 45&amp;#10;boxTextHeight = 80&amp;#10;wrap = screensize[0]*.9&amp;#10;&amp;#10;Fboxloc = [col1, row1]&amp;#10;Hboxloc = [col2, row1]&amp;#10;Jboxloc = [col3, row1]&amp;#10;Kboxloc = [col1, row2]&amp;#10;Lboxloc = [col2, row2]&amp;#10;Nboxloc = [col3, row2]&amp;#10;Pboxloc = [col1, row3]&amp;#10;Qboxloc = [col2, row3]&amp;#10;Rboxloc = [col3, row3]&amp;#10;Sboxloc = [col1, row4]&amp;#10;Tboxloc = [col2, row4]&amp;#10;Yboxloc = [col3, row4]&amp;#10;&amp;#10;#practiceSetSize = [2,2,3,3]&amp;#10;#practiceSetSize = random.choices(practiceSetSize, k=4)&amp;#10;letters = ['F','K','P','S','H','L','Q','T','J','N', 'R', 'Y']" valType="extendedCode" updates="constant" name="Begin Experiment"/>
+        <Param val="import * as random from 'random';&amp;#10;var Fboxloc, Hboxloc, Jboxloc, Kboxloc, Lboxloc, Nboxloc, Pboxloc, Qboxloc, Rboxloc, Sboxloc, Tboxloc, Yboxloc, blankBoxLoc, boxSize, boxTextHeight, clearBoxLoc, col1, col2, col3, enterBoxLoc, letterPractTextLoc, letters, row1, row2, row3, row4, screensize, specialBoxSize, specialBoxXaxis, textHeight, wrap;&amp;#10;screensize = [1120, 700];&amp;#10;col1 = (screensize[0] * (- 0.3));&amp;#10;col2 = (screensize[0] * (- 0.1));&amp;#10;col3 = (screensize[0] * 0.1);&amp;#10;row1 = (screensize[1] * 0.3);&amp;#10;row2 = (screensize[1] * 0.15);&amp;#10;row3 = (screensize[1] * 0);&amp;#10;row4 = (screensize[1] * (- 0.15));&amp;#10;specialBoxXaxis = (screensize[0] * 0.4);&amp;#10;blankBoxLoc = [specialBoxXaxis, (screensize[1] * 0.35)];&amp;#10;clearBoxLoc = [specialBoxXaxis, (screensize[1] * 0)];&amp;#10;enterBoxLoc = [specialBoxXaxis, (screensize[1] * (- 0.35))];&amp;#10;letterPractTextLoc = [0, (screensize[1] * 0.4)];&amp;#10;boxSize = [90, 90];&amp;#10;specialBoxSize = [250, 115];&amp;#10;textHeight = 45;&amp;#10;boxTextHeight = 80;&amp;#10;wrap = (screensize[0] * 0.9);&amp;#10;Fboxloc = [col1, row1];&amp;#10;Hboxloc = [col2, row1];&amp;#10;Jboxloc = [col3, row1];&amp;#10;Kboxloc = [col1, row2];&amp;#10;Lboxloc = [col2, row2];&amp;#10;Nboxloc = [col3, row2];&amp;#10;Pboxloc = [col1, row3];&amp;#10;Qboxloc = [col2, row3];&amp;#10;Rboxloc = [col3, row3];&amp;#10;Sboxloc = [col1, row4];&amp;#10;Tboxloc = [col2, row4];&amp;#10;Yboxloc = [col3, row4];&amp;#10;letters = [&quot;F&quot;, &quot;K&quot;, &quot;P&quot;, &quot;S&quot;, &quot;H&quot;, &quot;L&quot;, &quot;Q&quot;, &quot;T&quot;, &quot;J&quot;, &quot;N&quot;, &quot;R&quot;, &quot;Y&quot;];&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
+        <Param val="tmpLetter = lettersShown[trials.thisN];&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
+        <Param val="#import random&amp;#10;#lettersShown = random.choices(letters,k=setSize,replace=False)&amp;#10;tmpLetter = lettersShown[trials.thisN]" valType="extendedCode" updates="constant" name="Begin Routine"/>
         <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
@@ -232,7 +102,7 @@
         <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
         <Param val="1.0" valType="code" updates="constant" name="stopVal"/>
         <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
-        <Param val="$letters" valType="str" updates="set every frame" name="text"/>
+        <Param val="$tmpLetter" valType="str" updates="set every frame" name="text"/>
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
         <Param val="" valType="num" updates="constant" name="wrapWidth"/>
       </TextComponent>
@@ -1031,8 +901,8 @@
       <CodeComponent name="stimuliLocationSize">
         <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
-        <Param val="# set location of the boxes and text&amp;#10;screensize = [1120,700]&amp;#10;&amp;#10;col1 = screensize[0]*-.3&amp;#10;col2 = screensize[0]*-.1&amp;#10;col3 = screensize[0]*.1&amp;#10;row1 = screensize[1]*.2&amp;#10;row2 = screensize[1]*.05&amp;#10;row3 = screensize[1]*-.1&amp;#10;row4 = screensize[1]*-.25&amp;#10;&amp;#10;specialBoxXaxis = screensize[0]*.35&amp;#10;blankBoxLoc = [specialBoxXaxis,screensize[1]*.2]&amp;#10;clearBoxLoc = [specialBoxXaxis, screensize[1]*0]&amp;#10;enterBoxLoc = [specialBoxXaxis, screensize[1]*-.2]&amp;#10;letterPractTextLoc = [0,screensize[1]*.4]&amp;#10;&amp;#10;boxSize = [90,90]&amp;#10;specialBoxSize = [250,115]&amp;#10;textHeight = 40&amp;#10;boxTextHeight = 70&amp;#10;wrap = screensize[0]*.9&amp;#10;&amp;#10;Fboxloc = [col1, row1]&amp;#10;Hboxloc = [col2, row1]&amp;#10;Jboxloc = [col3, row1]&amp;#10;Kboxloc = [col1, row2]&amp;#10;Lboxloc = [col2, row2]&amp;#10;Nboxloc = [col3, row2]&amp;#10;Pboxloc = [col1, row3]&amp;#10;Qboxloc = [col2, row3]&amp;#10;Rboxloc = [col3, row3]&amp;#10;Sboxloc = [col1, row4]&amp;#10;Tboxloc = [col2, row4]&amp;#10;Yboxloc = [col3, row4]" valType="extendedCode" updates="constant" name="Begin Experiment"/>
-        <Param val="screensize = [1120, 700];&amp;#10;col1 = (screensize[0] * (- 0.3));&amp;#10;col2 = (screensize[0] * (- 0.1));&amp;#10;col3 = (screensize[0] * 0.1);&amp;#10;row1 = (screensize[1] * 0.2);&amp;#10;row2 = (screensize[1] * 0.05);&amp;#10;row3 = (screensize[1] * (- 0.1));&amp;#10;row4 = (screensize[1] * (- 0.25));&amp;#10;specialBoxXaxis = (screensize[0] * 0.35);&amp;#10;blankBoxLoc = [specialBoxXaxis, (screensize[1] * 0.2)];&amp;#10;clearBoxLoc = [specialBoxXaxis, (screensize[1] * 0)];&amp;#10;enterBoxLoc = [specialBoxXaxis, (screensize[1] * (- 0.2))];&amp;#10;letterPractTextLoc = [0, (screensize[1] * 0.4)];&amp;#10;boxSize = [90, 90];&amp;#10;specialBoxSize = [250, 115];&amp;#10;textHeight = 40;&amp;#10;boxTextHeight = 70;&amp;#10;wrap = (screensize[0] * 0.9);&amp;#10;Fboxloc = [col1, row1];&amp;#10;Hboxloc = [col2, row1];&amp;#10;Jboxloc = [col3, row1];&amp;#10;Kboxloc = [col1, row2];&amp;#10;Lboxloc = [col2, row2];&amp;#10;Nboxloc = [col3, row2];&amp;#10;Pboxloc = [col1, row3];&amp;#10;Qboxloc = [col2, row3];&amp;#10;Rboxloc = [col3, row3];&amp;#10;Sboxloc = [col1, row4];&amp;#10;Tboxloc = [col2, row4];&amp;#10;Yboxloc = [col3, row4];&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
+        <Param val="# set location of the boxes and text&amp;#10;screensize = [1120,700]&amp;#10;&amp;#10;col1 = screensize[0]*-.3&amp;#10;col2 = screensize[0]*-.1&amp;#10;col3 = screensize[0]*.1&amp;#10;row1 = screensize[1]*.2&amp;#10;row2 = screensize[1]*.05&amp;#10;row3 = screensize[1]*-.1&amp;#10;row4 = screensize[1]*-.25&amp;#10;&amp;#10;specialBoxXaxis = screensize[0]*.35&amp;#10;blankBoxLoc = [specialBoxXaxis,screensize[1]*.2]&amp;#10;clearBoxLoc = [specialBoxXaxis, screensize[1]*0]&amp;#10;enterBoxLoc = [specialBoxXaxis, screensize[1]*-.2]&amp;#10;letterPractTextLoc = [0,screensize[1]*.4]&amp;#10;&amp;#10;boxSize = [90,90]&amp;#10;specialBoxSize = [250,115]&amp;#10;textHeight = 40&amp;#10;boxTextHeight = 70&amp;#10;wrap = screensize[0]*.9&amp;#10;&amp;#10;Fboxloc = [col1, row1]&amp;#10;Hboxloc = [col2, row1]&amp;#10;Jboxloc = [col3, row1]&amp;#10;Kboxloc = [col1, row2]&amp;#10;Lboxloc = [col2, row2]&amp;#10;Nboxloc = [col3, row2]&amp;#10;Pboxloc = [col1, row3]&amp;#10;Qboxloc = [col2, row3]&amp;#10;Rboxloc = [col3, row3]&amp;#10;Sboxloc = [col1, row4]&amp;#10;Tboxloc = [col2, row4]&amp;#10;Yboxloc = [col3, row4]&amp;#10;&amp;#10;recallTextLoc = [col2,screensize[1]*-.4]" valType="extendedCode" updates="constant" name="Begin Experiment"/>
+        <Param val="screensize = [1120, 700];&amp;#10;col1 = (screensize[0] * (- 0.3));&amp;#10;col2 = (screensize[0] * (- 0.1));&amp;#10;col3 = (screensize[0] * 0.1);&amp;#10;row1 = (screensize[1] * 0.2);&amp;#10;row2 = (screensize[1] * 0.05);&amp;#10;row3 = (screensize[1] * (- 0.1));&amp;#10;row4 = (screensize[1] * (- 0.25));&amp;#10;specialBoxXaxis = (screensize[0] * 0.35);&amp;#10;blankBoxLoc = [specialBoxXaxis, (screensize[1] * 0.2)];&amp;#10;clearBoxLoc = [specialBoxXaxis, (screensize[1] * 0)];&amp;#10;enterBoxLoc = [specialBoxXaxis, (screensize[1] * (- 0.2))];&amp;#10;letterPractTextLoc = [0, (screensize[1] * 0.4)];&amp;#10;boxSize = [90, 90];&amp;#10;specialBoxSize = [250, 115];&amp;#10;textHeight = 40;&amp;#10;boxTextHeight = 70;&amp;#10;wrap = (screensize[0] * 0.9);&amp;#10;Fboxloc = [col1, row1];&amp;#10;Hboxloc = [col2, row1];&amp;#10;Jboxloc = [col3, row1];&amp;#10;Kboxloc = [col1, row2];&amp;#10;Lboxloc = [col2, row2];&amp;#10;Nboxloc = [col3, row2];&amp;#10;Pboxloc = [col1, row3];&amp;#10;Qboxloc = [col2, row3];&amp;#10;Rboxloc = [col3, row3];&amp;#10;Sboxloc = [col1, row4];&amp;#10;Tboxloc = [col2, row4];&amp;#10;Yboxloc = [col3, row4];&amp;#10;recallTextLoc = [col2, (screensize[1] * (- 0.4))];&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
         <Param val="col1 = (- 200);&amp;#10;col2 = 0;&amp;#10;col3 = 200;&amp;#10;row1 = 200;&amp;#10;row2 = 100;&amp;#10;row3 = 0;&amp;#10;row4 = (- 100);&amp;#10;specialBoxXaxis = 275;&amp;#10;blankBoxLoc = [specialBoxXaxis, (- 175)];&amp;#10;clearBoxLoc = [specialBoxXaxis, 0];&amp;#10;enterBoxLoc = [specialBoxXaxis, 175];&amp;#10;boxSize = [80, 80];&amp;#10;specialBoxSize = [200, 115];&amp;#10;Fboxloc = [col1, row1];&amp;#10;Hboxloc = [col2, row1];&amp;#10;Jboxloc = [col3, row1];&amp;#10;Kboxloc = [col1, row2];&amp;#10;Lboxloc = [col2, row2];&amp;#10;Nboxloc = [col3, row2];&amp;#10;Pboxloc = [col1, row3];&amp;#10;Qboxloc = [col2, row3];&amp;#10;Rboxloc = [col3, row3];&amp;#10;Sboxloc = [col1, row4];&amp;#10;Tboxloc = [col2, row4];&amp;#10;Yboxloc = [col3, row4];&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
         <Param val="# set location of the boxes and text&amp;#10;&amp;#10;&amp;#10;col1 = -200&amp;#10;col2 = 0&amp;#10;col3 = 200&amp;#10;row1 = 200&amp;#10;row2 = 100&amp;#10;row3 = 0&amp;#10;row4 = -100&amp;#10;&amp;#10;specialBoxXaxis = 275&amp;#10;blankBoxLoc = [specialBoxXaxis,-175]&amp;#10;clearBoxLoc = [specialBoxXaxis, 0]&amp;#10;enterBoxLoc = [specialBoxXaxis, 175]&amp;#10;&amp;#10;boxSize = [80,80]&amp;#10;specialBoxSize = [200,115]&amp;#10;&amp;#10;Fboxloc = [col1, row1]&amp;#10;Hboxloc = [col2, row1]&amp;#10;Jboxloc = [col3, row1]&amp;#10;Kboxloc = [col1, row2]&amp;#10;Lboxloc = [col2, row2]&amp;#10;Nboxloc = [col3, row2]&amp;#10;Pboxloc = [col1, row3]&amp;#10;Qboxloc = [col2, row3]&amp;#10;Rboxloc = [col3, row3]&amp;#10;Sboxloc = [col1, row4]&amp;#10;Tboxloc = [col2, row4]&amp;#10;Yboxloc = [col3, row4]" valType="extendedCode" updates="constant" name="Begin Routine"/>
         <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
@@ -1045,7 +915,7 @@
         <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="stimuliLocationSize" valType="code" updates="None" name="name"/>
       </CodeComponent>
-      <PolygonComponent name="PBox">
+      <PolygonComponent name="P">
         <Param val="center" valType="str" updates="constant" name="anchor"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
@@ -1056,7 +926,7 @@
         <Param val="white" valType="color" updates="constant" name="lineColor"/>
         <Param val="1" valType="num" updates="constant" name="lineWidth"/>
         <Param val="4" valType="int" updates="constant" name="nVertices"/>
-        <Param val="PBox" valType="code" updates="None" name="name"/>
+        <Param val="P" valType="code" updates="None" name="name"/>
         <Param val="" valType="num" updates="constant" name="opacity"/>
         <Param val="0" valType="num" updates="constant" name="ori"/>
         <Param val="Pboxloc" valType="list" updates="constant" name="pos"/>
@@ -1072,7 +942,7 @@
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
         <Param val="" valType="list" updates="constant" name="vertices"/>
       </PolygonComponent>
-      <PolygonComponent name="NBox2">
+      <PolygonComponent name="N">
         <Param val="center" valType="str" updates="constant" name="anchor"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
@@ -1083,7 +953,7 @@
         <Param val="white" valType="color" updates="constant" name="lineColor"/>
         <Param val="1" valType="num" updates="constant" name="lineWidth"/>
         <Param val="4" valType="int" updates="constant" name="nVertices"/>
-        <Param val="NBox2" valType="code" updates="None" name="name"/>
+        <Param val="N" valType="code" updates="None" name="name"/>
         <Param val="" valType="num" updates="constant" name="opacity"/>
         <Param val="0" valType="num" updates="constant" name="ori"/>
         <Param val="Nboxloc" valType="list" updates="constant" name="pos"/>
@@ -1099,7 +969,7 @@
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
         <Param val="" valType="list" updates="constant" name="vertices"/>
       </PolygonComponent>
-      <PolygonComponent name="SBox2">
+      <PolygonComponent name="S">
         <Param val="center" valType="str" updates="constant" name="anchor"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
@@ -1110,7 +980,7 @@
         <Param val="white" valType="color" updates="constant" name="lineColor"/>
         <Param val="1" valType="num" updates="constant" name="lineWidth"/>
         <Param val="4" valType="int" updates="constant" name="nVertices"/>
-        <Param val="SBox2" valType="code" updates="None" name="name"/>
+        <Param val="S" valType="code" updates="None" name="name"/>
         <Param val="" valType="num" updates="constant" name="opacity"/>
         <Param val="0" valType="num" updates="constant" name="ori"/>
         <Param val="Sboxloc" valType="list" updates="constant" name="pos"/>
@@ -1126,7 +996,7 @@
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
         <Param val="" valType="list" updates="constant" name="vertices"/>
       </PolygonComponent>
-      <PolygonComponent name="KBox2">
+      <PolygonComponent name="K">
         <Param val="center" valType="str" updates="constant" name="anchor"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
@@ -1137,7 +1007,7 @@
         <Param val="white" valType="color" updates="constant" name="lineColor"/>
         <Param val="1" valType="num" updates="constant" name="lineWidth"/>
         <Param val="4" valType="int" updates="constant" name="nVertices"/>
-        <Param val="KBox2" valType="code" updates="None" name="name"/>
+        <Param val="K" valType="code" updates="None" name="name"/>
         <Param val="" valType="num" updates="constant" name="opacity"/>
         <Param val="0" valType="num" updates="constant" name="ori"/>
         <Param val="Kboxloc" valType="list" updates="constant" name="pos"/>
@@ -1153,7 +1023,7 @@
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
         <Param val="" valType="list" updates="constant" name="vertices"/>
       </PolygonComponent>
-      <PolygonComponent name="HBox">
+      <PolygonComponent name="H">
         <Param val="center" valType="str" updates="constant" name="anchor"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
@@ -1164,7 +1034,7 @@
         <Param val="white" valType="color" updates="constant" name="lineColor"/>
         <Param val="1" valType="num" updates="constant" name="lineWidth"/>
         <Param val="4" valType="int" updates="constant" name="nVertices"/>
-        <Param val="HBox" valType="code" updates="None" name="name"/>
+        <Param val="H" valType="code" updates="None" name="name"/>
         <Param val="" valType="num" updates="constant" name="opacity"/>
         <Param val="0" valType="num" updates="constant" name="ori"/>
         <Param val="Hboxloc" valType="list" updates="constant" name="pos"/>
@@ -1180,7 +1050,7 @@
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
         <Param val="" valType="list" updates="constant" name="vertices"/>
       </PolygonComponent>
-      <PolygonComponent name="FBox">
+      <PolygonComponent name="F">
         <Param val="center" valType="str" updates="constant" name="anchor"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
@@ -1191,7 +1061,7 @@
         <Param val="white" valType="color" updates="constant" name="lineColor"/>
         <Param val="1" valType="num" updates="constant" name="lineWidth"/>
         <Param val="4" valType="int" updates="constant" name="nVertices"/>
-        <Param val="FBox" valType="code" updates="None" name="name"/>
+        <Param val="F" valType="code" updates="None" name="name"/>
         <Param val="" valType="num" updates="constant" name="opacity"/>
         <Param val="0" valType="num" updates="constant" name="ori"/>
         <Param val="Fboxloc" valType="list" updates="constant" name="pos"/>
@@ -1207,7 +1077,7 @@
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
         <Param val="" valType="list" updates="constant" name="vertices"/>
       </PolygonComponent>
-      <PolygonComponent name="QBox">
+      <PolygonComponent name="Q">
         <Param val="center" valType="str" updates="constant" name="anchor"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
@@ -1218,7 +1088,7 @@
         <Param val="white" valType="color" updates="constant" name="lineColor"/>
         <Param val="1" valType="num" updates="constant" name="lineWidth"/>
         <Param val="4" valType="int" updates="constant" name="nVertices"/>
-        <Param val="QBox" valType="code" updates="None" name="name"/>
+        <Param val="Q" valType="code" updates="None" name="name"/>
         <Param val="" valType="num" updates="constant" name="opacity"/>
         <Param val="0" valType="num" updates="constant" name="ori"/>
         <Param val="Qboxloc" valType="list" updates="constant" name="pos"/>
@@ -1234,7 +1104,7 @@
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
         <Param val="" valType="list" updates="constant" name="vertices"/>
       </PolygonComponent>
-      <PolygonComponent name="LBox">
+      <PolygonComponent name="L">
         <Param val="center" valType="str" updates="constant" name="anchor"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
@@ -1245,7 +1115,7 @@
         <Param val="white" valType="color" updates="constant" name="lineColor"/>
         <Param val="1" valType="num" updates="constant" name="lineWidth"/>
         <Param val="4" valType="int" updates="constant" name="nVertices"/>
-        <Param val="LBox" valType="code" updates="None" name="name"/>
+        <Param val="L" valType="code" updates="None" name="name"/>
         <Param val="" valType="num" updates="constant" name="opacity"/>
         <Param val="0" valType="num" updates="constant" name="ori"/>
         <Param val="Lboxloc" valType="list" updates="constant" name="pos"/>
@@ -1261,7 +1131,7 @@
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
         <Param val="" valType="list" updates="constant" name="vertices"/>
       </PolygonComponent>
-      <PolygonComponent name="RBox">
+      <PolygonComponent name="R">
         <Param val="center" valType="str" updates="constant" name="anchor"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
@@ -1272,7 +1142,7 @@
         <Param val="white" valType="color" updates="constant" name="lineColor"/>
         <Param val="1" valType="num" updates="constant" name="lineWidth"/>
         <Param val="4" valType="int" updates="constant" name="nVertices"/>
-        <Param val="RBox" valType="code" updates="None" name="name"/>
+        <Param val="R" valType="code" updates="None" name="name"/>
         <Param val="" valType="num" updates="constant" name="opacity"/>
         <Param val="0" valType="num" updates="constant" name="ori"/>
         <Param val="Rboxloc" valType="list" updates="constant" name="pos"/>
@@ -1288,7 +1158,7 @@
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
         <Param val="" valType="list" updates="constant" name="vertices"/>
       </PolygonComponent>
-      <PolygonComponent name="TBox">
+      <PolygonComponent name="T">
         <Param val="center" valType="str" updates="constant" name="anchor"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
@@ -1299,7 +1169,7 @@
         <Param val="white" valType="color" updates="constant" name="lineColor"/>
         <Param val="1" valType="num" updates="constant" name="lineWidth"/>
         <Param val="4" valType="int" updates="constant" name="nVertices"/>
-        <Param val="TBox" valType="code" updates="None" name="name"/>
+        <Param val="T" valType="code" updates="None" name="name"/>
         <Param val="" valType="num" updates="constant" name="opacity"/>
         <Param val="0" valType="num" updates="constant" name="ori"/>
         <Param val="Tboxloc" valType="list" updates="constant" name="pos"/>
@@ -1315,7 +1185,7 @@
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
         <Param val="" valType="list" updates="constant" name="vertices"/>
       </PolygonComponent>
-      <PolygonComponent name="YBox">
+      <PolygonComponent name="Y">
         <Param val="center" valType="str" updates="constant" name="anchor"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
@@ -1326,7 +1196,7 @@
         <Param val="white" valType="color" updates="constant" name="lineColor"/>
         <Param val="1" valType="num" updates="constant" name="lineWidth"/>
         <Param val="4" valType="int" updates="constant" name="nVertices"/>
-        <Param val="YBox" valType="code" updates="None" name="name"/>
+        <Param val="Y" valType="code" updates="None" name="name"/>
         <Param val="" valType="num" updates="constant" name="opacity"/>
         <Param val="0" valType="num" updates="constant" name="ori"/>
         <Param val="Yboxloc" valType="list" updates="constant" name="pos"/>
@@ -1342,7 +1212,7 @@
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
         <Param val="" valType="list" updates="constant" name="vertices"/>
       </PolygonComponent>
-      <PolygonComponent name="JBox">
+      <PolygonComponent name="J">
         <Param val="center" valType="str" updates="constant" name="anchor"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
@@ -1353,7 +1223,7 @@
         <Param val="white" valType="color" updates="constant" name="lineColor"/>
         <Param val="1" valType="num" updates="constant" name="lineWidth"/>
         <Param val="4" valType="int" updates="constant" name="nVertices"/>
-        <Param val="JBox" valType="code" updates="None" name="name"/>
+        <Param val="J" valType="code" updates="None" name="name"/>
         <Param val="" valType="num" updates="constant" name="opacity"/>
         <Param val="0" valType="num" updates="constant" name="ori"/>
         <Param val="Jboxloc" valType="list" updates="constant" name="pos"/>
@@ -1394,7 +1264,7 @@
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
         <Param val="wrap" valType="num" updates="constant" name="wrapWidth"/>
       </TextComponent>
-      <TextComponent name="P">
+      <TextComponent name="Ptext">
         <Param val="black" valType="color" updates="constant" name="color"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
@@ -1404,7 +1274,7 @@
         <Param val="Open Sans" valType="str" updates="constant" name="font"/>
         <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
         <Param val="boxTextHeight" valType="num" updates="constant" name="letterHeight"/>
-        <Param val="P" valType="code" updates="None" name="name"/>
+        <Param val="Ptext" valType="code" updates="None" name="name"/>
         <Param val="" valType="num" updates="constant" name="opacity"/>
         <Param val="0" valType="num" updates="constant" name="ori"/>
         <Param val="Pboxloc" valType="list" updates="constant" name="pos"/>
@@ -1419,7 +1289,7 @@
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
         <Param val="" valType="num" updates="constant" name="wrapWidth"/>
       </TextComponent>
-      <TextComponent name="F_2">
+      <TextComponent name="Ftext">
         <Param val="black" valType="color" updates="constant" name="color"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
@@ -1429,7 +1299,7 @@
         <Param val="Open Sans" valType="str" updates="constant" name="font"/>
         <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
         <Param val="boxTextHeight" valType="num" updates="constant" name="letterHeight"/>
-        <Param val="F_2" valType="code" updates="None" name="name"/>
+        <Param val="Ftext" valType="code" updates="None" name="name"/>
         <Param val="" valType="num" updates="constant" name="opacity"/>
         <Param val="0" valType="num" updates="constant" name="ori"/>
         <Param val="Fboxloc" valType="list" updates="constant" name="pos"/>
@@ -1444,7 +1314,7 @@
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
         <Param val="" valType="num" updates="constant" name="wrapWidth"/>
       </TextComponent>
-      <TextComponent name="H">
+      <TextComponent name="Htext">
         <Param val="black" valType="color" updates="constant" name="color"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
@@ -1454,7 +1324,7 @@
         <Param val="Open Sans" valType="str" updates="constant" name="font"/>
         <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
         <Param val="boxTextHeight" valType="num" updates="constant" name="letterHeight"/>
-        <Param val="H" valType="code" updates="None" name="name"/>
+        <Param val="Htext" valType="code" updates="None" name="name"/>
         <Param val="" valType="num" updates="constant" name="opacity"/>
         <Param val="0" valType="num" updates="constant" name="ori"/>
         <Param val="Hboxloc" valType="list" updates="constant" name="pos"/>
@@ -1469,7 +1339,7 @@
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
         <Param val="" valType="num" updates="constant" name="wrapWidth"/>
       </TextComponent>
-      <TextComponent name="S">
+      <TextComponent name="Stext">
         <Param val="black" valType="color" updates="constant" name="color"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
@@ -1479,7 +1349,7 @@
         <Param val="Open Sans" valType="str" updates="constant" name="font"/>
         <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
         <Param val="boxTextHeight" valType="num" updates="constant" name="letterHeight"/>
-        <Param val="S" valType="code" updates="None" name="name"/>
+        <Param val="Stext" valType="code" updates="None" name="name"/>
         <Param val="" valType="num" updates="constant" name="opacity"/>
         <Param val="0" valType="num" updates="constant" name="ori"/>
         <Param val="Sboxloc" valType="list" updates="constant" name="pos"/>
@@ -1494,7 +1364,7 @@
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
         <Param val="" valType="num" updates="constant" name="wrapWidth"/>
       </TextComponent>
-      <TextComponent name="K">
+      <TextComponent name="Ktext">
         <Param val="black" valType="color" updates="constant" name="color"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
@@ -1504,7 +1374,7 @@
         <Param val="Open Sans" valType="str" updates="constant" name="font"/>
         <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
         <Param val="boxTextHeight" valType="num" updates="constant" name="letterHeight"/>
-        <Param val="K" valType="code" updates="None" name="name"/>
+        <Param val="Ktext" valType="code" updates="None" name="name"/>
         <Param val="" valType="num" updates="constant" name="opacity"/>
         <Param val="0" valType="num" updates="constant" name="ori"/>
         <Param val="Kboxloc" valType="list" updates="constant" name="pos"/>
@@ -1519,7 +1389,7 @@
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
         <Param val="" valType="num" updates="constant" name="wrapWidth"/>
       </TextComponent>
-      <TextComponent name="N">
+      <TextComponent name="Ntext">
         <Param val="black" valType="color" updates="constant" name="color"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
@@ -1529,7 +1399,7 @@
         <Param val="Open Sans" valType="str" updates="constant" name="font"/>
         <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
         <Param val="boxTextHeight" valType="num" updates="constant" name="letterHeight"/>
-        <Param val="N" valType="code" updates="None" name="name"/>
+        <Param val="Ntext" valType="code" updates="None" name="name"/>
         <Param val="" valType="num" updates="constant" name="opacity"/>
         <Param val="0" valType="num" updates="constant" name="ori"/>
         <Param val="Nboxloc" valType="list" updates="constant" name="pos"/>
@@ -1544,7 +1414,7 @@
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
         <Param val="" valType="num" updates="constant" name="wrapWidth"/>
       </TextComponent>
-      <TextComponent name="L">
+      <TextComponent name="Ltext">
         <Param val="black" valType="color" updates="constant" name="color"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
@@ -1554,7 +1424,7 @@
         <Param val="Open Sans" valType="str" updates="constant" name="font"/>
         <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
         <Param val="boxTextHeight" valType="num" updates="constant" name="letterHeight"/>
-        <Param val="L" valType="code" updates="None" name="name"/>
+        <Param val="Ltext" valType="code" updates="None" name="name"/>
         <Param val="" valType="num" updates="constant" name="opacity"/>
         <Param val="0" valType="num" updates="constant" name="ori"/>
         <Param val="Lboxloc" valType="list" updates="constant" name="pos"/>
@@ -1569,7 +1439,7 @@
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
         <Param val="" valType="num" updates="constant" name="wrapWidth"/>
       </TextComponent>
-      <TextComponent name="Q">
+      <TextComponent name="Qtext">
         <Param val="black" valType="color" updates="constant" name="color"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
@@ -1579,7 +1449,7 @@
         <Param val="Open Sans" valType="str" updates="constant" name="font"/>
         <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
         <Param val="boxTextHeight" valType="num" updates="constant" name="letterHeight"/>
-        <Param val="Q" valType="code" updates="None" name="name"/>
+        <Param val="Qtext" valType="code" updates="None" name="name"/>
         <Param val="" valType="num" updates="constant" name="opacity"/>
         <Param val="0" valType="num" updates="constant" name="ori"/>
         <Param val="Qboxloc" valType="list" updates="constant" name="pos"/>
@@ -1594,7 +1464,7 @@
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
         <Param val="" valType="num" updates="constant" name="wrapWidth"/>
       </TextComponent>
-      <TextComponent name="R">
+      <TextComponent name="Rtext">
         <Param val="black" valType="color" updates="constant" name="color"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
@@ -1604,7 +1474,7 @@
         <Param val="Open Sans" valType="str" updates="constant" name="font"/>
         <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
         <Param val="boxTextHeight" valType="num" updates="constant" name="letterHeight"/>
-        <Param val="R" valType="code" updates="None" name="name"/>
+        <Param val="Rtext" valType="code" updates="None" name="name"/>
         <Param val="" valType="num" updates="constant" name="opacity"/>
         <Param val="0" valType="num" updates="constant" name="ori"/>
         <Param val="Rboxloc" valType="list" updates="constant" name="pos"/>
@@ -1619,7 +1489,7 @@
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
         <Param val="" valType="num" updates="constant" name="wrapWidth"/>
       </TextComponent>
-      <TextComponent name="J">
+      <TextComponent name="Jtext">
         <Param val="black" valType="color" updates="constant" name="color"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
@@ -1629,7 +1499,7 @@
         <Param val="Open Sans" valType="str" updates="constant" name="font"/>
         <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
         <Param val="boxTextHeight" valType="num" updates="constant" name="letterHeight"/>
-        <Param val="J" valType="code" updates="None" name="name"/>
+        <Param val="Jtext" valType="code" updates="None" name="name"/>
         <Param val="" valType="num" updates="constant" name="opacity"/>
         <Param val="0" valType="num" updates="constant" name="ori"/>
         <Param val="Jboxloc" valType="list" updates="constant" name="pos"/>
@@ -1644,7 +1514,7 @@
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
         <Param val="" valType="num" updates="constant" name="wrapWidth"/>
       </TextComponent>
-      <TextComponent name="Y">
+      <TextComponent name="Ytext">
         <Param val="black" valType="color" updates="constant" name="color"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
@@ -1654,7 +1524,7 @@
         <Param val="Open Sans" valType="str" updates="constant" name="font"/>
         <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
         <Param val="boxTextHeight" valType="num" updates="constant" name="letterHeight"/>
-        <Param val="Y" valType="code" updates="None" name="name"/>
+        <Param val="Ytext" valType="code" updates="None" name="name"/>
         <Param val="" valType="num" updates="constant" name="opacity"/>
         <Param val="0" valType="num" updates="constant" name="ori"/>
         <Param val="Yboxloc" valType="list" updates="constant" name="pos"/>
@@ -1669,7 +1539,7 @@
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
         <Param val="" valType="num" updates="constant" name="wrapWidth"/>
       </TextComponent>
-      <TextComponent name="T_2">
+      <TextComponent name="Ttext">
         <Param val="black" valType="color" updates="constant" name="color"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
@@ -1679,7 +1549,7 @@
         <Param val="Open Sans" valType="str" updates="constant" name="font"/>
         <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
         <Param val="boxTextHeight" valType="num" updates="constant" name="letterHeight"/>
-        <Param val="T_2" valType="code" updates="None" name="name"/>
+        <Param val="Ttext" valType="code" updates="None" name="name"/>
         <Param val="" valType="num" updates="constant" name="opacity"/>
         <Param val="0" valType="num" updates="constant" name="ori"/>
         <Param val="Tboxloc" valType="list" updates="constant" name="pos"/>
@@ -1865,25 +1735,69 @@
         <Param val="0.0" valType="code" updates="None" name="startVal"/>
         <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
         <Param val="" valType="code" updates="constant" name="stopVal"/>
-        <Param val="False" valType="bool" updates="None" name="syncScreenRefresh"/>
+        <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
         <Param val="mouse onset" valType="str" updates="constant" name="timeRelativeTo"/>
       </MouseComponent>
       <CodeComponent name="mouserecall">
         <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
-        <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
-        <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
-        <Param val="clicked_things = [];&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
-        <Param val="clicked_things = [] &amp;#10;" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="myClock = core.Clock()" valType="extendedCode" updates="constant" name="Begin Experiment"/>
+        <Param val="myClock = new core.Clock();&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
+        <Param val="clicked_things = [];&amp;#10;timeAfterClick = 0;&amp;#10;F.color = &quot;white&quot;;&amp;#10;K.color = &quot;white&quot;;&amp;#10;P.color = &quot;white&quot;;&amp;#10;S.color = &quot;white&quot;;&amp;#10;H.color = &quot;white&quot;;&amp;#10;L.color = &quot;white&quot;;&amp;#10;Q.color = &quot;white&quot;;&amp;#10;T.color = &quot;white&quot;;&amp;#10;J.color = &quot;white&quot;;&amp;#10;N.color = &quot;white&quot;;&amp;#10;R.color = &quot;white&quot;;&amp;#10;Y.color = &quot;white&quot;;&amp;#10;myClock.reset();&amp;#10;t = myClock.getTime();&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
+        <Param val="clicked_things = [] &amp;#10;timeAfterClick = 0&amp;#10;&amp;#10;F.color = &quot;white&quot; #and then reset our shapes to have white boxes&amp;#10;K.color = &quot;white&quot;&amp;#10;P.color = &quot;white&quot;&amp;#10;S.color = &quot;white&quot;&amp;#10;H.color = &quot;white&quot;&amp;#10;L.color = &quot;white&quot;&amp;#10;Q.color = &quot;white&quot;&amp;#10;T.color = &quot;white&quot;&amp;#10;J.color = &quot;white&quot;&amp;#10;N.color = &quot;white&quot;&amp;#10;R.color = &quot;white&quot;&amp;#10;Y.color = &quot;white&quot;&amp;#10;&amp;#10;myClock.reset()&amp;#10;t = myClock.getTime()&amp;#10;&amp;#10;" valType="extendedCode" updates="constant" name="Begin Routine"/>
         <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
-        <Param val="clickables = [FBox, KBox2, PBox, SBox2, HBox, LBox, QBox, TBox, JBox, NBox2, RBox, YBox, BLANK, CLEAR]&amp;#10;&amp;#10;#check if the mouse is pressed in any of the boxes&amp;#10;for clickable in clickables: # for our shapes that can be clicked on&amp;#10;    if mouse.isPressedIn(clickable): #if the mouse is clikced on one of the shapes&amp;#10;        clicked_things.append(clickable.name) #add the name of the shape that was clicked&amp;#10;        mouse.clickReset() #resets mouse click&amp;#10;       &amp;#10;        if clickable == CLEAR: # if the clear button was pressed&amp;#10;            clicked_things = [] # reset our clicked_thing variable&amp;#10;            FBox.color = &quot;white&quot; #and then reset our shapes to have white boxes&amp;#10;            KBox2.color = &quot;white&quot;&amp;#10;            PBox.color = &quot;white&quot;&amp;#10;            SBox2.color = &quot;white&quot;&amp;#10;            HBox.color = &quot;white&quot;&amp;#10;            LBox.color = &quot;white&quot;&amp;#10;            QBox.color = &quot;white&quot;&amp;#10;            TBox.color = &quot;white&quot;&amp;#10;            JBox.color = &quot;white&quot;&amp;#10;            NBox2.color = &quot;white&quot;&amp;#10;            RBox.color = &quot;white&quot;&amp;#10;            YBox.color = &quot;white&quot;&amp;#10;            &amp;#10;#change box to blue if clicked unless its the blank box&amp;#10;# clickedN = 0 &amp;#10;for clickable in clickables: &amp;#10;    if clickable.name in clicked_things and not clickable.name == BLANK: &amp;#10;        clickable.color = 'blue' &amp;#10;        &amp;#10; #clickedN += 1&amp;#10;        &amp;#10;&amp;#10;#if mouse.isPressedIn(ENTER):&amp;#10;#    continueRoutine=False&amp;#10;    &amp;#10;#if clickedN == 3 and not waiting: &amp;#10;#    waiting = True&amp;#10;#    startTime = t &amp;#10;  &amp;#10;#if clickedN == 3 and not waiting: &amp;#10;#    if t &gt; startTime + 0.05: &amp;#10;#        continueRoutine = False &amp;#10;   " valType="extendedCode" updates="constant" name="Each Frame"/>
-        <Param val="var _pj;&amp;#10;function _pj_snippets(container) {&amp;#10;    function in_es6(left, right) {&amp;#10;        if (((right instanceof Array) || ((typeof right) === &quot;string&quot;))) {&amp;#10;            return (right.indexOf(left) &gt; (- 1));&amp;#10;        } else {&amp;#10;            if (((right instanceof Map) || (right instanceof Set) || (right instanceof WeakMap) || (right instanceof WeakSet))) {&amp;#10;                return right.has(left);&amp;#10;            } else {&amp;#10;                return (left in right);&amp;#10;            }&amp;#10;        }&amp;#10;    }&amp;#10;    container[&quot;in_es6&quot;] = in_es6;&amp;#10;    return container;&amp;#10;}&amp;#10;_pj = {};&amp;#10;_pj_snippets(_pj);&amp;#10;clickables = [FBox, KBox2, PBox, SBox2, HBox, LBox, QBox, TBox, JBox, NBox2, RBox, YBox, BLANK, CLEAR];&amp;#10;for (var clickable, _pj_c = 0, _pj_a = clickables, _pj_b = _pj_a.length; (_pj_c &lt; _pj_b); _pj_c += 1) {&amp;#10;    clickable = _pj_a[_pj_c];&amp;#10;    if (mouse.isPressedIn(clickable)) {&amp;#10;        clicked_things.push(clickable.name);&amp;#10;        mouse.clickReset();&amp;#10;        if ((clickable === CLEAR)) {&amp;#10;            clicked_things = [];&amp;#10;            FBox.color = &quot;white&quot;;&amp;#10;            KBox2.color = &quot;white&quot;;&amp;#10;            PBox.color = &quot;white&quot;;&amp;#10;            SBox2.color = &quot;white&quot;;&amp;#10;            HBox.color = &quot;white&quot;;&amp;#10;            LBox.color = &quot;white&quot;;&amp;#10;            QBox.color = &quot;white&quot;;&amp;#10;            TBox.color = &quot;white&quot;;&amp;#10;            JBox.color = &quot;white&quot;;&amp;#10;            NBox2.color = &quot;white&quot;;&amp;#10;            RBox.color = &quot;white&quot;;&amp;#10;            YBox.color = &quot;white&quot;;&amp;#10;        }&amp;#10;    }&amp;#10;}&amp;#10;for (var clickable, _pj_c = 0, _pj_a = clickables, _pj_b = _pj_a.length; (_pj_c &lt; _pj_b); _pj_c += 1) {&amp;#10;    clickable = _pj_a[_pj_c];&amp;#10;    if ((_pj.in_es6(clickable.name, clicked_things) &amp;&amp; (! (clickable.name === BLANK)))) {&amp;#10;        clickable.color = &quot;blue&quot;;&amp;#10;    }&amp;#10;}&amp;#10;" valType="extendedCode" updates="constant" name="Each JS Frame"/>
+        <Param val="clickables = [F, K, P, S, H, L, Q, T, J, N, R, Y, BLANK, CLEAR]&amp;#10;&amp;#10;#check if the mouse is pressed in any of the boxes&amp;#10;for clickable in clickables: # for our shapes that can be clicked on&amp;#10;    #timeAfterClick += 1&amp;#10;    if mouse.isPressedIn(clickable) and t &gt; timeAfterClick:&amp;#10;        timeAfterClick = t + .5&amp;#10;        clicked_things.append(clickable.name) #add the name of the shape that was clicked&amp;#10;        mouse.clickReset() #resets mouse click&amp;#10;       &amp;#10;        if clickable == CLEAR: # if the clear button was pressed&amp;#10;            clicked_things = [] # reset our clicked_thing variable&amp;#10;            F.color = &quot;white&quot; #and then reset our shapes to have white boxes&amp;#10;            K.color = &quot;white&quot;&amp;#10;            P.color = &quot;white&quot;&amp;#10;            S.color = &quot;white&quot;&amp;#10;            H.color = &quot;white&quot;&amp;#10;            L.color = &quot;white&quot;&amp;#10;            Q.color = &quot;white&quot;&amp;#10;            T.color = &quot;white&quot;&amp;#10;            J.color = &quot;white&quot;&amp;#10;            N.color = &quot;white&quot;&amp;#10;            R.color = &quot;white&quot;&amp;#10;            Y.color = &quot;white&quot;&amp;#10;            &amp;#10;#change box to blue if clicked unless its the blank box&amp;#10;# clickedN = 0 &amp;#10;for clickable in clickables: &amp;#10;    if clickable.name in clicked_things and not clickable.name == 'BLANK': &amp;#10;        clickable.color = 'blue' &amp;#10;&amp;#10;# prep the text that shows participant's responses (letters)&amp;#10;responseText='' &amp;#10;for l in range(len(clicked_things)):&amp;#10;      if clicked_things[l] == &quot;BLANK&quot;:&amp;#10;        clicked_things[l] = &quot;*&quot;&amp;#10;      responseText = &quot;%s %s &quot; % (responseText, clicked_things[l])&amp;#10;      &amp;#10;      &amp;#10;#print(timeAfterClick)" valType="extendedCode" updates="constant" name="Each Frame"/>
+        <Param val="var _pj;&amp;#10;function _pj_snippets(container) {&amp;#10;    function in_es6(left, right) {&amp;#10;        if (((right instanceof Array) || ((typeof right) === &quot;string&quot;))) {&amp;#10;            return (right.indexOf(left) &gt; (- 1));&amp;#10;        } else {&amp;#10;            if (((right instanceof Map) || (right instanceof Set) || (right instanceof WeakMap) || (right instanceof WeakSet))) {&amp;#10;                return right.has(left);&amp;#10;            } else {&amp;#10;                return (left in right);&amp;#10;            }&amp;#10;        }&amp;#10;    }&amp;#10;    container[&quot;in_es6&quot;] = in_es6;&amp;#10;    return container;&amp;#10;}&amp;#10;_pj = {};&amp;#10;_pj_snippets(_pj);&amp;#10;clickables = [F, K, P, S, H, L, Q, T, J, N, R, Y, BLANK, CLEAR];&amp;#10;for (var clickable, _pj_c = 0, _pj_a = clickables, _pj_b = _pj_a.length; (_pj_c &lt; _pj_b); _pj_c += 1) {&amp;#10;    clickable = _pj_a[_pj_c];&amp;#10;    if ((mouse.isPressedIn(clickable) &amp;&amp; (t &gt; timeAfterClick))) {&amp;#10;        timeAfterClick = (t + 0.5);&amp;#10;        clicked_things.push(clickable.name);&amp;#10;        mouse.clickReset();&amp;#10;        if ((clickable === CLEAR)) {&amp;#10;            clicked_things = [];&amp;#10;            F.color = &quot;white&quot;;&amp;#10;            K.color = &quot;white&quot;;&amp;#10;            P.color = &quot;white&quot;;&amp;#10;            S.color = &quot;white&quot;;&amp;#10;            H.color = &quot;white&quot;;&amp;#10;            L.color = &quot;white&quot;;&amp;#10;            Q.color = &quot;white&quot;;&amp;#10;            T.color = &quot;white&quot;;&amp;#10;            J.color = &quot;white&quot;;&amp;#10;            N.color = &quot;white&quot;;&amp;#10;            R.color = &quot;white&quot;;&amp;#10;            Y.color = &quot;white&quot;;&amp;#10;        }&amp;#10;    }&amp;#10;}&amp;#10;for (var clickable, _pj_c = 0, _pj_a = clickables, _pj_b = _pj_a.length; (_pj_c &lt; _pj_b); _pj_c += 1) {&amp;#10;    clickable = _pj_a[_pj_c];&amp;#10;    if ((_pj.in_es6(clickable.name, clicked_things) &amp;&amp; (! (clickable.name === &quot;BLANK&quot;)))) {&amp;#10;        clickable.color = &quot;blue&quot;;&amp;#10;    }&amp;#10;}&amp;#10;responseText = &quot;&quot;;&amp;#10;for (var l, _pj_c = 0, _pj_a = util.range(clicked_things.length), _pj_b = _pj_a.length; (_pj_c &lt; _pj_b); _pj_c += 1) {&amp;#10;    l = _pj_a[_pj_c];&amp;#10;    if ((clicked_things[l] === &quot;BLANK&quot;)) {&amp;#10;        clicked_things[l] = &quot;*&quot;;&amp;#10;    }&amp;#10;    responseText = `${responseText} ${clicked_things[l]}`;&amp;#10;}&amp;#10;" valType="extendedCode" updates="constant" name="Each JS Frame"/>
         <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
-        <Param val="" valType="extendedCode" updates="constant" name="End JS Routine"/>
-        <Param val="" valType="extendedCode" updates="constant" name="End Routine"/>
+        <Param val="psychoJS.experiment.addData(&quot;letterRecall&quot;, clicked_things);&amp;#10;" valType="extendedCode" updates="constant" name="End JS Routine"/>
+        <Param val="thisExp.addData(&quot;letterRecall&quot;, clicked_things)" valType="extendedCode" updates="constant" name="End Routine"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="mouserecall" valType="code" updates="None" name="name"/>
+      </CodeComponent>
+      <TextComponent name="showRecall">
+        <Param val="yellow" valType="color" updates="constant" name="color"/>
+        <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
+        <Param val="1" valType="num" updates="constant" name="contrast"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="None" valType="str" updates="constant" name="flip"/>
+        <Param val="Open Sans" valType="str" updates="constant" name="font"/>
+        <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
+        <Param val="textHeight" valType="num" updates="constant" name="letterHeight"/>
+        <Param val="showRecall" valType="code" updates="None" name="name"/>
+        <Param val="" valType="num" updates="constant" name="opacity"/>
+        <Param val="0" valType="num" updates="constant" name="ori"/>
+        <Param val="recallTextLoc" valType="list" updates="constant" name="pos"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="0.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
+        <Param val="$responseText" valType="str" updates="set every frame" name="text"/>
+        <Param val="from exp settings" valType="str" updates="None" name="units"/>
+        <Param val="" valType="num" updates="constant" name="wrapWidth"/>
+      </TextComponent>
+    </Routine>
+    <Routine name="selectLetters">
+      <CodeComponent name="selectLetters_2">
+        <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
+        <Param val="var _pj;&amp;#10;function _pj_snippets(container) {&amp;#10;    function in_es6(left, right) {&amp;#10;        if (((right instanceof Array) || ((typeof right) === &quot;string&quot;))) {&amp;#10;            return (right.indexOf(left) &gt; (- 1));&amp;#10;        } else {&amp;#10;            if (((right instanceof Map) || (right instanceof Set) || (right instanceof WeakMap) || (right instanceof WeakSet))) {&amp;#10;                return right.has(left);&amp;#10;            } else {&amp;#10;                return (left in right);&amp;#10;            }&amp;#10;        }&amp;#10;    }&amp;#10;    container[&quot;in_es6&quot;] = in_es6;&amp;#10;    return container;&amp;#10;}&amp;#10;_pj = {};&amp;#10;_pj_snippets(_pj);&amp;#10;lettersShown = [];&amp;#10;while ((lettersShown.length &lt; setSize)) {&amp;#10;    singleLetter = random.choice(letters);&amp;#10;    if ((! _pj.in_es6(singleLetter, lettersShown))) {&amp;#10;        lettersShown.push(singleLetter);&amp;#10;    }&amp;#10;}&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
+        <Param val="lettersShown = [];&amp;#10;&amp;#10;while len(lettersShown) &lt; setSize:&amp;#10;    singleLetter = random.choice(letters)&amp;#10;&amp;#10;    if not singleLetter in lettersShown:&amp;#10;       lettersShown.append(singleLetter)&amp;#10;        &amp;#10;   " valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
+        <Param val="psychoJS.experiment.addData(&quot;lettersShown&quot;, lettersShown);&amp;#10;" valType="extendedCode" updates="constant" name="End JS Routine"/>
+        <Param val="thisExp.addData('lettersShown', lettersShown)" valType="extendedCode" updates="constant" name="End Routine"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="selectLetters_2" valType="code" updates="None" name="name"/>
       </CodeComponent>
     </Routine>
   </Routines>
@@ -1892,14 +1806,26 @@
     <Routine name="CogConIns2"/>
     <Routine name="CogConIns3"/>
     <Routine name="Blank1"/>
-    <LoopInitiator loopType="TrialHandler" name="trials">
-      <Param name="Selected rows" updates="None" val="1" valType="str"/>
-      <Param name="conditions" updates="None" val="[{'letters': &quot;F'&quot;}, {'letters': &quot;K'&quot;}, {'letters': &quot;P'&quot;}, {'letters': &quot;S'&quot;}, {'letters': &quot;H'&quot;}, {'letters': &quot;L'&quot;}, {'letters': &quot;Q'&quot;}, {'letters': &quot;T'&quot;}, {'letters': &quot;J'&quot;}, {'letters': &quot;N'&quot;}, {'letters': &quot;R'&quot;}, {'letters': &quot;Y'&quot;}]" valType="str"/>
-      <Param name="conditionsFile" updates="None" val="practiceletters.xlsx" valType="file"/>
+    <LoopInitiator loopType="TrialHandler" name="bigLetterLoop">
+      <Param name="Selected rows" updates="None" val="" valType="str"/>
+      <Param name="conditions" updates="None" val="[{'setSize': 2}, {'setSize': 2}, {'setSize': 3}, {'setSize': 3}]" valType="str"/>
+      <Param name="conditionsFile" updates="None" val="setSizeLetterPractice.xlsx" valType="file"/>
       <Param name="endPoints" updates="None" val="[0, 1]" valType="num"/>
       <Param name="isTrials" updates="None" val="True" valType="bool"/>
       <Param name="loopType" updates="None" val="random" valType="str"/>
       <Param name="nReps" updates="None" val="1" valType="num"/>
+      <Param name="name" updates="None" val="bigLetterLoop" valType="code"/>
+      <Param name="random seed" updates="None" val="" valType="code"/>
+    </LoopInitiator>
+    <Routine name="selectLetters"/>
+    <LoopInitiator loopType="TrialHandler" name="trials">
+      <Param name="Selected rows" updates="None" val="" valType="str"/>
+      <Param name="conditions" updates="None" val="None" valType="str"/>
+      <Param name="conditionsFile" updates="None" val="" valType="file"/>
+      <Param name="endPoints" updates="None" val="[0, 1]" valType="num"/>
+      <Param name="isTrials" updates="None" val="True" valType="bool"/>
+      <Param name="loopType" updates="None" val="random" valType="str"/>
+      <Param name="nReps" updates="None" val="setSize" valType="num"/>
       <Param name="name" updates="None" val="trials" valType="code"/>
       <Param name="random seed" updates="None" val="" valType="code"/>
     </LoopInitiator>
@@ -1921,6 +1847,7 @@
     <Routine name="Recall_Letters1"/>
     <Routine name="LetterScore"/>
     <LoopTerminator name="trials_2"/>
+    <LoopTerminator name="bigLetterLoop"/>
     <Routine name="MathPracIns"/>
     <Routine name="MathPracIns2"/>
     <Routine name="MathPrac3"/>
