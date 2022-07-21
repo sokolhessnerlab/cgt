@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2022.2.1),
-    on Thu Jul 21 12:54:43 2022
+    on Thu Jul 21 14:02:37 2022
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -429,8 +429,8 @@ showRecall = visual.TextStim(win=win, name='showRecall',
     depth=-34.0);
 
 # --- Initialize components for Routine "LetterScore" ---
-text_3 = visual.TextStim(win=win, name='text_3',
-    text='You recalled ___ letters correctly out of ___.',
+recallScore = visual.TextStim(win=win, name='recallScore',
+    text='',
     font='Open Sans',
     pos=(0, 0), height=boxTextHeight, wrapWidth=wrap, ori=0.0, 
     color='white', colorSpace='rgb', opacity=None, 
@@ -978,23 +978,23 @@ for thisBigLetterLoop in bigLetterLoop:
     
     
     # set up handler to look after randomisation of conditions etc
-    trials_2 = data.TrialHandler(nReps=1.0, method='random', 
+    recall = data.TrialHandler(nReps=1.0, method='random', 
         extraInfo=expInfo, originPath=-1,
         trialList=[None],
-        seed=None, name='trials_2')
-    thisExp.addLoop(trials_2)  # add the loop to the experiment
-    thisTrial_2 = trials_2.trialList[0]  # so we can initialise stimuli with some values
-    # abbreviate parameter names if possible (e.g. rgb = thisTrial_2.rgb)
-    if thisTrial_2 != None:
-        for paramName in thisTrial_2:
-            exec('{} = thisTrial_2[paramName]'.format(paramName))
+        seed=None, name='recall')
+    thisExp.addLoop(recall)  # add the loop to the experiment
+    thisRecall = recall.trialList[0]  # so we can initialise stimuli with some values
+    # abbreviate parameter names if possible (e.g. rgb = thisRecall.rgb)
+    if thisRecall != None:
+        for paramName in thisRecall:
+            exec('{} = thisRecall[paramName]'.format(paramName))
     
-    for thisTrial_2 in trials_2:
-        currentLoop = trials_2
-        # abbreviate parameter names if possible (e.g. rgb = thisTrial_2.rgb)
-        if thisTrial_2 != None:
-            for paramName in thisTrial_2:
-                exec('{} = thisTrial_2[paramName]'.format(paramName))
+    for thisRecall in recall:
+        currentLoop = recall
+        # abbreviate parameter names if possible (e.g. rgb = thisRecall.rgb)
+        if thisRecall != None:
+            for paramName in thisRecall:
+                exec('{} = thisRecall[paramName]'.format(paramName))
         
         # --- Prepare to start Routine "Recall_Letters1" ---
         continueRoutine = True
@@ -1538,14 +1538,14 @@ for thisBigLetterLoop in bigLetterLoop:
         for thisComponent in Recall_Letters1Components:
             if hasattr(thisComponent, "setAutoDraw"):
                 thisComponent.setAutoDraw(False)
-        # store data for trials_2 (TrialHandler)
-        trials_2.addData('mouse.x', mouse.x)
-        trials_2.addData('mouse.y', mouse.y)
-        trials_2.addData('mouse.leftButton', mouse.leftButton)
-        trials_2.addData('mouse.midButton', mouse.midButton)
-        trials_2.addData('mouse.rightButton', mouse.rightButton)
-        trials_2.addData('mouse.time', mouse.time)
-        trials_2.addData('mouse.clicked_name', mouse.clicked_name)
+        # store data for recall (TrialHandler)
+        recall.addData('mouse.x', mouse.x)
+        recall.addData('mouse.y', mouse.y)
+        recall.addData('mouse.leftButton', mouse.leftButton)
+        recall.addData('mouse.midButton', mouse.midButton)
+        recall.addData('mouse.rightButton', mouse.rightButton)
+        recall.addData('mouse.time', mouse.time)
+        recall.addData('mouse.clicked_name', mouse.clicked_name)
         # Run 'End Routine' code from mouserecall
         thisExp.addData("letterRecall", clicked_things)
         # the Routine "Recall_Letters1" was not non-slip safe, so reset the non-slip timer
@@ -1554,8 +1554,22 @@ for thisBigLetterLoop in bigLetterLoop:
         # --- Prepare to start Routine "LetterScore" ---
         continueRoutine = True
         # update component parameters for each repeat
+        # Run 'Begin Routine' code from scoring
+        correctCount = 0
+        
+        if len(clicked_things) >= setSize:
+            for l in range(setSize):
+                if clicked_things[l] == lettersShown[l]:
+                    correctCount +=1
+        elif len(clicked_things) ==0:
+            correctCount = 0
+        elif len(clicked_things)==1:
+                if clicked_things[0] == lettersShown[0]:
+                    correctCount +=1
+            
+        
         # keep track of which components have finished
-        LetterScoreComponents = [text_3]
+        LetterScoreComponents = [recallScore]
         for thisComponent in LetterScoreComponents:
             thisComponent.tStart = None
             thisComponent.tStop = None
@@ -1569,7 +1583,7 @@ for thisBigLetterLoop in bigLetterLoop:
         frameN = -1
         
         # --- Run Routine "LetterScore" ---
-        while continueRoutine and routineTimer.getTime() < 4.5:
+        while continueRoutine and routineTimer.getTime() < 1.5:
             # get current time
             t = routineTimer.getTime()
             tThisFlip = win.getFutureFlipTime(clock=routineTimer)
@@ -1577,25 +1591,27 @@ for thisBigLetterLoop in bigLetterLoop:
             frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
             # update/draw components on each frame
             
-            # *text_3* updates
-            if text_3.status == NOT_STARTED and tThisFlip >= 3-frameTolerance:
+            # *recallScore* updates
+            if recallScore.status == NOT_STARTED and tThisFlip >= 0-frameTolerance:
                 # keep track of start time/frame for later
-                text_3.frameNStart = frameN  # exact frame index
-                text_3.tStart = t  # local t and not account for scr refresh
-                text_3.tStartRefresh = tThisFlipGlobal  # on global time
-                win.timeOnFlip(text_3, 'tStartRefresh')  # time at next scr refresh
+                recallScore.frameNStart = frameN  # exact frame index
+                recallScore.tStart = t  # local t and not account for scr refresh
+                recallScore.tStartRefresh = tThisFlipGlobal  # on global time
+                win.timeOnFlip(recallScore, 'tStartRefresh')  # time at next scr refresh
                 # add timestamp to datafile
-                thisExp.timestampOnFlip(win, 'text_3.started')
-                text_3.setAutoDraw(True)
-            if text_3.status == STARTED:
+                thisExp.timestampOnFlip(win, 'recallScore.started')
+                recallScore.setAutoDraw(True)
+            if recallScore.status == STARTED:
                 # is it time to stop? (based on global clock, using actual start)
-                if tThisFlipGlobal > text_3.tStartRefresh + 1.5-frameTolerance:
+                if tThisFlipGlobal > recallScore.tStartRefresh + 1.5-frameTolerance:
                     # keep track of stop time/frame for later
-                    text_3.tStop = t  # not accounting for scr refresh
-                    text_3.frameNStop = frameN  # exact frame index
+                    recallScore.tStop = t  # not accounting for scr refresh
+                    recallScore.frameNStop = frameN  # exact frame index
                     # add timestamp to datafile
-                    thisExp.timestampOnFlip(win, 'text_3.stopped')
-                    text_3.setAutoDraw(False)
+                    thisExp.timestampOnFlip(win, 'recallScore.stopped')
+                    recallScore.setAutoDraw(False)
+            if recallScore.status == STARTED:  # only update if drawing
+                recallScore.setText("You recalled " + str(correctCount) + " letters correctly out of " + str(setSize), log=False)
             
             # check for quit (typically the Esc key)
             if endExpNow or defaultKeyboard.getKeys(keyList=["escape"]):
@@ -1618,11 +1634,13 @@ for thisBigLetterLoop in bigLetterLoop:
         for thisComponent in LetterScoreComponents:
             if hasattr(thisComponent, "setAutoDraw"):
                 thisComponent.setAutoDraw(False)
+        # Run 'End Routine' code from scoring
+        thisExp.addData("correctCount", correctCount)
         # using non-slip timing so subtract the expected duration of this Routine
-        routineTimer.addTime(-4.500000)
+        routineTimer.addTime(-1.500000)
         thisExp.nextEntry()
         
-    # completed 1.0 repeats of 'trials_2'
+    # completed 1.0 repeats of 'recall'
     
     thisExp.nextEntry()
     
