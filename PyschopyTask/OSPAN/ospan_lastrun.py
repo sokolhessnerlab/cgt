@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2022.2.1),
-    on Mon Jul 25 16:34:41 2022
+    on Tue Jul 26 13:01:54 2022
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -102,7 +102,7 @@ defaultKeyboard = keyboard.Keyboard(backend='iohub')
 # --- Initialize components for Routine "CogConIns3" ---
 
 # --- Initialize components for Routine "Blank1" ---
-text = visual.TextStim(win=win, name='text',
+blankText = visual.TextStim(win=win, name='blankText',
     text=' \n',
     font='Open Sans',
     pos=(0, 0), height=0.05, wrapWidth=None, ori=0.0, 
@@ -444,11 +444,11 @@ recallScore = visual.TextStim(win=win, name='recallScore',
     languageStyle='LTR',
     depth=-1.0);
 
-# --- Initialize components for Routine "MathPracIns" ---
+# --- Initialize components for Routine "MathPracticeInst1" ---
 
-# --- Initialize components for Routine "MathPracIns2" ---
+# --- Initialize components for Routine "MathPracticeInst2" ---
 
-# --- Initialize components for Routine "MathPrac3" ---
+# --- Initialize components for Routine "MathPracticeInst3" ---
 
 # --- Initialize components for Routine "selectMathProbs" ---
 # Run 'Begin Experiment' code from selectMathCode
@@ -458,10 +458,10 @@ op2 = [1,2,3,4,5,6,7,8,9]
 sign = ["+","-"]
 sum2 = [1,2,3,4,5,6,7,8,9,-1,-2,-3,-4,-5,-6,-7,-8,-9]
 
-
+mathPractCount = 0
 
 # --- Initialize components for Routine "Blank1" ---
-text = visual.TextStim(win=win, name='text',
+blankText = visual.TextStim(win=win, name='blankText',
     text=' \n',
     font='Open Sans',
     pos=(0, 0), height=0.05, wrapWidth=None, ori=0.0, 
@@ -477,15 +477,47 @@ showMathProblemPractice = visual.TextStim(win=win, name='showMathProblemPractice
     color='white', colorSpace='rgb', opacity=None, 
     languageStyle='LTR',
     depth=-1.0);
-mouseToTF = event.Mouse(win=win)
-x, y = [None, None]
-mouseToTF.mouseClock = core.Clock()
+keyboard_moveToTF = keyboard.Keyboard()
 
 # --- Initialize components for Routine "isiPracMath" ---
+isiPracMath2 = visual.TextStim(win=win, name='isiPracMath2',
+    text='+',
+    font='Open Sans',
+    pos=(0, 0), height=textHeight, wrapWidth=None, ori=0.0, 
+    color='white', colorSpace='rgb', opacity=None, 
+    languageStyle='LTR',
+    depth=0.0);
 
 # --- Initialize components for Routine "TF" ---
-# Run 'Begin Experiment' code from code_2
-#call right or wrong answer (some if then loop if correct maybe we need an excel sheet wiht the possible answers presented and true or false ? ( just maybe make it?) 
+TrueBoxPractice = visual.Rect(
+    win=win, name='TrueBoxPractice',
+    width=(150, 100)[0], height=(150, 100)[1],
+    ori=0.0, pos=(-200, 0), anchor='center',
+    lineWidth=1.0,     colorSpace='rgb',  lineColor='white', fillColor='Green',
+    opacity=None, depth=0.0, interpolate=True)
+TrueTextPractice = visual.TextStim(win=win, name='TrueTextPractice',
+    text='TRUE',
+    font='Open Sans',
+    units='pix', pos=(-200, 0), height=0.05, wrapWidth=None, ori=0.0, 
+    color='black', colorSpace='rgb', opacity=None, 
+    languageStyle='LTR',
+    depth=-1.0);
+FalseBoxPractice = visual.Rect(
+    win=win, name='FalseBoxPractice',
+    width=(150, 100)[0], height=(150, 100)[1],
+    ori=0.0, pos=(200, 0), anchor='center',
+    lineWidth=1.0,     colorSpace='rgb',  lineColor='white', fillColor='red',
+    opacity=None, depth=-2.0, interpolate=True)
+FalseTextPractice = visual.TextStim(win=win, name='FalseTextPractice',
+    text='FALSE',
+    font='Open Sans',
+    units='pix', pos=(200, 0), height=0.05, wrapWidth=None, ori=0.0, 
+    color='black', colorSpace='rgb', opacity=None, 
+    languageStyle='LTR',
+    depth=-3.0);
+mouse_2 = event.Mouse(win=win)
+x, y = [None, None]
+mouse_2.mouseClock = core.Clock()
 
 # Create some handy timers
 globalClock = core.Clock()  # to track the time since experiment started
@@ -645,7 +677,7 @@ routineTimer.reset()
 continueRoutine = True
 # update component parameters for each repeat
 # keep track of which components have finished
-Blank1Components = [text]
+Blank1Components = [blankText]
 for thisComponent in Blank1Components:
     thisComponent.tStart = None
     thisComponent.tStop = None
@@ -667,25 +699,25 @@ while continueRoutine and routineTimer.getTime() < 0.5:
     frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
     # update/draw components on each frame
     
-    # *text* updates
-    if text.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+    # *blankText* updates
+    if blankText.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
         # keep track of start time/frame for later
-        text.frameNStart = frameN  # exact frame index
-        text.tStart = t  # local t and not account for scr refresh
-        text.tStartRefresh = tThisFlipGlobal  # on global time
-        win.timeOnFlip(text, 'tStartRefresh')  # time at next scr refresh
+        blankText.frameNStart = frameN  # exact frame index
+        blankText.tStart = t  # local t and not account for scr refresh
+        blankText.tStartRefresh = tThisFlipGlobal  # on global time
+        win.timeOnFlip(blankText, 'tStartRefresh')  # time at next scr refresh
         # add timestamp to datafile
-        thisExp.timestampOnFlip(win, 'text.started')
-        text.setAutoDraw(True)
-    if text.status == STARTED:
+        thisExp.timestampOnFlip(win, 'blankText.started')
+        blankText.setAutoDraw(True)
+    if blankText.status == STARTED:
         # is it time to stop? (based on global clock, using actual start)
-        if tThisFlipGlobal > text.tStartRefresh + .5-frameTolerance:
+        if tThisFlipGlobal > blankText.tStartRefresh + .5-frameTolerance:
             # keep track of stop time/frame for later
-            text.tStop = t  # not accounting for scr refresh
-            text.frameNStop = frameN  # exact frame index
+            blankText.tStop = t  # not accounting for scr refresh
+            blankText.frameNStop = frameN  # exact frame index
             # add timestamp to datafile
-            thisExp.timestampOnFlip(win, 'text.stopped')
-            text.setAutoDraw(False)
+            thisExp.timestampOnFlip(win, 'blankText.stopped')
+            blankText.setAutoDraw(False)
     
     # check for quit (typically the Esc key)
     if endExpNow or defaultKeyboard.getKeys(keyList=["escape"]):
@@ -1701,12 +1733,12 @@ for thisBigLetterLoop in bigLetterLoop:
 # completed 0.0 repeats of 'bigLetterLoop'
 
 
-# --- Prepare to start Routine "MathPracIns" ---
+# --- Prepare to start Routine "MathPracticeInst1" ---
 continueRoutine = True
 # update component parameters for each repeat
 # keep track of which components have finished
-MathPracInsComponents = []
-for thisComponent in MathPracInsComponents:
+MathPracticeInst1Components = []
+for thisComponent in MathPracticeInst1Components:
     thisComponent.tStart = None
     thisComponent.tStop = None
     thisComponent.tStartRefresh = None
@@ -1718,7 +1750,7 @@ t = 0
 _timeToFirstFrame = win.getFutureFlipTime(clock="now")
 frameN = -1
 
-# --- Run Routine "MathPracIns" ---
+# --- Run Routine "MathPracticeInst1" ---
 while continueRoutine:
     # get current time
     t = routineTimer.getTime()
@@ -1735,7 +1767,7 @@ while continueRoutine:
     if not continueRoutine:  # a component has requested a forced-end of Routine
         break
     continueRoutine = False  # will revert to True if at least one component still running
-    for thisComponent in MathPracInsComponents:
+    for thisComponent in MathPracticeInst1Components:
         if hasattr(thisComponent, "status") and thisComponent.status != FINISHED:
             continueRoutine = True
             break  # at least one component has not yet finished
@@ -1744,19 +1776,19 @@ while continueRoutine:
     if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
         win.flip()
 
-# --- Ending Routine "MathPracIns" ---
-for thisComponent in MathPracInsComponents:
+# --- Ending Routine "MathPracticeInst1" ---
+for thisComponent in MathPracticeInst1Components:
     if hasattr(thisComponent, "setAutoDraw"):
         thisComponent.setAutoDraw(False)
-# the Routine "MathPracIns" was not non-slip safe, so reset the non-slip timer
+# the Routine "MathPracticeInst1" was not non-slip safe, so reset the non-slip timer
 routineTimer.reset()
 
-# --- Prepare to start Routine "MathPracIns2" ---
+# --- Prepare to start Routine "MathPracticeInst2" ---
 continueRoutine = True
 # update component parameters for each repeat
 # keep track of which components have finished
-MathPracIns2Components = []
-for thisComponent in MathPracIns2Components:
+MathPracticeInst2Components = []
+for thisComponent in MathPracticeInst2Components:
     thisComponent.tStart = None
     thisComponent.tStop = None
     thisComponent.tStartRefresh = None
@@ -1768,7 +1800,7 @@ t = 0
 _timeToFirstFrame = win.getFutureFlipTime(clock="now")
 frameN = -1
 
-# --- Run Routine "MathPracIns2" ---
+# --- Run Routine "MathPracticeInst2" ---
 while continueRoutine:
     # get current time
     t = routineTimer.getTime()
@@ -1785,7 +1817,7 @@ while continueRoutine:
     if not continueRoutine:  # a component has requested a forced-end of Routine
         break
     continueRoutine = False  # will revert to True if at least one component still running
-    for thisComponent in MathPracIns2Components:
+    for thisComponent in MathPracticeInst2Components:
         if hasattr(thisComponent, "status") and thisComponent.status != FINISHED:
             continueRoutine = True
             break  # at least one component has not yet finished
@@ -1794,19 +1826,19 @@ while continueRoutine:
     if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
         win.flip()
 
-# --- Ending Routine "MathPracIns2" ---
-for thisComponent in MathPracIns2Components:
+# --- Ending Routine "MathPracticeInst2" ---
+for thisComponent in MathPracticeInst2Components:
     if hasattr(thisComponent, "setAutoDraw"):
         thisComponent.setAutoDraw(False)
-# the Routine "MathPracIns2" was not non-slip safe, so reset the non-slip timer
+# the Routine "MathPracticeInst2" was not non-slip safe, so reset the non-slip timer
 routineTimer.reset()
 
-# --- Prepare to start Routine "MathPrac3" ---
+# --- Prepare to start Routine "MathPracticeInst3" ---
 continueRoutine = True
 # update component parameters for each repeat
 # keep track of which components have finished
-MathPrac3Components = []
-for thisComponent in MathPrac3Components:
+MathPracticeInst3Components = []
+for thisComponent in MathPracticeInst3Components:
     thisComponent.tStart = None
     thisComponent.tStop = None
     thisComponent.tStartRefresh = None
@@ -1818,7 +1850,7 @@ t = 0
 _timeToFirstFrame = win.getFutureFlipTime(clock="now")
 frameN = -1
 
-# --- Run Routine "MathPrac3" ---
+# --- Run Routine "MathPracticeInst3" ---
 while continueRoutine:
     # get current time
     t = routineTimer.getTime()
@@ -1835,7 +1867,7 @@ while continueRoutine:
     if not continueRoutine:  # a component has requested a forced-end of Routine
         break
     continueRoutine = False  # will revert to True if at least one component still running
-    for thisComponent in MathPrac3Components:
+    for thisComponent in MathPracticeInst3Components:
         if hasattr(thisComponent, "status") and thisComponent.status != FINISHED:
             continueRoutine = True
             break  # at least one component has not yet finished
@@ -1844,17 +1876,17 @@ while continueRoutine:
     if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
         win.flip()
 
-# --- Ending Routine "MathPrac3" ---
-for thisComponent in MathPrac3Components:
+# --- Ending Routine "MathPracticeInst3" ---
+for thisComponent in MathPracticeInst3Components:
     if hasattr(thisComponent, "setAutoDraw"):
         thisComponent.setAutoDraw(False)
-# the Routine "MathPrac3" was not non-slip safe, so reset the non-slip timer
+# the Routine "MathPracticeInst3" was not non-slip safe, so reset the non-slip timer
 routineTimer.reset()
 
 # set up handler to look after randomisation of conditions etc
 mathPracticeTrials = data.TrialHandler(nReps=1.0, method='random', 
     extraInfo=expInfo, originPath=-1,
-    trialList=data.importConditions('operationSet1.xlsx'),
+    trialList=data.importConditions('operationSet1_noParen.xlsx'),
     seed=None, name='mathPracticeTrials')
 thisExp.addLoop(mathPracticeTrials)  # add the loop to the experiment
 thisMathPracticeTrial = mathPracticeTrials.trialList[0]  # so we can initialise stimuli with some values
@@ -1875,10 +1907,12 @@ for thisMathPracticeTrial in mathPracticeTrials:
     # update component parameters for each repeat
     # Run 'Begin Routine' code from selectMathCode
     import random
-    tmpMathOp1 = str(random.choice(problem))
+    
     tmpMathOp2 = str(random.choice(op2))
     tmpSign = random.choice(sign)
     suggestedAns = str(random.choice(sum2))
+    
+    
     # keep track of which components have finished
     selectMathProbsComponents = []
     for thisComponent in selectMathProbsComponents:
@@ -1924,7 +1958,14 @@ for thisMathPracticeTrial in mathPracticeTrials:
         if hasattr(thisComponent, "setAutoDraw"):
             thisComponent.setAutoDraw(False)
     # Run 'End Routine' code from selectMathCode
-    thisExp.addData("selectedProblems", tmpMathOp1)
+    mathPractCount +=1
+    if mathPractCount > 14:
+        mathPracticeTrials.finished = True
+    
+    thisExp.addData("operation1", problem)
+    thisExp.addData("sign", tmpSign)
+    thisExp.addData("operation2",tmpMathOp2)
+    thisExp.addData("suggestedAnswer", suggestedAns)
     # the Routine "selectMathProbs" was not non-slip safe, so reset the non-slip timer
     routineTimer.reset()
     
@@ -1932,7 +1973,7 @@ for thisMathPracticeTrial in mathPracticeTrials:
     continueRoutine = True
     # update component parameters for each repeat
     # keep track of which components have finished
-    Blank1Components = [text]
+    Blank1Components = [blankText]
     for thisComponent in Blank1Components:
         thisComponent.tStart = None
         thisComponent.tStop = None
@@ -1954,25 +1995,25 @@ for thisMathPracticeTrial in mathPracticeTrials:
         frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
         # update/draw components on each frame
         
-        # *text* updates
-        if text.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+        # *blankText* updates
+        if blankText.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
             # keep track of start time/frame for later
-            text.frameNStart = frameN  # exact frame index
-            text.tStart = t  # local t and not account for scr refresh
-            text.tStartRefresh = tThisFlipGlobal  # on global time
-            win.timeOnFlip(text, 'tStartRefresh')  # time at next scr refresh
+            blankText.frameNStart = frameN  # exact frame index
+            blankText.tStart = t  # local t and not account for scr refresh
+            blankText.tStartRefresh = tThisFlipGlobal  # on global time
+            win.timeOnFlip(blankText, 'tStartRefresh')  # time at next scr refresh
             # add timestamp to datafile
-            thisExp.timestampOnFlip(win, 'text.started')
-            text.setAutoDraw(True)
-        if text.status == STARTED:
+            thisExp.timestampOnFlip(win, 'blankText.started')
+            blankText.setAutoDraw(True)
+        if blankText.status == STARTED:
             # is it time to stop? (based on global clock, using actual start)
-            if tThisFlipGlobal > text.tStartRefresh + .5-frameTolerance:
+            if tThisFlipGlobal > blankText.tStartRefresh + .5-frameTolerance:
                 # keep track of stop time/frame for later
-                text.tStop = t  # not accounting for scr refresh
-                text.frameNStop = frameN  # exact frame index
+                blankText.tStop = t  # not accounting for scr refresh
+                blankText.frameNStop = frameN  # exact frame index
                 # add timestamp to datafile
-                thisExp.timestampOnFlip(win, 'text.stopped')
-                text.setAutoDraw(False)
+                thisExp.timestampOnFlip(win, 'blankText.stopped')
+                blankText.setAutoDraw(False)
         
         # check for quit (typically the Esc key)
         if endExpNow or defaultKeyboard.getKeys(keyList=["escape"]):
@@ -2002,15 +2043,14 @@ for thisMathPracticeTrial in mathPracticeTrials:
     continueRoutine = True
     # update component parameters for each repeat
     # Run 'Begin Routine' code from MathProb_2
-    #operation1 = "3/1 "
-    #operation2 = "+ 1"
     qMark = " = ?"
     
-    showMathProblem = tmpMathOp1 + tmpSign + tmpMathOp2 + qMark
-    # setup some python lists for storing info about the mouseToTF
-    gotValidClick = False  # until a click is received
+    showMathProblem = "(" + problem + ")"  + tmpSign + tmpMathOp2 + qMark
+    keyboard_moveToTF.keys = []
+    keyboard_moveToTF.rt = []
+    _keyboard_moveToTF_allKeys = []
     # keep track of which components have finished
-    MathPracComponents = [showMathProblemPractice, mouseToTF]
+    MathPracComponents = [showMathProblemPractice, keyboard_moveToTF]
     for thisComponent in MathPracComponents:
         thisComponent.tStart = None
         thisComponent.tStop = None
@@ -2043,25 +2083,32 @@ for thisMathPracticeTrial in mathPracticeTrials:
             thisExp.timestampOnFlip(win, 'showMathProblemPractice.started')
             showMathProblemPractice.setAutoDraw(True)
         if showMathProblemPractice.status == STARTED:  # only update if drawing
-            showMathProblemPractice.setText(showMathProblem + "\n\n\n\n\nWhen you have solved the math problem, click the mouse to continue.", log=False)
-        # *mouseToTF* updates
-        if mouseToTF.status == NOT_STARTED and tThisFlip >= 0-frameTolerance:
+            showMathProblemPractice.setText(showMathProblem + "\n\n\n\n\nWhen you have solved the math problem, click 'enter' to continue.", log=False)
+        
+        # *keyboard_moveToTF* updates
+        waitOnFlip = False
+        if keyboard_moveToTF.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
             # keep track of start time/frame for later
-            mouseToTF.frameNStart = frameN  # exact frame index
-            mouseToTF.tStart = t  # local t and not account for scr refresh
-            mouseToTF.tStartRefresh = tThisFlipGlobal  # on global time
-            win.timeOnFlip(mouseToTF, 'tStartRefresh')  # time at next scr refresh
+            keyboard_moveToTF.frameNStart = frameN  # exact frame index
+            keyboard_moveToTF.tStart = t  # local t and not account for scr refresh
+            keyboard_moveToTF.tStartRefresh = tThisFlipGlobal  # on global time
+            win.timeOnFlip(keyboard_moveToTF, 'tStartRefresh')  # time at next scr refresh
             # add timestamp to datafile
-            thisExp.timestampOnFlip(win, 'mouseToTF.started')
-            mouseToTF.status = STARTED
-            mouseToTF.mouseClock.reset()
-            prevButtonState = mouseToTF.getPressed()  # if button is down already this ISN'T a new click
-        if mouseToTF.status == STARTED:  # only update if started and not finished!
-            buttons = mouseToTF.getPressed()
-            if buttons != prevButtonState:  # button state changed?
-                prevButtonState = buttons
-                if sum(buttons) > 0:  # state changed to a new click
-                    continueRoutine = False  # abort routine on response        
+            thisExp.timestampOnFlip(win, 'keyboard_moveToTF.started')
+            keyboard_moveToTF.status = STARTED
+            # keyboard checking is just starting
+            waitOnFlip = True
+            win.callOnFlip(keyboard_moveToTF.clock.reset)  # t=0 on next screen flip
+            win.callOnFlip(keyboard_moveToTF.clearEvents, eventType='keyboard')  # clear events on next screen flip
+        if keyboard_moveToTF.status == STARTED and not waitOnFlip:
+            theseKeys = keyboard_moveToTF.getKeys(keyList=['return'], waitRelease=False)
+            _keyboard_moveToTF_allKeys.extend(theseKeys)
+            if len(_keyboard_moveToTF_allKeys):
+                keyboard_moveToTF.keys = _keyboard_moveToTF_allKeys[-1].name  # just the last key pressed
+                keyboard_moveToTF.rt = _keyboard_moveToTF_allKeys[-1].rt
+                # a response ends the routine
+                continueRoutine = False
+        
         # check for quit (typically the Esc key)
         if endExpNow or defaultKeyboard.getKeys(keyList=["escape"]):
             core.quit()
@@ -2083,14 +2130,12 @@ for thisMathPracticeTrial in mathPracticeTrials:
     for thisComponent in MathPracComponents:
         if hasattr(thisComponent, "setAutoDraw"):
             thisComponent.setAutoDraw(False)
-    # store data for mathPracticeTrials (TrialHandler)
-    x, y = mouseToTF.getPos()
-    buttons = mouseToTF.getPressed()
-    mathPracticeTrials.addData('mouseToTF.x', x)
-    mathPracticeTrials.addData('mouseToTF.y', y)
-    mathPracticeTrials.addData('mouseToTF.leftButton', buttons[0])
-    mathPracticeTrials.addData('mouseToTF.midButton', buttons[1])
-    mathPracticeTrials.addData('mouseToTF.rightButton', buttons[2])
+    # check responses
+    if keyboard_moveToTF.keys in ['', [], None]:  # No response was made
+        keyboard_moveToTF.keys = None
+    mathPracticeTrials.addData('keyboard_moveToTF.keys',keyboard_moveToTF.keys)
+    if keyboard_moveToTF.keys != None:  # we had a response
+        mathPracticeTrials.addData('keyboard_moveToTF.rt', keyboard_moveToTF.rt)
     # the Routine "MathPrac" was not non-slip safe, so reset the non-slip timer
     routineTimer.reset()
     
@@ -2098,7 +2143,7 @@ for thisMathPracticeTrial in mathPracticeTrials:
     continueRoutine = True
     # update component parameters for each repeat
     # keep track of which components have finished
-    isiPracMathComponents = []
+    isiPracMathComponents = [isiPracMath2]
     for thisComponent in isiPracMathComponents:
         thisComponent.tStart = None
         thisComponent.tStop = None
@@ -2112,13 +2157,33 @@ for thisMathPracticeTrial in mathPracticeTrials:
     frameN = -1
     
     # --- Run Routine "isiPracMath" ---
-    while continueRoutine:
+    while continueRoutine and routineTimer.getTime() < 0.2:
         # get current time
         t = routineTimer.getTime()
         tThisFlip = win.getFutureFlipTime(clock=routineTimer)
         tThisFlipGlobal = win.getFutureFlipTime(clock=None)
         frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
         # update/draw components on each frame
+        
+        # *isiPracMath2* updates
+        if isiPracMath2.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+            # keep track of start time/frame for later
+            isiPracMath2.frameNStart = frameN  # exact frame index
+            isiPracMath2.tStart = t  # local t and not account for scr refresh
+            isiPracMath2.tStartRefresh = tThisFlipGlobal  # on global time
+            win.timeOnFlip(isiPracMath2, 'tStartRefresh')  # time at next scr refresh
+            # add timestamp to datafile
+            thisExp.timestampOnFlip(win, 'isiPracMath2.started')
+            isiPracMath2.setAutoDraw(True)
+        if isiPracMath2.status == STARTED:
+            # is it time to stop? (based on global clock, using actual start)
+            if tThisFlipGlobal > isiPracMath2.tStartRefresh + .200-frameTolerance:
+                # keep track of stop time/frame for later
+                isiPracMath2.tStop = t  # not accounting for scr refresh
+                isiPracMath2.frameNStop = frameN  # exact frame index
+                # add timestamp to datafile
+                thisExp.timestampOnFlip(win, 'isiPracMath2.stopped')
+                isiPracMath2.setAutoDraw(False)
         
         # check for quit (typically the Esc key)
         if endExpNow or defaultKeyboard.getKeys(keyList=["escape"]):
@@ -2141,14 +2206,23 @@ for thisMathPracticeTrial in mathPracticeTrials:
     for thisComponent in isiPracMathComponents:
         if hasattr(thisComponent, "setAutoDraw"):
             thisComponent.setAutoDraw(False)
-    # the Routine "isiPracMath" was not non-slip safe, so reset the non-slip timer
-    routineTimer.reset()
+    # using non-slip timing so subtract the expected duration of this Routine
+    routineTimer.addTime(-0.200000)
     
     # --- Prepare to start Routine "TF" ---
     continueRoutine = True
     # update component parameters for each repeat
+    # setup some python lists for storing info about the mouse_2
+    mouse_2.x = []
+    mouse_2.y = []
+    mouse_2.leftButton = []
+    mouse_2.midButton = []
+    mouse_2.rightButton = []
+    mouse_2.time = []
+    mouse_2.clicked_name = []
+    gotValidClick = False  # until a click is received
     # keep track of which components have finished
-    TFComponents = []
+    TFComponents = [TrueBoxPractice, TrueTextPractice, FalseBoxPractice, FalseTextPractice, mouse_2]
     for thisComponent in TFComponents:
         thisComponent.tStart = None
         thisComponent.tStop = None
@@ -2169,6 +2243,88 @@ for thisMathPracticeTrial in mathPracticeTrials:
         tThisFlipGlobal = win.getFutureFlipTime(clock=None)
         frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
         # update/draw components on each frame
+        
+        # *TrueBoxPractice* updates
+        if TrueBoxPractice.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+            # keep track of start time/frame for later
+            TrueBoxPractice.frameNStart = frameN  # exact frame index
+            TrueBoxPractice.tStart = t  # local t and not account for scr refresh
+            TrueBoxPractice.tStartRefresh = tThisFlipGlobal  # on global time
+            win.timeOnFlip(TrueBoxPractice, 'tStartRefresh')  # time at next scr refresh
+            # add timestamp to datafile
+            thisExp.timestampOnFlip(win, 'TrueBoxPractice.started')
+            TrueBoxPractice.setAutoDraw(True)
+        
+        # *TrueTextPractice* updates
+        if TrueTextPractice.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+            # keep track of start time/frame for later
+            TrueTextPractice.frameNStart = frameN  # exact frame index
+            TrueTextPractice.tStart = t  # local t and not account for scr refresh
+            TrueTextPractice.tStartRefresh = tThisFlipGlobal  # on global time
+            win.timeOnFlip(TrueTextPractice, 'tStartRefresh')  # time at next scr refresh
+            # add timestamp to datafile
+            thisExp.timestampOnFlip(win, 'TrueTextPractice.started')
+            TrueTextPractice.setAutoDraw(True)
+        
+        # *FalseBoxPractice* updates
+        if FalseBoxPractice.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+            # keep track of start time/frame for later
+            FalseBoxPractice.frameNStart = frameN  # exact frame index
+            FalseBoxPractice.tStart = t  # local t and not account for scr refresh
+            FalseBoxPractice.tStartRefresh = tThisFlipGlobal  # on global time
+            win.timeOnFlip(FalseBoxPractice, 'tStartRefresh')  # time at next scr refresh
+            # add timestamp to datafile
+            thisExp.timestampOnFlip(win, 'FalseBoxPractice.started')
+            FalseBoxPractice.setAutoDraw(True)
+        
+        # *FalseTextPractice* updates
+        if FalseTextPractice.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+            # keep track of start time/frame for later
+            FalseTextPractice.frameNStart = frameN  # exact frame index
+            FalseTextPractice.tStart = t  # local t and not account for scr refresh
+            FalseTextPractice.tStartRefresh = tThisFlipGlobal  # on global time
+            win.timeOnFlip(FalseTextPractice, 'tStartRefresh')  # time at next scr refresh
+            # add timestamp to datafile
+            thisExp.timestampOnFlip(win, 'FalseTextPractice.started')
+            FalseTextPractice.setAutoDraw(True)
+        # *mouse_2* updates
+        if mouse_2.status == NOT_STARTED and t >= 0.0-frameTolerance:
+            # keep track of start time/frame for later
+            mouse_2.frameNStart = frameN  # exact frame index
+            mouse_2.tStart = t  # local t and not account for scr refresh
+            mouse_2.tStartRefresh = tThisFlipGlobal  # on global time
+            win.timeOnFlip(mouse_2, 'tStartRefresh')  # time at next scr refresh
+            # add timestamp to datafile
+            thisExp.addData('mouse_2.started', t)
+            mouse_2.status = STARTED
+            mouse_2.mouseClock.reset()
+            prevButtonState = mouse_2.getPressed()  # if button is down already this ISN'T a new click
+        if mouse_2.status == STARTED:  # only update if started and not finished!
+            buttons = mouse_2.getPressed()
+            if buttons != prevButtonState:  # button state changed?
+                prevButtonState = buttons
+                if sum(buttons) > 0:  # state changed to a new click
+                    # check if the mouse was inside our 'clickable' objects
+                    gotValidClick = False
+                    try:
+                        iter(TrueBoxPractice)
+                        clickableList = TrueBoxPractice
+                    except:
+                        clickableList = [TrueBoxPractice]
+                    for obj in clickableList:
+                        if obj.contains(mouse_2):
+                            gotValidClick = True
+                            mouse_2.clicked_name.append(obj.name)
+                    x, y = mouse_2.getPos()
+                    mouse_2.x.append(x)
+                    mouse_2.y.append(y)
+                    buttons = mouse_2.getPressed()
+                    mouse_2.leftButton.append(buttons[0])
+                    mouse_2.midButton.append(buttons[1])
+                    mouse_2.rightButton.append(buttons[2])
+                    mouse_2.time.append(mouse_2.mouseClock.getTime())
+                    if gotValidClick:
+                        continueRoutine = False  # abort routine on response
         
         # check for quit (typically the Esc key)
         if endExpNow or defaultKeyboard.getKeys(keyList=["escape"]):
@@ -2191,6 +2347,14 @@ for thisMathPracticeTrial in mathPracticeTrials:
     for thisComponent in TFComponents:
         if hasattr(thisComponent, "setAutoDraw"):
             thisComponent.setAutoDraw(False)
+    # store data for mathPracticeTrials (TrialHandler)
+    mathPracticeTrials.addData('mouse_2.x', mouse_2.x)
+    mathPracticeTrials.addData('mouse_2.y', mouse_2.y)
+    mathPracticeTrials.addData('mouse_2.leftButton', mouse_2.leftButton)
+    mathPracticeTrials.addData('mouse_2.midButton', mouse_2.midButton)
+    mathPracticeTrials.addData('mouse_2.rightButton', mouse_2.rightButton)
+    mathPracticeTrials.addData('mouse_2.time', mouse_2.time)
+    mathPracticeTrials.addData('mouse_2.clicked_name', mouse_2.clicked_name)
     # the Routine "TF" was not non-slip safe, so reset the non-slip timer
     routineTimer.reset()
     thisExp.nextEntry()
