@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2022.2.1),
-    on Wed Jul 27 12:10:33 2022
+    on Wed Jul 27 13:16:28 2022
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -547,6 +547,7 @@ mathFeedback = [];
 nTrials = 0
 nCorrect = 0
 mathCorrRespRTs = [];
+meanCorrect = [];
 
 
 
@@ -603,9 +604,9 @@ blankText = visual.TextStim(win=win, name='blankText',
 
 # --- Initialize components for Routine "computeMathDisp" ---
 # Run 'Begin Experiment' code from mathMaxDispCode
-meanDiff =[];
-squaredMeanDiff = [];
-sumSquaredMeanDiff = [];
+#meanDiff =[];
+#squaredMeanDiff = [];
+#sumSquaredMeanDiff = [];
 stdMathRT = [];
 
 # --- Initialize components for Routine "selectMathProbs" ---
@@ -622,21 +623,26 @@ sum2 = [1,2,3,4,5,6,7,8,9,-1,-2,-3,-4,-5,-6,-7,-8,-9]
 trueBoxSize = specialBoxSize
 falseBoxSize = specialBoxSize
 
-trueBoxLoc = [screensize[0]*-.25, row3]
-falseBoxLoc = [screensize[0]*.25, row3]
-
-feedbackTextLoc = [0, screensize[1]*-.4]
-
-suggestAnsLoc = [0,screensize[1]*.3]
+trueBoxLoc = [screensize[0]*-.25, screensize[1]*-.15]
+falseBoxLoc = [screensize[0]*.25, screensize[1]*-.15]
+mathProbAnsLoc = [0,screensize[1]*.2]
+clickMouseTextLoc = [0,screensize[1]*-.35]
 
 # --- Initialize components for Routine "showMath" ---
-showMathProblem = visual.TextStim(win=win, name='showMathProblem',
+showMathProblem2 = visual.TextStim(win=win, name='showMathProblem2',
     text='',
     font='Open Sans',
-    pos=(0, 0), height=textHeight, wrapWidth=wrap, ori=0.0, 
+    pos=mathProbAnsLoc, height=boxTextHeight, wrapWidth=wrap, ori=0.0, 
     color='white', colorSpace='rgb', opacity=None, 
     languageStyle='LTR',
     depth=-1.0);
+textToContinue = visual.TextStim(win=win, name='textToContinue',
+    text='Click the mouse to continue.',
+    font='Open Sans',
+    pos=clickMouseTextLoc, height=textHeight, wrapWidth=wrap, ori=0.0, 
+    color='white', colorSpace='rgb', opacity=None, 
+    languageStyle='LTR',
+    depth=-2.0);
 mouseToTF = event.Mouse(win=win)
 x, y = [None, None]
 mouseToTF.mouseClock = core.Clock()
@@ -680,7 +686,7 @@ falseText = visual.TextStim(win=win, name='falseText',
 suggestedAnswer = visual.TextStim(win=win, name='suggestedAnswer',
     text='',
     font='Open Sans',
-    pos=suggestAnsLoc, height=boxTextHeight, wrapWidth=None, ori=0.0, 
+    pos=mathProbAnsLoc, height=boxTextHeight, wrapWidth=None, ori=0.0, 
     color='white', colorSpace='rgb', opacity=None, 
     languageStyle='LTR',
     depth=-4.0);
@@ -689,6 +695,7 @@ x, y = [None, None]
 mouseMathResponse.mouseClock = core.Clock()
 # Run 'Begin Experiment' code from mathRespMouse
 mathClock = core.Clock()
+maxRespClock = core.Clock()
 
 # --- Initialize components for Routine "Blank1" ---
 blankText = visual.TextStim(win=win, name='blankText',
@@ -2138,7 +2145,7 @@ routineTimer.addTime(-1.000000)
 # set up handler to look after randomisation of conditions etc
 mathPracticeLoop = data.TrialHandler(nReps=1.0, method='sequential', 
     extraInfo=expInfo, originPath=-1,
-    trialList=data.importConditions('practiceOperations.xlsx', selection='0:5'),
+    trialList=data.importConditions('practiceOperations.xlsx', selection='0:4'),
     seed=None, name='mathPracticeLoop')
 thisExp.addLoop(mathPracticeLoop)  # add the loop to the experiment
 thisMathPracticeLoop = mathPracticeLoop.trialList[0]  # so we can initialise stimuli with some values
@@ -2743,8 +2750,8 @@ for thisMathPracticeLoop in mathPracticeLoop:
         nTrials = nTrials + 1
         nCorrect = nCorrect + mathMousePractice.time[0]
         mathCorrRespRTs.append(mathMousePractice.time[0])
-    
-    meanCorrect = nCorrect/nTrials
+        meanCorrect = nCorrect/nTrials
+        
     thisExp.addData('meanCorrect', meanCorrect)
     thisExp.addData("isMathCorrect",isMathCorrect)
     thisExp.addData("mathCorrRespRTs", mathCorrRespRTs)
@@ -2835,9 +2842,11 @@ continueRoutine = True
 #   meanDiff.append(tmpMeanDiff)
 #   squaredMeanDiff.append(tmpMeanDiff*tmpMeanDiff)
 
+# compute the max amount of time a participant has to responde
+# to the math problem in the letter/math practice and real task.
 stdMathRT = std(mathCorrRespRTs)
 
-maxMathWindow = meanCorrect + 2.5* stdMathRT
+maxMathWindow = meanCorrect + (2.5* stdMathRT)
 if maxMathWindow <1.5:
     maxMathWindow ==1.5
 
@@ -2900,23 +2909,23 @@ thisExp.addData("maxMathWindow",maxMathWindow)
 routineTimer.reset()
 
 # set up handler to look after randomisation of conditions etc
-lettersMathLoop = data.TrialHandler(nReps=0.0, method='random', 
+lettersMathPracticeLoop = data.TrialHandler(nReps=1.0, method='random', 
     extraInfo=expInfo, originPath=-1,
-    trialList=data.importConditions('operationSet1_noParen.xlsx', selection='1:4'),
-    seed=None, name='lettersMathLoop')
-thisExp.addLoop(lettersMathLoop)  # add the loop to the experiment
-thisLettersMathLoop = lettersMathLoop.trialList[0]  # so we can initialise stimuli with some values
-# abbreviate parameter names if possible (e.g. rgb = thisLettersMathLoop.rgb)
-if thisLettersMathLoop != None:
-    for paramName in thisLettersMathLoop:
-        exec('{} = thisLettersMathLoop[paramName]'.format(paramName))
+    trialList=data.importConditions('operationSet1_noParen.xlsx', selection='0:4'),
+    seed=None, name='lettersMathPracticeLoop')
+thisExp.addLoop(lettersMathPracticeLoop)  # add the loop to the experiment
+thisLettersMathPracticeLoop = lettersMathPracticeLoop.trialList[0]  # so we can initialise stimuli with some values
+# abbreviate parameter names if possible (e.g. rgb = thisLettersMathPracticeLoop.rgb)
+if thisLettersMathPracticeLoop != None:
+    for paramName in thisLettersMathPracticeLoop:
+        exec('{} = thisLettersMathPracticeLoop[paramName]'.format(paramName))
 
-for thisLettersMathLoop in lettersMathLoop:
-    currentLoop = lettersMathLoop
-    # abbreviate parameter names if possible (e.g. rgb = thisLettersMathLoop.rgb)
-    if thisLettersMathLoop != None:
-        for paramName in thisLettersMathLoop:
-            exec('{} = thisLettersMathLoop[paramName]'.format(paramName))
+for thisLettersMathPracticeLoop in lettersMathPracticeLoop:
+    currentLoop = lettersMathPracticeLoop
+    # abbreviate parameter names if possible (e.g. rgb = thisLettersMathPracticeLoop.rgb)
+    if thisLettersMathPracticeLoop != None:
+        for paramName in thisLettersMathPracticeLoop:
+            exec('{} = thisLettersMathPracticeLoop[paramName]'.format(paramName))
     
     # --- Prepare to start Routine "selectMathProbs" ---
     continueRoutine = True
@@ -2990,9 +2999,8 @@ for thisLettersMathLoop in lettersMathLoop:
     # update component parameters for each repeat
     # Run 'Begin Routine' code from showMathCode
     qMark = " = ?"
-    
     showMathProblem = "(" + problem + ")"  + " " + tmpSign + " " + tmpMathOp2 + " " + qMark
-    #showMathProblem="hi"
+    
     # setup some python lists for storing info about the mouseToTF
     mouseToTF.x = []
     mouseToTF.y = []
@@ -3002,7 +3010,7 @@ for thisLettersMathLoop in lettersMathLoop:
     mouseToTF.time = []
     gotValidClick = False  # until a click is received
     # keep track of which components have finished
-    showMathComponents = [showMathProblem, mouseToTF]
+    showMathComponents = [showMathProblem2, textToContinue, mouseToTF]
     for thisComponent in showMathComponents:
         thisComponent.tStart = None
         thisComponent.tStop = None
@@ -3024,18 +3032,29 @@ for thisLettersMathLoop in lettersMathLoop:
         frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
         # update/draw components on each frame
         
-        # *showMathProblem* updates
-        if showMathProblem.status == NOT_STARTED and tThisFlip >= 0-frameTolerance:
+        # *showMathProblem2* updates
+        if showMathProblem2.status == NOT_STARTED and tThisFlip >= 0-frameTolerance:
             # keep track of start time/frame for later
-            showMathProblem.frameNStart = frameN  # exact frame index
-            showMathProblem.tStart = t  # local t and not account for scr refresh
-            showMathProblem.tStartRefresh = tThisFlipGlobal  # on global time
-            win.timeOnFlip(showMathProblem, 'tStartRefresh')  # time at next scr refresh
+            showMathProblem2.frameNStart = frameN  # exact frame index
+            showMathProblem2.tStart = t  # local t and not account for scr refresh
+            showMathProblem2.tStartRefresh = tThisFlipGlobal  # on global time
+            win.timeOnFlip(showMathProblem2, 'tStartRefresh')  # time at next scr refresh
             # add timestamp to datafile
-            thisExp.timestampOnFlip(win, 'showMathProblem.started')
-            showMathProblem.setAutoDraw(True)
-        if showMathProblem.status == STARTED:  # only update if drawing
-            showMathProblem.setText(showMathProblem + "\n\n\n\n\nWhen you have solved the math problem, click the mouse to continue.", log=False)
+            thisExp.timestampOnFlip(win, 'showMathProblem2.started')
+            showMathProblem2.setAutoDraw(True)
+        if showMathProblem2.status == STARTED:  # only update if drawing
+            showMathProblem2.setText(showMathProblem, log=False)
+        
+        # *textToContinue* updates
+        if textToContinue.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+            # keep track of start time/frame for later
+            textToContinue.frameNStart = frameN  # exact frame index
+            textToContinue.tStart = t  # local t and not account for scr refresh
+            textToContinue.tStartRefresh = tThisFlipGlobal  # on global time
+            win.timeOnFlip(textToContinue, 'tStartRefresh')  # time at next scr refresh
+            # add timestamp to datafile
+            thisExp.timestampOnFlip(win, 'textToContinue.started')
+            textToContinue.setAutoDraw(True)
         # *mouseToTF* updates
         if mouseToTF.status == NOT_STARTED and t >= 0.0-frameTolerance:
             # keep track of start time/frame for later
@@ -3048,6 +3067,15 @@ for thisLettersMathLoop in lettersMathLoop:
             mouseToTF.status = STARTED
             mouseToTF.mouseClock.reset()
             prevButtonState = mouseToTF.getPressed()  # if button is down already this ISN'T a new click
+        if mouseToTF.status == STARTED:
+            # is it time to stop? (based on global clock, using actual start)
+            if tThisFlipGlobal > mouseToTF.tStartRefresh + maxMathWindow-frameTolerance:
+                # keep track of stop time/frame for later
+                mouseToTF.tStop = t  # not accounting for scr refresh
+                mouseToTF.frameNStop = frameN  # exact frame index
+                # add timestamp to datafile
+                thisExp.addData('mouseToTF.stopped', t)
+                mouseToTF.status = FINISHED
         if mouseToTF.status == STARTED:  # only update if started and not finished!
             buttons = mouseToTF.getPressed()
             if buttons != prevButtonState:  # button state changed?
@@ -3085,13 +3113,13 @@ for thisLettersMathLoop in lettersMathLoop:
     for thisComponent in showMathComponents:
         if hasattr(thisComponent, "setAutoDraw"):
             thisComponent.setAutoDraw(False)
-    # store data for lettersMathLoop (TrialHandler)
-    lettersMathLoop.addData('mouseToTF.x', mouseToTF.x)
-    lettersMathLoop.addData('mouseToTF.y', mouseToTF.y)
-    lettersMathLoop.addData('mouseToTF.leftButton', mouseToTF.leftButton)
-    lettersMathLoop.addData('mouseToTF.midButton', mouseToTF.midButton)
-    lettersMathLoop.addData('mouseToTF.rightButton', mouseToTF.rightButton)
-    lettersMathLoop.addData('mouseToTF.time', mouseToTF.time)
+    # store data for lettersMathPracticeLoop (TrialHandler)
+    lettersMathPracticeLoop.addData('mouseToTF.x', mouseToTF.x)
+    lettersMathPracticeLoop.addData('mouseToTF.y', mouseToTF.y)
+    lettersMathPracticeLoop.addData('mouseToTF.leftButton', mouseToTF.leftButton)
+    lettersMathPracticeLoop.addData('mouseToTF.midButton', mouseToTF.midButton)
+    lettersMathPracticeLoop.addData('mouseToTF.rightButton', mouseToTF.rightButton)
+    lettersMathPracticeLoop.addData('mouseToTF.time', mouseToTF.time)
     # the Routine "showMath" was not non-slip safe, so reset the non-slip timer
     routineTimer.reset()
     
@@ -3188,6 +3216,7 @@ for thisLettersMathLoop in lettersMathLoop:
     mathClock.reset()
     t = mathClock.getTime()
     
+    #maxRespClock.reset()
     
     # keep track of which components have finished
     mathRespComponents = [trueBox, falseBox, trueText, falseText, suggestedAnswer, mouseMathResponse]
@@ -3309,13 +3338,14 @@ for thisLettersMathLoop in lettersMathLoop:
         # Run 'Each Frame' code from mathRespMouse
         math_clickables = [trueBox, falseBox]
         
+        #while maxRespClock.getTime() < maxMathWindow:
         #check if the mouse is pressed in any of the boxes
         for clickable in math_clickables: # for our shapes that can be clicked on
             #timeAfterClick += 1
             if mouseMathResponse.isPressedIn(clickable) and t > timeAfterClick:
                 timeAfterClick = t + .5
                 clicked_things.append(clickable.name) #add the name of the shape that was clicked
-                #mouseMathResponse.clickReset() #resets mouse click
+                clickable.color="grey"
         
         #change box to grey if clicked 
         
@@ -3323,15 +3353,7 @@ for thisLettersMathLoop in lettersMathLoop:
         #    if clickable.name in clicked_things: 
         #        clickable.color = 'grey' 
         
-        # prep the text that shows participant's responses (letters)
-        #responseText='' 
-        #for l in range(len(clicked_things)):
-        #      if clicked_things[l] == "BLANK":
-        #        clicked_things[l] = "*"
-        #      responseText = "%s %s " % (responseText, clicked_things[l])
-              
-              
-        #print(timeAfterClick)
+        #
         
         # check for quit (typically the Esc key)
         if endExpNow or defaultKeyboard.getKeys(keyList=["escape"]):
@@ -3354,14 +3376,14 @@ for thisLettersMathLoop in lettersMathLoop:
     for thisComponent in mathRespComponents:
         if hasattr(thisComponent, "setAutoDraw"):
             thisComponent.setAutoDraw(False)
-    # store data for lettersMathLoop (TrialHandler)
-    lettersMathLoop.addData('mouseMathResponse.x', mouseMathResponse.x)
-    lettersMathLoop.addData('mouseMathResponse.y', mouseMathResponse.y)
-    lettersMathLoop.addData('mouseMathResponse.leftButton', mouseMathResponse.leftButton)
-    lettersMathLoop.addData('mouseMathResponse.midButton', mouseMathResponse.midButton)
-    lettersMathLoop.addData('mouseMathResponse.rightButton', mouseMathResponse.rightButton)
-    lettersMathLoop.addData('mouseMathResponse.time', mouseMathResponse.time)
-    lettersMathLoop.addData('mouseMathResponse.clicked_name', mouseMathResponse.clicked_name)
+    # store data for lettersMathPracticeLoop (TrialHandler)
+    lettersMathPracticeLoop.addData('mouseMathResponse.x', mouseMathResponse.x)
+    lettersMathPracticeLoop.addData('mouseMathResponse.y', mouseMathResponse.y)
+    lettersMathPracticeLoop.addData('mouseMathResponse.leftButton', mouseMathResponse.leftButton)
+    lettersMathPracticeLoop.addData('mouseMathResponse.midButton', mouseMathResponse.midButton)
+    lettersMathPracticeLoop.addData('mouseMathResponse.rightButton', mouseMathResponse.rightButton)
+    lettersMathPracticeLoop.addData('mouseMathResponse.time', mouseMathResponse.time)
+    lettersMathPracticeLoop.addData('mouseMathResponse.clicked_name', mouseMathResponse.clicked_name)
     # Run 'End Routine' code from mathRespMouse
     thisExp.addData("mathResponse", clicked_things)
     
@@ -3439,7 +3461,7 @@ for thisLettersMathLoop in lettersMathLoop:
     routineTimer.addTime(-0.500000)
     thisExp.nextEntry()
     
-# completed 0.0 repeats of 'lettersMathLoop'
+# completed 1.0 repeats of 'lettersMathPracticeLoop'
 
 
 # --- End experiment ---
