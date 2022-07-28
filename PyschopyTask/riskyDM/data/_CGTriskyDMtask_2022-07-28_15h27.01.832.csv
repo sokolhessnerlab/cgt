@@ -1,0 +1,4 @@
+﻿trials.thisRepN,trials.thisTrialN,trials.thisN,trials.thisIndex,Instructions.started,inst1.started,inst1.keys,inst1.rt,startPract.started,startPracResp.started,startPracResp.keys,startPracResp.rt,postPracText.started,postPractResp.started,postPractResp.keys,postPractResp.rt,participant,session,date,expName,psychopyVersion,frameRate,
+,,,,5.927669438000521,7.918293615000948,return,0.0994479870005307,,,,,,,,,,001,2022-07-28_15h27.01.832,CGTriskyDMtask,2022.2.1,59.946164148557024,
+,,,,,,,,8.03769062900028,10.035199390000344,v,0.24594669499856536,,,,,,001,2022-07-28_15h27.01.832,CGTriskyDMtask,2022.2.1,59.946164148557024,
+,,,,,,,,,,,,10.301883164000174,10.301883164000174,v,0.5074767070000235,,001,2022-07-28_15h27.01.832,CGTriskyDMtask,2022.2.1,59.946164148557024,

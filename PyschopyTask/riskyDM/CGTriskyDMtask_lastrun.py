@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2022.2.1),
-    on Thu Jul 21 10:14:38 2022
+    on Thu Jul 28 15:29:24 2022
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -50,7 +50,7 @@ filename = _thisDir + os.sep + u'data/%s_%s_%s' % (expInfo['participant'], expNa
 # An ExperimentHandler isn't essential but helps with data saving
 thisExp = data.ExperimentHandler(name=expName, version='',
     extraInfo=expInfo, runtimeInfo=None,
-    originPath='/Users/shlab/Documents/GitHub/cgt/PyschopyTask/CGTriskyDMtask_lastrun.py',
+    originPath='/Users/shlab/Documents/GitHub/cgt/PyschopyTask/riskyDM/CGTriskyDMtask_lastrun.py',
     savePickle=True, saveWideText=True,
     dataFileName=filename)
 # save a log file for detail verbose info
@@ -1522,7 +1522,7 @@ routineTimer.reset()
 # set up handler to look after randomisation of conditions etc
 staticRDM = data.TrialHandler(nReps=1, method='random', 
     extraInfo=expInfo, originPath=-1,
-    trialList=data.importConditions('/Users/shlab/Documents/GitHub/cgt/choiceset/CGT-choice-set.csv', selection='0:3'),
+    trialList=data.importConditions('CGT-choice-set.csv', selection='0:3'),
     seed=None, name='staticRDM')
 thisExp.addLoop(staticRDM)  # add the loop to the experiment
 thisStaticRDM = staticRDM.trialList[0]  # so we can initialise stimuli with some values
