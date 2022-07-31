@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2022.2.1),
-    on Thu Jul 28 15:10:17 2022
+    on Sat Jul 30 17:46:32 2022
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -54,7 +54,7 @@ filename = _thisDir + os.sep + u'data/%s_%s_%s' % (expInfo['participant'], expNa
 # An ExperimentHandler isn't essential but helps with data saving
 thisExp = data.ExperimentHandler(name=expName, version='',
     extraInfo=expInfo, runtimeInfo=None,
-    originPath='/Users/shlab/Desktop/digit-span-task-master/digitSpan_shlab_lastrun.py',
+    originPath='/Users/shlab/Documents/GitHub/cgt/PyschopyTask/digitSpan/digitSpan_shlab_lastrun.py',
     savePickle=True, saveWideText=True,
     dataFileName=filename)
 # save a log file for detail verbose info
@@ -111,7 +111,7 @@ mouse_2.mouseClock = core.Clock()
 cont_buttonGEN = visual.ImageStim(
     win=win,
     name='cont_buttonGEN', 
-    image='continue.png', mask=None, anchor='center',
+    image='continue copy.png', mask=None, anchor='center',
     ori=0.0, pos=(0, -.4), size=(0.3, 0.07),
     color=[1,1,1], colorSpace='rgb', opacity=None,
     flipHoriz=False, flipVert=False,
@@ -131,7 +131,7 @@ FSMouse.mouseClock = core.Clock()
 cont_buttonFSIns = visual.ImageStim(
     win=win,
     name='cont_buttonFSIns', 
-    image='continue.png', mask=None, anchor='center',
+    image='continue copy.png', mask=None, anchor='center',
     ori=0.0, pos=(0, -.4), size=(0.3, 0.07),
     color=[1,1,1], colorSpace='rgb', opacity=None,
     flipHoriz=False, flipVert=False,
@@ -180,11 +180,13 @@ textboxPractice = visual.TextBox2(
 cont_buttonPractice = visual.ImageStim(
     win=win,
     name='cont_buttonPractice', 
-    image='continue.png', mask=None, anchor='center',
+    image='continue copy.png', mask=None, anchor='center',
     ori=0.0, pos=(0, -.4), size=(0.3, 0.07),
     color=[1,1,1], colorSpace='rgb', opacity=None,
     flipHoriz=False, flipVert=False,
     texRes=128.0, interpolate=True, depth=-2.0)
+# Run 'Begin Experiment' code from code_3practice
+cont_button = []
 mousePractice = event.Mouse(win=win)
 x, y = [None, None]
 mousePractice.mouseClock = core.Clock()
