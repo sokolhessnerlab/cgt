@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2022.2.1),
-    on Mon Aug  1 11:30:17 2022
+    on Mon Aug  1 12:16:50 2022
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -418,13 +418,12 @@ bestRhoContainer = []
 bestMu = ''
 bestMuContainer = []
 settingUpForPart2 = visual.TextStim(win=win, name='settingUpForPart2',
-    text='',
+    text='The first round of the gambling task is complete. \n\nSetting up for the next and final round of the gambling task...',
     font='Open Sans',
-    pos=(-.5, 0), height=0.05, wrapWidth=None, ori=0.0, 
+    pos=(0, 0), height=0.05, wrapWidth=None, ori=0.0, 
     color='white', colorSpace='rgb', opacity=None, 
     languageStyle='LTR',
     depth=-4.0);
-moveAlong = keyboard.Keyboard()
 
 # --- Initialize components for Routine "startDynamicTask" ---
 moveToRDMpart2 = visual.TextStim(win=win, name='moveToRDMpart2',
@@ -1922,7 +1921,7 @@ routineTimer.reset()
 # set up handler to look after randomisation of conditions etc
 staticRDM = data.TrialHandler(nReps=1, method='random', 
     extraInfo=expInfo, originPath=-1,
-    trialList=data.importConditions('CGT-choice-set.csv', selection='0:2'),
+    trialList=data.importConditions('CGT-choice-set.csv', selection='0:3'),
     seed=None, name='staticRDM')
 thisExp.addLoop(staticRDM)  # add the loop to the experiment
 thisStaticRDM = staticRDM.trialList[0]  # so we can initialise stimuli with some values
@@ -2678,16 +2677,13 @@ for r in range(n_rho_values):
 
 print('The best R index is', bestR, 'while the best M index is', bestM, ', with an NLL of', best_nll_value);
 
-fname.append("../choiceset/bespoke_choicesets/bespoke_choiceset_rhoInd%03i_muInd%03i.csv" % (bestR, bestM))
+fname.append("../tasks_RDM_digitSpan/bespoke_choicesets/bespoke_choiceset_rhoInd%03i_muInd%03i.csv" % (bestR, bestM))
 dynamicChoiceSet = fname[0]  # Set routine start values for dynamicChoiceSet
 thisExp.addData('dynamicChoiceSet.routineStartVal', dynamicChoiceSet)  # Save exp start value
 bestRho = bestR  # Set routine start values for bestRho
 bestMu = bestM  # Set routine start values for bestMu
-moveAlong.keys = []
-moveAlong.rt = []
-_moveAlong_allKeys = []
 # keep track of which components have finished
-computeEstimatesComponents = [settingUpForPart2, moveAlong]
+computeEstimatesComponents = [settingUpForPart2]
 for thisComponent in computeEstimatesComponents:
     thisComponent.tStart = None
     thisComponent.tStop = None
@@ -2710,7 +2706,7 @@ while continueRoutine:
     # update/draw components on each frame
     
     # *settingUpForPart2* updates
-    if settingUpForPart2.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+    if settingUpForPart2.status == NOT_STARTED and tThisFlip >= 0-frameTolerance:
         # keep track of start time/frame for later
         settingUpForPart2.frameNStart = frameN  # exact frame index
         settingUpForPart2.tStart = t  # local t and not account for scr refresh
@@ -2719,32 +2715,15 @@ while continueRoutine:
         # add timestamp to datafile
         thisExp.timestampOnFlip(win, 'settingUpForPart2.started')
         settingUpForPart2.setAutoDraw(True)
-    if settingUpForPart2.status == STARTED:  # only update if drawing
-        settingUpForPart2.setText('The first round of the gambling task is complete. \n\nSetting up for the next and final round of the gambling task...', log=False)
-    
-    # *moveAlong* updates
-    waitOnFlip = False
-    if moveAlong.status == NOT_STARTED and tThisFlip >= 1-frameTolerance:
-        # keep track of start time/frame for later
-        moveAlong.frameNStart = frameN  # exact frame index
-        moveAlong.tStart = t  # local t and not account for scr refresh
-        moveAlong.tStartRefresh = tThisFlipGlobal  # on global time
-        win.timeOnFlip(moveAlong, 'tStartRefresh')  # time at next scr refresh
-        # add timestamp to datafile
-        thisExp.timestampOnFlip(win, 'moveAlong.started')
-        moveAlong.status = STARTED
-        # keyboard checking is just starting
-        waitOnFlip = True
-        win.callOnFlip(moveAlong.clock.reset)  # t=0 on next screen flip
-        win.callOnFlip(moveAlong.clearEvents, eventType='keyboard')  # clear events on next screen flip
-    if moveAlong.status == STARTED and not waitOnFlip:
-        theseKeys = moveAlong.getKeys(keyList=['return'], waitRelease=False)
-        _moveAlong_allKeys.extend(theseKeys)
-        if len(_moveAlong_allKeys):
-            moveAlong.keys = _moveAlong_allKeys[-1].name  # just the last key pressed
-            moveAlong.rt = _moveAlong_allKeys[-1].rt
-            # a response ends the routine
-            continueRoutine = False
+    if settingUpForPart2.status == STARTED:
+        # is it time to stop? (based on global clock, using actual start)
+        if tThisFlipGlobal > settingUpForPart2.tStartRefresh + 4-frameTolerance:
+            # keep track of stop time/frame for later
+            settingUpForPart2.tStop = t  # not accounting for scr refresh
+            settingUpForPart2.frameNStop = frameN  # exact frame index
+            # add timestamp to datafile
+            thisExp.timestampOnFlip(win, 'settingUpForPart2.stopped')
+            settingUpForPart2.setAutoDraw(False)
     
     # check for quit (typically the Esc key)
     if endExpNow or defaultKeyboard.getKeys(keyList=["escape"]):
@@ -2770,13 +2749,6 @@ for thisComponent in computeEstimatesComponents:
 thisExp.addData('dynamicChoiceSet.routineEndVal', dynamicChoiceSet)  # Save end routine value
 thisExp.addData('bestRho.routineEndVal', bestRho)  # Save end routine value
 thisExp.addData('bestMu.routineEndVal', bestMu)  # Save end routine value
-# check responses
-if moveAlong.keys in ['', [], None]:  # No response was made
-    moveAlong.keys = None
-thisExp.addData('moveAlong.keys',moveAlong.keys)
-if moveAlong.keys != None:  # we had a response
-    thisExp.addData('moveAlong.rt', moveAlong.rt)
-thisExp.nextEntry()
 # the Routine "computeEstimates" was not non-slip safe, so reset the non-slip timer
 routineTimer.reset()
 
@@ -2876,7 +2848,7 @@ thisExp.nextEntry()
 routineTimer.reset()
 
 # set up handler to look after randomisation of conditions etc
-dynamicRDM = data.TrialHandler(nReps=0.0, method='sequential', 
+dynamicRDM = data.TrialHandler(nReps=1.0, method='sequential', 
     extraInfo=expInfo, originPath=-1,
     trialList=data.importConditions(fname[0], selection='0:3'),
     seed=None, name='dynamicRDM')
@@ -3574,7 +3546,7 @@ for thisDynamicRDM in dynamicRDM:
     routineTimer.addTime(-1.000000)
     thisExp.nextEntry()
     
-# completed 0.0 repeats of 'dynamicRDM'
+# completed 1.0 repeats of 'dynamicRDM'
 
 
 # --- Prepare to start Routine "selectOutcome" ---
@@ -3999,7 +3971,7 @@ thisExp.nextEntry()
 routineTimer.reset()
 
 # set up handler to look after randomisation of conditions etc
-trialFSPractice = data.TrialHandler(nReps=0.0, method='sequential', 
+trialFSPractice = data.TrialHandler(nReps=1.0, method='sequential', 
     extraInfo=expInfo, originPath=-1,
     trialList=data.importConditions('digitSpanPractice.xlsx'),
     seed=None, name='trialFSPractice')
@@ -4356,7 +4328,7 @@ for thisTrialFSPractice in trialFSPractice:
     routineTimer.addTime(-1.000000)
     thisExp.nextEntry()
     
-# completed 0.0 repeats of 'trialFSPractice'
+# completed 1.0 repeats of 'trialFSPractice'
 
 
 # --- Prepare to start Routine "StartRealFS" ---
@@ -4488,7 +4460,7 @@ thisExp.nextEntry()
 routineTimer.reset()
 
 # set up handler to look after randomisation of conditions etc
-trialsFS = data.TrialHandler(nReps=0.0, method='sequential', 
+trialsFS = data.TrialHandler(nReps=1.0, method='sequential', 
     extraInfo=expInfo, originPath=-1,
     trialList=data.importConditions('digitSpanTrialNumber.xlsx', selection='0:3'),
     seed=None, name='trialsFS')
@@ -4962,7 +4934,7 @@ for thisTrialsFS in trialsFS:
     routineTimer.addTime(-1.000000)
     thisExp.nextEntry()
     
-# completed 0.0 repeats of 'trialsFS'
+# completed 1.0 repeats of 'trialsFS'
 
 
 # --- Prepare to start Routine "InstructionsBS" ---
