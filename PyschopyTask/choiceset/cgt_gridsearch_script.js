@@ -69,6 +69,8 @@ temp_val = negLLprospect_cgt([.8, 3], riskygain_values, riskyloss_values, certai
 console.log("NLL:", temp_val)
 
 // Grid Search Code
+
+// WILL NEED TO MAKE SURE DATA IS ONLY FROM TRIALS WHERE PARTICIPANT RESPONDED
 n_rho_values = 200;
 n_mu_values = 201;
 
