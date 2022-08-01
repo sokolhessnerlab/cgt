@@ -69,7 +69,7 @@
         <Param val="white" valType="str" updates="constant" name="color"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
-        <Param val="True" valType="bool" updates="None" name="disabled"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="" valType="str" updates="constant" name="flip"/>
         <Param val="Arial" valType="str" updates="constant" name="font"/>
@@ -93,7 +93,7 @@
       <KeyboardComponent name="inst1">
         <Param val="&quot;return&quot;" valType="list" updates="constant" name="allowedKeys"/>
         <Param val="" valType="str" updates="constant" name="correctAns"/>
-        <Param val="True" valType="bool" updates="None" name="disabled"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="True" valType="bool" updates="constant" name="discard previous"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="True" valType="bool" updates="constant" name="forceEndRoutine"/>
@@ -113,25 +113,25 @@
       <CodeComponent name="randLoc">
         <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
-        <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
-        <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
-        <Param val="if (loc==1) {&amp;#10;    targetPos=[-.4,0];&amp;#10;} else {&amp;#10;    targetPos=[.4,0];&amp;#10;}&amp;#10;&amp;#10;if (loc==1) {&amp;#10;    lossLoc=[-.4,-.2];&amp;#10;    gainLoc=[-.4,.2];&amp;#10;    safeLoc=[.4,0];&amp;#10;} else {&amp;#10;    lossLoc=[.4,-.2];&amp;#10;    gainLoc=[.4,.2];&amp;#10;    safeLoc=[.4,0];&amp;#10;}" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
-        <Param val="if loc==1:&amp;#10;    targetPos=[-.4,0]&amp;#10;else:&amp;#10;    targetPos=[.4,0]&amp;#10;&amp;#10;if loc==1:&amp;#10;    lossLoc=[-.4,-.1]&amp;#10;    gainLoc=[-.4,.1]&amp;#10;    safeLoc=[.4,0]&amp;#10;else:&amp;#10;    lossLoc=[.4,-.1]&amp;#10;    gainLoc=[.4,.1]&amp;#10;    safeLoc=[-.4,0]" valType="extendedCode" updates="constant" name="Begin Routine"/>
-        <Param val="Both" valType="str" updates="None" name="Code Type"/>
+        <Param val="textHeight = 0.05;" valType="extendedCode" updates="constant" name="Begin Experiment"/>
+        <Param val="textHeight = 0.05;&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
+        <Param val="if ((loc === 1)) {&amp;#10;    targetPos = [(- 0.4), 0];&amp;#10;} else {&amp;#10;    targetPos = [0.4, 0];&amp;#10;}&amp;#10;if ((loc === 1)) {&amp;#10;    lossLoc = [(- 0.4), (- 0.1)];&amp;#10;    gainLoc = [(- 0.4), 0.1];&amp;#10;    safeLoc = [0.4, 0];&amp;#10;} else {&amp;#10;    lossLoc = [0.4, (- 0.1)];&amp;#10;    gainLoc = [0.4, 0.1];&amp;#10;    safeLoc = [(- 0.4), 0];&amp;#10;}&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
+        <Param val="if loc==1:&amp;#10;    targetPos=[-.4,0]&amp;#10;else:&amp;#10;    targetPos=[.4,0]&amp;#10;&amp;#10;if loc==1:&amp;#10;    lossLoc=[-.4,-.1]&amp;#10;    gainLoc=[-.4,.1]&amp;#10;    safeLoc=[.4,0]&amp;#10;else:&amp;#10;    lossLoc=[.4,-.1]&amp;#10;    gainLoc=[.4,.1]&amp;#10;    safeLoc=[-.4,0]&amp;#10;    &amp;#10;" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
         <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="End JS Routine"/>
         <Param val="" valType="extendedCode" updates="constant" name="End Routine"/>
-        <Param val="True" valType="bool" updates="None" name="disabled"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="randLoc" valType="code" updates="None" name="name"/>
       </CodeComponent>
       <PolygonComponent name="circleLeft">
         <Param val="center" valType="str" updates="constant" name="anchor"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
-        <Param val="True" valType="bool" updates="None" name="disabled"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="$[1,1,1]" valType="str" updates="constant" name="fillColor"/>
         <Param val="rgb" valType="str" updates="constant" name="fillColorSpace"/>
@@ -160,7 +160,7 @@
         <Param val="center" valType="str" updates="constant" name="anchor"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
-        <Param val="True" valType="bool" updates="None" name="disabled"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="$[1,1,1]" valType="str" updates="set every repeat" name="fillColor"/>
         <Param val="rgb" valType="str" updates="constant" name="fillColorSpace"/>
@@ -189,7 +189,7 @@
         <Param val="center" valType="str" updates="constant" name="anchor"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
-        <Param val="True" valType="bool" updates="None" name="disabled"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="$[-1,-1,-1]" valType="str" updates="constant" name="fillColor"/>
         <Param val="rgb" valType="str" updates="constant" name="fillColorSpace"/>
@@ -218,7 +218,7 @@
         <Param val="white" valType="str" updates="constant" name="color"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
-        <Param val="True" valType="bool" updates="None" name="disabled"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="" valType="str" updates="constant" name="flip"/>
         <Param val="Arial" valType="str" updates="constant" name="font"/>
@@ -243,7 +243,7 @@
         <Param val="black" valType="str" updates="constant" name="color"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
-        <Param val="True" valType="bool" updates="None" name="disabled"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="" valType="str" updates="constant" name="flip"/>
         <Param val="Arial" valType="str" updates="constant" name="font"/>
@@ -268,7 +268,7 @@
         <Param val="black" valType="str" updates="constant" name="color"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
-        <Param val="True" valType="bool" updates="None" name="disabled"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="" valType="str" updates="constant" name="flip"/>
         <Param val="Arial" valType="str" updates="constant" name="font"/>
@@ -293,7 +293,7 @@
         <Param val="black" valType="str" updates="constant" name="color"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
-        <Param val="True" valType="bool" updates="None" name="disabled"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="" valType="str" updates="constant" name="flip"/>
         <Param val="Arial" valType="str" updates="constant" name="font"/>
@@ -318,7 +318,7 @@
         <Param val="white" valType="str" updates="constant" name="color"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
-        <Param val="True" valType="bool" updates="None" name="disabled"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="" valType="str" updates="constant" name="flip"/>
         <Param val="Arial" valType="str" updates="constant" name="font"/>
@@ -343,7 +343,7 @@
         <Param val="white" valType="str" updates="constant" name="color"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
-        <Param val="True" valType="bool" updates="None" name="disabled"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="" valType="str" updates="constant" name="flip"/>
         <Param val="Arial" valType="str" updates="constant" name="font"/>
@@ -367,7 +367,7 @@
       <KeyboardComponent name="choice1">
         <Param val="'v','n'" valType="list" updates="constant" name="allowedKeys"/>
         <Param val="" valType="str" updates="constant" name="correctAns"/>
-        <Param val="True" valType="bool" updates="None" name="disabled"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="True" valType="bool" updates="constant" name="discard previous"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="True" valType="bool" updates="constant" name="forceEndRoutine"/>
@@ -388,7 +388,7 @@
         <Param val="white" valType="str" updates="constant" name="color"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
-        <Param val="True" valType="bool" updates="None" name="disabled"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="" valType="str" updates="constant" name="flip"/>
         <Param val="Arial" valType="str" updates="constant" name="font"/>
@@ -412,7 +412,7 @@
       <KeyboardComponent name="startPracResp">
         <Param val="'v','n'" valType="list" updates="constant" name="allowedKeys"/>
         <Param val="" valType="str" updates="constant" name="correctAns"/>
-        <Param val="True" valType="bool" updates="None" name="disabled"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="True" valType="bool" updates="constant" name="discard previous"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="True" valType="bool" updates="constant" name="forceEndRoutine"/>
@@ -433,12 +433,12 @@
         <Param val="white" valType="str" updates="constant" name="color"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
-        <Param val="True" valType="bool" updates="None" name="disabled"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="" valType="str" updates="constant" name="flip"/>
         <Param val="Arial" valType="str" updates="constant" name="font"/>
         <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
-        <Param val="0.03" valType="code" updates="constant" name="letterHeight"/>
+        <Param val="0.05" valType="code" updates="constant" name="letterHeight"/>
         <Param val="isiText" valType="code" updates="None" name="name"/>
         <Param val="1" valType="code" updates="constant" name="opacity"/>
         <Param val="0" valType="code" updates="constant" name="ori"/>
@@ -470,19 +470,19 @@
         <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
         <Param val="psychoJS.experiment.addData('outcome', outcome)" valType="extendedCode" updates="constant" name="End JS Routine"/>
         <Param val="thisExp.addData('outcome', outcome)" valType="extendedCode" updates="constant" name="End Routine"/>
-        <Param val="True" valType="bool" updates="None" name="disabled"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="codeFeedback" valType="code" updates="None" name="name"/>
       </CodeComponent>
       <TextComponent name="noRespTxt">
         <Param val="white" valType="str" updates="constant" name="color"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
-        <Param val="True" valType="bool" updates="None" name="disabled"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="" valType="str" updates="constant" name="flip"/>
         <Param val="Arial" valType="str" updates="constant" name="font"/>
         <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
-        <Param val="0.08" valType="code" updates="constant" name="letterHeight"/>
+        <Param val="textHeight" valType="code" updates="constant" name="letterHeight"/>
         <Param val="noRespTxt" valType="code" updates="None" name="name"/>
         <Param val="1" valType="code" updates="constant" name="opacity"/>
         <Param val="0" valType="code" updates="constant" name="ori"/>
@@ -502,7 +502,7 @@
         <Param val="center" valType="str" updates="constant" name="anchor"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
-        <Param val="True" valType="bool" updates="None" name="disabled"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="$[1,1,1]" valType="str" updates="constant" name="fillColor"/>
         <Param val="rgb" valType="str" updates="constant" name="fillColorSpace"/>
@@ -531,7 +531,7 @@
         <Param val="center" valType="str" updates="constant" name="anchor"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
-        <Param val="True" valType="bool" updates="None" name="disabled"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="$[1,1,1]" valType="str" updates="constant" name="fillColor"/>
         <Param val="rgb" valType="str" updates="constant" name="fillColorSpace"/>
@@ -560,7 +560,7 @@
         <Param val="black" valType="str" updates="set every repeat" name="color"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
-        <Param val="True" valType="bool" updates="None" name="disabled"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="" valType="str" updates="constant" name="flip"/>
         <Param val="Arial" valType="str" updates="constant" name="font"/>
@@ -585,7 +585,7 @@
         <Param val="center" valType="str" updates="constant" name="anchor"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
-        <Param val="True" valType="bool" updates="None" name="disabled"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="$[-1,-1,-1]" valType="str" updates="constant" name="fillColor"/>
         <Param val="rgb" valType="str" updates="constant" name="fillColorSpace"/>
@@ -616,12 +616,12 @@
         <Param val="white" valType="str" updates="constant" name="color"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
-        <Param val="True" valType="bool" updates="None" name="disabled"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="" valType="str" updates="constant" name="flip"/>
         <Param val="Arial" valType="str" updates="constant" name="font"/>
         <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
-        <Param val="0.03" valType="code" updates="constant" name="letterHeight"/>
+        <Param val="0.05" valType="code" updates="constant" name="letterHeight"/>
         <Param val="itiText" valType="code" updates="None" name="name"/>
         <Param val="1" valType="code" updates="constant" name="opacity"/>
         <Param val="0" valType="code" updates="constant" name="ori"/>
@@ -775,12 +775,12 @@
         <Param val="white" valType="str" updates="constant" name="color"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
-        <Param val="True" valType="bool" updates="None" name="disabled"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="" valType="str" updates="constant" name="flip"/>
         <Param val="Arial" valType="str" updates="constant" name="font"/>
         <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
-        <Param val="0.06" valType="code" updates="constant" name="letterHeight"/>
+        <Param val="0.05" valType="code" updates="constant" name="letterHeight"/>
         <Param val="postPracText" valType="code" updates="None" name="name"/>
         <Param val="1" valType="code" updates="constant" name="opacity"/>
         <Param val="0" valType="code" updates="constant" name="ori"/>
@@ -799,7 +799,7 @@
       <KeyboardComponent name="postPractResp">
         <Param val="'v','n'" valType="list" updates="constant" name="allowedKeys"/>
         <Param val="" valType="str" updates="constant" name="correctAns"/>
-        <Param val="True" valType="bool" updates="None" name="disabled"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="True" valType="bool" updates="constant" name="discard previous"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="True" valType="bool" updates="constant" name="forceEndRoutine"/>
@@ -1421,21 +1421,21 @@
         <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
         <Param val="import math&amp;#10;&amp;#10;### Function Definitions&amp;#10;&amp;#10;def choice_probability(parameters, riskyGv, riskyLv, certv):&amp;#10;    # Pull out parameters&amp;#10;    rho = parameters[0];&amp;#10;    mu = parameters[1];&amp;#10;    &amp;#10;    nTrials = len(riskyGv);&amp;#10;    &amp;#10;    # Calculate utility of the two options&amp;#10;    utility_riskygain_value = [math.pow(value, rho) for value in riskyGv];&amp;#10;    utility_riskyloss_value = [math.pow(value, rho) for value in riskyLv];&amp;#10;    utility_risky_option = [.5 * utility_riskygain_value[t] + .5 * utility_riskyloss_value[t] for t in range(nTrials)];&amp;#10;    utility_safe_option = [math.pow(value, rho) for value in certv]&amp;#10;    &amp;#10;    # Normalize values with div&amp;#10;    div = max(riskyGv)**rho;&amp;#10;    &amp;#10;    # Softmax&amp;#10;    p = [1/(1 + math.exp(-mu/div*(utility_risky_option[t] - utility_safe_option[t]))) for t in range(nTrials)];&amp;#10;    return p&amp;#10;&amp;#10;def negLLprospect_cgt(parameters, riskyGv, riskyLv, certv, choices):&amp;#10;    choiceP = choice_probability(parameters, riskyGv, riskyLv, certv);&amp;#10;    &amp;#10;    nTrials = len(choiceP);&amp;#10;    &amp;#10;    likelihood = [choices[t]*choiceP[t] + (1-choices[t])*(1-choiceP[t]) for t in range(nTrials)];&amp;#10;    zeroindex = [likelihood[t] == 0 for t in range(nTrials)];&amp;#10;    for ind in range(nTrials):&amp;#10;        if zeroindex[ind]:&amp;#10;            likelihood[ind] = 0.000000000000001;&amp;#10;    &amp;#10;    loglikelihood = [math.log(likelihood[t]) for t in range(nTrials)];&amp;#10;    &amp;#10;    nll = -sum(loglikelihood);&amp;#10;    return nll&amp;#10;&amp;#10;fname =[];&amp;#10;&amp;#10;&amp;#10;&amp;#10;" valType="extendedCode" updates="constant" name="Begin Experiment"/>
-        <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
-        <Param val="" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
-        <Param val="&amp;#10;### Grid Search Code&amp;#10;&amp;#10;# Prepare rho &amp; mu values&amp;#10;n_rho_values = 200;&amp;#10;n_mu_values = 201;&amp;#10;&amp;#10;rmin = 0.3&amp;#10;rmax = 2.2&amp;#10;rstep = (rmax - rmin)/(n_rho_values-1)&amp;#10;&amp;#10;mmin = 7&amp;#10;mmax = 80&amp;#10;mstep = (mmax - mmin)/(n_mu_values-1)&amp;#10;&amp;#10;rho_values = [];&amp;#10;mu_values = [];&amp;#10;&amp;#10;for r in range(n_rho_values):&amp;#10;    rho_values += [rmin + r*rstep];&amp;#10;&amp;#10;for m in range(n_mu_values):&amp;#10;    mu_values += [mmin + m*mstep];&amp;#10;&amp;#10;# Execute the grid search&amp;#10;best_nll_value = 1e10; # a preposterously bad first NLL&amp;#10;&amp;#10;for r in range(n_rho_values):&amp;#10;    for m in range(n_mu_values):&amp;#10;        nll_new = negLLprospect_cgt([rho_values[r], mu_values[m]], riskygain_values, riskyloss_values, certain_values, choices);&amp;#10;        if nll_new &lt; best_nll_value:&amp;#10;            best_nll_value = nll_new;&amp;#10;            bestR = r + 1; # &quot;+1&quot; corrects for diff. in python vs. R indexing&amp;#10;            bestM = m + 1; # &quot;+1&quot; corrects for diff. in python vs. R indexing&amp;#10;&amp;#10;print('The best R index is', bestR, 'while the best M index is', bestM, ', with an NLL of', best_nll_value);&amp;#10;&amp;#10;fname.append(&quot;../choiceset/bespoke_choicesets/bespoke_choiceset_rhoInd%03i_muInd%03i.csv&quot; % (bestR, bestM))" valType="extendedCode" updates="constant" name="Begin Routine"/>
-        <Param val="Both" valType="str" updates="None" name="Code Type"/>
+        <Param val="import * as math from 'math';&amp;#10;var fname;&amp;#10;function choice_probability(parameters, riskyGv, riskyLv, certv) {&amp;#10;    var div, mu, nTrials, p, rho, utility_risky_option, utility_riskygain_value, utility_riskyloss_value, utility_safe_option;&amp;#10;    rho = parameters[0];&amp;#10;    mu = parameters[1];&amp;#10;    nTrials = riskyGv.length;&amp;#10;    utility_riskygain_value = function () {&amp;#10;    var _pj_a = [], _pj_b = riskyGv;&amp;#10;    for (var _pj_c = 0, _pj_d = _pj_b.length; (_pj_c &lt; _pj_d); _pj_c += 1) {&amp;#10;        var value = _pj_b[_pj_c];&amp;#10;        _pj_a.push(Math.pow(value, rho));&amp;#10;    }&amp;#10;    return _pj_a;&amp;#10;}&amp;#10;.call(this);&amp;#10;    utility_riskyloss_value = function () {&amp;#10;    var _pj_a = [], _pj_b = riskyLv;&amp;#10;    for (var _pj_c = 0, _pj_d = _pj_b.length; (_pj_c &lt; _pj_d); _pj_c += 1) {&amp;#10;        var value = _pj_b[_pj_c];&amp;#10;        _pj_a.push(Math.pow(value, rho));&amp;#10;    }&amp;#10;    return _pj_a;&amp;#10;}&amp;#10;.call(this);&amp;#10;    utility_risky_option = function () {&amp;#10;    var _pj_a = [], _pj_b = util.range(nTrials);&amp;#10;    for (var _pj_c = 0, _pj_d = _pj_b.length; (_pj_c &lt; _pj_d); _pj_c += 1) {&amp;#10;        var t = _pj_b[_pj_c];&amp;#10;        _pj_a.push(((0.5 * utility_riskygain_value[t]) + (0.5 * utility_riskyloss_value[t])));&amp;#10;    }&amp;#10;    return _pj_a;&amp;#10;}&amp;#10;.call(this);&amp;#10;    utility_safe_option = function () {&amp;#10;    var _pj_a = [], _pj_b = certv;&amp;#10;    for (var _pj_c = 0, _pj_d = _pj_b.length; (_pj_c &lt; _pj_d); _pj_c += 1) {&amp;#10;        var value = _pj_b[_pj_c];&amp;#10;        _pj_a.push(Math.pow(value, rho));&amp;#10;    }&amp;#10;    return _pj_a;&amp;#10;}&amp;#10;.call(this);&amp;#10;    div = Math.pow(Math.max(riskyGv), rho);&amp;#10;    p = function () {&amp;#10;    var _pj_a = [], _pj_b = util.range(nTrials);&amp;#10;    for (var _pj_c = 0, _pj_d = _pj_b.length; (_pj_c &lt; _pj_d); _pj_c += 1) {&amp;#10;        var t = _pj_b[_pj_c];&amp;#10;        _pj_a.push((1 / (1 + Math.exp((((- mu) / div) * (utility_risky_option[t] - utility_safe_option[t]))))));&amp;#10;    }&amp;#10;    return _pj_a;&amp;#10;}&amp;#10;.call(this);&amp;#10;    return p;&amp;#10;}&amp;#10;function negLLprospect_cgt(parameters, riskyGv, riskyLv, certv, choices) {&amp;#10;    var choiceP, likelihood, loglikelihood, nTrials, nll, zeroindex;&amp;#10;    choiceP = choice_probability(parameters, riskyGv, riskyLv, certv);&amp;#10;    nTrials = choiceP.length;&amp;#10;    likelihood = function () {&amp;#10;    var _pj_a = [], _pj_b = util.range(nTrials);&amp;#10;    for (var _pj_c = 0, _pj_d = _pj_b.length; (_pj_c &lt; _pj_d); _pj_c += 1) {&amp;#10;        var t = _pj_b[_pj_c];&amp;#10;        _pj_a.push(((choices[t] * choiceP[t]) + ((1 - choices[t]) * (1 - choiceP[t]))));&amp;#10;    }&amp;#10;    return _pj_a;&amp;#10;}&amp;#10;.call(this);&amp;#10;    zeroindex = function () {&amp;#10;    var _pj_a = [], _pj_b = util.range(nTrials);&amp;#10;    for (var _pj_c = 0, _pj_d = _pj_b.length; (_pj_c &lt; _pj_d); _pj_c += 1) {&amp;#10;        var t = _pj_b[_pj_c];&amp;#10;        _pj_a.push((likelihood[t] === 0));&amp;#10;    }&amp;#10;    return _pj_a;&amp;#10;}&amp;#10;.call(this);&amp;#10;    for (var ind, _pj_c = 0, _pj_a = util.range(nTrials), _pj_b = _pj_a.length; (_pj_c &lt; _pj_b); _pj_c += 1) {&amp;#10;        ind = _pj_a[_pj_c];&amp;#10;        if (zeroindex[ind]) {&amp;#10;            likelihood[ind] = 1e-15;&amp;#10;        }&amp;#10;    }&amp;#10;    loglikelihood = function () {&amp;#10;    var _pj_a = [], _pj_b = util.range(nTrials);&amp;#10;    for (var _pj_c = 0, _pj_d = _pj_b.length; (_pj_c &lt; _pj_d); _pj_c += 1) {&amp;#10;        var t = _pj_b[_pj_c];&amp;#10;        _pj_a.push(Math.log(likelihood[t]));&amp;#10;    }&amp;#10;    return _pj_a;&amp;#10;}&amp;#10;.call(this);&amp;#10;    nll = (- util.sum(loglikelihood));&amp;#10;    return nll;&amp;#10;}&amp;#10;fname = [];&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
+        <Param val="import * as math from 'math';&amp;#10;var bestM, bestR, best_nll_value, finiteChoices, finiteGainVals, finiteLossVals, finiteSafeVals, mmax, mmin, mstep, mu_values, n_mu_values, n_rho_values, nll_new, rho_values, rmax, rmin, rstep;&amp;#10;finiteChoices = [];&amp;#10;finiteGainVals = [];&amp;#10;finiteSafeVals = [];&amp;#10;finiteLossVals = [];&amp;#10;for (var t, _pj_c = 0, _pj_a = util.range(choices.length), _pj_b = _pj_a.length; (_pj_c &lt; _pj_b); _pj_c += 1) {&amp;#10;    t = _pj_a[_pj_c];&amp;#10;    if (math.isfinite(choices[t])) {&amp;#10;        finiteChoices.push(choices[t]);&amp;#10;        finiteGainVals.push(riskygain_values[t]);&amp;#10;        finiteSafeVals.push(certain_values[t]);&amp;#10;        finiteLossVals.push(riskyloss_values[t]);&amp;#10;    }&amp;#10;}&amp;#10;n_rho_values = 200;&amp;#10;n_mu_values = 201;&amp;#10;rmin = 0.3;&amp;#10;rmax = 2.2;&amp;#10;rstep = ((rmax - rmin) / (n_rho_values - 1));&amp;#10;mmin = 7;&amp;#10;mmax = 80;&amp;#10;mstep = ((mmax - mmin) / (n_mu_values - 1));&amp;#10;rho_values = [];&amp;#10;mu_values = [];&amp;#10;for (var r, _pj_c = 0, _pj_a = util.range(n_rho_values), _pj_b = _pj_a.length; (_pj_c &lt; _pj_b); _pj_c += 1) {&amp;#10;    r = _pj_a[_pj_c];&amp;#10;    rho_values += [(rmin + (r * rstep))];&amp;#10;}&amp;#10;for (var m, _pj_c = 0, _pj_a = util.range(n_mu_values), _pj_b = _pj_a.length; (_pj_c &lt; _pj_b); _pj_c += 1) {&amp;#10;    m = _pj_a[_pj_c];&amp;#10;    mu_values += [(mmin + (m * mstep))];&amp;#10;}&amp;#10;best_nll_value = 10000000000.0;&amp;#10;for (var r, _pj_c = 0, _pj_a = util.range(n_rho_values), _pj_b = _pj_a.length; (_pj_c &lt; _pj_b); _pj_c += 1) {&amp;#10;    r = _pj_a[_pj_c];&amp;#10;    for (var m, _pj_f = 0, _pj_d = util.range(n_mu_values), _pj_e = _pj_d.length; (_pj_f &lt; _pj_e); _pj_f += 1) {&amp;#10;        m = _pj_d[_pj_f];&amp;#10;        nll_new = negLLprospect_cgt([rho_values[r], mu_values[m]], finiteGainVals, finiteLossVals, finiteSafeVals, finiteChoices);&amp;#10;        if ((nll_new &lt; best_nll_value)) {&amp;#10;            best_nll_value = nll_new;&amp;#10;            bestR = (r + 1);&amp;#10;            bestM = (m + 1);&amp;#10;        }&amp;#10;    }&amp;#10;}&amp;#10;console.log(&quot;The best R index is&quot;, bestR, &quot;while the best M index is&quot;, bestM, &quot;, with an NLL of&quot;, best_nll_value);&amp;#10;fname.push(`../choiceset/bespoke_choicesets/bespoke_choiceset_rhoInd${bestR}3i_muInd${bestM}`);&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
+        <Param val="&amp;#10;### Grid Search Code&amp;#10;import math &amp;#10;&amp;#10;# Prepare choice set values to remove any nans&amp;#10;finiteChoices = []&amp;#10;finiteGainVals = []&amp;#10;finiteSafeVals = []&amp;#10;finiteLossVals = []&amp;#10;&amp;#10;# just save trial things where participant responded&amp;#10;for t in range(len(choices)):&amp;#10;    if math.isfinite(choices[t]):&amp;#10;        finiteChoices.append(choices[t])&amp;#10;        finiteGainVals.append(riskygain_values[t])&amp;#10;        finiteSafeVals.append(certain_values[t])&amp;#10;        finiteLossVals.append(riskyloss_values[t])&amp;#10;&amp;#10;&amp;#10;# Prepare rho &amp; mu values&amp;#10;n_rho_values = 200;&amp;#10;n_mu_values = 201;&amp;#10;&amp;#10;rmin = 0.3&amp;#10;rmax = 2.2&amp;#10;rstep = (rmax - rmin)/(n_rho_values-1)&amp;#10;&amp;#10;mmin = 7&amp;#10;mmax = 80&amp;#10;mstep = (mmax - mmin)/(n_mu_values-1)&amp;#10;&amp;#10;rho_values = [];&amp;#10;mu_values = [];&amp;#10;&amp;#10;for r in range(n_rho_values):&amp;#10;    rho_values += [rmin + r*rstep];&amp;#10;&amp;#10;for m in range(n_mu_values):&amp;#10;    mu_values += [mmin + m*mstep];&amp;#10;&amp;#10;# Execute the grid search&amp;#10;best_nll_value = 1e10; # a preposterously bad first NLL&amp;#10;&amp;#10;for r in range(n_rho_values):&amp;#10;    for m in range(n_mu_values):&amp;#10;        nll_new = negLLprospect_cgt([rho_values[r], mu_values[m]], finiteGainVals, finiteLossVals, finiteSafeVals, finiteChoices);&amp;#10;        if nll_new &lt; best_nll_value:&amp;#10;            best_nll_value = nll_new;&amp;#10;            bestR = r + 1; # &quot;+1&quot; corrects for diff. in python vs. R indexing&amp;#10;            bestM = m + 1; # &quot;+1&quot; corrects for diff. in python vs. R indexing&amp;#10;&amp;#10;print('The best R index is', bestR, 'while the best M index is', bestM, ', with an NLL of', best_nll_value);&amp;#10;&amp;#10;fname.append(&quot;../choiceset/bespoke_choicesets/bespoke_choiceset_rhoInd%03i_muInd%03i.csv&quot; % (bestR, bestM))" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
         <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="End JS Routine"/>
         <Param val="" valType="extendedCode" updates="constant" name="End Routine"/>
-        <Param val="True" valType="bool" updates="None" name="disabled"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="gridSearchCode" valType="code" updates="None" name="name"/>
       </CodeComponent>
       <VariableComponent name="dynamicChoiceSet">
-        <Param val="True" valType="bool" updates="None" name="disabled"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="dynamicChoiceSet" valType="code" updates="None" name="name"/>
         <Param val="False" valType="bool" updates="constant" name="saveEndExp"/>
@@ -1455,7 +1455,7 @@
         <Param val="False" valType="bool" updates="None" name="syncScreenRefresh"/>
       </VariableComponent>
       <VariableComponent name="bestRho">
-        <Param val="True" valType="bool" updates="None" name="disabled"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="bestRho" valType="code" updates="None" name="name"/>
         <Param val="False" valType="bool" updates="constant" name="saveEndExp"/>
@@ -1475,7 +1475,7 @@
         <Param val="False" valType="bool" updates="None" name="syncScreenRefresh"/>
       </VariableComponent>
       <VariableComponent name="bestMu">
-        <Param val="True" valType="bool" updates="None" name="disabled"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="bestMu" valType="code" updates="None" name="name"/>
         <Param val="False" valType="bool" updates="constant" name="saveEndExp"/>
@@ -1494,35 +1494,35 @@
         <Param val="" valType="code" updates="constant" name="stopVal"/>
         <Param val="False" valType="bool" updates="None" name="syncScreenRefresh"/>
       </VariableComponent>
-      <TextComponent name="showPart2fileName">
+      <TextComponent name="settingUpForPart2">
         <Param val="white" valType="color" updates="constant" name="color"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
-        <Param val="True" valType="bool" updates="None" name="disabled"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="None" valType="str" updates="constant" name="flip"/>
         <Param val="Open Sans" valType="str" updates="constant" name="font"/>
         <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
         <Param val="0.05" valType="num" updates="constant" name="letterHeight"/>
-        <Param val="showPart2fileName" valType="code" updates="None" name="name"/>
+        <Param val="settingUpForPart2" valType="code" updates="None" name="name"/>
         <Param val="" valType="num" updates="constant" name="opacity"/>
         <Param val="0" valType="num" updates="constant" name="ori"/>
         <Param val="(-.5, 0)" valType="list" updates="constant" name="pos"/>
         <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
-        <Param val="2" valType="code" updates="None" name="startEstim"/>
+        <Param val="4" valType="code" updates="None" name="startEstim"/>
         <Param val="time (s)" valType="str" updates="None" name="startType"/>
         <Param val="" valType="code" updates="None" name="startVal"/>
         <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
         <Param val="" valType="code" updates="constant" name="stopVal"/>
         <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
-        <Param val="$&quot;dynamic choice set name:\n&quot; + fname[0] + &quot;\nbestRho:&quot; + str(bestRho) + &quot;\nbestMu:&quot; + str(bestMu)" valType="str" updates="set every frame" name="text"/>
+        <Param val="The first round of the gambling task is complete. &amp;#10;&amp;#10;Setting up for the next and final round of the gambling task..." valType="str" updates="set every frame" name="text"/>
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
         <Param val="" valType="num" updates="constant" name="wrapWidth"/>
       </TextComponent>
       <KeyboardComponent name="moveAlong">
         <Param val="'return'" valType="list" updates="constant" name="allowedKeys"/>
         <Param val="" valType="str" updates="constant" name="correctAns"/>
-        <Param val="True" valType="bool" updates="None" name="disabled"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="True" valType="bool" updates="constant" name="discard previous"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="True" valType="bool" updates="constant" name="forceEndRoutine"/>
@@ -2037,14 +2037,14 @@
         <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
         <Param val="psychoJS.experiment.addData(&quot;loc&quot;, loc);&amp;#10;" valType="extendedCode" updates="constant" name="End JS Routine"/>
         <Param val="thisExp.addData(&quot;loc&quot;, loc)" valType="extendedCode" updates="constant" name="End Routine"/>
-        <Param val="True" valType="bool" updates="None" name="disabled"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="randLoc_2" valType="code" updates="None" name="name"/>
       </CodeComponent>
       <PolygonComponent name="circleLeftReal">
         <Param val="center" valType="str" updates="constant" name="anchor"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
-        <Param val="True" valType="bool" updates="None" name="disabled"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="$[1,1,1]" valType="str" updates="constant" name="fillColor"/>
         <Param val="rgb" valType="str" updates="constant" name="fillColorSpace"/>
@@ -2073,7 +2073,7 @@
         <Param val="center" valType="str" updates="constant" name="anchor"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
-        <Param val="True" valType="bool" updates="None" name="disabled"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="$[1,1,1]" valType="str" updates="set every repeat" name="fillColor"/>
         <Param val="rgb" valType="str" updates="constant" name="fillColorSpace"/>
@@ -2102,7 +2102,7 @@
         <Param val="center" valType="str" updates="constant" name="anchor"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
-        <Param val="True" valType="bool" updates="None" name="disabled"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="$[-1,-1,-1]" valType="str" updates="constant" name="fillColor"/>
         <Param val="rgb" valType="str" updates="constant" name="fillColorSpace"/>
@@ -2131,7 +2131,7 @@
         <Param val="white" valType="str" updates="constant" name="color"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
-        <Param val="True" valType="bool" updates="None" name="disabled"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="" valType="str" updates="constant" name="flip"/>
         <Param val="Arial" valType="str" updates="constant" name="font"/>
@@ -2156,7 +2156,7 @@
         <Param val="black" valType="str" updates="constant" name="color"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
-        <Param val="True" valType="bool" updates="None" name="disabled"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="" valType="str" updates="constant" name="flip"/>
         <Param val="Arial" valType="str" updates="constant" name="font"/>
@@ -2181,7 +2181,7 @@
         <Param val="black" valType="str" updates="constant" name="color"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
-        <Param val="True" valType="bool" updates="None" name="disabled"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="" valType="str" updates="constant" name="flip"/>
         <Param val="Arial" valType="str" updates="constant" name="font"/>
@@ -2206,7 +2206,7 @@
         <Param val="black" valType="str" updates="constant" name="color"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
-        <Param val="True" valType="bool" updates="None" name="disabled"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="" valType="str" updates="constant" name="flip"/>
         <Param val="Arial" valType="str" updates="constant" name="font"/>
@@ -2231,7 +2231,7 @@
         <Param val="white" valType="str" updates="constant" name="color"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
-        <Param val="True" valType="bool" updates="None" name="disabled"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="" valType="str" updates="constant" name="flip"/>
         <Param val="Arial" valType="str" updates="constant" name="font"/>
@@ -2256,7 +2256,7 @@
         <Param val="white" valType="str" updates="constant" name="color"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
-        <Param val="True" valType="bool" updates="None" name="disabled"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="" valType="str" updates="constant" name="flip"/>
         <Param val="Arial" valType="str" updates="constant" name="font"/>
@@ -2280,7 +2280,7 @@
       <KeyboardComponent name="realChoice">
         <Param val="'v','n'" valType="list" updates="constant" name="allowedKeys"/>
         <Param val="" valType="str" updates="constant" name="correctAns"/>
-        <Param val="True" valType="bool" updates="None" name="disabled"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="True" valType="bool" updates="constant" name="discard previous"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="True" valType="bool" updates="constant" name="forceEndRoutine"/>
@@ -2301,12 +2301,12 @@
         <Param val="white" valType="str" updates="constant" name="color"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
-        <Param val="True" valType="bool" updates="None" name="disabled"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="" valType="str" updates="constant" name="flip"/>
         <Param val="Arial" valType="str" updates="constant" name="font"/>
         <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
-        <Param val="0.03" valType="code" updates="constant" name="letterHeight"/>
+        <Param val="0.05" valType="code" updates="constant" name="letterHeight"/>
         <Param val="isiTextReal" valType="code" updates="None" name="name"/>
         <Param val="1" valType="code" updates="constant" name="opacity"/>
         <Param val="0" valType="code" updates="constant" name="ori"/>
@@ -2316,7 +2316,7 @@
         <Param val="time (s)" valType="str" updates="None" name="startType"/>
         <Param val="0.0" valType="code" updates="None" name="startVal"/>
         <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
-        <Param val="$isi" valType="code" updates="constant" name="stopVal"/>
+        <Param val=".5" valType="code" updates="constant" name="stopVal"/>
         <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
         <Param val="+" valType="str" updates="constant" name="text"/>
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
@@ -2329,8 +2329,8 @@
         <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
         <Param val="riskygain_values = []&amp;#10;riskyloss_values = []&amp;#10;certain_values = []&amp;#10;choices = []&amp;#10;outcomes = []" valType="extendedCode" updates="constant" name="Begin Experiment"/>
         <Param val="riskygain_values = [];&amp;#10;riskyloss_values = [];&amp;#10;certain_values = [];&amp;#10;choices = [];&amp;#10;outcomes = [];&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
-        <Param val="import * as random from 'random';&amp;#10;import * as math from 'math';&amp;#10;var choicetmp, hideGamLoc, noRespLoc, ocGambleLoc, ocLoc, ocSafeLoc, outcometmp;&amp;#10;if ((! realChoice.keys)) {&amp;#10;    outcometmp = math.nan;&amp;#10;    choicetmp = math.nan;&amp;#10;    noRespLoc = [0, 0];&amp;#10;    ocLoc = [5, 5];&amp;#10;    ocGambleLoc = [5, 5];&amp;#10;    ocSafeLoc = [5, 5];&amp;#10;    hideGamLoc = [5, 5];&amp;#10;} else {&amp;#10;    if (((realChoice.keys === &quot;v&quot;) &amp;&amp; (loc === 1))) {&amp;#10;        outcometmp = random.choice([riskyoption1, riskyoption2]);&amp;#10;        choicetmp = 1;&amp;#10;        if ((outcometmp === riskyoption1)) {&amp;#10;            ocLoc = [(- 0.4), 0.1];&amp;#10;            ocGambleLoc = [(- 0.4), 0];&amp;#10;            ocSafeLoc = [5, 5];&amp;#10;            noRespLoc = [5, 5];&amp;#10;            hideGamLoc = [(- 0.4), (- 0.125)];&amp;#10;        } else {&amp;#10;            if ((outcometmp === riskyoption2)) {&amp;#10;                ocLoc = [(- 0.4), (- 0.1)];&amp;#10;                ocGambleLoc = [(- 0.4), 0];&amp;#10;                ocSafeLoc = [5, 5];&amp;#10;                hideGamLoc = [(- 0.4), 0.125];&amp;#10;                noRespLoc = [5, 5];&amp;#10;            }&amp;#10;        }&amp;#10;    } else {&amp;#10;        if (((realChoice.keys === &quot;v&quot;) &amp;&amp; (loc === 2))) {&amp;#10;            outcometmp = safeoption;&amp;#10;            choicetmp = 0;&amp;#10;            ocLoc = [(- 0.4), 0];&amp;#10;            ocGambleLoc = [5, 5];&amp;#10;            ocSafeLoc = ocLoc;&amp;#10;            hideGamLoc = ocGambleLoc;&amp;#10;            noRespLoc = [5, 5];&amp;#10;        } else {&amp;#10;            if (((realChoice.keys === &quot;n&quot;) &amp;&amp; (loc === 1))) {&amp;#10;                outcometmp = safeoption;&amp;#10;                choicetmp = 0;&amp;#10;                ocLoc = [0.4, 0];&amp;#10;                ocGambleLoc = [5, 5];&amp;#10;                ocSafeLoc = ocLoc;&amp;#10;                hideGamLoc = ocGambleLoc;&amp;#10;                noRespLoc = [5, 5];&amp;#10;            } else {&amp;#10;                if (((realChoice.keys === &quot;n&quot;) &amp;&amp; (loc === 2))) {&amp;#10;                    outcometmp = random.choice([riskyoption1, riskyoption2]);&amp;#10;                    choicetmp = 1;&amp;#10;                    if ((outcometmp === riskyoption1)) {&amp;#10;                        ocLoc = [0.4, 0.1];&amp;#10;                        ocGambleLoc = [0.4, 0];&amp;#10;                        ocSafeLoc = [5, 5];&amp;#10;                        hideGamLoc = [0.4, (- 0.125)];&amp;#10;                        noRespLoc = [5, 5];&amp;#10;                    } else {&amp;#10;                        if ((outcometmp === riskyoption2)) {&amp;#10;                            ocLoc = [0.4, (- 0.1)];&amp;#10;                            ocGambleLoc = [0.4, 0];&amp;#10;                            ocSafeLoc = [5, 5];&amp;#10;                            hideGamLoc = [0.4, 0.125];&amp;#10;                            noRespLoc = [5, 5];&amp;#10;                        }&amp;#10;                    }&amp;#10;                }&amp;#10;            }&amp;#10;        }&amp;#10;    }&amp;#10;}&amp;#10;outcomes.push(outcometmp);&amp;#10;choices.push(choicetmp);&amp;#10;riskyloss_values.push(riskyoption2);&amp;#10;riskygain_values.push(riskyoption1);&amp;#10;certain_values.push(safeoption);&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
-        <Param val="import random&amp;#10;import math&amp;#10;if not realChoice.keys:&amp;#10;    outcometmp = math.nan&amp;#10;    choicetmp = math.nan&amp;#10;    noRespLoc = [0,0]&amp;#10;    ocLoc = [5,5]&amp;#10;    ocGambleLoc = [5,5]&amp;#10;    ocSafeLoc = [5,5]&amp;#10;    hideGamLoc = [5,5]&amp;#10;elif realChoice.keys == 'v' and loc == 1:&amp;#10;    outcometmp = random.choice([riskyoption1, riskyoption2])&amp;#10;    choicetmp = 1&amp;#10;    if outcometmp == riskyoption1:&amp;#10;        ocLoc = [-.4,.1]&amp;#10;        ocGambleLoc = [-.4,0]&amp;#10;        ocSafeLoc = [5,5]&amp;#10;        noRespLoc = [5,5]&amp;#10;        hideGamLoc = [-.4,-.125]&amp;#10;    elif outcometmp == riskyoption2:&amp;#10;         ocLoc = [-.4,-.1]&amp;#10;         ocGambleLoc = [-.4,0]&amp;#10;         ocSafeLoc = [5,5]&amp;#10;         hideGamLoc = [-.4,.125]&amp;#10;         noRespLoc = [5,5]&amp;#10;elif realChoice.keys == 'v' and loc == 2:&amp;#10;    outcometmp = safeoption&amp;#10;    choicetmp = 0&amp;#10;    ocLoc = [-.4,0]&amp;#10;    ocGambleLoc = [5,5]&amp;#10;    ocSafeLoc = ocLoc&amp;#10;    hideGamLoc = ocGambleLoc&amp;#10;    noRespLoc = [5,5]&amp;#10;elif realChoice.keys == 'n' and loc ==1:&amp;#10;    outcometmp = safeoption&amp;#10;    choicetmp = 0&amp;#10;    ocLoc = [.4,0]&amp;#10;    ocGambleLoc = [5,5]&amp;#10;    ocSafeLoc = ocLoc&amp;#10;    hideGamLoc = ocGambleLoc&amp;#10;    noRespLoc = [5,5]&amp;#10;elif realChoice.keys == 'n' and loc ==2:&amp;#10;    outcometmp = random.choice([riskyoption1, riskyoption2])&amp;#10;    choicetmp = 1&amp;#10;    if outcometmp == riskyoption1:&amp;#10;        ocLoc = [.4,.1]&amp;#10;        ocGambleLoc = [.4,0]&amp;#10;        ocSafeLoc = [5,5]&amp;#10;        hideGamLoc = [.4,-.125]&amp;#10;        noRespLoc = [5,5]&amp;#10;    elif outcometmp == riskyoption2:&amp;#10;        ocLoc = [.4,-.1]&amp;#10;        ocGambleLoc = [.4,0]&amp;#10;        ocSafeLoc = [5,5]&amp;#10;        hideGamLoc = [.4,.125]&amp;#10;        noRespLoc = [5,5]&amp;#10;&amp;#10;outcomes.append(outcometmp)&amp;#10;choices.append(choicetmp)&amp;#10;riskyloss_values.append(riskyoption2)&amp;#10;riskygain_values.append(riskyoption1)&amp;#10;certain_values.append(safeoption)" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="import * as random from 'random';&amp;#10;import * as math from 'math';&amp;#10;var certain, choicetmp, hideGamLoc, noRespLoc, ocGambleLoc, ocLoc, ocSafeLoc, outcometmp, riskyGain, riskyLoss;&amp;#10;if ((! realChoice.keys)) {&amp;#10;    outcometmp = math.nan;&amp;#10;    choicetmp = math.nan;&amp;#10;    riskyLoss = math.nan;&amp;#10;    riskyGain = math.nan;&amp;#10;    certain = math.nan;&amp;#10;    noRespLoc = [0, 0];&amp;#10;    ocLoc = [5, 5];&amp;#10;    ocGambleLoc = [5, 5];&amp;#10;    ocSafeLoc = [5, 5];&amp;#10;    hideGamLoc = [5, 5];&amp;#10;} else {&amp;#10;    if (((realChoice.keys === &quot;v&quot;) &amp;&amp; (loc === 1))) {&amp;#10;        outcometmp = random.choice([riskyoption1, riskyoption2]);&amp;#10;        choicetmp = 1;&amp;#10;        riskyLoss = riskyoption2;&amp;#10;        riskyGain = riskyoption1;&amp;#10;        certain = safeoption;&amp;#10;        if ((outcometmp === riskyoption1)) {&amp;#10;            ocLoc = [(- 0.4), 0.1];&amp;#10;            ocGambleLoc = [(- 0.4), 0];&amp;#10;            ocSafeLoc = [5, 5];&amp;#10;            noRespLoc = [5, 5];&amp;#10;            hideGamLoc = [(- 0.4), (- 0.125)];&amp;#10;        } else {&amp;#10;            if ((outcometmp === riskyoption2)) {&amp;#10;                ocLoc = [(- 0.4), (- 0.1)];&amp;#10;                ocGambleLoc = [(- 0.4), 0];&amp;#10;                ocSafeLoc = [5, 5];&amp;#10;                hideGamLoc = [(- 0.4), 0.125];&amp;#10;                noRespLoc = [5, 5];&amp;#10;            }&amp;#10;        }&amp;#10;    } else {&amp;#10;        if (((realChoice.keys === &quot;v&quot;) &amp;&amp; (loc === 2))) {&amp;#10;            outcometmp = safeoption;&amp;#10;            choicetmp = 0;&amp;#10;            riskyLoss = riskyoption2;&amp;#10;            riskyGain = riskyoption1;&amp;#10;            certain = safeoption;&amp;#10;            ocLoc = [(- 0.4), 0];&amp;#10;            ocGambleLoc = [5, 5];&amp;#10;            ocSafeLoc = ocLoc;&amp;#10;            hideGamLoc = ocGambleLoc;&amp;#10;            noRespLoc = [5, 5];&amp;#10;        } else {&amp;#10;            if (((realChoice.keys === &quot;n&quot;) &amp;&amp; (loc === 1))) {&amp;#10;                outcometmp = safeoption;&amp;#10;                choicetmp = 0;&amp;#10;                riskyLoss = riskyoption2;&amp;#10;                riskyGain = riskyoption1;&amp;#10;                certain = safeoption;&amp;#10;                ocLoc = [0.4, 0];&amp;#10;                ocGambleLoc = [5, 5];&amp;#10;                ocSafeLoc = ocLoc;&amp;#10;                hideGamLoc = ocGambleLoc;&amp;#10;                noRespLoc = [5, 5];&amp;#10;            } else {&amp;#10;                if (((realChoice.keys === &quot;n&quot;) &amp;&amp; (loc === 2))) {&amp;#10;                    outcometmp = random.choice([riskyoption1, riskyoption2]);&amp;#10;                    choicetmp = 1;&amp;#10;                    riskyLoss = riskyoption2;&amp;#10;                    riskyGain = riskyoption1;&amp;#10;                    certain = safeoption;&amp;#10;                    if ((outcometmp === riskyoption1)) {&amp;#10;                        ocLoc = [0.4, 0.1];&amp;#10;                        ocGambleLoc = [0.4, 0];&amp;#10;                        ocSafeLoc = [5, 5];&amp;#10;                        hideGamLoc = [0.4, (- 0.125)];&amp;#10;                        noRespLoc = [5, 5];&amp;#10;                    } else {&amp;#10;                        if ((outcometmp === riskyoption2)) {&amp;#10;                            ocLoc = [0.4, (- 0.1)];&amp;#10;                            ocGambleLoc = [0.4, 0];&amp;#10;                            ocSafeLoc = [5, 5];&amp;#10;                            hideGamLoc = [0.4, 0.125];&amp;#10;                            noRespLoc = [5, 5];&amp;#10;                        }&amp;#10;                    }&amp;#10;                }&amp;#10;            }&amp;#10;        }&amp;#10;    }&amp;#10;}&amp;#10;outcomes.push(outcometmp);&amp;#10;choices.push(choicetmp);&amp;#10;riskyloss_values.push(riskyLoss);&amp;#10;riskygain_values.push(riskyGain);&amp;#10;certain_values.push(certain);&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
+        <Param val="import random&amp;#10;import math&amp;#10;if not realChoice.keys:&amp;#10;    outcometmp = math.nan&amp;#10;    choicetmp = math.nan&amp;#10;    riskyLoss = math.nan&amp;#10;    riskyGain = math.nan&amp;#10;    certain = math.nan&amp;#10;    noRespLoc = [0,0]&amp;#10;    ocLoc = [5,5]&amp;#10;    ocGambleLoc = [5,5]&amp;#10;    ocSafeLoc = [5,5]&amp;#10;    hideGamLoc = [5,5]&amp;#10;elif realChoice.keys == 'v' and loc == 1:&amp;#10;    outcometmp = random.choice([riskyoption1, riskyoption2])&amp;#10;    choicetmp = 1&amp;#10;    riskyLoss = riskyoption2&amp;#10;    riskyGain = riskyoption1&amp;#10;    certain = safeoption&amp;#10;    if outcometmp == riskyoption1:&amp;#10;        ocLoc = [-.4,.1]&amp;#10;        ocGambleLoc = [-.4,0]&amp;#10;        ocSafeLoc = [5,5]&amp;#10;        noRespLoc = [5,5]&amp;#10;        hideGamLoc = [-.4,-.125]&amp;#10;    elif outcometmp == riskyoption2:&amp;#10;         ocLoc = [-.4,-.1]&amp;#10;         ocGambleLoc = [-.4,0]&amp;#10;         ocSafeLoc = [5,5]&amp;#10;         hideGamLoc = [-.4,.125]&amp;#10;         noRespLoc = [5,5]&amp;#10;elif realChoice.keys == 'v' and loc == 2:&amp;#10;    outcometmp = safeoption&amp;#10;    choicetmp = 0&amp;#10;    riskyLoss = riskyoption2&amp;#10;    riskyGain = riskyoption1&amp;#10;    certain = safeoption&amp;#10;    ocLoc = [-.4,0]&amp;#10;    ocGambleLoc = [5,5]&amp;#10;    ocSafeLoc = ocLoc&amp;#10;    hideGamLoc = ocGambleLoc&amp;#10;    noRespLoc = [5,5]&amp;#10;elif realChoice.keys == 'n' and loc ==1:&amp;#10;    outcometmp = safeoption&amp;#10;    choicetmp = 0&amp;#10;    riskyLoss = riskyoption2&amp;#10;    riskyGain = riskyoption1&amp;#10;    certain = safeoption&amp;#10;    ocLoc = [.4,0]&amp;#10;    ocGambleLoc = [5,5]&amp;#10;    ocSafeLoc = ocLoc&amp;#10;    hideGamLoc = ocGambleLoc&amp;#10;    noRespLoc = [5,5]&amp;#10;elif realChoice.keys == 'n' and loc ==2:&amp;#10;    outcometmp = random.choice([riskyoption1, riskyoption2])&amp;#10;    choicetmp = 1&amp;#10;    riskyLoss = riskyoption2&amp;#10;    riskyGain = riskyoption1&amp;#10;    certain = safeoption&amp;#10;    if outcometmp == riskyoption1:&amp;#10;        ocLoc = [.4,.1]&amp;#10;        ocGambleLoc = [.4,0]&amp;#10;        ocSafeLoc = [5,5]&amp;#10;        hideGamLoc = [.4,-.125]&amp;#10;        noRespLoc = [5,5]&amp;#10;    elif outcometmp == riskyoption2:&amp;#10;        ocLoc = [.4,-.1]&amp;#10;        ocGambleLoc = [.4,0]&amp;#10;        ocSafeLoc = [5,5]&amp;#10;        hideGamLoc = [.4,.125]&amp;#10;        noRespLoc = [5,5]&amp;#10;&amp;#10;outcomes.append(outcometmp)&amp;#10;choices.append(choicetmp)&amp;#10;riskyloss_values.append(riskyLoss)&amp;#10;riskygain_values.append(riskyGain)&amp;#10;certain_values.append(certain)" valType="extendedCode" updates="constant" name="Begin Routine"/>
         <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
@@ -2338,14 +2338,14 @@
         <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
         <Param val="psychoJS.experiment.addData(&quot;outcomes&quot;, outcometmp);&amp;#10;psychoJS.experiment.addData(&quot;choices&quot;, choicetmp);&amp;#10;" valType="extendedCode" updates="constant" name="End JS Routine"/>
         <Param val="thisExp.addData('outcomes', outcometmp)&amp;#10;thisExp.addData('choices', choicetmp)" valType="extendedCode" updates="constant" name="End Routine"/>
-        <Param val="True" valType="bool" updates="None" name="disabled"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="codeFeedbackReal" valType="code" updates="None" name="name"/>
       </CodeComponent>
       <TextComponent name="noRespTxtReal">
         <Param val="white" valType="str" updates="constant" name="color"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
-        <Param val="True" valType="bool" updates="None" name="disabled"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="" valType="str" updates="constant" name="flip"/>
         <Param val="Arial" valType="str" updates="constant" name="font"/>
@@ -2370,7 +2370,7 @@
         <Param val="center" valType="str" updates="constant" name="anchor"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
-        <Param val="True" valType="bool" updates="None" name="disabled"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="$[1,1,1]" valType="str" updates="constant" name="fillColor"/>
         <Param val="rgb" valType="str" updates="constant" name="fillColorSpace"/>
@@ -2399,7 +2399,7 @@
         <Param val="center" valType="str" updates="constant" name="anchor"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
-        <Param val="True" valType="bool" updates="None" name="disabled"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="$[1,1,1]" valType="str" updates="constant" name="fillColor"/>
         <Param val="rgb" valType="str" updates="constant" name="fillColorSpace"/>
@@ -2428,7 +2428,7 @@
         <Param val="black" valType="str" updates="set every repeat" name="color"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
-        <Param val="True" valType="bool" updates="None" name="disabled"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="" valType="str" updates="constant" name="flip"/>
         <Param val="Arial" valType="str" updates="constant" name="font"/>
@@ -2453,7 +2453,7 @@
         <Param val="center" valType="str" updates="constant" name="anchor"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
-        <Param val="True" valType="bool" updates="None" name="disabled"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="$[-1,-1,-1]" valType="str" updates="constant" name="fillColor"/>
         <Param val="rgb" valType="str" updates="constant" name="fillColorSpace"/>
@@ -2484,12 +2484,12 @@
         <Param val="white" valType="str" updates="constant" name="color"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
-        <Param val="True" valType="bool" updates="None" name="disabled"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="" valType="str" updates="constant" name="flip"/>
         <Param val="Arial" valType="str" updates="constant" name="font"/>
         <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
-        <Param val="0.03" valType="code" updates="constant" name="letterHeight"/>
+        <Param val="0.05" valType="code" updates="constant" name="letterHeight"/>
         <Param val="itiTextReal" valType="code" updates="None" name="name"/>
         <Param val="1" valType="code" updates="constant" name="opacity"/>
         <Param val="0" valType="code" updates="constant" name="ori"/>
@@ -2499,7 +2499,7 @@
         <Param val="time (s)" valType="str" updates="None" name="startType"/>
         <Param val="0.0" valType="code" updates="None" name="startVal"/>
         <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
-        <Param val="$iti" valType="code" updates="constant" name="stopVal"/>
+        <Param val="1" valType="code" updates="constant" name="stopVal"/>
         <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
         <Param val="+" valType="str" updates="constant" name="text"/>
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
@@ -3393,7 +3393,7 @@
         <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
         <Param val="1" valType="code" updates="constant" name="stopVal"/>
         <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
-        <Param val="$str(digits)[digitLoopPracticeBS.thisN]" valType="str" updates="set every repeat" name="text"/>
+        <Param val="$str(digitsReverse)[digitLoopPracticeBS.thisN]" valType="str" updates="set every repeat" name="text"/>
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
         <Param val="" valType="code" updates="constant" name="wrapWidth"/>
       </TextComponent>
@@ -3500,8 +3500,8 @@
         <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
         <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
-        <Param val="if ((textboxPractice_2.text === digitsReverse.toString())) {&amp;#10;    correct = 1;&amp;#10;    fbTxt = &quot;Correct!&quot;;&amp;#10;} else {&amp;#10;    correct = 0;&amp;#10;    fbTxt = &quot;Incorrect&quot;;&amp;#10;}&amp;#10;psychoJS.experiment.addData(&quot;correct&quot;, correct);&amp;#10;" valType="extendedCode" updates="constant" name="End JS Routine"/>
-        <Param val="#for r in range(len(digitsForTrial)):&amp;#10;#    digitsForTrial[r] = str(digitsForTrial[r])&amp;#10;&amp;#10;#digitsForTrial = ''.join(digitsForTrial)&amp;#10;&amp;#10;&amp;#10;if textboxPractice_2.text == str(digitsReverse):&amp;#10;    correct = 1&amp;#10;    fbTxt = 'Correct!'&amp;#10;else:&amp;#10;    correct = 0&amp;#10;    fbTxt = 'Incorrect'&amp;#10;thisExp.addData('correct', correct)" valType="extendedCode" updates="constant" name="End Routine"/>
+        <Param val="if ((textboxPractice_2.text === digitsReverseCorrAnswer.toString())) {&amp;#10;    correct = 1;&amp;#10;    fbTxt = &quot;Correct!&quot;;&amp;#10;} else {&amp;#10;    correct = 0;&amp;#10;    fbTxt = &quot;Incorrect&quot;;&amp;#10;}&amp;#10;psychoJS.experiment.addData(&quot;correct&quot;, correct);&amp;#10;" valType="extendedCode" updates="constant" name="End JS Routine"/>
+        <Param val="if textboxPractice_2.text == str(digitsReverseCorrAnswer):&amp;#10;    correct = 1&amp;#10;    fbTxt = 'Correct!'&amp;#10;else:&amp;#10;    correct = 0&amp;#10;    fbTxt = 'Incorrect'&amp;#10;thisExp.addData('correct', correct)" valType="extendedCode" updates="constant" name="End Routine"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="code_3practice_2" valType="code" updates="None" name="name"/>
       </CodeComponent>
@@ -3994,14 +3994,59 @@
         <Param val="" valType="num" updates="constant" name="wrapWidth"/>
       </TextComponent>
     </Routine>
+    <Routine name="startDynamicTask">
+      <TextComponent name="moveToRDMpart2">
+        <Param val="white" valType="color" updates="constant" name="color"/>
+        <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
+        <Param val="1" valType="num" updates="constant" name="contrast"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="None" valType="str" updates="constant" name="flip"/>
+        <Param val="Open Sans" valType="str" updates="constant" name="font"/>
+        <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
+        <Param val="0.05" valType="num" updates="constant" name="letterHeight"/>
+        <Param val="moveToRDMpart2" valType="code" updates="None" name="name"/>
+        <Param val="" valType="num" updates="constant" name="opacity"/>
+        <Param val="0" valType="num" updates="constant" name="ori"/>
+        <Param val="(0, 0)" valType="list" updates="constant" name="pos"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="0.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
+        <Param val="When you are ready to begin the next round of the gambling task, press &quot;enter&quot;." valType="str" updates="constant" name="text"/>
+        <Param val="from exp settings" valType="str" updates="None" name="units"/>
+        <Param val="" valType="num" updates="constant" name="wrapWidth"/>
+      </TextComponent>
+      <KeyboardComponent name="key_resp">
+        <Param val="'return'" valType="list" updates="constant" name="allowedKeys"/>
+        <Param val="" valType="str" updates="constant" name="correctAns"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="True" valType="bool" updates="constant" name="discard previous"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="True" valType="bool" updates="constant" name="forceEndRoutine"/>
+        <Param val="key_resp" valType="code" updates="None" name="name"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="0.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="last key" valType="str" updates="constant" name="store"/>
+        <Param val="False" valType="bool" updates="constant" name="storeCorrect"/>
+        <Param val="True" valType="bool" updates="constant" name="syncScreenRefresh"/>
+      </KeyboardComponent>
+    </Routine>
   </Routines>
   <Flow>
     <Routine name="instructions"/>
     <Routine name="pracStart"/>
     <LoopInitiator loopType="TrialHandler" name="trials">
-      <Param name="Selected rows" updates="None" val="" valType="str"/>
+      <Param name="Selected rows" updates="None" val="0:2" valType="str"/>
       <Param name="conditions" updates="None" val="[{'riskyGain': 18.23, 'riskyLoss': 0, 'alternative': 9.45, 'isi': 2, 'iti': 1, 'loc': 1}, {'riskyGain': 53.27, 'riskyLoss': 0, 'alternative': 35.16, 'isi': 1, 'iti': 3, 'loc': 1}, {'riskyGain': 8.27, 'riskyLoss': 0, 'alternative': 1.15, 'isi': 1, 'iti': 2, 'loc': 2}, {'riskyGain': 45.88, 'riskyLoss': 0, 'alternative': 40.41, 'isi': 3, 'iti': 1, 'loc': 1}, {'riskyGain': 21.56, 'riskyLoss': 0, 'alternative': 11.96, 'isi': 1, 'iti': 1, 'loc': 2}]" valType="str"/>
-      <Param name="conditionsFile" updates="None" val="cgtPractice.xlsx" valType="str"/>
+      <Param name="conditionsFile" updates="None" val="cgtRDMPractice.xlsx" valType="str"/>
       <Param name="endPoints" updates="None" val="[0, 1]" valType="num"/>
       <Param name="isTrials" updates="None" val="True" valType="bool"/>
       <Param name="loopType" updates="None" val="sequential" valType="str"/>
@@ -4016,13 +4061,13 @@
     <LoopTerminator name="trials"/>
     <Routine name="postPrac"/>
     <LoopInitiator loopType="TrialHandler" name="staticRDM">
-      <Param name="Selected rows" updates="None" val="" valType="str"/>
+      <Param name="Selected rows" updates="None" val="0:2" valType="str"/>
       <Param name="conditions" updates="None" val="[OrderedDict([('riskyoption1', 20.03), ('riskyoption2', 0.0), ('safeoption', 1.99), ('ischecktrial', 0)]), OrderedDict([('riskyoption1', 28.21), ('riskyoption2', 0.0), ('safeoption', 3.89), ('ischecktrial', 0)]), OrderedDict([('riskyoption1', 17.73), ('riskyoption2', 0.0), ('safeoption', 3.13), ('ischecktrial', 0)]), OrderedDict([('riskyoption1', 25.2), ('riskyoption2', 0.0), ('safeoption', 5.4), ('ischecktrial', 0)]), OrderedDict([('riskyoption1', 16.0), ('riskyoption2', 0.0), ('safeoption', 4.0), ('ischecktrial', 0)]), OrderedDict([('riskyoption1', 22.97), ('riskyoption2', 0.0), ('safeoption', 6.51), ('ischecktrial', 0)]), OrderedDict([('riskyoption1', 14.72), ('riskyoption2', 0.0), ('safeoption', 4.64), ('ischecktrial', 0)]), OrderedDict([('riskyoption1', 21.32), ('riskyoption2', 0.0), ('safeoption', 7.34), ('ischecktrial', 0)]), OrderedDict([('riskyoption1', 13.94), ('riskyoption2', 0.0), ('safeoption', 5.03), ('ischecktrial', 0)]), OrderedDict([('riskyoption1', 20.53), ('riskyoption2', 0.0), ('safeoption', 7.73), ('ischecktrial', 0)]), OrderedDict([('riskyoption1', 13.45), ('riskyoption2', 0.0), ('safeoption', 5.27), ('ischecktrial', 0)]), OrderedDict([('riskyoption1', 19.86), ('riskyoption2', 0.0), ('safeoption', 8.07), ('ischecktrial', 0)]), OrderedDict([('riskyoption1', 13.04), ('riskyoption2', 0.0), ('safeoption', 5.48), ('ischecktrial', 0)]), OrderedDict([('riskyoption1', 19.28), ('riskyoption2', 0.0), ('safeoption', 8.36), ('ischecktrial', 0)]), OrderedDict([('riskyoption1', 12.68), ('riskyoption2', 0.0), ('safeoption', 5.66), ('ischecktrial', 0)]), OrderedDict([('riskyoption1', 18.77), ('riskyoption2', 0.0), ('safeoption', 8.61), ('ischecktrial', 0)]), OrderedDict([('riskyoption1', 12.36), ('riskyoption2', 0.0), ('safeoption', 5.82), ('ischecktrial', 0)]), OrderedDict([('riskyoption1', 18.33), ('riskyoption2', 0.0), ('safeoption', 8.84), ('ischecktrial', 0)]), OrderedDict([('riskyoption1', 12.08), ('riskyoption2', 0.0), ('safeoption', 5.96), ('ischecktrial', 0)]), OrderedDict([('riskyoption1', 17.94), ('riskyoption2', 0.0), ('safeoption', 9.03), ('ischecktrial', 0)]), OrderedDict([('riskyoption1', 11.84), ('riskyoption2', 0.0), ('safeoption', 6.08), ('ischecktrial', 0)]), OrderedDict([('riskyoption1', 17.59), ('riskyoption2', 0.0), ('safeoption', 9.2), ('ischecktrial', 0)]), OrderedDict([('riskyoption1', 11.62), ('riskyoption2', 0.0), ('safeoption', 6.19), ('ischecktrial', 0)]), OrderedDict([('riskyoption1', 17.28), ('riskyoption2', 0.0), ('safeoption', 9.36), ('ischecktrial', 0)]), OrderedDict([('riskyoption1', 11.43), ('riskyoption2', 0.0), ('safeoption', 6.29), ('ischecktrial', 0)]), OrderedDict([('riskyoption1', 17.0), ('riskyoption2', 0.0), ('safeoption', 9.5), ('ischecktrial', 0)]), OrderedDict([('riskyoption1', 11.2), ('riskyoption2', 0.0), ('safeoption', 6.4), ('ischecktrial', 0)]), OrderedDict([('riskyoption1', 16.6), ('riskyoption2', 0.0), ('safeoption', 9.7), ('ischecktrial', 0)]), OrderedDict([('riskyoption1', 10.95), ('riskyoption2', 0.0), ('safeoption', 6.53), ('ischecktrial', 0)]), OrderedDict([('riskyoption1', 16.26), ('riskyoption2', 0.0), ('safeoption', 9.87), ('ischecktrial', 0)]), OrderedDict([('riskyoption1', 10.73), ('riskyoption2', 0.0), ('safeoption', 6.63), ('ischecktrial', 0)]), OrderedDict([('riskyoption1', 15.96), ('riskyoption2', 0.0), ('safeoption', 10.02), ('ischecktrial', 0)]), OrderedDict([('riskyoption1', 10.55), ('riskyoption2', 0.0), ('safeoption', 6.73), ('ischecktrial', 0)]), OrderedDict([('riskyoption1', 15.7), ('riskyoption2', 0.0), ('safeoption', 10.15), ('ischecktrial', 0)]), OrderedDict([('riskyoption1', 10.39), ('riskyoption2', 0.0), ('safeoption', 6.81), ('ischecktrial', 0)]), OrderedDict([('riskyoption1', 15.47), ('riskyoption2', 0.0), ('safeoption', 10.27), ('ischecktrial', 0)]), OrderedDict([('riskyoption1', 10.24), ('riskyoption2', 0.0), ('safeoption', 6.88), ('ischecktrial', 0)]), OrderedDict([('riskyoption1', 15.27), ('riskyoption2', 0.0), ('safeoption', 10.37), ('ischecktrial', 0)]), OrderedDict([('riskyoption1', 10.12), ('riskyoption2', 0.0), ('safeoption', 6.94), ('ischecktrial', 0)]), OrderedDict([('riskyoption1', 15.09), ('riskyoption2', 0.0), ('safeoption', 10.46), ('ischecktrial', 0)]), OrderedDict([('riskyoption1', 10.35), ('riskyoption2', 0.0), ('safeoption', 0.0), ('ischecktrial', 1)]), OrderedDict([('riskyoption1', 14.26), ('riskyoption2', 0.0), ('safeoption', 0.0), ('ischecktrial', 1)]), OrderedDict([('riskyoption1', 19.86), ('riskyoption2', 0.0), ('safeoption', 0.0), ('ischecktrial', 1)]), OrderedDict([('riskyoption1', 16.11), ('riskyoption2', 6.99), ('safeoption', 6.99), ('ischecktrial', 1)]), OrderedDict([('riskyoption1', 13.1), ('riskyoption2', 7.73), ('safeoption', 4.68), ('ischecktrial', 1)]), OrderedDict([('riskyoption1', 0.0), ('riskyoption2', 0.0), ('safeoption', 7.55), ('ischecktrial', 1)]), OrderedDict([('riskyoption1', 0.0), ('riskyoption2', 0.0), ('safeoption', 10.25), ('ischecktrial', 1)]), OrderedDict([('riskyoption1', 0.0), ('riskyoption2', 0.0), ('safeoption', 3.13), ('ischecktrial', 1)]), OrderedDict([('riskyoption1', 10.68), ('riskyoption2', 0.0), ('safeoption', 10.68), ('ischecktrial', 1)]), OrderedDict([('riskyoption1', 6.79), ('riskyoption2', 0.0), ('safeoption', 9.92), ('ischecktrial', 1)])]" valType="str"/>
       <Param name="conditionsFile" updates="None" val="CGT-choice-set.csv" valType="str"/>
       <Param name="endPoints" updates="None" val="[0, 1]" valType="num"/>
       <Param name="isTrials" updates="None" val="True" valType="bool"/>
       <Param name="loopType" updates="None" val="random" valType="str"/>
-      <Param name="nReps" updates="None" val="0" valType="code"/>
+      <Param name="nReps" updates="None" val="1" valType="code"/>
       <Param name="name" updates="None" val="staticRDM" valType="code"/>
       <Param name="random seed" updates="None" val="" valType="code"/>
     </LoopInitiator>
@@ -4032,10 +4077,11 @@
     <Routine name="iti"/>
     <LoopTerminator name="staticRDM"/>
     <Routine name="computeEstimates"/>
+    <Routine name="startDynamicTask"/>
     <LoopInitiator loopType="TrialHandler" name="dynamicRDM">
-      <Param name="Selected rows" updates="None" val="" valType="str"/>
+      <Param name="Selected rows" updates="None" val="0:3" valType="str"/>
       <Param name="conditions" updates="None" val="None" valType="str"/>
-      <Param name="conditionsFile" updates="None" val="" valType="file"/>
+      <Param name="conditionsFile" updates="None" val="$fname[0]" valType="file"/>
       <Param name="endPoints" updates="None" val="[0, 1]" valType="num"/>
       <Param name="isTrials" updates="None" val="True" valType="bool"/>
       <Param name="loopType" updates="None" val="sequential" valType="str"/>
@@ -4052,15 +4098,15 @@
     <Routine name="rdmToSpanTransition"/>
     <Routine name="SpanGeneralInstructions"/>
     <Routine name="FSInstructions"/>
-    <LoopInitiator loopType="TrialHandler" name="TrialFSPractice">
+    <LoopInitiator loopType="TrialHandler" name="trialFSPractice">
       <Param name="Selected rows" updates="None" val="" valType="str"/>
-      <Param name="conditions" updates="None" val="[{'digitSpan': 3, 'digits': 342, 'digitsReverse': 243}, {'digitSpan': 3, 'digits': 937, 'digitsReverse': 739}]" valType="str"/>
+      <Param name="conditions" updates="None" val="[{'digitSpan': 3, 'digits': 342, 'digitsReverse': 24, 'digitSpanReverse': 2, 'digitsReverseCorrAnswer': 42}, {'digitSpan': 3, 'digits': 937, 'digitsReverse': 73, 'digitSpanReverse': 2, 'digitsReverseCorrAnswer': 37}]" valType="str"/>
       <Param name="conditionsFile" updates="None" val="digitSpanPractice.xlsx" valType="file"/>
       <Param name="endPoints" updates="None" val="[0, 1]" valType="num"/>
       <Param name="isTrials" updates="None" val="True" valType="bool"/>
       <Param name="loopType" updates="None" val="sequential" valType="str"/>
-      <Param name="nReps" updates="None" val="1" valType="num"/>
-      <Param name="name" updates="None" val="TrialFSPractice" valType="code"/>
+      <Param name="nReps" updates="None" val="0" valType="num"/>
+      <Param name="name" updates="None" val="trialFSPractice" valType="code"/>
       <Param name="random seed" updates="None" val="" valType="code"/>
     </LoopInitiator>
     <LoopInitiator loopType="TrialHandler" name="DigitLoopPractice">
@@ -4078,17 +4124,17 @@
     <LoopTerminator name="DigitLoopPractice"/>
     <Routine name="RecallPractice"/>
     <Routine name="FeedbackPractice"/>
-    <LoopTerminator name="TrialFSPractice"/>
+    <LoopTerminator name="trialFSPractice"/>
     <Routine name="StartRealFS"/>
-    <LoopInitiator loopType="TrialHandler" name="trials2">
-      <Param name="Selected rows" updates="None" val="" valType="str"/>
+    <LoopInitiator loopType="TrialHandler" name="trialsFS">
+      <Param name="Selected rows" updates="None" val="0:3" valType="str"/>
       <Param name="conditions" updates="None" val="[{'trialNumber': 1}, {'trialNumber': 2}, {'trialNumber': 3}, {'trialNumber': 4}, {'trialNumber': 5}, {'trialNumber': 6}, {'trialNumber': 7}, {'trialNumber': 8}, {'trialNumber': 9}, {'trialNumber': 10}, {'trialNumber': 11}, {'trialNumber': 12}, {'trialNumber': 13}, {'trialNumber': 14}]" valType="str"/>
-      <Param name="conditionsFile" updates="None" val="digitSpanTrialNumber copy.xlsx" valType="file"/>
+      <Param name="conditionsFile" updates="None" val="digitSpanTrialNumber.xlsx" valType="file"/>
       <Param name="endPoints" updates="None" val="[0, 1]" valType="num"/>
       <Param name="isTrials" updates="None" val="True" valType="bool"/>
       <Param name="loopType" updates="None" val="sequential" valType="str"/>
-      <Param name="nReps" updates="None" val="1" valType="num"/>
-      <Param name="name" updates="None" val="trials2" valType="code"/>
+      <Param name="nReps" updates="None" val="0" valType="num"/>
+      <Param name="name" updates="None" val="trialsFS" valType="code"/>
       <Param name="random seed" updates="None" val="" valType="code"/>
     </LoopInitiator>
     <Routine name="selectNumbers"/>
@@ -4107,11 +4153,11 @@
     <LoopTerminator name="digitLoop"/>
     <Routine name="Recall"/>
     <Routine name="Feedback"/>
-    <LoopTerminator name="trials2"/>
+    <LoopTerminator name="trialsFS"/>
     <Routine name="InstructionsBS"/>
     <LoopInitiator loopType="TrialHandler" name="trialsPracticeBS">
       <Param name="Selected rows" updates="None" val="" valType="str"/>
-      <Param name="conditions" updates="None" val="[{'digitSpan': 3, 'digits': 342, 'digitsReverse': 243}, {'digitSpan': 3, 'digits': 937, 'digitsReverse': 739}]" valType="str"/>
+      <Param name="conditions" updates="None" val="[{'digitSpan': 3, 'digits': 342, 'digitsReverse': 24, 'digitSpanReverse': 2, 'digitsReverseCorrAnswer': 42}, {'digitSpan': 3, 'digits': 937, 'digitsReverse': 73, 'digitSpanReverse': 2, 'digitsReverseCorrAnswer': 37}]" valType="str"/>
       <Param name="conditionsFile" updates="None" val="digitSpanPractice.xlsx" valType="file"/>
       <Param name="endPoints" updates="None" val="[0, 1]" valType="num"/>
       <Param name="isTrials" updates="None" val="True" valType="bool"/>
@@ -4127,7 +4173,7 @@
       <Param name="endPoints" updates="None" val="[0, 1]" valType="num"/>
       <Param name="isTrials" updates="None" val="True" valType="bool"/>
       <Param name="loopType" updates="None" val="sequential" valType="str"/>
-      <Param name="nReps" updates="None" val="digitSpan" valType="num"/>
+      <Param name="nReps" updates="None" val="digitSpanReverse" valType="num"/>
       <Param name="name" updates="None" val="digitLoopPracticeBS" valType="code"/>
       <Param name="random seed" updates="None" val="" valType="code"/>
     </LoopInitiator>
@@ -4138,9 +4184,9 @@
     <LoopTerminator name="trialsPracticeBS"/>
     <Routine name="startRealBS"/>
     <LoopInitiator loopType="TrialHandler" name="trialsBS">
-      <Param name="Selected rows" updates="None" val="" valType="str"/>
+      <Param name="Selected rows" updates="None" val="0:3" valType="str"/>
       <Param name="conditions" updates="None" val="[{'trialNumber': 1}, {'trialNumber': 2}, {'trialNumber': 3}, {'trialNumber': 4}, {'trialNumber': 5}, {'trialNumber': 6}, {'trialNumber': 7}, {'trialNumber': 8}, {'trialNumber': 9}, {'trialNumber': 10}, {'trialNumber': 11}, {'trialNumber': 12}, {'trialNumber': 13}, {'trialNumber': 14}]" valType="str"/>
-      <Param name="conditionsFile" updates="None" val="digitSpanTrialNumber copy.xlsx" valType="file"/>
+      <Param name="conditionsFile" updates="None" val="digitSpanTrialNumber.xlsx" valType="file"/>
       <Param name="endPoints" updates="None" val="[0, 1]" valType="num"/>
       <Param name="isTrials" updates="None" val="True" valType="bool"/>
       <Param name="loopType" updates="None" val="sequential" valType="str"/>
