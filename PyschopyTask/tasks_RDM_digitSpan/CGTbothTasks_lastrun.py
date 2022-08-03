@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2022.2.1),
-    on Mon Aug  1 12:16:50 2022
+    on Wed Aug  3 14:43:44 2022
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -64,12 +64,12 @@ frameTolerance = 0.001  # how close to onset before 'same' frame
 
 # --- Setup the Window ---
 win = visual.Window(
-    size=[1024, 576], fullscr=False, screen=0, 
+    size=[2048, 1152], fullscr=True, screen=0, 
     winType='pyglet', allowStencil=False,
     monitor='testMonitor', color=[-1,-1,-1], colorSpace='rgb',
     blendMode='avg', useFBO=True, 
     units='height')
-win.mouseVisible = True
+win.mouseVisible = False
 # store frame rate of monitor if we can measure it
 expInfo['frameRate'] = win.getActualFrameRate()
 if expInfo['frameRate'] != None:
@@ -92,20 +92,24 @@ eyetracker = None
 defaultKeyboard = keyboard.Keyboard(backend='iohub')
 
 # --- Initialize components for Routine "instructions" ---
+# Run 'Begin Experiment' code from code
+instructionsTextHeight = 0.04;
+letterTextHeight = 0.1;
+wrap = 1.6
 Instructions = visual.TextStim(win=win, name='Instructions',
     text='As discussed in the instructions, you will choose between a gamble and a guaranteed alternative.\n\nOnce "V-Left" and "N-Right" appear on the screen, you may press "V" to select the option on the left and "N" to choose the option on the right.\n\nPress "enter" to move on to the next screen.',
     font='Arial',
-    pos=(0, 0), height=0.05, wrapWidth=None, ori=0, 
+    pos=(0, 0), height=instructionsTextHeight, wrapWidth=wrap, ori=0, 
     color='white', colorSpace='rgb', opacity=1, 
     languageStyle='LTR',
-    depth=0.0);
+    depth=-1.0);
 inst1 = keyboard.Keyboard()
 
 # --- Initialize components for Routine "pracStart" ---
 startPract = visual.TextStim(win=win, name='startPract',
     text='There will now be 5 practice trials.\n\nWhen you are ready to begin the practice, press "V" or "N".',
     font='Arial',
-    pos=(0, 0), height=0.05, wrapWidth=None, ori=0, 
+    pos=(0, 0), height=instructionsTextHeight, wrapWidth=wrap, ori=0, 
     color='white', colorSpace='rgb', opacity=1, 
     languageStyle='LTR',
     depth=0.0);
@@ -232,7 +236,7 @@ itiText = visual.TextStim(win=win, name='itiText',
 postPracText = visual.TextStim(win=win, name='postPracText',
     text='Practice complete.\n\nWhen you are ready to start the real task, press "V" or "N".\n',
     font='Arial',
-    pos=(0, 0), height=0.05, wrapWidth=None, ori=0, 
+    pos=(0, 0), height=instructionsTextHeight, wrapWidth=wrap, ori=0, 
     color='white', colorSpace='rgb', opacity=1, 
     languageStyle='LTR',
     depth=0.0);
@@ -418,9 +422,9 @@ bestRhoContainer = []
 bestMu = ''
 bestMuContainer = []
 settingUpForPart2 = visual.TextStim(win=win, name='settingUpForPart2',
-    text='The first round of the gambling task is complete. \n\nSetting up for the next and final round of the gambling task...',
-    font='Open Sans',
-    pos=(0, 0), height=0.05, wrapWidth=None, ori=0.0, 
+    text='The first round of the gambling task is complete! \n\nSetting up for the last round of the gambling task.\n\nPlease wait...\n\n',
+    font='Arial',
+    pos=(0, 0), height=instructionsTextHeight, wrapWidth=wrap, ori=0.0, 
     color='white', colorSpace='rgb', opacity=None, 
     languageStyle='LTR',
     depth=-4.0);
@@ -428,8 +432,8 @@ settingUpForPart2 = visual.TextStim(win=win, name='settingUpForPart2',
 # --- Initialize components for Routine "startDynamicTask" ---
 moveToRDMpart2 = visual.TextStim(win=win, name='moveToRDMpart2',
     text='When you are ready to begin the next round of the gambling task, press "enter".',
-    font='Open Sans',
-    pos=(0, 0), height=0.05, wrapWidth=None, ori=0.0, 
+    font='Arial',
+    pos=(0, 0), height=instructionsTextHeight, wrapWidth=wrap, ori=0.0, 
     color='white', colorSpace='rgb', opacity=None, 
     languageStyle='LTR',
     depth=0.0);
@@ -558,80 +562,48 @@ itiTextReal = visual.TextStim(win=win, name='itiTextReal',
     languageStyle='LTR',
     depth=0.0);
 
-# --- Initialize components for Routine "selectOutcome" ---
-
 # --- Initialize components for Routine "rdmToSpanTransition" ---
 breaktxt = visual.TextStim(win=win, name='breaktxt',
-    text='You have sucessfully completed the first task in this experiment!\n\nPlease take a brief break. The option to continue will appear on the screen in about 30 seconds, if you feel ready to move on, click the continue button. \n\nYou are welcome to take a longer break, but keep in mind this study should take no longer than 1 hour to complete. ',
-    font='Open Sans',
-    pos=(0, 0), height=0.04, wrapWidth=None, ori=0.0, 
+    text="You have sucessfully completed the first task in this experiment!\n\nPlease take a brief 1 minute break. \n\nYou are welcome to take a longer break, but keep in mind this study should take no longer than 1 hour to complete. \n\nWhen you are ready to move on, press 'enter' to continue.\n",
+    font='Arial',
+    pos=(0, 0), height=instructionsTextHeight, wrapWidth=wrap, ori=0.0, 
     color='white', colorSpace='rgb', opacity=None, 
     languageStyle='LTR',
     depth=0.0);
-BreakEndMouse = event.Mouse(win=win)
-x, y = [None, None]
-BreakEndMouse.mouseClock = core.Clock()
-cont_buttonBreak = visual.ImageStim(
-    win=win,
-    name='cont_buttonBreak', 
-    image='continue.png', mask=None, anchor='center',
-    ori=0.0, pos=(0, -.4), size=(0.3, 0.07),
-    color=[1,1,1], colorSpace='rgb', opacity=None,
-    flipHoriz=False, flipVert=False,
-    texRes=128.0, interpolate=True, depth=-2.0)
+stopBreak = keyboard.Keyboard()
 
 # --- Initialize components for Routine "SpanGeneralInstructions" ---
 GenInsText = visual.TextStim(win=win, name='GenInsText',
-    text='In this task you will be asked to memorize a series of numbers and recall them. You will do this twice, once recalling the numbers as they are presented on the screen and once recalling the numbers in the reverse order presented on the screen. \n\nThere are 14 trials in each direction for a total of 28 trials. Click the continue button when you are ready. ',
-    font='Open Sans',
-    pos=(0, 0), height=0.04, wrapWidth=None, ori=0.0, 
+    text="In this task you will be asked to memorize a series of numbers and recall them. \n\nYou will do this twice, once recalling the numbers in the order as presented on the screen and once recalling the numbers in the reverse order presented on the screen. \n\nThere are 14 trials in each direction for a total of 28 trials. \n\nYou will complete 2 practice sets prior to starting each round of this task.\n\nPress 'enter' to continue.",
+    font='Arial',
+    pos=(0, 0), height=instructionsTextHeight, wrapWidth=wrap, ori=0.0, 
     color='white', colorSpace='rgb', opacity=None, 
     languageStyle='LTR',
     depth=0.0);
-mouse_2 = event.Mouse(win=win)
-x, y = [None, None]
-mouse_2.mouseClock = core.Clock()
-cont_buttonGEN = visual.ImageStim(
-    win=win,
-    name='cont_buttonGEN', 
-    image='continue.png', mask=None, anchor='center',
-    ori=0.0, pos=(0, -.4), size=(0.3, 0.07),
-    color=[1,1,1], colorSpace='rgb', opacity=None,
-    flipHoriz=False, flipVert=False,
-    texRes=128.0, interpolate=True, depth=-2.0)
+movealong = keyboard.Keyboard()
 
 # --- Initialize components for Routine "FSInstructions" ---
 FSGenInsText = visual.TextStim(win=win, name='FSGenInsText',
-    text='You are about to begin the forwards section of this task. \n\nYou will start with a list of 3 numbers. If you are able to correctly recall two out of three lists you will proceed to longer list trials. \n\nType out your answer when "Recall" screen appears using the numbers at the top of the keyboard to type out the numbers in the order they were presented on the screen. \n\nIf you make a mistake you can use backspace to correct it.  Do not use spaces. Feedback will be provided.\n\nClick the continue button to begin a few practice trials.',
-    font='Open Sans',
-    pos=(0, 0), height=0.04, wrapWidth=None, ori=0.0, 
+    text='The practice for the forwards section of this task is up next.\n\nYou will complete two practice trials, each with a list of 3 numbers. \n\nType out your answer when "Recall" screen appears using the numbers at the top of the keyboard to type out the numbers in the order they were presented on the screen. \n\nIf you make a mistake you can use backspace to correct it.  \n\nDo not use spaces. \n\nFeedback will be provided.\n\nPress \'enter\' to begin the practice.',
+    font='Arial',
+    pos=(0, 0), height=instructionsTextHeight, wrapWidth=wrap, ori=0.0, 
     color='white', colorSpace='rgb', opacity=None, 
     languageStyle='LTR',
     depth=0.0);
-FSMouse = event.Mouse(win=win)
-x, y = [None, None]
-FSMouse.mouseClock = core.Clock()
-cont_buttonFSIns = visual.ImageStim(
-    win=win,
-    name='cont_buttonFSIns', 
-    image='continue.png', mask=None, anchor='center',
-    ori=0.0, pos=(0, -.4), size=(0.3, 0.07),
-    color=[1,1,1], colorSpace='rgb', opacity=None,
-    flipHoriz=False, flipVert=False,
-    texRes=128.0, interpolate=True, depth=-2.0)
+startPractice = keyboard.Keyboard()
 
 # --- Initialize components for Routine "ShowNumbersPractice" ---
 fixation_2 = visual.TextStim(win=win, name='fixation_2',
     text='+',
     font='Arial',
-    pos=(0, 0), height=0.1, wrapWidth=None, ori=0, 
+    pos=(0, 0), height=instructionsTextHeight, wrapWidth=None, ori=0, 
     color='white', colorSpace='rgb', opacity=1, 
     languageStyle='LTR',
     depth=0.0);
 pres_text_practice = visual.TextStim(win=win, name='pres_text_practice',
     text='',
     font='Arial',
-    pos=(0, 0), height=0.1, wrapWidth=None, ori=0, 
+    pos=(0, 0), height=letterTextHeight, wrapWidth=None, ori=0, 
     color='white', colorSpace='rgb', opacity=1, 
     languageStyle='LTR',
     depth=-1.0);
@@ -640,13 +612,13 @@ pres_text_practice = visual.TextStim(win=win, name='pres_text_practice',
 recall_txtPractice = visual.TextStim(win=win, name='recall_txtPractice',
     text='Recall',
     font='Arial',
-    pos=(0, 0.25), height=0.05, wrapWidth=None, ori=0, 
+    pos=(0, 0.25), height=instructionsTextHeight, wrapWidth=None, ori=0, 
     color='white', colorSpace='rgb', opacity=1, 
     languageStyle='LTR',
     depth=0.0);
 textboxPractice = visual.TextBox2(
      win, text=None, font='Arial',
-     pos=(0, 0),     letterHeight=0.1,
+     pos=(0, 0),     letterHeight=letterTextHeight,
      size=(None, None), borderWidth=2.0,
      color='white', colorSpace='rgb',
      opacity=None,
@@ -676,30 +648,20 @@ mousePractice.mouseClock = core.Clock()
 feedbac_textPractice = visual.TextStim(win=win, name='feedbac_textPractice',
     text='',
     font='Arial',
-    pos=(0, 0), height=0.05, wrapWidth=None, ori=0, 
+    pos=(0, 0), height=instructionsTextHeight, wrapWidth=None, ori=0, 
     color='white', colorSpace='rgb', opacity=1, 
     languageStyle='LTR',
     depth=0.0);
 
 # --- Initialize components for Routine "StartRealFS" ---
 praccomplete = visual.TextStim(win=win, name='praccomplete',
-    text='Practice complete. \n\nWhen you are ready to start the real task, click the continue button.',
+    text="Practice complete! \n\nYou are about to begin the forwards section of this task. \n\nYou will start with a list of 3 numbers. If you are able to correctly recall the list of numbers, you will continue to larger lists. \n\nPress 'enter' to start the task.",
     font='Open Sans',
-    pos=(0, 0), height=0.04, wrapWidth=None, ori=0.0, 
+    pos=(0, 0), height=instructionsTextHeight, wrapWidth=wrap, ori=0.0, 
     color='white', colorSpace='rgb', opacity=None, 
     languageStyle='LTR',
     depth=0.0);
-cont_buttonFSReal = visual.ImageStim(
-    win=win,
-    name='cont_buttonFSReal', 
-    image='continue.png', mask=None, anchor='center',
-    ori=0.0, pos=(0, -.4), size=(0.3, 0.07),
-    color=[1,1,1], colorSpace='rgb', opacity=None,
-    flipHoriz=False, flipVert=False,
-    texRes=128.0, interpolate=True, depth=-1.0)
-mouse_5 = event.Mouse(win=win)
-x, y = [None, None]
-mouse_5.mouseClock = core.Clock()
+startFSreal = keyboard.Keyboard()
 
 # --- Initialize components for Routine "selectNumbers" ---
 # Run 'Begin Experiment' code from selectNumbersFS
@@ -718,14 +680,14 @@ incorrectCount = 0;
 fixation = visual.TextStim(win=win, name='fixation',
     text='+',
     font='Arial',
-    pos=(0, 0), height=0.1, wrapWidth=None, ori=0, 
+    pos=(0, 0), height=instructionsTextHeight, wrapWidth=None, ori=0, 
     color='white', colorSpace='rgb', opacity=1, 
     languageStyle='LTR',
     depth=-1.0);
 presentation_text = visual.TextStim(win=win, name='presentation_text',
     text='',
     font='Arial',
-    pos=(0, 0), height=0.1, wrapWidth=None, ori=0, 
+    pos=(0, 0), height=letterTextHeight, wrapWidth=None, ori=0, 
     color='white', colorSpace='rgb', opacity=1, 
     languageStyle='LTR',
     depth=-2.0);
@@ -734,13 +696,13 @@ presentation_text = visual.TextStim(win=win, name='presentation_text',
 recall_txt = visual.TextStim(win=win, name='recall_txt',
     text='Recall',
     font='Arial',
-    pos=(0, 0.25), height=0.05, wrapWidth=None, ori=0, 
+    pos=(0, 0.25), height=instructionsTextHeight, wrapWidth=None, ori=0, 
     color='white', colorSpace='rgb', opacity=1, 
     languageStyle='LTR',
     depth=0.0);
 textbox = visual.TextBox2(
      win, text=None, font='Arial',
-     pos=(0, 0),     letterHeight=0.1,
+     pos=(0, 0),     letterHeight=letterTextHeight,
      size=(None, None), borderWidth=2.0,
      color='white', colorSpace='rgb',
      opacity=None,
@@ -770,43 +732,33 @@ mouse_3.mouseClock = core.Clock()
 feedback_text = visual.TextStim(win=win, name='feedback_text',
     text='',
     font='Arial',
-    pos=(0, 0), height=0.05, wrapWidth=None, ori=0, 
+    pos=(0, 0), height=instructionsTextHeight, wrapWidth=None, ori=0, 
     color='white', colorSpace='rgb', opacity=1, 
     languageStyle='LTR',
     depth=0.0);
 
 # --- Initialize components for Routine "InstructionsBS" ---
 BSGenInsText = visual.TextStim(win=win, name='BSGenInsText',
-    text='You are about to begin the backwards section of this task. \n\nYou will start with a list of 2 numbers. If you are able to correctly recall two out of three lists you will proceed to longer list trials. \n\nType out your answer when the "Recall" screen appears using the numbers at the top of the keyboard making sure to type out the answers in the REVERSE order than they are presented on the screen. For example if you see 3,2,1 you should answer 1,2,3. \n\nIf you make a mistake you can use backspace to correct it. Do not use spaces. Feedback will be provided.\n\nClick the continue button to begin a few practice trials.',
-    font='Open Sans',
-    pos=(0, 0), height=0.04, wrapWidth=None, ori=0.0, 
+    text='The practice for the backwards section of this task is up next.\n\nYou will complete two practice trials, each with a list of 2 numbers. \n\nType out your answer when "Recall" screen appears using the numbers at the top of the keyboard to type out the numbers in the REVERSE order they were presented on the screen. \n\nFor example, if the numbers presented are 6 then 2, your response should be 26.\n\nIf you make a mistake you can use backspace to correct it.  \n\nDo not use spaces. \n\nFeedback will be provided.\n\nPress \'enter\' to begin the practice.',
+    font='Arial',
+    pos=(0, 0), height=instructionsTextHeight, wrapWidth=wrap, ori=0.0, 
     color='white', colorSpace='rgb', opacity=None, 
     languageStyle='LTR',
     depth=0.0);
-BSMouse = event.Mouse(win=win)
-x, y = [None, None]
-BSMouse.mouseClock = core.Clock()
-cont_buttonBSIns = visual.ImageStim(
-    win=win,
-    name='cont_buttonBSIns', 
-    image='continue.png', mask=None, anchor='center',
-    ori=0.0, pos=(0, -.4), size=(0.3, 0.07),
-    color=[1,1,1], colorSpace='rgb', opacity=None,
-    flipHoriz=False, flipVert=False,
-    texRes=128.0, interpolate=True, depth=-2.0)
+startBSprac = keyboard.Keyboard()
 
 # --- Initialize components for Routine "showNumbersPracticeBS" ---
 fixation_3 = visual.TextStim(win=win, name='fixation_3',
     text='+',
     font='Arial',
-    pos=(0, 0), height=0.1, wrapWidth=None, ori=0, 
+    pos=(0, 0), height=instructionsTextHeight, wrapWidth=None, ori=0, 
     color='white', colorSpace='rgb', opacity=1, 
     languageStyle='LTR',
     depth=0.0);
 pres_text_practice_2 = visual.TextStim(win=win, name='pres_text_practice_2',
     text='',
     font='Arial',
-    pos=(0, 0), height=0.1, wrapWidth=None, ori=0, 
+    pos=(0, 0), height=letterTextHeight, wrapWidth=None, ori=0, 
     color='white', colorSpace='rgb', opacity=1, 
     languageStyle='LTR',
     depth=-1.0);
@@ -815,13 +767,13 @@ pres_text_practice_2 = visual.TextStim(win=win, name='pres_text_practice_2',
 recall_txtPractice_2 = visual.TextStim(win=win, name='recall_txtPractice_2',
     text='Recall',
     font='Arial',
-    pos=(0, 0.25), height=0.05, wrapWidth=None, ori=0, 
+    pos=(0, 0.25), height=instructionsTextHeight, wrapWidth=None, ori=0, 
     color='white', colorSpace='rgb', opacity=1, 
     languageStyle='LTR',
     depth=0.0);
 textboxPractice_2 = visual.TextBox2(
      win, text=None, font='Arial',
-     pos=(0, 0),     letterHeight=0.1,
+     pos=(0, 0),     letterHeight=letterTextHeight,
      size=(None, None), borderWidth=2.0,
      color='white', colorSpace='rgb',
      opacity=None,
@@ -851,30 +803,20 @@ mousePractice_2.mouseClock = core.Clock()
 feedbac_textPractice_2 = visual.TextStim(win=win, name='feedbac_textPractice_2',
     text='',
     font='Arial',
-    pos=(0, 0), height=0.05, wrapWidth=None, ori=0, 
+    pos=(0, 0), height=instructionsTextHeight, wrapWidth=None, ori=0, 
     color='white', colorSpace='rgb', opacity=1, 
     languageStyle='LTR',
     depth=0.0);
 
 # --- Initialize components for Routine "startRealBS" ---
 praccompleteBS = visual.TextStim(win=win, name='praccompleteBS',
-    text='Practice complete. \n\nWhen you are ready to start the real task, click the continue button.',
-    font='Open Sans',
-    pos=(0, 0), height=0.05, wrapWidth=None, ori=0.0, 
+    text="Practice complete!\n\nYou are about to begin the backwards section of this task. \n\nYou will start with a list of 2 numbers. If you are able to correctly recall the list of numbers, you will continue to larger lists. \n\nPress 'enter' to start the task.",
+    font='Arial',
+    pos=(0, 0), height=instructionsTextHeight, wrapWidth=wrap, ori=0.0, 
     color='white', colorSpace='rgb', opacity=None, 
     languageStyle='LTR',
     depth=0.0);
-cont_buttonBSReal = visual.ImageStim(
-    win=win,
-    name='cont_buttonBSReal', 
-    image='continue.png', mask=None, anchor='center',
-    ori=0.0, pos=(0, -.4), size=(0.3, 0.07),
-    color=[1,1,1], colorSpace='rgb', opacity=None,
-    flipHoriz=False, flipVert=False,
-    texRes=128.0, interpolate=True, depth=-1.0)
-mouse_4 = event.Mouse(win=win)
-x, y = [None, None]
-mouse_4.mouseClock = core.Clock()
+startBSreal = keyboard.Keyboard()
 
 # --- Initialize components for Routine "selectNumbersBS" ---
 # Run 'Begin Experiment' code from selectNumbersBScode
@@ -889,14 +831,14 @@ incorrectCount = 0;
 fixationBS = visual.TextStim(win=win, name='fixationBS',
     text='+',
     font='Arial',
-    pos=(0, 0), height=0.1, wrapWidth=None, ori=0, 
+    pos=(0, 0), height=instructionsTextHeight, wrapWidth=None, ori=0, 
     color='white', colorSpace='rgb', opacity=1, 
     languageStyle='LTR',
     depth=-1.0);
 presentation_textBS = visual.TextStim(win=win, name='presentation_textBS',
     text='',
     font='Arial',
-    pos=(0, 0), height=0.1, wrapWidth=None, ori=0, 
+    pos=(0, 0), height=letterTextHeight, wrapWidth=None, ori=0, 
     color='white', colorSpace='rgb', opacity=1, 
     languageStyle='LTR',
     depth=-2.0);
@@ -905,13 +847,13 @@ presentation_textBS = visual.TextStim(win=win, name='presentation_textBS',
 recall_txtBS = visual.TextStim(win=win, name='recall_txtBS',
     text='Recall',
     font='Arial',
-    pos=(0, 0.25), height=0.05, wrapWidth=None, ori=0, 
+    pos=(0, 0.25), height=instructionsTextHeight, wrapWidth=None, ori=0, 
     color='white', colorSpace='rgb', opacity=1, 
     languageStyle='LTR',
     depth=0.0);
 textboxBS = visual.TextBox2(
      win, text=None, font='Arial',
-     pos=(0, 0),     letterHeight=0.1,
+     pos=(0, 0),     letterHeight=letterTextHeight,
      size=(None, None), borderWidth=2.0,
      color='white', colorSpace='rgb',
      opacity=None,
@@ -941,16 +883,16 @@ mouseBS.mouseClock = core.Clock()
 feedback_textBS = visual.TextStim(win=win, name='feedback_textBS',
     text='',
     font='Arial',
-    pos=(0, 0), height=0.05, wrapWidth=None, ori=0, 
+    pos=(0, 0), height=instructionsTextHeight, wrapWidth=None, ori=0, 
     color='white', colorSpace='rgb', opacity=1, 
     languageStyle='LTR',
     depth=0.0);
 
 # --- Initialize components for Routine "END" ---
 ThankYou = visual.TextStim(win=win, name='ThankYou',
-    text='Thank you! You have sucessfully completed the second portion of this experiment. \n\nYou will now be automatically redirected to Qualtrics to take a breif end of task survey. ',
-    font='Open Sans',
-    pos=(0, 0), height=0.05, wrapWidth=None, ori=0.0, 
+    text='Thank you! You have sucessfully completed the second portion of this study.\n\nYou will now be automatically redirected to Qualtrics.',
+    font='Arial',
+    pos=(0, 0), height=instructionsTextHeight, wrapWidth=wrap, ori=0.0, 
     color='white', colorSpace='rgb', opacity=None, 
     languageStyle='LTR',
     depth=0.0);
@@ -3549,69 +3491,14 @@ for thisDynamicRDM in dynamicRDM:
 # completed 1.0 repeats of 'dynamicRDM'
 
 
-# --- Prepare to start Routine "selectOutcome" ---
-continueRoutine = True
-# update component parameters for each repeat
-# keep track of which components have finished
-selectOutcomeComponents = []
-for thisComponent in selectOutcomeComponents:
-    thisComponent.tStart = None
-    thisComponent.tStop = None
-    thisComponent.tStartRefresh = None
-    thisComponent.tStopRefresh = None
-    if hasattr(thisComponent, 'status'):
-        thisComponent.status = NOT_STARTED
-# reset timers
-t = 0
-_timeToFirstFrame = win.getFutureFlipTime(clock="now")
-frameN = -1
-
-# --- Run Routine "selectOutcome" ---
-while continueRoutine:
-    # get current time
-    t = routineTimer.getTime()
-    tThisFlip = win.getFutureFlipTime(clock=routineTimer)
-    tThisFlipGlobal = win.getFutureFlipTime(clock=None)
-    frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
-    # update/draw components on each frame
-    
-    # check for quit (typically the Esc key)
-    if endExpNow or defaultKeyboard.getKeys(keyList=["escape"]):
-        core.quit()
-    
-    # check if all components have finished
-    if not continueRoutine:  # a component has requested a forced-end of Routine
-        break
-    continueRoutine = False  # will revert to True if at least one component still running
-    for thisComponent in selectOutcomeComponents:
-        if hasattr(thisComponent, "status") and thisComponent.status != FINISHED:
-            continueRoutine = True
-            break  # at least one component has not yet finished
-    
-    # refresh the screen
-    if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
-        win.flip()
-
-# --- Ending Routine "selectOutcome" ---
-for thisComponent in selectOutcomeComponents:
-    if hasattr(thisComponent, "setAutoDraw"):
-        thisComponent.setAutoDraw(False)
-# the Routine "selectOutcome" was not non-slip safe, so reset the non-slip timer
-routineTimer.reset()
-
 # --- Prepare to start Routine "rdmToSpanTransition" ---
 continueRoutine = True
 # update component parameters for each repeat
-# setup some python lists for storing info about the BreakEndMouse
-BreakEndMouse.x = []
-BreakEndMouse.y = []
-BreakEndMouse.leftButton = []
-BreakEndMouse.midButton = []
-BreakEndMouse.rightButton = []
-BreakEndMouse.time = []
-gotValidClick = False  # until a click is received
+stopBreak.keys = []
+stopBreak.rt = []
+_stopBreak_allKeys = []
 # keep track of which components have finished
-rdmToSpanTransitionComponents = [breaktxt, BreakEndMouse, cont_buttonBreak]
+rdmToSpanTransitionComponents = [breaktxt, stopBreak]
 for thisComponent in rdmToSpanTransitionComponents:
     thisComponent.tStart = None
     thisComponent.tStop = None
@@ -3643,44 +3530,30 @@ while continueRoutine:
         # add timestamp to datafile
         thisExp.timestampOnFlip(win, 'breaktxt.started')
         breaktxt.setAutoDraw(True)
-    # *BreakEndMouse* updates
-    if BreakEndMouse.status == NOT_STARTED and t >= 5-frameTolerance:
-        # keep track of start time/frame for later
-        BreakEndMouse.frameNStart = frameN  # exact frame index
-        BreakEndMouse.tStart = t  # local t and not account for scr refresh
-        BreakEndMouse.tStartRefresh = tThisFlipGlobal  # on global time
-        win.timeOnFlip(BreakEndMouse, 'tStartRefresh')  # time at next scr refresh
-        # add timestamp to datafile
-        thisExp.addData('BreakEndMouse.started', t)
-        BreakEndMouse.status = STARTED
-        BreakEndMouse.mouseClock.reset()
-        prevButtonState = BreakEndMouse.getPressed()  # if button is down already this ISN'T a new click
-    if BreakEndMouse.status == STARTED:  # only update if started and not finished!
-        buttons = BreakEndMouse.getPressed()
-        if buttons != prevButtonState:  # button state changed?
-            prevButtonState = buttons
-            if sum(buttons) > 0:  # state changed to a new click
-                x, y = BreakEndMouse.getPos()
-                BreakEndMouse.x.append(x)
-                BreakEndMouse.y.append(y)
-                buttons = BreakEndMouse.getPressed()
-                BreakEndMouse.leftButton.append(buttons[0])
-                BreakEndMouse.midButton.append(buttons[1])
-                BreakEndMouse.rightButton.append(buttons[2])
-                BreakEndMouse.time.append(BreakEndMouse.mouseClock.getTime())
-                
-                continueRoutine = False  # abort routine on response
     
-    # *cont_buttonBreak* updates
-    if cont_buttonBreak.status == NOT_STARTED and tThisFlip >= 5-frameTolerance:
+    # *stopBreak* updates
+    waitOnFlip = False
+    if stopBreak.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
         # keep track of start time/frame for later
-        cont_buttonBreak.frameNStart = frameN  # exact frame index
-        cont_buttonBreak.tStart = t  # local t and not account for scr refresh
-        cont_buttonBreak.tStartRefresh = tThisFlipGlobal  # on global time
-        win.timeOnFlip(cont_buttonBreak, 'tStartRefresh')  # time at next scr refresh
+        stopBreak.frameNStart = frameN  # exact frame index
+        stopBreak.tStart = t  # local t and not account for scr refresh
+        stopBreak.tStartRefresh = tThisFlipGlobal  # on global time
+        win.timeOnFlip(stopBreak, 'tStartRefresh')  # time at next scr refresh
         # add timestamp to datafile
-        thisExp.timestampOnFlip(win, 'cont_buttonBreak.started')
-        cont_buttonBreak.setAutoDraw(True)
+        thisExp.timestampOnFlip(win, 'stopBreak.started')
+        stopBreak.status = STARTED
+        # keyboard checking is just starting
+        waitOnFlip = True
+        win.callOnFlip(stopBreak.clock.reset)  # t=0 on next screen flip
+        win.callOnFlip(stopBreak.clearEvents, eventType='keyboard')  # clear events on next screen flip
+    if stopBreak.status == STARTED and not waitOnFlip:
+        theseKeys = stopBreak.getKeys(keyList=['return'], waitRelease=False)
+        _stopBreak_allKeys.extend(theseKeys)
+        if len(_stopBreak_allKeys):
+            stopBreak.keys = _stopBreak_allKeys[-1].name  # just the last key pressed
+            stopBreak.rt = _stopBreak_allKeys[-1].rt
+            # a response ends the routine
+            continueRoutine = False
     
     # check for quit (typically the Esc key)
     if endExpNow or defaultKeyboard.getKeys(keyList=["escape"]):
@@ -3703,13 +3576,12 @@ while continueRoutine:
 for thisComponent in rdmToSpanTransitionComponents:
     if hasattr(thisComponent, "setAutoDraw"):
         thisComponent.setAutoDraw(False)
-# store data for thisExp (ExperimentHandler)
-thisExp.addData('BreakEndMouse.x', BreakEndMouse.x)
-thisExp.addData('BreakEndMouse.y', BreakEndMouse.y)
-thisExp.addData('BreakEndMouse.leftButton', BreakEndMouse.leftButton)
-thisExp.addData('BreakEndMouse.midButton', BreakEndMouse.midButton)
-thisExp.addData('BreakEndMouse.rightButton', BreakEndMouse.rightButton)
-thisExp.addData('BreakEndMouse.time', BreakEndMouse.time)
+# check responses
+if stopBreak.keys in ['', [], None]:  # No response was made
+    stopBreak.keys = None
+thisExp.addData('stopBreak.keys',stopBreak.keys)
+if stopBreak.keys != None:  # we had a response
+    thisExp.addData('stopBreak.rt', stopBreak.rt)
 thisExp.nextEntry()
 # the Routine "rdmToSpanTransition" was not non-slip safe, so reset the non-slip timer
 routineTimer.reset()
@@ -3717,17 +3589,11 @@ routineTimer.reset()
 # --- Prepare to start Routine "SpanGeneralInstructions" ---
 continueRoutine = True
 # update component parameters for each repeat
-# setup some python lists for storing info about the mouse_2
-mouse_2.x = []
-mouse_2.y = []
-mouse_2.leftButton = []
-mouse_2.midButton = []
-mouse_2.rightButton = []
-mouse_2.time = []
-mouse_2.clicked_name = []
-gotValidClick = False  # until a click is received
+movealong.keys = []
+movealong.rt = []
+_movealong_allKeys = []
 # keep track of which components have finished
-SpanGeneralInstructionsComponents = [GenInsText, mouse_2, cont_buttonGEN]
+SpanGeneralInstructionsComponents = [GenInsText, movealong]
 for thisComponent in SpanGeneralInstructionsComponents:
     thisComponent.tStart = None
     thisComponent.tStop = None
@@ -3759,55 +3625,30 @@ while continueRoutine:
         # add timestamp to datafile
         thisExp.timestampOnFlip(win, 'GenInsText.started')
         GenInsText.setAutoDraw(True)
-    # *mouse_2* updates
-    if mouse_2.status == NOT_STARTED and t >= 0-frameTolerance:
-        # keep track of start time/frame for later
-        mouse_2.frameNStart = frameN  # exact frame index
-        mouse_2.tStart = t  # local t and not account for scr refresh
-        mouse_2.tStartRefresh = tThisFlipGlobal  # on global time
-        win.timeOnFlip(mouse_2, 'tStartRefresh')  # time at next scr refresh
-        # add timestamp to datafile
-        thisExp.addData('mouse_2.started', t)
-        mouse_2.status = STARTED
-        mouse_2.mouseClock.reset()
-        prevButtonState = mouse_2.getPressed()  # if button is down already this ISN'T a new click
-    if mouse_2.status == STARTED:  # only update if started and not finished!
-        buttons = mouse_2.getPressed()
-        if buttons != prevButtonState:  # button state changed?
-            prevButtonState = buttons
-            if sum(buttons) > 0:  # state changed to a new click
-                # check if the mouse was inside our 'clickable' objects
-                gotValidClick = False
-                try:
-                    iter(cont_buttonGEN)
-                    clickableList = cont_buttonGEN
-                except:
-                    clickableList = [cont_buttonGEN]
-                for obj in clickableList:
-                    if obj.contains(mouse_2):
-                        gotValidClick = True
-                        mouse_2.clicked_name.append(obj.name)
-                x, y = mouse_2.getPos()
-                mouse_2.x.append(x)
-                mouse_2.y.append(y)
-                buttons = mouse_2.getPressed()
-                mouse_2.leftButton.append(buttons[0])
-                mouse_2.midButton.append(buttons[1])
-                mouse_2.rightButton.append(buttons[2])
-                mouse_2.time.append(mouse_2.mouseClock.getTime())
-                if gotValidClick:
-                    continueRoutine = False  # abort routine on response
     
-    # *cont_buttonGEN* updates
-    if cont_buttonGEN.status == NOT_STARTED and tThisFlip >= 0-frameTolerance:
+    # *movealong* updates
+    waitOnFlip = False
+    if movealong.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
         # keep track of start time/frame for later
-        cont_buttonGEN.frameNStart = frameN  # exact frame index
-        cont_buttonGEN.tStart = t  # local t and not account for scr refresh
-        cont_buttonGEN.tStartRefresh = tThisFlipGlobal  # on global time
-        win.timeOnFlip(cont_buttonGEN, 'tStartRefresh')  # time at next scr refresh
+        movealong.frameNStart = frameN  # exact frame index
+        movealong.tStart = t  # local t and not account for scr refresh
+        movealong.tStartRefresh = tThisFlipGlobal  # on global time
+        win.timeOnFlip(movealong, 'tStartRefresh')  # time at next scr refresh
         # add timestamp to datafile
-        thisExp.timestampOnFlip(win, 'cont_buttonGEN.started')
-        cont_buttonGEN.setAutoDraw(True)
+        thisExp.timestampOnFlip(win, 'movealong.started')
+        movealong.status = STARTED
+        # keyboard checking is just starting
+        waitOnFlip = True
+        win.callOnFlip(movealong.clock.reset)  # t=0 on next screen flip
+        win.callOnFlip(movealong.clearEvents, eventType='keyboard')  # clear events on next screen flip
+    if movealong.status == STARTED and not waitOnFlip:
+        theseKeys = movealong.getKeys(keyList=['return'], waitRelease=False)
+        _movealong_allKeys.extend(theseKeys)
+        if len(_movealong_allKeys):
+            movealong.keys = _movealong_allKeys[-1].name  # just the last key pressed
+            movealong.rt = _movealong_allKeys[-1].rt
+            # a response ends the routine
+            continueRoutine = False
     
     # check for quit (typically the Esc key)
     if endExpNow or defaultKeyboard.getKeys(keyList=["escape"]):
@@ -3830,14 +3671,12 @@ while continueRoutine:
 for thisComponent in SpanGeneralInstructionsComponents:
     if hasattr(thisComponent, "setAutoDraw"):
         thisComponent.setAutoDraw(False)
-# store data for thisExp (ExperimentHandler)
-thisExp.addData('mouse_2.x', mouse_2.x)
-thisExp.addData('mouse_2.y', mouse_2.y)
-thisExp.addData('mouse_2.leftButton', mouse_2.leftButton)
-thisExp.addData('mouse_2.midButton', mouse_2.midButton)
-thisExp.addData('mouse_2.rightButton', mouse_2.rightButton)
-thisExp.addData('mouse_2.time', mouse_2.time)
-thisExp.addData('mouse_2.clicked_name', mouse_2.clicked_name)
+# check responses
+if movealong.keys in ['', [], None]:  # No response was made
+    movealong.keys = None
+thisExp.addData('movealong.keys',movealong.keys)
+if movealong.keys != None:  # we had a response
+    thisExp.addData('movealong.rt', movealong.rt)
 thisExp.nextEntry()
 # the Routine "SpanGeneralInstructions" was not non-slip safe, so reset the non-slip timer
 routineTimer.reset()
@@ -3845,17 +3684,11 @@ routineTimer.reset()
 # --- Prepare to start Routine "FSInstructions" ---
 continueRoutine = True
 # update component parameters for each repeat
-# setup some python lists for storing info about the FSMouse
-FSMouse.x = []
-FSMouse.y = []
-FSMouse.leftButton = []
-FSMouse.midButton = []
-FSMouse.rightButton = []
-FSMouse.time = []
-FSMouse.clicked_name = []
-gotValidClick = False  # until a click is received
+startPractice.keys = []
+startPractice.rt = []
+_startPractice_allKeys = []
 # keep track of which components have finished
-FSInstructionsComponents = [FSGenInsText, FSMouse, cont_buttonFSIns]
+FSInstructionsComponents = [FSGenInsText, startPractice]
 for thisComponent in FSInstructionsComponents:
     thisComponent.tStart = None
     thisComponent.tStop = None
@@ -3887,55 +3720,30 @@ while continueRoutine:
         # add timestamp to datafile
         thisExp.timestampOnFlip(win, 'FSGenInsText.started')
         FSGenInsText.setAutoDraw(True)
-    # *FSMouse* updates
-    if FSMouse.status == NOT_STARTED and t >= 0-frameTolerance:
-        # keep track of start time/frame for later
-        FSMouse.frameNStart = frameN  # exact frame index
-        FSMouse.tStart = t  # local t and not account for scr refresh
-        FSMouse.tStartRefresh = tThisFlipGlobal  # on global time
-        win.timeOnFlip(FSMouse, 'tStartRefresh')  # time at next scr refresh
-        # add timestamp to datafile
-        thisExp.addData('FSMouse.started', t)
-        FSMouse.status = STARTED
-        FSMouse.mouseClock.reset()
-        prevButtonState = FSMouse.getPressed()  # if button is down already this ISN'T a new click
-    if FSMouse.status == STARTED:  # only update if started and not finished!
-        buttons = FSMouse.getPressed()
-        if buttons != prevButtonState:  # button state changed?
-            prevButtonState = buttons
-            if sum(buttons) > 0:  # state changed to a new click
-                # check if the mouse was inside our 'clickable' objects
-                gotValidClick = False
-                try:
-                    iter(cont_buttonFSIns)
-                    clickableList = cont_buttonFSIns
-                except:
-                    clickableList = [cont_buttonFSIns]
-                for obj in clickableList:
-                    if obj.contains(FSMouse):
-                        gotValidClick = True
-                        FSMouse.clicked_name.append(obj.name)
-                x, y = FSMouse.getPos()
-                FSMouse.x.append(x)
-                FSMouse.y.append(y)
-                buttons = FSMouse.getPressed()
-                FSMouse.leftButton.append(buttons[0])
-                FSMouse.midButton.append(buttons[1])
-                FSMouse.rightButton.append(buttons[2])
-                FSMouse.time.append(FSMouse.mouseClock.getTime())
-                if gotValidClick:
-                    continueRoutine = False  # abort routine on response
     
-    # *cont_buttonFSIns* updates
-    if cont_buttonFSIns.status == NOT_STARTED and tThisFlip >= 0-frameTolerance:
+    # *startPractice* updates
+    waitOnFlip = False
+    if startPractice.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
         # keep track of start time/frame for later
-        cont_buttonFSIns.frameNStart = frameN  # exact frame index
-        cont_buttonFSIns.tStart = t  # local t and not account for scr refresh
-        cont_buttonFSIns.tStartRefresh = tThisFlipGlobal  # on global time
-        win.timeOnFlip(cont_buttonFSIns, 'tStartRefresh')  # time at next scr refresh
+        startPractice.frameNStart = frameN  # exact frame index
+        startPractice.tStart = t  # local t and not account for scr refresh
+        startPractice.tStartRefresh = tThisFlipGlobal  # on global time
+        win.timeOnFlip(startPractice, 'tStartRefresh')  # time at next scr refresh
         # add timestamp to datafile
-        thisExp.timestampOnFlip(win, 'cont_buttonFSIns.started')
-        cont_buttonFSIns.setAutoDraw(True)
+        thisExp.timestampOnFlip(win, 'startPractice.started')
+        startPractice.status = STARTED
+        # keyboard checking is just starting
+        waitOnFlip = True
+        win.callOnFlip(startPractice.clock.reset)  # t=0 on next screen flip
+        win.callOnFlip(startPractice.clearEvents, eventType='keyboard')  # clear events on next screen flip
+    if startPractice.status == STARTED and not waitOnFlip:
+        theseKeys = startPractice.getKeys(keyList=['return'], waitRelease=False)
+        _startPractice_allKeys.extend(theseKeys)
+        if len(_startPractice_allKeys):
+            startPractice.keys = _startPractice_allKeys[-1].name  # just the last key pressed
+            startPractice.rt = _startPractice_allKeys[-1].rt
+            # a response ends the routine
+            continueRoutine = False
     
     # check for quit (typically the Esc key)
     if endExpNow or defaultKeyboard.getKeys(keyList=["escape"]):
@@ -3958,14 +3766,12 @@ while continueRoutine:
 for thisComponent in FSInstructionsComponents:
     if hasattr(thisComponent, "setAutoDraw"):
         thisComponent.setAutoDraw(False)
-# store data for thisExp (ExperimentHandler)
-thisExp.addData('FSMouse.x', FSMouse.x)
-thisExp.addData('FSMouse.y', FSMouse.y)
-thisExp.addData('FSMouse.leftButton', FSMouse.leftButton)
-thisExp.addData('FSMouse.midButton', FSMouse.midButton)
-thisExp.addData('FSMouse.rightButton', FSMouse.rightButton)
-thisExp.addData('FSMouse.time', FSMouse.time)
-thisExp.addData('FSMouse.clicked_name', FSMouse.clicked_name)
+# check responses
+if startPractice.keys in ['', [], None]:  # No response was made
+    startPractice.keys = None
+thisExp.addData('startPractice.keys',startPractice.keys)
+if startPractice.keys != None:  # we had a response
+    thisExp.addData('startPractice.rt', startPractice.rt)
 thisExp.nextEntry()
 # the Routine "FSInstructions" was not non-slip safe, so reset the non-slip timer
 routineTimer.reset()
@@ -4334,17 +4140,11 @@ for thisTrialFSPractice in trialFSPractice:
 # --- Prepare to start Routine "StartRealFS" ---
 continueRoutine = True
 # update component parameters for each repeat
-# setup some python lists for storing info about the mouse_5
-mouse_5.x = []
-mouse_5.y = []
-mouse_5.leftButton = []
-mouse_5.midButton = []
-mouse_5.rightButton = []
-mouse_5.time = []
-mouse_5.clicked_name = []
-gotValidClick = False  # until a click is received
+startFSreal.keys = []
+startFSreal.rt = []
+_startFSreal_allKeys = []
 # keep track of which components have finished
-StartRealFSComponents = [praccomplete, cont_buttonFSReal, mouse_5]
+StartRealFSComponents = [praccomplete, startFSreal]
 for thisComponent in StartRealFSComponents:
     thisComponent.tStart = None
     thisComponent.tStop = None
@@ -4377,54 +4177,29 @@ while continueRoutine:
         thisExp.timestampOnFlip(win, 'praccomplete.started')
         praccomplete.setAutoDraw(True)
     
-    # *cont_buttonFSReal* updates
-    if cont_buttonFSReal.status == NOT_STARTED and tThisFlip >= 0-frameTolerance:
+    # *startFSreal* updates
+    waitOnFlip = False
+    if startFSreal.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
         # keep track of start time/frame for later
-        cont_buttonFSReal.frameNStart = frameN  # exact frame index
-        cont_buttonFSReal.tStart = t  # local t and not account for scr refresh
-        cont_buttonFSReal.tStartRefresh = tThisFlipGlobal  # on global time
-        win.timeOnFlip(cont_buttonFSReal, 'tStartRefresh')  # time at next scr refresh
+        startFSreal.frameNStart = frameN  # exact frame index
+        startFSreal.tStart = t  # local t and not account for scr refresh
+        startFSreal.tStartRefresh = tThisFlipGlobal  # on global time
+        win.timeOnFlip(startFSreal, 'tStartRefresh')  # time at next scr refresh
         # add timestamp to datafile
-        thisExp.timestampOnFlip(win, 'cont_buttonFSReal.started')
-        cont_buttonFSReal.setAutoDraw(True)
-    # *mouse_5* updates
-    if mouse_5.status == NOT_STARTED and t >= 0.0-frameTolerance:
-        # keep track of start time/frame for later
-        mouse_5.frameNStart = frameN  # exact frame index
-        mouse_5.tStart = t  # local t and not account for scr refresh
-        mouse_5.tStartRefresh = tThisFlipGlobal  # on global time
-        win.timeOnFlip(mouse_5, 'tStartRefresh')  # time at next scr refresh
-        # add timestamp to datafile
-        thisExp.addData('mouse_5.started', t)
-        mouse_5.status = STARTED
-        mouse_5.mouseClock.reset()
-        prevButtonState = mouse_5.getPressed()  # if button is down already this ISN'T a new click
-    if mouse_5.status == STARTED:  # only update if started and not finished!
-        buttons = mouse_5.getPressed()
-        if buttons != prevButtonState:  # button state changed?
-            prevButtonState = buttons
-            if sum(buttons) > 0:  # state changed to a new click
-                # check if the mouse was inside our 'clickable' objects
-                gotValidClick = False
-                try:
-                    iter(cont_buttonFSReal)
-                    clickableList = cont_buttonFSReal
-                except:
-                    clickableList = [cont_buttonFSReal]
-                for obj in clickableList:
-                    if obj.contains(mouse_5):
-                        gotValidClick = True
-                        mouse_5.clicked_name.append(obj.name)
-                x, y = mouse_5.getPos()
-                mouse_5.x.append(x)
-                mouse_5.y.append(y)
-                buttons = mouse_5.getPressed()
-                mouse_5.leftButton.append(buttons[0])
-                mouse_5.midButton.append(buttons[1])
-                mouse_5.rightButton.append(buttons[2])
-                mouse_5.time.append(mouse_5.mouseClock.getTime())
-                if gotValidClick:
-                    continueRoutine = False  # abort routine on response
+        thisExp.timestampOnFlip(win, 'startFSreal.started')
+        startFSreal.status = STARTED
+        # keyboard checking is just starting
+        waitOnFlip = True
+        win.callOnFlip(startFSreal.clock.reset)  # t=0 on next screen flip
+        win.callOnFlip(startFSreal.clearEvents, eventType='keyboard')  # clear events on next screen flip
+    if startFSreal.status == STARTED and not waitOnFlip:
+        theseKeys = startFSreal.getKeys(keyList=['return'], waitRelease=False)
+        _startFSreal_allKeys.extend(theseKeys)
+        if len(_startFSreal_allKeys):
+            startFSreal.keys = _startFSreal_allKeys[-1].name  # just the last key pressed
+            startFSreal.rt = _startFSreal_allKeys[-1].rt
+            # a response ends the routine
+            continueRoutine = False
     
     # check for quit (typically the Esc key)
     if endExpNow or defaultKeyboard.getKeys(keyList=["escape"]):
@@ -4447,14 +4222,12 @@ while continueRoutine:
 for thisComponent in StartRealFSComponents:
     if hasattr(thisComponent, "setAutoDraw"):
         thisComponent.setAutoDraw(False)
-# store data for thisExp (ExperimentHandler)
-thisExp.addData('mouse_5.x', mouse_5.x)
-thisExp.addData('mouse_5.y', mouse_5.y)
-thisExp.addData('mouse_5.leftButton', mouse_5.leftButton)
-thisExp.addData('mouse_5.midButton', mouse_5.midButton)
-thisExp.addData('mouse_5.rightButton', mouse_5.rightButton)
-thisExp.addData('mouse_5.time', mouse_5.time)
-thisExp.addData('mouse_5.clicked_name', mouse_5.clicked_name)
+# check responses
+if startFSreal.keys in ['', [], None]:  # No response was made
+    startFSreal.keys = None
+thisExp.addData('startFSreal.keys',startFSreal.keys)
+if startFSreal.keys != None:  # we had a response
+    thisExp.addData('startFSreal.rt', startFSreal.rt)
 thisExp.nextEntry()
 # the Routine "StartRealFS" was not non-slip safe, so reset the non-slip timer
 routineTimer.reset()
@@ -4940,16 +4713,11 @@ for thisTrialsFS in trialsFS:
 # --- Prepare to start Routine "InstructionsBS" ---
 continueRoutine = True
 # update component parameters for each repeat
-# setup some python lists for storing info about the BSMouse
-BSMouse.x = []
-BSMouse.y = []
-BSMouse.leftButton = []
-BSMouse.midButton = []
-BSMouse.rightButton = []
-BSMouse.time = []
-gotValidClick = False  # until a click is received
+startBSprac.keys = []
+startBSprac.rt = []
+_startBSprac_allKeys = []
 # keep track of which components have finished
-InstructionsBSComponents = [BSGenInsText, BSMouse, cont_buttonBSIns]
+InstructionsBSComponents = [BSGenInsText, startBSprac]
 for thisComponent in InstructionsBSComponents:
     thisComponent.tStart = None
     thisComponent.tStop = None
@@ -4981,44 +4749,30 @@ while continueRoutine:
         # add timestamp to datafile
         thisExp.timestampOnFlip(win, 'BSGenInsText.started')
         BSGenInsText.setAutoDraw(True)
-    # *BSMouse* updates
-    if BSMouse.status == NOT_STARTED and t >= 5-frameTolerance:
-        # keep track of start time/frame for later
-        BSMouse.frameNStart = frameN  # exact frame index
-        BSMouse.tStart = t  # local t and not account for scr refresh
-        BSMouse.tStartRefresh = tThisFlipGlobal  # on global time
-        win.timeOnFlip(BSMouse, 'tStartRefresh')  # time at next scr refresh
-        # add timestamp to datafile
-        thisExp.addData('BSMouse.started', t)
-        BSMouse.status = STARTED
-        BSMouse.mouseClock.reset()
-        prevButtonState = BSMouse.getPressed()  # if button is down already this ISN'T a new click
-    if BSMouse.status == STARTED:  # only update if started and not finished!
-        buttons = BSMouse.getPressed()
-        if buttons != prevButtonState:  # button state changed?
-            prevButtonState = buttons
-            if sum(buttons) > 0:  # state changed to a new click
-                x, y = BSMouse.getPos()
-                BSMouse.x.append(x)
-                BSMouse.y.append(y)
-                buttons = BSMouse.getPressed()
-                BSMouse.leftButton.append(buttons[0])
-                BSMouse.midButton.append(buttons[1])
-                BSMouse.rightButton.append(buttons[2])
-                BSMouse.time.append(BSMouse.mouseClock.getTime())
-                
-                continueRoutine = False  # abort routine on response
     
-    # *cont_buttonBSIns* updates
-    if cont_buttonBSIns.status == NOT_STARTED and tThisFlip >= 5-frameTolerance:
+    # *startBSprac* updates
+    waitOnFlip = False
+    if startBSprac.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
         # keep track of start time/frame for later
-        cont_buttonBSIns.frameNStart = frameN  # exact frame index
-        cont_buttonBSIns.tStart = t  # local t and not account for scr refresh
-        cont_buttonBSIns.tStartRefresh = tThisFlipGlobal  # on global time
-        win.timeOnFlip(cont_buttonBSIns, 'tStartRefresh')  # time at next scr refresh
+        startBSprac.frameNStart = frameN  # exact frame index
+        startBSprac.tStart = t  # local t and not account for scr refresh
+        startBSprac.tStartRefresh = tThisFlipGlobal  # on global time
+        win.timeOnFlip(startBSprac, 'tStartRefresh')  # time at next scr refresh
         # add timestamp to datafile
-        thisExp.timestampOnFlip(win, 'cont_buttonBSIns.started')
-        cont_buttonBSIns.setAutoDraw(True)
+        thisExp.timestampOnFlip(win, 'startBSprac.started')
+        startBSprac.status = STARTED
+        # keyboard checking is just starting
+        waitOnFlip = True
+        win.callOnFlip(startBSprac.clock.reset)  # t=0 on next screen flip
+        win.callOnFlip(startBSprac.clearEvents, eventType='keyboard')  # clear events on next screen flip
+    if startBSprac.status == STARTED and not waitOnFlip:
+        theseKeys = startBSprac.getKeys(keyList=['return'], waitRelease=False)
+        _startBSprac_allKeys.extend(theseKeys)
+        if len(_startBSprac_allKeys):
+            startBSprac.keys = _startBSprac_allKeys[-1].name  # just the last key pressed
+            startBSprac.rt = _startBSprac_allKeys[-1].rt
+            # a response ends the routine
+            continueRoutine = False
     
     # check for quit (typically the Esc key)
     if endExpNow or defaultKeyboard.getKeys(keyList=["escape"]):
@@ -5041,13 +4795,12 @@ while continueRoutine:
 for thisComponent in InstructionsBSComponents:
     if hasattr(thisComponent, "setAutoDraw"):
         thisComponent.setAutoDraw(False)
-# store data for thisExp (ExperimentHandler)
-thisExp.addData('BSMouse.x', BSMouse.x)
-thisExp.addData('BSMouse.y', BSMouse.y)
-thisExp.addData('BSMouse.leftButton', BSMouse.leftButton)
-thisExp.addData('BSMouse.midButton', BSMouse.midButton)
-thisExp.addData('BSMouse.rightButton', BSMouse.rightButton)
-thisExp.addData('BSMouse.time', BSMouse.time)
+# check responses
+if startBSprac.keys in ['', [], None]:  # No response was made
+    startBSprac.keys = None
+thisExp.addData('startBSprac.keys',startBSprac.keys)
+if startBSprac.keys != None:  # we had a response
+    thisExp.addData('startBSprac.rt', startBSprac.rt)
 thisExp.nextEntry()
 # the Routine "InstructionsBS" was not non-slip safe, so reset the non-slip timer
 routineTimer.reset()
@@ -5411,17 +5164,11 @@ for thisTrialsPracticeBS in trialsPracticeBS:
 # --- Prepare to start Routine "startRealBS" ---
 continueRoutine = True
 # update component parameters for each repeat
-# setup some python lists for storing info about the mouse_4
-mouse_4.x = []
-mouse_4.y = []
-mouse_4.leftButton = []
-mouse_4.midButton = []
-mouse_4.rightButton = []
-mouse_4.time = []
-mouse_4.clicked_name = []
-gotValidClick = False  # until a click is received
+startBSreal.keys = []
+startBSreal.rt = []
+_startBSreal_allKeys = []
 # keep track of which components have finished
-startRealBSComponents = [praccompleteBS, cont_buttonBSReal, mouse_4]
+startRealBSComponents = [praccompleteBS, startBSreal]
 for thisComponent in startRealBSComponents:
     thisComponent.tStart = None
     thisComponent.tStop = None
@@ -5454,54 +5201,29 @@ while continueRoutine:
         thisExp.timestampOnFlip(win, 'praccompleteBS.started')
         praccompleteBS.setAutoDraw(True)
     
-    # *cont_buttonBSReal* updates
-    if cont_buttonBSReal.status == NOT_STARTED and tThisFlip >= 0-frameTolerance:
+    # *startBSreal* updates
+    waitOnFlip = False
+    if startBSreal.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
         # keep track of start time/frame for later
-        cont_buttonBSReal.frameNStart = frameN  # exact frame index
-        cont_buttonBSReal.tStart = t  # local t and not account for scr refresh
-        cont_buttonBSReal.tStartRefresh = tThisFlipGlobal  # on global time
-        win.timeOnFlip(cont_buttonBSReal, 'tStartRefresh')  # time at next scr refresh
+        startBSreal.frameNStart = frameN  # exact frame index
+        startBSreal.tStart = t  # local t and not account for scr refresh
+        startBSreal.tStartRefresh = tThisFlipGlobal  # on global time
+        win.timeOnFlip(startBSreal, 'tStartRefresh')  # time at next scr refresh
         # add timestamp to datafile
-        thisExp.timestampOnFlip(win, 'cont_buttonBSReal.started')
-        cont_buttonBSReal.setAutoDraw(True)
-    # *mouse_4* updates
-    if mouse_4.status == NOT_STARTED and t >= 0.0-frameTolerance:
-        # keep track of start time/frame for later
-        mouse_4.frameNStart = frameN  # exact frame index
-        mouse_4.tStart = t  # local t and not account for scr refresh
-        mouse_4.tStartRefresh = tThisFlipGlobal  # on global time
-        win.timeOnFlip(mouse_4, 'tStartRefresh')  # time at next scr refresh
-        # add timestamp to datafile
-        thisExp.addData('mouse_4.started', t)
-        mouse_4.status = STARTED
-        mouse_4.mouseClock.reset()
-        prevButtonState = mouse_4.getPressed()  # if button is down already this ISN'T a new click
-    if mouse_4.status == STARTED:  # only update if started and not finished!
-        buttons = mouse_4.getPressed()
-        if buttons != prevButtonState:  # button state changed?
-            prevButtonState = buttons
-            if sum(buttons) > 0:  # state changed to a new click
-                # check if the mouse was inside our 'clickable' objects
-                gotValidClick = False
-                try:
-                    iter(cont_buttonBSReal)
-                    clickableList = cont_buttonBSReal
-                except:
-                    clickableList = [cont_buttonBSReal]
-                for obj in clickableList:
-                    if obj.contains(mouse_4):
-                        gotValidClick = True
-                        mouse_4.clicked_name.append(obj.name)
-                x, y = mouse_4.getPos()
-                mouse_4.x.append(x)
-                mouse_4.y.append(y)
-                buttons = mouse_4.getPressed()
-                mouse_4.leftButton.append(buttons[0])
-                mouse_4.midButton.append(buttons[1])
-                mouse_4.rightButton.append(buttons[2])
-                mouse_4.time.append(mouse_4.mouseClock.getTime())
-                if gotValidClick:
-                    continueRoutine = False  # abort routine on response
+        thisExp.timestampOnFlip(win, 'startBSreal.started')
+        startBSreal.status = STARTED
+        # keyboard checking is just starting
+        waitOnFlip = True
+        win.callOnFlip(startBSreal.clock.reset)  # t=0 on next screen flip
+        win.callOnFlip(startBSreal.clearEvents, eventType='keyboard')  # clear events on next screen flip
+    if startBSreal.status == STARTED and not waitOnFlip:
+        theseKeys = startBSreal.getKeys(keyList=['return'], waitRelease=False)
+        _startBSreal_allKeys.extend(theseKeys)
+        if len(_startBSreal_allKeys):
+            startBSreal.keys = _startBSreal_allKeys[-1].name  # just the last key pressed
+            startBSreal.rt = _startBSreal_allKeys[-1].rt
+            # a response ends the routine
+            continueRoutine = False
     
     # check for quit (typically the Esc key)
     if endExpNow or defaultKeyboard.getKeys(keyList=["escape"]):
@@ -5524,14 +5246,12 @@ while continueRoutine:
 for thisComponent in startRealBSComponents:
     if hasattr(thisComponent, "setAutoDraw"):
         thisComponent.setAutoDraw(False)
-# store data for thisExp (ExperimentHandler)
-thisExp.addData('mouse_4.x', mouse_4.x)
-thisExp.addData('mouse_4.y', mouse_4.y)
-thisExp.addData('mouse_4.leftButton', mouse_4.leftButton)
-thisExp.addData('mouse_4.midButton', mouse_4.midButton)
-thisExp.addData('mouse_4.rightButton', mouse_4.rightButton)
-thisExp.addData('mouse_4.time', mouse_4.time)
-thisExp.addData('mouse_4.clicked_name', mouse_4.clicked_name)
+# check responses
+if startBSreal.keys in ['', [], None]:  # No response was made
+    startBSreal.keys = None
+thisExp.addData('startBSreal.keys',startBSreal.keys)
+if startBSreal.keys != None:  # we had a response
+    thisExp.addData('startBSreal.rt', startBSreal.rt)
 thisExp.nextEntry()
 # the Routine "startRealBS" was not non-slip safe, so reset the non-slip timer
 routineTimer.reset()
