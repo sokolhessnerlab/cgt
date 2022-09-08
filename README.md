@@ -1,6 +1,6 @@
 # This repository holds all relevant documents for CGT (control and gambling task) study for Anna Rini's thesis.
 
-This study was programmed using PsychoPy (Builder) and hosted on Pavlovia (here is the link to the Gitlab repository). More information on the task itself can be found here: [LINK!]
+This study was programmed using PsychoPy (Builder) and hosted on Pavlovia ([here](https://pavlovia.org/sokolhessnerlab/cgtgamblingspantasks) is the link to the Gitlab repository). More information on the task itself can be found here: [LINK!]
 
 
 
