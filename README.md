@@ -1,3 +1,14 @@
+# This repository holds all relevant documents for CGT (control and gambling task) study for Anna Rini's thesis.
+
+This study was programmed using PsychoPy (Builder) and hosted on Pavlovia (here is the link to the Gitlab repository). More information on the task itself can be found here: [LINK!]
+
+
+
+
+
+
+
+# This project uses the Start Your Lab template. See below for more information.
 <!--
 **** README for the R Project Template repository
 **** Origin URL: https://github.com/startyourlab/r-project-template
