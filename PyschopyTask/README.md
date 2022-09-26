@@ -1,4 +1,4 @@
-# PsychoPy Tasks (NOTE: the files in this repo are outdated and not what is used for our online study)
+# PsychoPy Tasks (NOTE: the files in this repo are dated and not what is used for our online study)
 
 - We first stored the task on Github as we were programming the study before pushing it online. Once we pushed it online, we needed to move the study out of Github since Pavlovia uses Gitlab.
 - The versions of the task that you see in this directory are not the most recent, but we will keep them here for reference/future use if necessary.
@@ -9,7 +9,7 @@
 ## Details for how to access and update the study with Gitlab
 1. To access the study's repo on Gitlab: go to https://pavlovia.org/sokolhessnerlab/cgtgamblingspantasks. 
 2. Click on "view code", this will take you to the Gitlab repo.
-3. The study folder is also stored on mahi mahi in the lab (/Users/shlab/Desktop/cgt_gamblingSpanTasks). Editing to the task will need to take place on a local computer and then changes get pushed online (its like Github). 
+3. The study folder is also stored on mahi mahi in the lab. Editing to the task will need to take place on a local computer and then changes get pushed online (its like Github). 
 
 ### When you want to make changes to the task
 1. open the .psyexp file in Psychopy and make your changes using Builder interface
