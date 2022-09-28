@@ -1,4 +1,4 @@
-# This repository holds all relevant documents for CGT (control and gambling task) study for Anna Rini's thesis.
+# This repository holds all relevant documents for CGT (control and gambling task) study for Anna Rini's thesis and the extension to run pupillometry run by Anna Rini and Von Monteza.
 
 This study was programmed using PsychoPy (Builder) and hosted on Pavlovia ([here](https://pavlovia.org/sokolhessnerlab/cgtgamblingspantasks) is the link to the Gitlab repository). More information on the task itself can be found here: [LINK!]
 
