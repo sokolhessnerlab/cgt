@@ -1,11 +1,13 @@
-# CGT Analysis Script
+# CGT Data Processing Script
 #
-# Script to analyze data collected online during Summer 2022 in the CGT
+# Script to process the data collected online during Summer 2022 in the CGT
 # (Control & Gambling Task) study.
 
 # identify the working directory paths
-rawdata_wd = '/Volumes/shlab/Projects/CGT/rawdata/';
 main_wd = '/Volumes/shlab/Projects/CGT/';
+
+rawdata_wd = paste0(main_wd,'rawdata/');
+processeddata_wd = paste0(main_wd,'processeddata/')
 
 # set the working directory
 setwd(rawdata_wd);
@@ -16,10 +18,12 @@ fn = dir(pattern = glob2rx('CGTgamblingSpanTasks_2022-09*.csv'),full.names = T);
 # Identify the number of participants from the file listing
 number_of_subjects = length(fn);
 
+# Store some basic information about size of the decision-making task
 num_static_trials = 50;
 num_dynamic_trials = 120;
 number_of_dm_trials_per_person = num_static_trials + num_dynamic_trials; # static = 50, dynamic = 120
 
+# Set up variables to hold decision-making data
 column_names_dm = c(
   'trialnumber',
   'subjectnumber',
@@ -40,14 +44,10 @@ column_names_dm = c(
 data_dm = array(data = NA, dim = c(0, length(column_names_dm)));
 colnames(data_dm) <- column_names_dm
 
+# Set up variables to hold working memory data
+number_of_wm_trials_per_person = 28; # 14 forward, 14 backward
 
-
-# Prepare a place for the compiled data to live
-# - WM capacity data
-
-# data_wm; includes FS & BS
-
-column_names_wm = c(
+column_names_rawdata_wm = c(
   'digitsForTrial', #both FS & BS digits
   'textbox.text', #FS response
   'textboxBS.text', #BS response
@@ -57,12 +57,24 @@ column_names_wm = c(
   'correct' #both FS & BS
 );
 
+# this will have trials in rows, these will be col. names
+column_names_wm = c(
+  'trialnumber',
+  'subjectnumber',
+  'number_digits',
+  'forward1backward0',
+  'correct'
+);
+
 data_wm = array(data = NA, dim = c(0, length(column_names_wm)));
 colnames(data_wm) <- column_names_wm
 
 # Loop
 for(s in 1:number_of_subjects){
+  # Load in the data
   tmpdata = read.csv(fn[s]);
+  
+  # DECISION-MAKING DATA
   dm_data_to_add = array(data = NA, dim = c(number_of_dm_trials_per_person,length(column_names_dm)));
 
   dm_index_static = is.finite(tmpdata$staticRDM.thisTrialN);
@@ -108,13 +120,37 @@ for(s in 1:number_of_subjects){
   dm_data_to_add[,14] = tmpdata$bestMu[is.finite(tmpdata$bestMu)];
 
 
-  # Pull out the data we need
-
-  # Add this person's data to the total data.
-
+  # Add this person's DM data to the total DM data.
   data_dm = rbind(data_dm,dm_data_to_add);
+  
+  # WORKING MEMORY
+  wm_data_to_add = array(data = NA, dim = c(number_of_wm_trials_per_person,length(column_names_wm)));
+  
+  wm_trial_indices = which(!is.na(tmpdata$trialNumber));
+  
+  wm_data_to_add[,1] = 1:number_of_wm_trials_per_person; # trial numbers
+  wm_data_to_add[,2] = s; # subject number
+  
+  wm_data_to_add[,3] = (nchar(tmpdata$digitsForTrial[wm_trial_indices-1])-1)/2; # number of digits on the trial
+  
+  wm_data_to_add[1:14,4] = 1; # forward is always first
+  wm_data_to_add[15:28,4] = 0; # backward is always second
+  
+  wm_data_to_add[,5] = tmpdata$correct[wm_trial_indices]; # correct = 1, incorrect = 0
+  
+  data_wm = rbind(data_wm,wm_data_to_add);
 }
 
 data_dm = as.data.frame(data_dm) # make it a data frame so it plays nice
+data_wm = as.data.frame(data_wm)
 
 # save out CSVs with the clean, compiled data!
+setwd(processeddata_wd);
+
+write.csv(data_dm, file=sprintf('cgt_processed_decisionmaking_data_%s.csv',format(Sys.Date(), format="%Y%m%d")),
+          row.names = F);
+write.csv(data_wm, file=sprintf('cgt_processed_workingmemory_data_%s.csv',format(Sys.Date(), format="%Y%m%d")),
+          row.names = F);
+
+# all done!
+
