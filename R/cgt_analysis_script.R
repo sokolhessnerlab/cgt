@@ -43,12 +43,17 @@ keep_check_trial = check_trial_failure <= check_trial_criterion;
 # on the basis of is.na(data_dm$choice)
 #if missed >75% = exclude, for compensation, if i recall correctly, there should be 1 person who had 60%
 
-
 # RTs
+
+mean_rts = array(dim = c(number_of_subjects,1));
+
 for (subj in 1:number_of_subjects){
   tmpdata = data_dm[data_dm$subjectnumber == subj,];
-  correct_answers = (reactiontime >= 0.25) #I don't think we need a top cut off based upon distribution mainly around 1 second, anything above 0.2 seconds
-  incorrect_answers = (reactiontime == is.NaN) #if no response and not correct answers
+  
+  mean_rts[subj] = mean(tmpdata$reactiontime, na.rm = T)
+  
+  # correct_answers = (reactiontime >= 0.25) #I don't think we need a top cut off based upon distribution mainly around 1 second, anything above 0.2 seconds
+  # incorrect_answers = (reactiontime == is.NaN) #if no response and not correct answers
 }
 reactiontime_criterion = (length((correct_answers)/(num_static_trials + num_dynamic_trials)) >= .80) #RT per participant must mostly be correct, so at least 80% of the RT must be greater than or equal to 250 ms.
 
