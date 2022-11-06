@@ -51,14 +51,22 @@ for (subj in 1:number_of_subjects){
   tmpdata = data_dm[data_dm$subjectnumber == subj,];
   
   mean_rts[subj] = mean(tmpdata$reactiontime, na.rm = T)
-  
+}
   # correct_answers = (reactiontime >= 0.25) #I don't think we need a top cut off based upon distribution mainly around 1 second, anything above 0.2 seconds
   # incorrect_answers = (reactiontime == is.NaN) #if no response and not correct answers
-}
-reactiontime_criterion = (length((correct_answers)/(num_static_trials + num_dynamic_trials)) >= .80) #RT per participant must mostly be correct, so at least 80% of the RT must be greater than or equal to 250 ms.
+  #reactiontime_criterion = (length((correct_answers)/(num_static_trials + num_dynamic_trials)) >= .80) #RT per participant must mostly be correct, so at least 80% of the RT must be greater than or equal to 250 ms.
+  #keep_reactiontime == reactiontime_criterion
+  # QUESTION: WHAT DO WE DO WITH NA TRIALS (MISSED, OR TOO FAST)? KEEP? DISCARD?
 
-keep_reactiontime == reactiontime_criterion
-# QUESTION: WHAT DO WE DO WITH NA TRIALS (MISSED, OR TOO FAST)? KEEP? DISCARD?
+# exclude people faster than 0.85 RT (want to chat why this doesnt work)
+find_rows <-which(mean_rts <= 0.85) #find rows in colum [mean_rts]
+particpant_to_be_deleted <- mean_rts[find_rows,1] #find particpant that matches 
+result <- mean_rts[mean_rts!=particpant_to_be_deleted,] #remove all found particapnts 
+keep_mean_rts[subj] = mean(result) #shoudl be all RT less than or equal to .85 seconds 
+
+#this way worked 
+mean_rts[-c(3,35,28)] #participants = 35, 3, 28 have rt less than 0.85
+hist(mean_rts[-c(3,35,28)]) # histogram of mean rts, new mean rt 1.22 seconds
 
 
 # Exclude on the basis of WM task performance
