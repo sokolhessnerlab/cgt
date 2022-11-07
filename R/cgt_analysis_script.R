@@ -35,6 +35,7 @@ for (subj in 1:number_of_subjects){
 }
 
 check_trial_criterion = 0.2; # The maximum percent of check trials that can be missed
+# (there were 10 check trials)
 # chance is 0.5, perfect is 0.0.
 
 keep_check_trial = check_trial_failure <= check_trial_criterion;
@@ -58,24 +59,23 @@ for (subj in 1:number_of_subjects){
   #keep_reactiontime == reactiontime_criterion
   # QUESTION: WHAT DO WE DO WITH NA TRIALS (MISSED, OR TOO FAST)? KEEP? DISCARD?
 
-# exclude people faster than 0.85 RT (want to chat why this doesnt work)
-find_rows <-which(mean_rts <= 0.85) #find rows in colum [mean_rts]
-particpant_to_be_deleted <- mean_rts[find_rows,1] #find particpant that matches 
-result <- mean_rts[mean_rts!=particpant_to_be_deleted,] #remove all found particapnts 
-keep_mean_rts[subj] = mean(result) #shoudl be all RT less than or equal to .85 seconds 
+keep_dm_rt = mean_rts > 0.85;
 
 #this way worked 
-mean_rts[-c(3,35,28)] #participants = 35, 3, 28 have rt less than 0.85
-hist(mean_rts[-c(3,35,28)]) # histogram of mean rts, new mean rt 1.22 seconds
+mean_rts[keep_dm_rt] #participants = 35, 3, 28 have rt less than 0.85
+hist(mean_rts[keep_dm_rt]) # histogram of mean rts
+mean(mean_rts[keep_dm_rt]) # new mean rt 1.22 seconds
 
 
-# Exclude on the basis of WM task performance
-# (using... )
+# Cannot exclude on the basis of WM task quality
 
-# Exclude on any other basis?
 
 # >>>Create clean data frames<<<
+keep_participants = which(keep_check_trial & keep_dm_rt);
 
+# Create clean data frames for data!
+clean_data_dm = data_dm[data_dm$subjectnumber %in% keep_participants,]
+clean_data_wm = data_wm[data_wm$subjectnumber %in% keep_participants,]
 
 #### Basic Data Analysis ####
 # (Separately for DM & WM data)
