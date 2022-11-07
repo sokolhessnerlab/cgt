@@ -79,8 +79,42 @@ clean_data_wm = data_wm[data_wm$subjectnumber %in% keep_participants,]
 
 #### Basic Data Analysis ####
 # (Separately for DM & WM data)
-
 # Descriptives & simple averages of task performance
+
+### DM task ###
+# Analysis for static trials: Mean p(gamble), optimization
+
+
+# Does optimized analysis match grid search analysis?
+# (should be very close!)
+
+
+# Did choices align with predictions (re: easy risky and easy safe and hard)
+
+
+# Reaction times for easy risky, easy safe, and hard (hard > easy (either))
+
+
+
+### WM Task ###
+
+## Probability correct (FS & BS)
+
+
+## Forward span
+# max correct before 2 errors in a row @ a given length (BEST RELIABLE SPAN)
+
+# total # of trials before 2 errors in a row @ a given length (QUALITY OF EF?)
+
+# max correct ever (BEST SPAN PERIOD)
+
+
+## Backward span (max correct before 2 errors in a row; max correct ever)
+# max correct before 2 errors in a row @ a given length (BEST RELIABLE SPAN)
+
+# total # of trials before 2 errors in a row @ a given length (QUALITY OF EF?)
+
+# max correct ever (BEST SPAN PERIOD)
 
 
 #### Connecting Decision-Making & Working Memory ####
