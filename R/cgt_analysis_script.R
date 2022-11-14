@@ -83,9 +83,21 @@ clean_data_wm = data_wm[data_wm$subjectnumber %in% keep_participants,]
 
 ### DM task ###
 # Analysis for static trials: Mean p(gamble), optimization
+p_gamble = array(dim = c(number_of_subjects,1));
+for (subj in 1:number_of_subjects){
+  tmpdata = data_dm[data_dm$subjectnumber == subj,];
+  
+  p_gamble[subj] = sum(tmpdata$choice)/(170) #getting some NA idk why? 
+}
 
+# Does optimized analysis match grid search analysis? WORK IN PROGRESS
+bestRho = array(dim = c(number_of_subjects,1));
 
-# Does optimized analysis match grid search analysis?
+for (subj in 1:number_of_subjects){
+  tmpdata = data_dm[data_dm$subjectnumber == subj,];
+  
+  bestRho[subj] = sum(tmpdata$bestRho)
+}
 # (should be very close!)
 
 
