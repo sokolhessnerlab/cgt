@@ -66,9 +66,7 @@ mean_rts[keep_dm_rt] #participants = 35, 3, 28 have rt less than 0.85
 hist(mean_rts[keep_dm_rt]) # histogram of mean rts
 mean(mean_rts[keep_dm_rt]) # new mean rt 1.22 seconds
 
-
 # Cannot exclude on the basis of WM task quality
-
 
 # >>>Create clean data frames<<<
 keep_participants = which(keep_check_trial & keep_dm_rt);
@@ -83,21 +81,45 @@ clean_data_wm = data_wm[data_wm$subjectnumber %in% keep_participants,]
 
 ### DM task ###
 # Analysis for static trials: Mean p(gamble), optimization
-p_gamble = array(dim = c(number_of_subjects,1));
+#mean_pgamble over all trials
+mean_pgamble = array(dim = c(number_of_subjects,1));
 for (subj in 1:number_of_subjects){
   tmpdata = data_dm[data_dm$subjectnumber == subj,];
-  
-  p_gamble[subj] = sum(tmpdata$choice)/(170) #getting some NA idk why? 
+  mean_pgamble[subj] = mean(tmpdata$choice == 1,na.rm = T )
 }
+#mean_pgamble static trials 
+static_mean_pgamble = array(dim = c(number_of_subjects, 1));
+  for (subj in 1:number_of_subjects){
+    tmpdata = data_dm[data_dm$subjectnumber == subj,];
+    tmpdata = tmpdata[tmpdata$static0dynamic1 == 0,];
+    static_mean_pgamble[subj] = mean(tmpdata$choice == 1, na.rm = T)
+  }
+#mean_pgamble_dynamic trials 
+dynamic_mean_pgamble = array(dim = c(number_of_subjects, 1));
+for (subj in 1:number_of_subjects){
+  tmpdata = data_dm[data_dm$subjectnumber == subj,];
+  tmpdata = tmpdata[tmpdata$static0dynamic1 == 1,];
+  dynamic_mean_pgamble[subj] = mean(tmpdata$choice == 1, na.rm = T)
+}
+pgambleDiff = static_mean_pgamble - dynamic_mean_pgamble # most are negative, suggesting people gambled more in dyanmic, but also more chioces... 
 
-# Does optimized analysis match grid search analysis? WORK IN PROGRESS
+#^^should we look at this and choice probability^^? 
+
+#Does optimized analysis match grid search analysis? WORK IN PROGRESS
+
+#look at all best rho per participant
 bestRho = array(dim = c(number_of_subjects,1));
-
 for (subj in 1:number_of_subjects){
   tmpdata = data_dm[data_dm$subjectnumber == subj,];
-  
-  bestRho[subj] = sum(tmpdata$bestRho)
+  bestRho[subj] = mean(tmpdata$bestRho)
 }
+#look at all best mu per participant 
+bestMu = array(dim = c(number_of_subjects,1));
+for (subj in 1:number_of_subjects){
+  tmpdata = data_dm[data_dm$subjectnumber == subj,];
+  bestMu[subj] = mean(tmpdata$bestMu)
+}
+#unsure how to pull other data, do we look at bespoke choice sets, or calculation from other code?
 # (should be very close!)
 
 
@@ -105,7 +127,23 @@ for (subj in 1:number_of_subjects){
 
 
 # Reaction times for easy risky, easy safe, and hard (hard > easy (either))
-
+#mean easy RT 
+mean_rt_easy = array(dim = c(number_of_subjects, 1));
+for (subj in 1:number_of_subjects){
+  tmpdata = data_dm[data_dm$subjectnumber == subj,];
+  tmpdata = tmpdata[tmpdata$easyP1difficultN1 == 1,];
+  mean_rt_easy[subj] = mean(tmpdata$reactiontime, na.rm = T)
+}
+#mean hard RT 
+mean_rt_hard = array(dim = c(number_of_subjects, 1));
+for (subj in 1:number_of_subjects){
+  tmpdata = data_dm[data_dm$subjectnumber == subj,];
+  tmpdata = tmpdata[tmpdata$easyP1difficultN1 == -1,];
+  mean_rt_hard[subj] = mean(tmpdata$reactiontime, na.rm = T)
+}
+#differences between averages
+mean_rtDiff = mean_rt_easy - mean_rt_hard # a negative number means on average hard was longer, positive number means on average easy was shorter duration 
+# i don't know if this makes sense^^, b/c lots of ppl have a positive number, maybe average is not way to compare. 
 
 
 ### WM Task ###
