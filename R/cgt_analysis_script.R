@@ -83,7 +83,6 @@ number_of_clean_subjects = length(keep_participants);
 
 ### DM task ###
 # Analysis for static trials: Mean p(gamble), optimization
-# mean_pgamble over all trials, static, and dynamic
 mean_pgamble = array(dim = c(number_of_clean_subjects,1));
 static_mean_pgamble = array(dim = c(number_of_clean_subjects, 1));
 dynamic_mean_pgamble = array(dim = c(number_of_clean_subjects, 1));
@@ -95,14 +94,29 @@ easyREJ_mean_pgamble = array(dim = c(number_of_clean_subjects, 1));
 for (subj in 1:number_of_clean_subjects){
   subj_id = keep_participants[subj];
   tmpdata = clean_data_dm[clean_data_dm$subjectnumber == subj_id,]; # defines this person's data
-  mean_pgamble[subj] = mean(tmpdata$choice, na.rm = T);
-  static_mean_pgamble[subj] = mean(tmpdata$choice[tmpdata$static0dynamic1 == 0], na.rm=T);
-  dynamic_mean_pgamble[subj] = mean(tmpdata$choice[tmpdata$static0dynamic1 == 1], na.rm=T);
-  easy_mean_pgamble[subj] = mean(tmpdata$choice[tmpdata$easyP1difficultN1 == 1], na.rm = T);
-  diff_mean_pgamble[subj] = mean(tmpdata$choice[tmpdata$easyP1difficultN1 == -1], na.rm = T);
-  easyACC_mean_pgamble[subj] = mean(tmpdata$choice[(tmpdata$easyP1difficultN1 == 1) & (tmpdata$choiceP > .5)], na.rm = T);
-  easyREJ_mean_pgamble[subj] = mean(tmpdata$choice[(tmpdata$easyP1difficultN1 == 1) & (tmpdata$choiceP < .5)], na.rm = T);
+  mean_pgamble[subj_id] = mean(tmpdata$choice, na.rm = T);
+  static_mean_pgamble[subj_id] = mean(tmpdata$choice[tmpdata$static0dynamic1 == 0], na.rm=T);
+  dynamic_mean_pgamble[subj_id] = mean(tmpdata$choice[tmpdata$static0dynamic1 == 1], na.rm=T);
+  easy_mean_pgamble[subj_id] = mean(tmpdata$choice[tmpdata$easyP1difficultN1 == 1], na.rm = T);
+  diff_mean_pgamble[subj_id] = mean(tmpdata$choice[tmpdata$easyP1difficultN1 == -1], na.rm = T);
+  easyACC_mean_pgamble[subj_id] = mean(tmpdata$choice[(tmpdata$easyP1difficultN1 == 1) & (tmpdata$choiceP > .5)], na.rm = T);
+  easyREJ_mean_pgamble[subj_id] = mean(tmpdata$choice[(tmpdata$easyP1difficultN1 == 1) & (tmpdata$choiceP < .5)], na.rm = T);
 }
+
+column_names_rdm = c(
+  'mean_pgamble',
+  'static_mean_pgamble',
+  'dynamic_mean_pgamble', 
+  'easy_mean_pgamble',
+  'diff_mean_pgamble', 
+  'easyACC_mean_pgamble', 
+  'easyREJ_mean_pgamble'
+);
+
+data_rdm = array(data = NA, dim = c(0, length(column_names_rdm)));
+colnames(data_rdm) <-column_names_rdm
+data_rdm <- data.frame(mean_pgamble,static_mean_pgamble,dynamic_mean_pgamble,easy_mean_pgamble,diff_mean_pgamble,easyACC_mean_pgamble,easyREJ_mean_pgamble)
+
 
 # Plot static vs. dynamic gambling
 plot(static_mean_pgamble,dynamic_mean_pgamble,xlim = c(0,1), ylim = c(0,1))
@@ -118,7 +132,6 @@ lines(x = c(0,1), y = c(0,1), col = 'blue')
 plot(easyACC_mean_pgamble,easyREJ_mean_pgamble,xlim = c(0,1), ylim = c(0,1))
 # Almost all choices predicted to be accepted, ARE (p(gamble) = 0.97)
 # Many choices predicted to be rejected, are (p(gamble) = 0.23)
-
 
 # Optimization
 #### Function Creation ####
@@ -234,25 +247,64 @@ for (subj in 1:number_of_clean_subjects){
   estimated_parameter_errors[subj,] = sqrt(diag(solve(temp_hessians[best_ind,,]))); # the SEs
 }
 
-#^^should we look at this and choice probability^^? 
+#Does optimized analysis match grid search analysis?
 
-#Does optimized analysis match grid search analysis? WORK IN PROGRESS
+#How did we get from index to to choiceset... HELP!
+n_rho_values = 200; # SET THIS TO THE DESIRED DEGREE OF FINENESS
+n_mu_values = 201; # IBID
+
+rho_values = seq(from = 0.3, to = 2.2, length.out = n_rho_values); # the range of fit-able values
+mu_values = seq(from = 7, to = 80, length.out = n_mu_values);
+
+grid_nll_values = array(dim = c(n_rho_values, n_mu_values));
+
+#tic();
+for(r in 1:n_rho_values){
+  for(m in 1:n_mu_values){
+    grid_nll_values[r,m] = negLLprospect_cgt(c(rho_values[r],mu_values[m]), choiceset, simulatedchoices)
+  }
+}
+#toc()
+
+min_nll = min(grid_nll_values); # identify the single best value
+indexes = which(grid_nll_values == min_nll, arr.ind = T); # Get indices for that single best value
+
+best_rho = rho_values[indexes[1]]; # what are the corresponding rho & mu values?
+best_mu = mu_values[indexes[2]];
+
+sprintf('The best R index is %i while the best M indx is %i, with an NLL of %f', indexes[1], indexes[2], min_nll)
+
+c(best_rho, best_mu)
+true_vals
 
 #look at all best rho per participant
-bestRho = array(dim = c(number_of_subjects,1));
-for (subj in 1:number_of_subjects){
-  tmpdata = data_dm[data_dm$subjectnumber == subj,];
-  bestRho[subj] = mean(tmpdata$bestRho)
+grid_bestRho = array(dim = c(number_of_clean_subjects,1));
+for (subj_id in 1:number_of_subjects){
+  tmpdata = clean_data_dm[clean_data_dm$subjectnumber == subj_id,];
+  bestRho[subj_id] = mean(tmpdata$bestRho)
 }
 #look at all best mu per participant 
-bestMu = array(dim = c(number_of_subjects,1));
-for (subj in 1:number_of_subjects){
-  tmpdata = data_dm[data_dm$subjectnumber == subj,];
-  bestMu[subj] = mean(tmpdata$bestMu)
+grid_bestMu = array(dim = c(number_of_clean_subjects,1));
+for (subj_id in 1:number_of_subjects){
+  tmpdata = clean_data_dm[clean_data_dm$subjectnumber == subj_id,];
+  bestMu[subj_id] = mean(tmpdata$bestMu)
 }
-#unsure how to pull other data, do we look at bespoke choice sets, or calculation from other code?
-# (should be very close!)
 
+column_names_rhomu = c(
+  'grid_bestRho',
+  'grid_bestMu',
+  'fitting_best_rho', 
+  'fitting_best_mu'
+);
+
+data_rhomu = array(data = NA, dim = c(0, length(column_names_rhomu)));
+colnames(data_rhomu) <-column_names_rhomu
+data_rhomu <- data.frame(grid_bestMu, grid_bestRho,best_mu,best_rho)
+
+#plot(grid_bestMu,best_mu)
+#plot(grid_bestRho,best_rho)
+
+# (should be very close!)
 
 # Did choices align with predictions (re: easy risky and easy safe and hard)
 
