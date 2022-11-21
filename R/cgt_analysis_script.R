@@ -258,13 +258,11 @@ mu_values = seq(from = 7, to = 80, length.out = n_mu_values);
 
 grid_nll_values = array(dim = c(n_rho_values, n_mu_values));
 
-#tic();
 for(r in 1:n_rho_values){
   for(m in 1:n_mu_values){
     grid_nll_values[r,m] = negLLprospect_cgt(c(rho_values[r],mu_values[m]), choiceset, simulatedchoices)
   }
 }
-#toc()
 
 min_nll = min(grid_nll_values); # identify the single best value
 indexes = which(grid_nll_values == min_nll, arr.ind = T); # Get indices for that single best value
@@ -303,7 +301,6 @@ data_rhomu <- data.frame(grid_bestMu, grid_bestRho,best_mu,best_rho)
 
 #plot(grid_bestMu,best_mu)
 #plot(grid_bestRho,best_rho)
-
 # (should be very close!)
 
 # Did choices align with predictions (re: easy risky and easy safe and hard)
@@ -311,19 +308,28 @@ data_rhomu <- data.frame(grid_bestMu, grid_bestRho,best_mu,best_rho)
 
 # Reaction times for easy risky, easy safe, and hard (hard > easy (either))
 #mean easy RT 
-mean_rt_easy = array(dim = c(number_of_subjects, 1));
-for (subj in 1:number_of_subjects){
-  tmpdata = data_dm[data_dm$subjectnumber == subj,];
+mean_rt_easy = array(dim = c(number_of_clean_subjects, 1));
+mean_rt_hard = array(dim = c(number_of_clean_subjects, 1));
+mean_rt_easyACC = array(dim = c(number_of_clean_subjects, 1));
+mean_rt_easyREJ = array(dim = c(number_of_clean_subjects, 1));
+
+for (subj in 1:number_of_clean_subjects){
+  subj_id = keep_participants[subj];
+  tmpdata = data_dm[data_dm$subjectnumber == subj_id,];
   tmpdata = tmpdata[tmpdata$easyP1difficultN1 == 1,];
-  mean_rt_easy[subj] = mean(tmpdata$reactiontime, na.rm = T)
+  mean_rt_easy[subj_id] = mean(tmpdata$reactiontime, na.rm = T)
+  mean_rt_easyACC[subj_id] = mean(tmpdata$reactiontime[(tmpdata$easyP1difficultN1 == 1) & (tmpdata$choiceP > .5)], na.rm = T);
+  mean_rt_easyREJ[subj_id] = mean(tmpdata$reactiontime[(tmpdata$easyP1difficultN1 == 1) & (tmpdata$choiceP < .5)], na.rm = T)
 }
-#mean hard RT 
-mean_rt_hard = array(dim = c(number_of_subjects, 1));
-for (subj in 1:number_of_subjects){
-  tmpdata = data_dm[data_dm$subjectnumber == subj,];
+
+
+for (subj in 1:number_of_clean_subjects){
+  subj_id = keep_participants[subj];
+  tmpdata = data_dm[data_dm$subjectnumber == subj_id,];
   tmpdata = tmpdata[tmpdata$easyP1difficultN1 == -1,];
-  mean_rt_hard[subj] = mean(tmpdata$reactiontime, na.rm = T)
+  mean_rt_hard[subj_id] = mean(tmpdata$reactiontime, na.rm = T)
 }
+
 #differences between averages
 mean_rtDiff = mean_rt_easy - mean_rt_hard # a negative number means on average hard was longer, positive number means on average easy was shorter duration 
 # i don't know if this makes sense^^, b/c lots of ppl have a positive number, maybe average is not way to compare. 
@@ -332,8 +338,19 @@ mean_rtDiff = mean_rt_easy - mean_rt_hard # a negative number means on average h
 ### WM Task ###
 
 ## Probability correct (FS & BS)
+#FS_correct = array(dim = c(number_of_clean_subjects,1));
+#BS_correct = array(dim = c(number_of_clean_subjects,1));
+  
+#for (subj in 1:number_of_clean_subjects){
+ # subj_id = keep_participants[subj_id];
+  #tmpdata = data_wm[data_wm$subjectnumber == subj_id,]; # defines this person's data
+  #FS_correct[subj_id] = mean(tmpdata$correct[tmpdata$forward1backward0 == 1], na.rm=T);
+ # BS_correct[subj_id] = mean(tmpdata$correct[tmpdata$forward1backward0 == 0], na.rm=T);
+}
 
+#^^ I think we talked about removing if too high...  for people with 14... #
 
+  
 ## Forward span
 # max correct before 2 errors in a row @ a given length (BEST RELIABLE SPAN)
 
@@ -351,4 +368,4 @@ mean_rtDiff = mean_rt_easy - mean_rt_hard # a negative number means on average h
 
 
 #### Connecting Decision-Making & Working Memory ####
-
+#regression analysis 
