@@ -77,11 +77,11 @@ clean_data_wm = data_wm[data_wm$subjectnumber %in% keep_participants,]
 
 number_of_clean_subjects = length(keep_participants);
 
-#### Basic Data Analysis ####
+#### BASIC DATA ANALYSIS ####
 # (Separately for DM & WM data)
 # Descriptives & simple averages of task performance
 
-### DM task ###
+#### DM task Analysis ####
 # Analysis for static trials: Mean p(gamble), optimization
 mean_pgamble = array(dim = c(number_of_clean_subjects,1));
 static_mean_pgamble = array(dim = c(number_of_clean_subjects, 1));
@@ -133,8 +133,7 @@ plot(easyACC_mean_pgamble,easyREJ_mean_pgamble,xlim = c(0,1), ylim = c(0,1))
 # Almost all choices predicted to be accepted, ARE (p(gamble) = 0.97)
 # Many choices predicted to be rejected, are (p(gamble) = 0.23)
 
-# Optimization
-#### Function Creation ####
+#### Optimization Function Creation ####
 
 # Function to calculate choice probabilities
 choice_probability <- function(parameters, choiceset) {
@@ -191,16 +190,17 @@ negLLprospect_cgt <- function(parameters,choiceset,choices) {
   return(nll)
 }
 
+#### Optimization ####
 eps = .Machine$double.eps;
 lower_bounds = c(eps, 0); # R, M
-upper_bounds = c(2,50); 
+upper_bounds = c(2,80); 
 number_of_parameters = length(lower_bounds);
 
 # Create placeholders for parameters, errors, NLL (and anything else you want)
 number_of_iterations = 200; # 100 or more
-estimated_parameters = array(dim = c(number_of_subjects,2));
-estimated_parameter_errors = array(dim = c(number_of_subjects,2));
-NLLs = array(dim = c(number_of_subjects,1));
+estimated_parameters = array(dim = c(number_of_clean_subjects,2));
+estimated_parameter_errors = array(dim = c(number_of_clean_subjects,2));
+NLLs = array(dim = c(number_of_clean_subjects,1));
 
 for (subj in 1:number_of_clean_subjects){
   subj_id = keep_participants[subj];
@@ -247,63 +247,75 @@ for (subj in 1:number_of_clean_subjects){
   estimated_parameter_errors[subj,] = sqrt(diag(solve(temp_hessians[best_ind,,]))); # the SEs
 }
 
-#Does optimized analysis match grid search analysis?
+# Does optimized analysis match grid search analysis?
 
-#How did we get from index to to choiceset... HELP!
 n_rho_values = 200; # SET THIS TO THE DESIRED DEGREE OF FINENESS
 n_mu_values = 201; # IBID
 
 rho_values = seq(from = 0.3, to = 2.2, length.out = n_rho_values); # the range of fit-able values
 mu_values = seq(from = 7, to = 80, length.out = n_mu_values);
 
-grid_nll_values = array(dim = c(n_rho_values, n_mu_values));
+# # CODE TO DO GRID SEARCH FRESH IF YOU WANT!
+# 
+# best_rhos = array(dim = c(number_of_clean_subjects,1));
+# best_mus = array(dim = c(number_of_clean_subjects,1));
+# 
+# for (subj in 1:number_of_clean_subjects){
+#   subj_id = keep_participants[subj];
+#   print(subj_id)
+#   
+#   tmpdata = clean_data_dm[(clean_data_dm$subjectnumber == subj_id) & 
+#                             (clean_data_dm$static0dynamic1 == 0) & 
+#                             is.finite(clean_data_dm$choice),]; # defines this person's data
+#   
+#   choiceset = as.data.frame(cbind(tmpdata$riskyopt1, tmpdata$riskyopt2, tmpdata$safe));
+#   colnames(choiceset) <- c('riskyoption1', 'riskyoption2', 'safeoption');
+#   
+#   grid_nll_values = array(dim = c(n_rho_values, n_mu_values));
+#   
+#   for(r in 1:n_rho_values){
+#     for(m in 1:n_mu_values){
+#       grid_nll_values[r,m] = negLLprospect_cgt(c(rho_values[r],mu_values[m]), choiceset, tmpdata$choice)
+#     }
+#   }
+#   
+#   min_nll = min(grid_nll_values); # identify the single best value
+#   indexes = which(grid_nll_values == min_nll, arr.ind = T); # Get indices for that single best value
+#   
+#   best_rhos[subj] = rho_values[indexes[1]]; # what are the corresponding rho & mu values?
+#   best_mus[subj] = mu_values[indexes[2]];
+#   
+# }
 
-for(r in 1:n_rho_values){
-  for(m in 1:n_mu_values){
-    grid_nll_values[r,m] = negLLprospect_cgt(c(rho_values[r],mu_values[m]), choiceset, simulatedchoices)
-  }
-}
 
-min_nll = min(grid_nll_values); # identify the single best value
-indexes = which(grid_nll_values == min_nll, arr.ind = T); # Get indices for that single best value
-
-best_rho = rho_values[indexes[1]]; # what are the corresponding rho & mu values?
-best_mu = mu_values[indexes[2]];
-
-sprintf('The best R index is %i while the best M indx is %i, with an NLL of %f', indexes[1], indexes[2], min_nll)
-
-c(best_rho, best_mu)
-true_vals
-
-#look at all best rho per participant
+# look at all best rho & mu per participant
 grid_bestRho = array(dim = c(number_of_clean_subjects,1));
-for (subj_id in 1:number_of_subjects){
-  tmpdata = clean_data_dm[clean_data_dm$subjectnumber == subj_id,];
-  bestRho[subj_id] = mean(tmpdata$bestRho)
-}
-#look at all best mu per participant 
 grid_bestMu = array(dim = c(number_of_clean_subjects,1));
-for (subj_id in 1:number_of_subjects){
+for (subj in 1:number_of_clean_subjects){
+  subj_id = keep_participants[subj];
+  
   tmpdata = clean_data_dm[clean_data_dm$subjectnumber == subj_id,];
-  bestMu[subj_id] = mean(tmpdata$bestMu)
+  
+  grid_bestRho[subj] = rho_values[unique(tmpdata$bestRho)];
+  grid_bestMu[subj] = mu_values[unique(tmpdata$bestMu)];
 }
 
-column_names_rhomu = c(
-  'grid_bestRho',
-  'grid_bestMu',
-  'fitting_best_rho', 
-  'fitting_best_mu'
-);
 
-data_rhomu = array(data = NA, dim = c(0, length(column_names_rhomu)));
-colnames(data_rhomu) <-column_names_rhomu
-data_rhomu <- data.frame(grid_bestMu, grid_bestRho,best_mu,best_rho)
+plot(grid_bestRho,estimated_parameters[,1], main = 'RHO')
+plot(grid_bestMu,estimated_parameters[,2], main = 'MU')
 
-#plot(grid_bestMu,best_mu)
-#plot(grid_bestRho,best_rho)
-# (should be very close!)
+# ANSWER: YES, it matches perfectly. Grid-search values match optimized values very closely.
 
+#### Choice Alignment with Predictions ####
 # Did choices align with predictions (re: easy risky and easy safe and hard)
+
+# Have an issue in which choiceP values do not map on to what they should be, given rho & mu values.
+#
+# What's going on?
+# 1. Static choice set: grid search & optimization end up on the same values. Indices seem good. 
+# 2. File identification is correct. 
+# 3. Choice set *loading* is incorrect. Every participant completed the choice set for the minimum values
+#   of rho and mu (rho = 0.3; mu = 7).
 
 
 # Reaction times for easy risky, easy safe, and hard (hard > easy (either))
