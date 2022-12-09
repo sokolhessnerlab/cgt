@@ -184,6 +184,30 @@ for (subj in 1:number_of_clean_subjects){
   
   estimated_parameters[subj,] = temp_parameters[best_ind,] # the parameters
   estimated_parameter_errors[subj,] = sqrt(diag(solve(temp_hessians[best_ind,,]))); # the SEs
+  
+  
+  ### Fix ChoiceP Values in clean_data_dm ###
+  
+  # 1. Create index to identify this person's static trials in clean_data_dm
+  
+  subj_index = (clean_data_dm$subjectnumber == subj_id) & (clean_data_dm$static0dynamic1 == 1);
+  
+  # 2. Pull out choiceset values
+  
+  dynamic_choiceset = as.data.frame(cbind(clean_data_dm$riskyopt1[subj_index], 
+                                  clean_data_dm$riskyopt2[subj_index], 
+                                  clean_data_dm$safe[subj_index]));
+  colnames(dynamic_choiceset) <- c('riskyoption1', 'riskyoption2', 'safeoption');
+
+  # 3. Calculate new choiceP values with choiceset & parameters
+
+  choiceP_new = choice_probability(estimated_parameters[subj,], dynamic_choiceset)
+    
+  # 4. Store the values back in clean_data_dm
+  
+  clean_data_dm$choiceP[subj_index] = choiceP_new;
+  
+  ###
 }
 
 # Does optimized analysis match grid search analysis?
@@ -209,47 +233,25 @@ for (subj in 1:number_of_clean_subjects){
 plot(grid_bestRho,estimated_parameters[,1], main = 'RHO')
 plot(grid_bestMu,estimated_parameters[,2], main = 'MU')
 
-###CREATES AND FIXES ChoiceP###
-#how to replace choice p with correct choice p?? 
-RHO = array(dim = c(number_of_clean_subjects,1));
-MU = array(dim = c(number_of_clean_subjects,1));
-choiceP = array(dim = c(number_of_clean_subjects,1));
-}
 
 
-#for (subj in 1:number_of_clean_subjects){
-#subj_id = keep_participants[subj];
-#rdmDF = clean_data_dm[clean_data_dm$subjnumber == subj_id,];
-#rdmDF = clean_data_dm[clean_data_dm$choiceP ???
-#rdmDF = clean_data_dm[clean_data_dm$estimated_parameters[,1] #rho
-#rdmDF = clean_data_dm[clean_data_dm$estimated_parameters[,2] #mu
-#}
+### Create Continuous difficulty metric ###
 
-#Categorical Difficultly Metric  
-DifficultyMetric = array(dim = c(number_of_clean_subjects,1));
+clean_data_dm$diff_cont = abs(abs(clean_data_dm$choiceP - 0.5)*2-1);
+# EASY = 0
+# DIFFICULT = 1
 
-DifficultyMetric = choiceP - 0.5 #distance away from 0.5 (chance) 
+### Create Categorical difficulty metric ###
 
-if (-0.50 <= DifficultyMetric <= -0.30){#easy reject
-    cat(1)
-}
-if (0.30 <= DifficultyMetric <= 0.50){#easy accept
-  cat(1)
-}
-if (-0.29 <= DifficultyMetric <= -0.09){#medium reject
-  cat(0)
-}
-if (0.09 <= DifficultyMetric <= 0.29){#medium accept
-  cat(0)
-}
-if (-0.10 <= DifficultyMetric <= 0.10){#hard
-  cat(-1)
-}
+clean_data_dm$diff_cat = 0; # MEDIUM
+clean_data_dm$diff_cat[clean_data_dm$diff_cont < .3] = -1; # EASY (p's < .15 or > .85)
+clean_data_dm$diff_cat[clean_data_dm$diff_cont > .7] = 1; # DIFFICULT (p's > .35 AND < .65)
+clean_data_dm$diff_cat[clean_data_dm$static0dynamic1 == 0] = NA;
 
-easy = 1 # -0.5 or 0.5 easiest because its farthest away from 0.5(chance)
-medium = 0 #middle range (medium difficulty)
-difficult = -1  #closest to 0, because then choice p closest to chance, ev closer 
-#how do i make it so we can distinguish between rejects and accepts 
+
+
+
+
 
 
 #GENERAL SUBJECT LEVEL ANALYSIS 
