@@ -247,7 +247,29 @@ for (subj in 1:number_of_clean_subjects){
   estimated_parameter_errors[subj,] = sqrt(diag(solve(temp_hessians[best_ind,,]))); # the SEs
 }
 
-# Does optimized analysis match grid search analysis?
+### Fix ChoiceP Values in clean_data_dm ###
+
+# 1. Create index to identify this person's static trials in clean_data_dm
+
+subj_index = (clean_data_dm$subjectnumber == subj_id) & (clean_data_dm$static0dynamic1 == 1);
+
+# 2. Pull out choiceset values
+
+dynamic_choiceset = as.data.frame(cbind(clean_data_dm$riskyopt1[subj_index], 
+                                        clean_data_dm$riskyopt2[subj_index], 
+                                        clean_data_dm$safe[subj_index]));
+colnames(dynamic_choiceset) <- c('riskyoption1', 'riskyoption2', 'safeoption');
+
+# 3. Calculate new choiceP values with choiceset & parameters
+
+choiceP_new = choice_probability(estimated_parameters[subj,], dynamic_choiceset)
+
+# 4. Store the values back in clean_data_dm
+
+clean_data_dm$choiceP[subj_index] = choiceP_new;
+
+
+### Does optimized analysis match grid search analysis?###
 
 n_rho_values = 200; # SET THIS TO THE DESIRED DEGREE OF FINENESS
 n_mu_values = 201; # IBID
@@ -309,7 +331,7 @@ plot(grid_bestMu,estimated_parameters[,2], main = 'MU')
 #### Choice Alignment with Predictions ####
 # Did choices align with predictions (re: easy risky and easy safe and hard)
 
-# Have an issue in which choiceP values do not map on to what they should be, given rho & mu values.
+# Have an issue in which choiceP values do not map on to what they should be, given rho & mu values.(fixed see section above)
 #
 # What's going on?
 # 1. Static choice set: grid search & optimization end up on the same values. Indices seem good. 
@@ -317,6 +339,18 @@ plot(grid_bestMu,estimated_parameters[,2], main = 'MU')
 # 3. Choice set *loading* is incorrect. Every participant completed the choice set for the minimum values
 #   of rho and mu (rho = 0.3; mu = 7).
 
+### Create Continuous difficulty metric ###
+
+clean_data_dm$diff_cont = abs(abs(clean_data_dm$choiceP - 0.5)*2-1);
+# EASY = 0
+# DIFFICULT = 1
+
+### Create Categorical difficulty metric ###
+
+clean_data_dm$diff_cat = 0; # MEDIUM
+clean_data_dm$diff_cat[clean_data_dm$diff_cont < .3] = -1; # EASY (p's < .15 or > .85)
+clean_data_dm$diff_cat[clean_data_dm$diff_cont > .7] = 1; # DIFFICULT (p's > .35 AND < .65)
+clean_data_dm$diff_cat[clean_data_dm$static0dynamic1 == 0] = NA;
 
 # Reaction times for easy risky, easy safe, and hard (hard > easy (either))
 #mean easy RT 
@@ -358,7 +392,7 @@ mean_rtDiff = mean_rt_easy - mean_rt_hard # a negative number means on average h
   #tmpdata = data_wm[data_wm$subjectnumber == subj_id,]; # defines this person's data
   #FS_correct[subj_id] = mean(tmpdata$correct[tmpdata$forward1backward0 == 1], na.rm=T);
  # BS_correct[subj_id] = mean(tmpdata$correct[tmpdata$forward1backward0 == 0], na.rm=T);
-}
+
 
 #^^ I think we talked about removing if too high...  for people with 14... #
 
