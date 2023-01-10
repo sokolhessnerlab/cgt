@@ -66,7 +66,14 @@ mean_rts[keep_dm_rt] #participants = 35, 3, 28 have rt less than 0.85
 hist(mean_rts[keep_dm_rt]) # histogram of mean rts
 mean(mean_rts[keep_dm_rt]) # new mean rt 1.22 seconds
 
-# Cannot exclude on the basis of WM task quality
+# exclude on the basis of WM task performance
+max_span = array(dim = c(number_of_subjects, 1));
+keep_max_span= max_span < 12
+
+for (subj in 1:number_of_subjects){
+  tmpdata = data_wm[data_wm$subjectnumber == subj,];
+  max_span[subj]= max(tmpdata$number_digits, na.rm = T) #attempting to set a max on the span capactity to be 12 arbitrarily 
+}  
 
 # >>>Create clean data frames<<<
 keep_participants = which(keep_check_trial & keep_dm_rt);
@@ -413,5 +420,15 @@ mean_rtDiff = mean_rt_easy - mean_rt_hard # a negative number means on average h
 # max correct ever (BEST SPAN PERIOD)
 
 
-#### Connecting Decision-Making & Working Memory ####
-#regression analysis 
+### Connecting Decision-Making & Working Memory #### (use glmr)
+#1st looks at RT and choice difficulty 
+#General Linear Regression mixed model analysis (group level analysis)
+#account for choice difficulty 
+#see how far back if at all previous choice difficulty mattered
+#mean Rt after easy vs after hard trials
+#account for previous trial RT (ALL trail basis, not per person?)
+
+#2nd looks at cognitive capacity and choice behavior 
+#continuous variable of cog control? 
+#see behavioral (rt) variability in the regression based upon inc or dec of capacity?
+#see individual and group differences? 
