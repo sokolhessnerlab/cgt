@@ -1,13 +1,13 @@
-# CGT Data Processing Script
+# CGT Data Processing Script STUDY 2
 #
-# Script to process the data collected online during Summer 2022 in the CGT
+# Script to process the data collected SONA SYSTEMS 2023
 # (Control & Gambling Task) study.
 
 # identify the working directory paths
-main_wd = '/Volumes/shlab/Projects/CGT/';
+main_wd = '/Volumes/shlab/Projects/CGT/CGT_study2';
 
-rawdata_wd = paste0(main_wd,'rawdata/');
-processeddata_wd = paste0(main_wd,'processeddata/')
+rawdata_wd = paste0(main_wd,'rawdata_study2/');
+processeddata_wd = paste0(main_wd,'processeddata_study2/')
 
 # set the working directory
 setwd(rawdata_wd);

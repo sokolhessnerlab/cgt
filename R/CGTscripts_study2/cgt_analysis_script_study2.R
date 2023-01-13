@@ -6,15 +6,15 @@
 rm(list=ls()); # Clear the workspace
 
 # identify the working directory paths
-main_wd = '/Volumes/shlab/Projects/CGT/CGT_study2';
-processeddata_wd = paste0(main_wd,'processeddata_study2/')
+main_wd_2 = '/Volumes/shlab/Projects/CGT/CGT_study2/';
+processeddata_wd_2 = paste0(main_wd_2,'processeddata_study2/');
 
 #### Loading Data ####
-setwd(processeddata_wd)
+setwd(processeddata_wd_2) 
 fn = dir(pattern = glob2rx('cgt_processed*.csv'),full.names = T);
 
 data_dm = read.csv(fn[1]) # decision-making data
-data_wm = read.csv(fn[2]) # working memory data
+data_wm = read.csv(fn[2]) # working memory data 
 
 number_of_subjects = length(unique(data_dm$subjectnumber));
 
