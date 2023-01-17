@@ -4,7 +4,7 @@
 # (Control & Gambling Task) study.
 
 # identify the working directory paths
-main_wd = '/Volumes/shlab/Projects/CGT/CGT_study2';
+main_wd = '/Volumes/shlab/Projects/CGT/CGT_study2/';
 
 rawdata_wd = paste0(main_wd,'rawdata_study2/');
 processeddata_wd = paste0(main_wd,'processeddata_study2/')
@@ -13,7 +13,7 @@ processeddata_wd = paste0(main_wd,'processeddata_study2/')
 setwd(rawdata_wd);
 
 # List all the data files
-fn = dir(pattern = glob2rx('CGTgamblingSpanTasks_2022-09*.csv'),full.names = T);
+fn = dir(pattern = glob2rx('CGTgamblingSpanTasks_2023-01*.csv'),full.names = T);
 
 # Identify the number of participants from the file listing
 number_of_subjects = length(fn);

@@ -6,11 +6,11 @@
 rm(list=ls()); # Clear the workspace
 
 # identify the working directory paths
-main_wd_2 = '/Volumes/shlab/Projects/CGT/CGT_study2/';
-processeddata_wd_2 = paste0(main_wd_2,'processeddata_study2/');
+main_wd = '/Volumes/shlab/Projects/CGT/CGT_study2/';
+processeddata_wd = paste0(main_wd,'processeddata_study2/');
 
 #### Loading Data ####
-setwd(processeddata_wd_2) 
+setwd(processeddata_wd) 
 fn = dir(pattern = glob2rx('cgt_processed*.csv'),full.names = T);
 
 data_dm = read.csv(fn[1]) # decision-making data
@@ -62,18 +62,18 @@ for (subj in 1:number_of_subjects){
 keep_dm_rt = mean_rts > 0.85;
 
 #this way worked 
-mean_rts[keep_dm_rt] #participants = 35, 3, 28 have rt less than 0.85
+mean_rts[keep_dm_rt] # only shows 3 particpants ( mean 1.7 sec, 1.3 sec, 1.28 sec)
 hist(mean_rts[keep_dm_rt]) # histogram of mean rts
-mean(mean_rts[keep_dm_rt]) # new mean rt 1.22 seconds
+mean(mean_rts[keep_dm_rt]) # new mean rt 1.43 seconds
 
 # exclude on the basis of WM task performance
-max_span = array(dim = c(number_of_subjects, 1));
-keep_max_span= max_span < 12
+#max_span = array(dim = c(number_of_subjects, 1));
+#keep_max_span= max_span < 12
 
-for (subj in 1:number_of_subjects){
-  tmpdata = data_wm[data_wm$subjectnumber == subj,];
-  max_span[subj]= max(tmpdata$number_digits, na.rm = T) #attempting to set a max on the span capactity to be 12 arbitrarily 
-}  
+#for (subj in 1:number_of_subjects){
+  #tmpdata = data_wm[data_wm$subjectnumber == subj,];
+  #max_span[subj]= max(tmpdata$number_digits, na.rm = T) #attempting to set a max on the span capactity to be 12 arbitrarily 
+#}  
 
 # >>>Create clean data frames<<<
 keep_participants = which(keep_check_trial & keep_dm_rt);
@@ -129,16 +129,13 @@ data_rdm <- data.frame(mean_pgamble,static_mean_pgamble,dynamic_mean_pgamble,eas
 plot(static_mean_pgamble,dynamic_mean_pgamble,xlim = c(0,1), ylim = c(0,1))
 lines(x = c(0,1), y = c(0,1), col = 'red')
 
-pgambleDiff = static_mean_pgamble - dynamic_mean_pgamble # most are negative, suggesting people gambled more in dyanmic, but also more chioces... 
+pgambleDiff = static_mean_pgamble - dynamic_mean_pgamble # positive numbers, 0.105 0.138, suggesting people gambled less in dynamic than static 
 
 plot(easy_mean_pgamble,diff_mean_pgamble,xlim = c(0,1), ylim = c(0,1))
 lines(x = c(0,1), y = c(0,1), col = 'blue')
-# Lots of people taking risks on ALL (or nearly all) of the 'difficult' trials
-# --> Will limit inferences we can draw about risk-taking on difficult trials b/c of low variability in behavior.
 
 plot(easyACC_mean_pgamble,easyREJ_mean_pgamble,xlim = c(0,1), ylim = c(0,1))
-# Almost all choices predicted to be accepted, ARE (p(gamble) = 0.97)
-# Many choices predicted to be rejected, are (p(gamble) = 0.23)
+
 
 #### Optimization Function Creation ####
 
@@ -263,8 +260,8 @@ for (subj in 1:number_of_clean_subjects){
 # 2. Pull out choiceset values
 
 #dynamic_choiceset = as.data.frame(cbind(clean_data_dm$riskyopt1[subj_index], 
-                                        clean_data_dm$riskyopt2[subj_index], 
-                                        clean_data_dm$safe[subj_index]));
+                                        #clean_data_dm$riskyopt2[subj_index], 
+                                        #clean_data_dm$safe[subj_index]));
 #colnames(dynamic_choiceset) <- c('riskyoption1', 'riskyoption2', 'safeoption');
 
 # 3. Calculate new choiceP values with choiceset & parameters
@@ -327,7 +324,6 @@ for (subj in 1:number_of_clean_subjects){
   grid_bestRho[subj] = rho_values[unique(tmpdata$bestRho)];
   grid_bestMu[subj] = mu_values[unique(tmpdata$bestMu)];
 }
-
 
 plot(grid_bestRho,estimated_parameters[,1], main = 'RHO')
 plot(grid_bestMu,estimated_parameters[,2], main = 'MU')
