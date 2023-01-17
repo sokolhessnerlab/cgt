@@ -32,6 +32,12 @@ for (subj in 1:number_of_subjects){
   correct_answers = (0.5 * tmpdata$riskyopt1[check_trial_index] +
                        0.5 * tmpdata$riskyopt2[check_trial_index]) > tmpdata$safe[check_trial_index];
   check_trial_failure[subj] = length(which(!tmpdata$choice[check_trial_index] == correct_answers))/length(check_trial_index);
+  
+  # Plot the choice data
+  plot(tmpdata$riskyopt1[tmpdata$choice == 1],tmpdata$safe[tmpdata$choice == 1], col = 'green', 
+       xlab = 'Risky Gain $', ylab = 'Safe $', main = paste0('All Subjects; Subj ', subj),
+       xlim = c(0,30), ylim = c(0,12))
+  points(tmpdata$riskyopt1[tmpdata$choice == 0],tmpdata$safe[tmpdata$choice == 0], col = 'red')
 }
 
 check_trial_criterion = 0.2; # The maximum percent of check trials that can be missed
@@ -108,6 +114,12 @@ for (subj in 1:number_of_clean_subjects){
   diff_mean_pgamble[subj_id] = mean(tmpdata$choice[tmpdata$easyP1difficultN1 == -1], na.rm = T);
   easyACC_mean_pgamble[subj_id] = mean(tmpdata$choice[(tmpdata$easyP1difficultN1 == 1) & (tmpdata$choiceP > .5)], na.rm = T);
   easyREJ_mean_pgamble[subj_id] = mean(tmpdata$choice[(tmpdata$easyP1difficultN1 == 1) & (tmpdata$choiceP < .5)], na.rm = T);
+  
+  # Plot the choice data
+  plot(tmpdata$riskyopt1[tmpdata$choice == 1],tmpdata$safe[tmpdata$choice == 1], col = 'green', 
+       xlab = 'Risky Gain $', ylab = 'Safe $', main = paste0('Kept Subjects; Subj ', subj_id),
+       xlim = c(0,30), ylim = c(0,12))
+  points(tmpdata$riskyopt1[tmpdata$choice == 0],tmpdata$safe[tmpdata$choice == 0], col = 'red')
 }
 
 column_names_rdm = c(
