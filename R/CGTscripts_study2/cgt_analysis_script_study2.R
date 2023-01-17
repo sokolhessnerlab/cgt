@@ -337,8 +337,11 @@ for (subj in 1:number_of_clean_subjects){
   grid_bestMu[subj] = mu_values[unique(tmpdata$bestMu)];
 }
 
-plot(grid_bestRho,estimated_parameters[,1], main = 'RHO')
-plot(grid_bestMu,estimated_parameters[,2], main = 'MU')
+plot(grid_bestRho,estimated_parameters[,1], main = 'RHO', xlim = c(0, 2), ylim = c(0, 2))
+lines(c(0.3, 1.89), c(0.3, 1.89))
+
+plot(grid_bestMu,estimated_parameters[,2], main = 'MU', xlim = c(0, 100), ylim = c(0, 100))
+lines(c(7, 80), c(7, 80))
 
 # ANSWER: YES, it matches perfectly. Grid-search values match optimized values very closely.
 
