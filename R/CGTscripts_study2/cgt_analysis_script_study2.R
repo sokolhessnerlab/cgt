@@ -397,6 +397,21 @@ for (subj in 1:number_of_clean_subjects){
 mean_rtDiff = mean_rt_easy - mean_rt_hard # a negative number means on average hard was longer, positive number means on average easy was shorter duration 
 # i don't know if this makes sense^^, b/c lots of ppl have a positive number, maybe average is not way to compare. 
 
+#mean RT subsequent
+hard_hard_mean_rt = array(dim = c(number_of_clean_subjects, 1));
+easy_easy_mean_rt = array(dim = c(number_of_clean_subjects, 1));
+easy_hard_mean_rt = array(dim = c(number_of_clean_subjects, 1));
+hard_easy_mean_rt = array(dim = c(number_of_clean_subjects, 1));
+
+for (subj in 1:number_of_clean_subjects){
+  subj_id = keep_participants[subj];
+  tmpdata = data_dm[data_dm$subjectnumber == subj_id,];
+  easy_easy_mean_rt[subj_id] = mean(tmpdata$reactiontime[(tmpdata$easyP1difficultN1 == 1)]) & ((T-1)tmpdata=$easyP1difficultN1== 1)
+}
+
+#hard_hard_mean_rt[subj_id] = 
+#easy_hard_mean_rt[subj_id] =
+#hard_easy_mean_rt[subj_id] = 
 
 ### WM Task ###
 
@@ -413,7 +428,6 @@ mean_rtDiff = mean_rt_easy - mean_rt_hard # a negative number means on average h
 
 #^^ I think we talked about removing if too high...  for people with 14... #
 
-
 ## Forward span
 # max correct before 2 errors in a row @ a given length (BEST RELIABLE SPAN)
 
@@ -429,6 +443,10 @@ mean_rtDiff = mean_rt_easy - mean_rt_hard # a negative number means on average h
 
 # max correct ever (BEST SPAN PERIOD)
 
+###Subsequent Difficulty Measure ###
+
+### Regression LM (Contextual) ### 
+#shifted version of easy and difficult 
 
 ### Connecting Decision-Making & Working Memory #### (use glmr)
 #1st looks at RT and choice difficulty 
