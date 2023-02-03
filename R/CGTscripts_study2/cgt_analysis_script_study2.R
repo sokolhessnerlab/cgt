@@ -459,7 +459,8 @@ for (subj in 1:number_of_clean_subjects){
   subj_id = keep_participants[subj_id];
   tmpdata = data_wm[data_wm$subjectnumber == subj_id,];
   best_reliable_span[subj_id] = unique(data_wm$correctdigits[data_wm$correct == 1]);
-} # ^^ what function do i use here not unique and not max? ^^ 
+} 
+# ^^ what function do i use here not unique and not max? ^^ 
 
   
 # total # of trials before 2 errors in a row @ a given length (QUALITY OF EF?)
@@ -479,7 +480,7 @@ for (subj in 1:number_of_clean_subjects){
 #account for choice difficulty 
 #see how far back if at all previous choice difficulty mattered
 #mean Rt after easy vs after hard trials
-#account for previous trial RT (ALL trail basis, not per person?)
+#account for previous trial RT (ALL trail basis)
 
 #2nd looks at cognitive capacity and choice behavior 
 #continuous variable of cog control? 
