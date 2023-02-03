@@ -107,13 +107,13 @@ easyREJ_mean_pgamble = array(dim = c(number_of_clean_subjects, 1));
 for (subj in 1:number_of_clean_subjects){
   subj_id = keep_participants[subj];
   tmpdata = clean_data_dm[clean_data_dm$subjectnumber == subj_id,]; # defines this person's data
-  mean_pgamble[subj_id] = mean(tmpdata$choice, na.rm = T);
-  static_mean_pgamble[subj_id] = mean(tmpdata$choice[tmpdata$static0dynamic1 == 0], na.rm=T);
-  dynamic_mean_pgamble[subj_id] = mean(tmpdata$choice[tmpdata$static0dynamic1 == 1], na.rm=T);
-  easy_mean_pgamble[subj_id] = mean(tmpdata$choice[tmpdata$easyP1difficultN1 == 1], na.rm = T);
-  diff_mean_pgamble[subj_id] = mean(tmpdata$choice[tmpdata$easyP1difficultN1 == -1], na.rm = T);
-  easyACC_mean_pgamble[subj_id] = mean(tmpdata$choice[(tmpdata$easyP1difficultN1 == 1) & (tmpdata$choiceP > .5)], na.rm = T);
-  easyREJ_mean_pgamble[subj_id] = mean(tmpdata$choice[(tmpdata$easyP1difficultN1 == 1) & (tmpdata$choiceP < .5)], na.rm = T);
+  mean_pgamble[subj] = mean(tmpdata$choice, na.rm = T);
+  static_mean_pgamble[subj] = mean(tmpdata$choice[tmpdata$static0dynamic1 == 0], na.rm=T);
+  dynamic_mean_pgamble[subj] = mean(tmpdata$choice[tmpdata$static0dynamic1 == 1], na.rm=T);
+  easy_mean_pgamble[subj] = mean(tmpdata$choice[tmpdata$easyP1difficultN1 == 1], na.rm = T);
+  diff_mean_pgamble[subj] = mean(tmpdata$choice[tmpdata$easyP1difficultN1 == -1], na.rm = T);
+  easyACC_mean_pgamble[subj] = mean(tmpdata$choice[(tmpdata$easyP1difficultN1 == 1) & (tmpdata$choiceP > .5)], na.rm = T);
+  easyREJ_mean_pgamble[subj] = mean(tmpdata$choice[(tmpdata$easyP1difficultN1 == 1) & (tmpdata$choiceP < .5)], na.rm = T);
   
   # Plot the choice data
   plot(tmpdata$riskyopt1[tmpdata$choice == 1],tmpdata$safe[tmpdata$choice == 1], col = 'green', 
@@ -129,7 +129,7 @@ column_names_rdm = c(
   'easy_mean_pgamble',
   'diff_mean_pgamble', 
   'easyACC_mean_pgamble', 
-  'easyREJ_mean_pgamble', 
+  'easyREJ_mean_pgamble'
 );
 
 data_rdm = array(data = NA, dim = c(0, length(column_names_rdm)));
@@ -138,15 +138,37 @@ data_rdm <- data.frame(mean_pgamble,static_mean_pgamble,dynamic_mean_pgamble,eas
 
 
 # Plot static vs. dynamic gambling
-plot(static_mean_pgamble,dynamic_mean_pgamble,xlim = c(0,1), ylim = c(0,1))
+
+# Q: How did risk-taking compare from static to dynamic conditions?
+par(pty="s")
+plot(static_mean_pgamble,dynamic_mean_pgamble,xlim = c(0,1), ylim = c(0,1), asp = 1)
 lines(x = c(0,1), y = c(0,1), col = 'red')
 
-pgambleDiff = static_mean_pgamble - dynamic_mean_pgamble # positive numbers, suggesting people gambled less in dynamic than static 
+pgambleDiff = static_mean_pgamble - dynamic_mean_pgamble
+# A: positive numbers, suggesting people gambled less in dynamic than static 
 
-plot(easy_mean_pgamble,diff_mean_pgamble,xlim = c(0,1), ylim = c(0,1))
+
+# Q: How did risk-taking compare across the different dynamic trial types?
+# e.g. easy accept vs. easy reject vs. difficult
+hist(easyACC_mean_pgamble,
+     col = 'green', breaks = seq(from = 0, to = 1, by = 0.05), xlim = c(0,1), );
+hist(easyREJ_mean_pgamble,
+     col = 'red',   breaks = seq(from = 0, to = 1, by = 0.05), add = T);
+hist(diff_mean_pgamble,
+     col = 'blue',  breaks = seq(from = 0, to = 1, by = 0.05), add = T);
+# A: As expected red < blue < green (easy reject < difficult < easy acc)
+
+# Q: Can we collapse across easy accept & reject trials based on relative distance from 0.5?
+plot(abs(easyACC_mean_pgamble-.5),abs(easyREJ_mean_pgamble-.5),xlim = c(0,.5), ylim = c(0,.5),
+     xlab = 'Distance from 0.5 for EASY ACC', ylab = 'Distance from 0.5 for EASY REJ')
 lines(x = c(0,1), y = c(0,1), col = 'blue')
+# ... we want these to be clustered together on the blue line, close to 0.5
+# ... and they are! As of 2/3/23
 
-plot(easyACC_mean_pgamble,easyREJ_mean_pgamble,xlim = c(0,1), ylim = c(0,1))
+# Statistically test relative difficulty observed in easy ACC vs. easy REJ
+t.test(abs(easyACC_mean_pgamble-.5), abs(easyREJ_mean_pgamble-.5), paired = T)
+
+# A: Yes, we can treat all easy trials as similarly easy (whether easy ACC or REJ)
 
 
 #### Optimization Function Creation ####
@@ -263,29 +285,7 @@ for (subj in 1:number_of_clean_subjects){
   estimated_parameter_errors[subj,] = sqrt(diag(solve(temp_hessians[best_ind,,]))); # the SEs
 }
 
-### Fix ChoiceP Values in clean_data_dm ### (STUDY 1 ONLY)
-
-# 1. Create index to identify this person's static trials in clean_data_dm
-
-#subj_index = (clean_data_dm$subjectnumber == subj_id) & (clean_data_dm$static0dynamic1 == 1);
-
-# 2. Pull out choiceset values
-
-#dynamic_choiceset = as.data.frame(cbind(clean_data_dm$riskyopt1[subj_index], 
-                                        #clean_data_dm$riskyopt2[subj_index], 
-                                        #clean_data_dm$safe[subj_index]));
-#colnames(dynamic_choiceset) <- c('riskyoption1', 'riskyoption2', 'safeoption');
-
-# 3. Calculate new choiceP values with choiceset & parameters
-
-#choiceP_new = choice_probability(estimated_parameters[subj,], dynamic_choiceset)
-
-# 4. Store the values back in clean_data_dm
-
-#clean_data_dm$choiceP[subj_index] = choiceP_new;
-
-
-### Does optimized analysis match grid search analysis?###
+### Q: Does optimized analysis match grid search analysis?###
 
 n_rho_values = 200; # SET THIS TO THE DESIRED DEGREE OF FINENESS
 n_mu_values = 201; # IBID
@@ -336,28 +336,41 @@ for (subj in 1:number_of_clean_subjects){
   grid_bestMu[subj] = mu_values[unique(tmpdata$bestMu)];
 }
 
+# First, check fresh grid search best Rho & Mu against experiment-executed grid search Rho & Mu
+# (should be trivial and match!)
+
+if (any((grid_bestRho - best_rhos) != 0)){
+  print('MISMATCH!')
+}else{
+  print('Grid search values match (as expected)')
+}
+
+# Then check estimated parameters vs. grid search parameters
 plot(grid_bestRho,estimated_parameters[,1], main = 'RHO', xlim = c(0, 2), ylim = c(0, 2))
-lines(c(0.3, 1.89), c(0.3, 1.89))
+lines(c(0, 2), c(0, 2))
 
 plot(grid_bestMu,estimated_parameters[,2], main = 'MU', xlim = c(0, 100), ylim = c(0, 100))
-lines(c(7, 80), c(7, 80))
+lines(c(0, 100), c(0, 100))
 
-# ANSWER: YES, it matches perfectly. Grid-search values match optimized values very closely.
+hist(grid_bestRho - estimated_parameters[,1], xlim = c(-2,2),
+     breaks = seq(from = -2, to = 2, by = 0.05), main = 'Difference in Rho Estimates',
+     ylab = 'Participants', xlab = 'Grid estimate - MLE estimate')
+hist(grid_bestMu - estimated_parameters[,2], xlim = c(-100,100), 
+     breaks = seq(from = -100, to = 100, by = 1), main = 'Difference in Mu Estimates',
+     ylab = 'Participants', xlab = 'Grid estimate - MLE estimate')
+# This is supposed to look silly! Should cluster around 0
+# ... and it does, as of 2/3/23!
 
-#### Choice Alignment with Predictions ####
-# Did choices align with predictions (re: easy risky and easy safe and hard)
+t.test(grid_bestRho, estimated_parameters[,1], paired = T) # no sig. diff (rho)
+t.test(grid_bestMu, estimated_parameters[,2], paired = T) # no sig. diff (mu)
 
-# Have an issue in which choiceP values do not map on to what they should be, given rho & mu values.(fixed see section above)
-#
-# What's going on?
-# 1. Static choice set: grid search & optimization end up on the same values. Indices seem good. 
-# 2. File identification is correct. 
-# 3. Choice set *loading* is incorrect. Every participant completed the choice set for the minimum values
-#   of rho and mu (rho = 0.3; mu = 7).
+# A: YES, grid-search values match optimized values very closely.
+
+
 
 ### Create Continuous difficulty metric ###
 
-#clean_data_dm$diff_cont = abs(abs(clean_data_dm$choiceP - 0.5)*2-1);
+clean_data_dm$diff_cont = abs(abs(clean_data_dm$choiceP - 0.5)*2-1);
 # EASY = 0
 # DIFFICULT = 1
 
@@ -371,7 +384,7 @@ clean_data_dm$diff_cat[clean_data_dm$static0dynamic1 == 0] = NA;
 # Reaction times for easy risky, easy safe, and hard (hard > easy (either))
 #mean easy RT 
 mean_rt_easy = array(dim = c(number_of_clean_subjects, 1));
-mean_rt_hard = array(dim = c(number_of_clean_subjects, 1));
+mean_rt_diff = array(dim = c(number_of_clean_subjects, 1));
 mean_rt_easyACC = array(dim = c(number_of_clean_subjects, 1));
 mean_rt_easyREJ = array(dim = c(number_of_clean_subjects, 1));
 
@@ -379,21 +392,27 @@ for (subj in 1:number_of_clean_subjects){
   subj_id = keep_participants[subj];
   tmpdata = data_dm[data_dm$subjectnumber == subj_id,];
   tmpdata = tmpdata[tmpdata$easyP1difficultN1 == 1,];
-  mean_rt_easy[subj_id] = mean(tmpdata$reactiontime, na.rm = T)
-  mean_rt_easyACC[subj_id] = mean(tmpdata$reactiontime[(tmpdata$easyP1difficultN1 == 1) & (tmpdata$choiceP > .5)], na.rm = T);
-  mean_rt_easyREJ[subj_id] = mean(tmpdata$reactiontime[(tmpdata$easyP1difficultN1 == 1) & (tmpdata$choiceP < .5)], na.rm = T)
+  mean_rt_easy[subj] = mean(tmpdata$reactiontime, na.rm = T)
+  mean_rt_easyACC[subj] = mean(tmpdata$reactiontime[(tmpdata$easyP1difficultN1 == 1) & (tmpdata$choiceP > .5)], na.rm = T);
+  mean_rt_easyREJ[subj] = mean(tmpdata$reactiontime[(tmpdata$easyP1difficultN1 == 1) & (tmpdata$choiceP < .5)], na.rm = T)
 }
 
 for (subj in 1:number_of_clean_subjects){
   subj_id = keep_participants[subj];
   tmpdata = data_dm[data_dm$subjectnumber == subj_id,];
   tmpdata = tmpdata[tmpdata$easyP1difficultN1 == -1,];
-  mean_rt_hard[subj_id] = mean(tmpdata$reactiontime, na.rm = T)
+  mean_rt_diff[subj] = mean(tmpdata$reactiontime, na.rm = T)
 }
 
 #differences between averages
-mean_rtDiff = mean_rt_easy - mean_rt_hard # a negative number means on average hard was longer, positive number means on average easy was shorter duration 
+mean_rt_difference = mean_rt_diff - mean_rt_easy;  # a negative number means on average hard was longer, positive number means on average easy was shorter duration 
 # i don't know if this makes sense^^, b/c lots of ppl have a positive number, maybe average is not way to compare. 
+
+# test easy RTs vs. diff. RTs
+
+# test easy ACC vs. easy REJ RTs (and plot against each other)
+# Q: Can we treat easy ACC & REJ RTs as the same kind of thing? 
+
 
 ### SUBSEQUENT DIFFICULTY ANALYSIS ###
 
@@ -406,10 +425,13 @@ diff_easy_mean_rt = array(dim = c(number_of_clean_subjects, 1));
 for (subj in 1:number_of_clean_subjects){
   subj_id = keep_participants[subj]
   tmpdata = data_dm[data_dm$subjectnumber == subj_id,]
-  easy_easy_mean_rt[subj_id] = mean(tmpdata$reactiontime[(tmpdata$easyP1difficultN1 == 1) & (tmpdata$trialnumber -1) & (tmpdata$easyP1difficultN1 == 1)], na.rm = T);
-  diff_diff_mean_rt[subj_id] = mean(tmpdata$reactiontime[(tmpdata$easyP1difficultN1 == -1) & (tmpdata$trialnumber -1) & (tmpdata$easyP1difficultN1 == -1)], na.rm = T);
-  easy_diff_mean_rt[subj_id] = mean(tmpdata$reactiontime[(tmpdata$easyP1difficultN1 == 1) & (tmpdata$trialnumber -1) & (tmpdata$easyP1difficultN1 == -1)], na.rm = T);
-  diff_easy_mean_rt[subj_id] = mean(tmpdata$reactiontime[(tmpdata$easyP1difficultN1 == -1) & (tmpdata$trialnumber -1) & (tmpdata$easyP1difficultN1 == -1)], na.rm = T);
+  # easy_easy_mean_rt[subj] = mean(tmpdata$reactiontime[(tmpdata$easyP1difficultN1 == 1) & (tmpdata$trialnumber -1) & (tmpdata$easyP1difficultN1 == 1)], na.rm = T);
+  easy_easy_mean_rt[subj] = mean(tmpdata$reactiontime[(tmpdata$easyP1difficultN1[52:170] == 1) &
+                                                        (tmpdata$easyP1difficultN1[51:169] == 1)], na.rm = T);
+  
+  diff_diff_mean_rt[subj] = mean(tmpdata$reactiontime[(tmpdata$easyP1difficultN1 == -1) & (tmpdata$trialnumber -1) & (tmpdata$easyP1difficultN1 == -1)], na.rm = T);
+  easy_diff_mean_rt[subj] = mean(tmpdata$reactiontime[(tmpdata$easyP1difficultN1 == 1) & (tmpdata$trialnumber -1) & (tmpdata$easyP1difficultN1 == -1)], na.rm = T);
+  diff_easy_mean_rt[subj] = mean(tmpdata$reactiontime[(tmpdata$easyP1difficultN1 == -1) & (tmpdata$trialnumber -1) & (tmpdata$easyP1difficultN1 == -1)], na.rm = T);
 }
 
 #mean p_gamble subsequent 
