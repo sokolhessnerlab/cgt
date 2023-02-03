@@ -129,7 +129,7 @@ column_names_rdm = c(
   'easy_mean_pgamble',
   'diff_mean_pgamble', 
   'easyACC_mean_pgamble', 
-  'easyREJ_mean_pgamble'
+  'easyREJ_mean_pgamble', 
 );
 
 data_rdm = array(data = NA, dim = c(0, length(column_names_rdm)));
@@ -141,7 +141,7 @@ data_rdm <- data.frame(mean_pgamble,static_mean_pgamble,dynamic_mean_pgamble,eas
 plot(static_mean_pgamble,dynamic_mean_pgamble,xlim = c(0,1), ylim = c(0,1))
 lines(x = c(0,1), y = c(0,1), col = 'red')
 
-pgambleDiff = static_mean_pgamble - dynamic_mean_pgamble # positive numbers, 0.105 0.138, suggesting people gambled less in dynamic than static 
+pgambleDiff = static_mean_pgamble - dynamic_mean_pgamble # positive numbers, suggesting people gambled less in dynamic than static 
 
 plot(easy_mean_pgamble,diff_mean_pgamble,xlim = c(0,1), ylim = c(0,1))
 lines(x = c(0,1), y = c(0,1), col = 'blue')
@@ -324,7 +324,6 @@ mu_values = seq(from = 7, to = 80, length.out = n_mu_values);
    best_mus[subj] = mu_values[indexes[2]];
  }
 
-
 # look at all best rho & mu per participant
 grid_bestRho = array(dim = c(number_of_clean_subjects,1));
 grid_bestMu = array(dim = c(number_of_clean_subjects,1));
@@ -385,7 +384,6 @@ for (subj in 1:number_of_clean_subjects){
   mean_rt_easyREJ[subj_id] = mean(tmpdata$reactiontime[(tmpdata$easyP1difficultN1 == 1) & (tmpdata$choiceP < .5)], na.rm = T)
 }
 
-
 for (subj in 1:number_of_clean_subjects){
   subj_id = keep_participants[subj];
   tmpdata = data_dm[data_dm$subjectnumber == subj_id,];
@@ -397,44 +395,76 @@ for (subj in 1:number_of_clean_subjects){
 mean_rtDiff = mean_rt_easy - mean_rt_hard # a negative number means on average hard was longer, positive number means on average easy was shorter duration 
 # i don't know if this makes sense^^, b/c lots of ppl have a positive number, maybe average is not way to compare. 
 
-#mean RT subsequent
-hard_hard_mean_rt = array(dim = c(number_of_clean_subjects, 1));
+### SUBSEQUENT DIFFICULTY ANALYSIS ###
+
+#mean RT subsequent THIS RUNS BUT IDK IF IT ANSWERS WHAT WE WANT #
+diff_diff_mean_rt = array(dim = c(number_of_clean_subjects, 1));
 easy_easy_mean_rt = array(dim = c(number_of_clean_subjects, 1));
-easy_hard_mean_rt = array(dim = c(number_of_clean_subjects, 1));
-hard_easy_mean_rt = array(dim = c(number_of_clean_subjects, 1));
+easy_diff_mean_rt = array(dim = c(number_of_clean_subjects, 1));
+diff_easy_mean_rt = array(dim = c(number_of_clean_subjects, 1));
 
 for (subj in 1:number_of_clean_subjects){
-  subj_id = keep_participants[subj];
-  tmpdata = data_dm[data_dm$subjectnumber == subj_id,];
-  easy_easy_mean_rt[subj_id] = mean(tmpdata$reactiontime[(tmpdata$easyP1difficultN1 == 1)]) & ((T-1)tmpdata=$easyP1difficultN1== 1)
+  subj_id = keep_participants[subj]
+  tmpdata = data_dm[data_dm$subjectnumber == subj_id,]
+  easy_easy_mean_rt[subj_id] = mean(tmpdata$reactiontime[(tmpdata$easyP1difficultN1 == 1) & (tmpdata$trialnumber -1) & (tmpdata$easyP1difficultN1 == 1)], na.rm = T);
+  diff_diff_mean_rt[subj_id] = mean(tmpdata$reactiontime[(tmpdata$easyP1difficultN1 == -1) & (tmpdata$trialnumber -1) & (tmpdata$easyP1difficultN1 == -1)], na.rm = T);
+  easy_diff_mean_rt[subj_id] = mean(tmpdata$reactiontime[(tmpdata$easyP1difficultN1 == 1) & (tmpdata$trialnumber -1) & (tmpdata$easyP1difficultN1 == -1)], na.rm = T);
+  diff_easy_mean_rt[subj_id] = mean(tmpdata$reactiontime[(tmpdata$easyP1difficultN1 == -1) & (tmpdata$trialnumber -1) & (tmpdata$easyP1difficultN1 == -1)], na.rm = T);
 }
 
-#hard_hard_mean_rt[subj_id] = 
-#easy_hard_mean_rt[subj_id] =
-#hard_easy_mean_rt[subj_id] = 
+#mean p_gamble subsequent 
+diff_diff_mean_pgamble = array(dim = c(number_of_clean_subjects, 1));
+easy_easy_mean_pgamble = array(dim = c(number_of_clean_subjects, 1));
+easy_diff_mean_pgamble = array(dim = c(number_of_clean_subjects, 1));
+diff_easy_mean_pgamble = array(dim = c(number_of_clean_subjects, 1));
 
-### WM Task ###
+for (subj in 1:number_of_clean_subjects){
+  subj_id = keep_participants[subj]
+  tmpdata = data_dm[data_dm$subjectnumber == subj_id,]
+  diff_diff_mean_pgamble[subj_id] = mean(tmpdata$choice[(tmpdata$easyP1difficultN1 == -1) & (tmpdata$trialnumber -1) & (tmpdata$easyP1difficultN1 == -1)], na.rm = T);
+  easy_easy_mean_pgamble[subj_id] = mean(tmpdata$choice[(tmpdata$easyP1difficultN1 == 1) & (tmpdata$trialnumber -1) & (tmpdata$easyP1difficultN1 == 1)], na.rm = T);
+  easy_diff_mean_pgamble[subj_id] = mean(tmpdata$choice[(tmpdata$easyP1difficultN1 == 1) & (tmpdata$trialnumber -1) & (tmpdata$easyP1difficultN1 == -1)], na.rm = T);
+  diff_easy_mean_pgamble[subj_id] = mean(tmpdata$choice[(tmpdata$easyP1difficultN1 == -1) & (tmpdata$trialnumber -1) & (tmpdata$easyP1difficultN1 == -1)], na.rm = T);
+}  
+ 
 
-## Probability correct (FS & BS)
-#FS_correct = array(dim = c(number_of_clean_subjects,1));
-#BS_correct = array(dim = c(number_of_clean_subjects,1));
+### Regression LM (Contextual) ### 
+#RT on trials regressions
+#model1_reactiontime_choices <- glmer( XXX?? data = clean_data_dm, family = "binomial")
+#model2_difficulty_reactiontimes <- glmer(XXXXX data =clean_data_dm, family = "binomal" )
+#summary(model)
 
-#for (subj in 1:number_of_clean_subjects){
-# subj_id = keep_participants[subj_id];
-#tmpdata = data_wm[data_wm$subjectnumber == subj_id,]; # defines this person's data
-#FS_correct[subj_id] = mean(tmpdata$correct[tmpdata$forward1backward0 == 1], na.rm=T);
-# BS_correct[subj_id] = mean(tmpdata$correct[tmpdata$forward1backward0 == 0], na.rm=T);
+#shifted version of easy and difficult 
 
+### WM Task ### TO BE WORKED ON THIS WEEKEND NEED TO RESEARCH
+
+## Probability correct (FS & BS) THIS DOESNT WORK! HELP!! ##
+FS_correct = array(dim = c(number_of_clean_subjects,1));
+BS_correct = array(dim = c(number_of_clean_subjects,1));
+
+for (subj in 1:number_of_clean_subjects){
+subj_id = keep_participants[subj_id];
+tmpdata = data_wm[data_wm$subjectnumber == subj_id,]; # defines this person's data
+FS_correct[subj_id] = mean(tmpdata$correct[tmpdata$forward1backward0 == 1], na.rm=T);
+BS_correct[subj_id] = mean(tmpdata$correct[tmpdata$forward1backward0 == 0], na.rm=T);
+}
 
 #^^ I think we talked about removing if too high...  for people with 14... #
 
 ## Forward span
 # max correct before 2 errors in a row @ a given length (BEST RELIABLE SPAN)
+best_reliable_span = array(dim = c(number_of_clean_subjects,1));
 
+for (subj in 1:number_of_clean_subjects){
+  subj_id = keep_participants[subj_id];
+  tmpdata = data_wm[data_wm$subjectnumber == subj_id,];
+  best_reliable_span[subj_id] = unique(data_wm$correctdigits[data_wm$correct == 1]);
+} # ^^ what function do i use here not unique and not max? ^^ 
+
+  
 # total # of trials before 2 errors in a row @ a given length (QUALITY OF EF?)
 
 # max correct ever (BEST SPAN PERIOD)
-
 
 ## Backward span (max correct before 2 errors in a row; max correct ever)
 # max correct before 2 errors in a row @ a given length (BEST RELIABLE SPAN)
@@ -442,11 +472,6 @@ for (subj in 1:number_of_clean_subjects){
 # total # of trials before 2 errors in a row @ a given length (QUALITY OF EF?)
 
 # max correct ever (BEST SPAN PERIOD)
-
-###Subsequent Difficulty Measure ###
-
-### Regression LM (Contextual) ### 
-#shifted version of easy and difficult 
 
 ### Connecting Decision-Making & Working Memory #### (use glmr)
 #1st looks at RT and choice difficulty 
