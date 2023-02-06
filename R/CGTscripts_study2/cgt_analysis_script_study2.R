@@ -366,8 +366,6 @@ t.test(grid_bestMu, estimated_parameters[,2], paired = T) # no sig. diff (mu)
 
 # A: YES, grid-search values match optimized values very closely.
 
-
-
 ### Create Continuous difficulty metric ###
 
 clean_data_dm$diff_cont = abs(abs(clean_data_dm$choiceP - 0.5)*2-1);
@@ -381,7 +379,7 @@ clean_data_dm$diff_cat[clean_data_dm$diff_cont < .3] = -1; # EASY (p's < .15 or 
 clean_data_dm$diff_cat[clean_data_dm$diff_cont > .7] = 1; # DIFFICULT (p's > .35 AND < .65)
 clean_data_dm$diff_cat[clean_data_dm$static0dynamic1 == 0] = NA;
 
-# Reaction times for easy risky, easy safe, and hard (hard > easy (either))
+# Q:DO RT differ across condiitions? Reaction times for easy risky, easy safe, and hard (hard > easy (either))
 #mean easy RT 
 mean_rt_easy = array(dim = c(number_of_clean_subjects, 1));
 mean_rt_diff = array(dim = c(number_of_clean_subjects, 1));
@@ -406,12 +404,24 @@ for (subj in 1:number_of_clean_subjects){
 
 #differences between averages
 mean_rt_difference = mean_rt_diff - mean_rt_easy;  # a negative number means on average hard was longer, positive number means on average easy was shorter duration 
-# i don't know if this makes sense^^, b/c lots of ppl have a positive number, maybe average is not way to compare. 
 
-# test easy RTs vs. diff. RTs
+#A: yes, looks like on average rt of difficult decisions was slower 
+
+# test easy RTs vs. diff. RTs 
+t.test(mean_rt_easy,mean_rt_diff, paired = T); #significant difference between rt easy and hard
+
+# per person basis of easy RTs vs diff. RTs??
 
 # test easy ACC vs. easy REJ RTs (and plot against each other)
 # Q: Can we treat easy ACC & REJ RTs as the same kind of thing? 
+t.test(mean_rt_easyACC,mean_rt_easyREJ, paired = T); #not sig. diff between easy types
+plot(mean_rt_easyACC, mean_rt_easyREJ, main = 'RT EASY REJ & EASY ACC', xlim = c(0,2), ylim = c(0,2))
+lines(c(0,2.0), c(0,2.0))
+points(mean_rt_easyACC, col = 'green') 
+points(mean_rt_easyREJ, col = 'red') 
+#UNSURE WHAT BLACK POINTS ARE?^^# 
+
+# A: yes they are very similar & not significantly different 
 
 
 ### SUBSEQUENT DIFFICULTY ANALYSIS ###
@@ -471,7 +481,7 @@ FS_correct[subj_id] = mean(tmpdata$correct[tmpdata$forward1backward0 == 1], na.r
 BS_correct[subj_id] = mean(tmpdata$correct[tmpdata$forward1backward0 == 0], na.rm=T);
 }
 
-#^^ I think we talked about removing if too high...  for people with 14... #
+#^^ I think we talked about removing if too high... for people with 14... #
 
 ## Forward span
 # max correct before 2 errors in a row @ a given length (BEST RELIABLE SPAN)
@@ -482,9 +492,8 @@ for (subj in 1:number_of_clean_subjects){
   tmpdata = data_wm[data_wm$subjectnumber == subj_id,];
   best_reliable_span[subj_id] = unique(data_wm$correctdigits[data_wm$correct == 1]);
 } 
-# ^^ what function do i use here not unique and not max? ^^ 
+# ^^ what function do I use here not unique and not max? ^^ 
 
-  
 # total # of trials before 2 errors in a row @ a given length (QUALITY OF EF?)
 
 # max correct ever (BEST SPAN PERIOD)
