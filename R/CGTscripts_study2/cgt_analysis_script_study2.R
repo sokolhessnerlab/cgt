@@ -499,7 +499,6 @@ t.test(diff_diff_mean_pgamble, diff_easy_mean_pgamble, paired = T); # not sig di
 t.test(diff_diff_mean_pgamble, easy_easy_mean_pgamble, paired = T); # not sig diff 2/6/23
 #A:TO BE DETERMINED, but right now it looks like RT based upon subsequent trials is not significant different 
 
-
 ### Regression LM (Contextual) ### 
 #RT on trials regressions
 #model1_reactiontime_choices <- glmer( XXX?? data = clean_data_dm, family = "binomial")
