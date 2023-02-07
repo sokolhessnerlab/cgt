@@ -425,8 +425,8 @@ points(mean_rt_easyREJ, col = 'red')
 
 
 ### SUBSEQUENT DIFFICULTY ANALYSIS ###
-
-#mean RT subsequent THIS RUNS BUT IDK IF IT ANSWERS WHAT WE WANT #
+#Q:Does RT change depending on subsequent trial types? 
+#mean RT subsequent #
 diff_diff_mean_rt = array(dim = c(number_of_clean_subjects, 1));
 easy_easy_mean_rt = array(dim = c(number_of_clean_subjects, 1));
 easy_diff_mean_rt = array(dim = c(number_of_clean_subjects, 1));
@@ -435,14 +435,25 @@ diff_easy_mean_rt = array(dim = c(number_of_clean_subjects, 1));
 for (subj in 1:number_of_clean_subjects){
   subj_id = keep_participants[subj]
   tmpdata = data_dm[data_dm$subjectnumber == subj_id,]
-  # easy_easy_mean_rt[subj] = mean(tmpdata$reactiontime[(tmpdata$easyP1difficultN1 == 1) & (tmpdata$trialnumber -1) & (tmpdata$easyP1difficultN1 == 1)], na.rm = T);
   easy_easy_mean_rt[subj] = mean(tmpdata$reactiontime[(tmpdata$easyP1difficultN1[52:170] == 1) &
                                                         (tmpdata$easyP1difficultN1[51:169] == 1)], na.rm = T);
   
-  diff_diff_mean_rt[subj] = mean(tmpdata$reactiontime[(tmpdata$easyP1difficultN1 == -1) & (tmpdata$trialnumber -1) & (tmpdata$easyP1difficultN1 == -1)], na.rm = T);
-  easy_diff_mean_rt[subj] = mean(tmpdata$reactiontime[(tmpdata$easyP1difficultN1 == 1) & (tmpdata$trialnumber -1) & (tmpdata$easyP1difficultN1 == -1)], na.rm = T);
-  diff_easy_mean_rt[subj] = mean(tmpdata$reactiontime[(tmpdata$easyP1difficultN1 == -1) & (tmpdata$trialnumber -1) & (tmpdata$easyP1difficultN1 == -1)], na.rm = T);
+  diff_diff_mean_rt[subj] = mean(tmpdata$reactiontime[(tmpdata$easyP1difficultN1[52:170] == -1) & 
+                                                        (tmpdata$easyP1difficultN1[51:169] == -1)], na.rm = T);
+  
+  easy_diff_mean_rt[subj] = mean(tmpdata$reactiontime[(tmpdata$easyP1difficultN1[52:170] == 1) & 
+                                                        (tmpdata$easyP1difficultN1[51:169] == -1)], na.rm = T);
+  
+  diff_easy_mean_rt[subj] = mean(tmpdata$reactiontime[(tmpdata$easyP1difficultN1[52:170] == -1) &
+                                                        (tmpdata$easyP1difficultN1[51:169] == 1)], na.rm = T);
 }
+
+t.test(easy_easy_mean_rt, easy_diff_mean_rt, paired = T); # not sig diff 2/6/23
+t.test(diff_diff_mean_rt, diff_easy_mean_rt, paired = T); # not sig diff 2/6/23
+t.test(diff_diff_mean_rt, easy_easy_mean_rt, paired = T); # not sig diff 2/6/23
+
+#plot(diff_diff_mean_rt[subj],diff_easy_mean_rt[subj], main ='diff/diff RT', xlim = c(0,2), ylim = c(0,2))
+#lines(c(0,2.0), c(0,2.0))
 
 #mean p_gamble subsequent 
 diff_diff_mean_pgamble = array(dim = c(number_of_clean_subjects, 1));
