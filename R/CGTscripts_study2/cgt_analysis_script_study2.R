@@ -404,13 +404,27 @@ for (subj in 1:number_of_clean_subjects){
 
 #differences between averages
 mean_rt_difference = mean_rt_diff - mean_rt_easy;  # a negative number means on average hard was longer, positive number means on average easy was shorter duration 
+plot(mean_rt_diff, mean_rt_easy, main = 'AVG RT', xlim = c(0, 2), ylim = c(0, 2))
+lines(c(0, 2), c(0, 2))
 
-#A: yes, looks like on average rt of difficult decisions was slower 
+#A: yes, looks like on average rt of difficult decisions was slower than avg rt of easy decisions
 
 # test easy RTs vs. diff. RTs 
-t.test(mean_rt_easy,mean_rt_diff, paired = T); #significant difference between rt easy and hard
+t.test(mean_rt_easy,mean_rt_diff, paired = T); #significant difference between rt easy and hard, WOOHOO! 
 
-# per person basis of easy RTs vs diff. RTs??
+# per person basis of easy RTs vs diff. RTs?? HELP, THIS DOESNT WORK WAY I WANT IT TOO!!! 
+#Q: are easy choices similarly fast across people & are difficult choices similarly slower across people? 
+for (subj in 1:number_of_clean_subjects){
+  subj_id = keep_participants[subj];
+  tmpdata = clean_data_dm[clean_data_dm$subjectnumber == subj_id,];
+  t.test(mean_rt_easy,mean_rt_diff, paired = T);
+  hist(clean_data_dm$reactiontime[clean_data_dm$easyP1difficultN1 == -1]);
+  hist(clean_data_dm$reactiontime[clean_data_dm$easyP1difficultN1 == 1])
+}
+
+#Variance test, to see differences in RT per person?? 
+var.test(mean_rt_easy, mean_rt_diff) #not sig difference 2/6/23
+#A: HELP SECTION^^ 
 
 # test easy ACC vs. easy REJ RTs (and plot against each other)
 # Q: Can we treat easy ACC & REJ RTs as the same kind of thing? 
@@ -421,8 +435,7 @@ points(mean_rt_easyACC, col = 'green')
 points(mean_rt_easyREJ, col = 'red') 
 #UNSURE WHAT BLACK POINTS ARE?^^# 
 
-# A: yes they are very similar & not significantly different 
-
+# A: yes they are very similar & not significantly different, what we want to see. CAN collapse easy REJ and easy ACC as "easy"
 
 ### SUBSEQUENT DIFFICULTY ANALYSIS ###
 #Q:Does RT change depending on subsequent trial types? 
@@ -480,7 +493,12 @@ for (subj in 1:number_of_clean_subjects){
   diff_easy_mean_pgamble[subj] = mean(tmpdata$choice[(tmpdata$easyP1difficultN1[52:170] == -1) &
                                                        (tmpdata$easyP1difficultN1[51:169] == 1)], na.rm = T);
 }  
-#A: 
+
+t.test(easy_easy_mean_pgamble, easy_diff_mean_pgamble, paired = T); # not sig diff 2/6/23
+t.test(diff_diff_mean_pgamble, diff_easy_mean_pgamble, paired = T); # not sig diff 2/6/23
+t.test(diff_diff_mean_pgamble, easy_easy_mean_pgamble, paired = T); # not sig diff 2/6/23
+#A:TO BE DETERMINED, but right now it looks like RT based upon subsequent trials is not significant different 
+#plot???? 
 
 
 ### Regression LM (Contextual) ### 
