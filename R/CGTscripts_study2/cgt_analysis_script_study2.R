@@ -407,33 +407,37 @@ mean_rt_difference = mean_rt_diff - mean_rt_easy;  # a negative number means on 
 plot(mean_rt_diff, mean_rt_easy, main = 'AVG RT', xlim = c(0, 2), ylim = c(0, 2))
 lines(c(0, 2), c(0, 2))
 
-#A: yes, looks like on average rt of difficult decisions was slower than avg rt of easy decisions
-
 # test easy RTs vs. diff. RTs 
 t.test(mean_rt_easy,mean_rt_diff, paired = T); #significant difference between rt easy and hard, WOOHOO! 
+
+#A: yes, looks like on average rt of difficult decisions was slower than avg rt of easy decisions
+
 
 # per person basis of easy RTs vs diff. RTs?? HELP, THIS DOESNT WORK WAY I WANT IT TOO!!! 
 #Q: are easy choices similarly fast across people & are difficult choices similarly slower across people? 
 for (subj in 1:number_of_clean_subjects){
   subj_id = keep_participants[subj];
-  tmpdata = clean_data_dm[clean_data_dm$subjectnumber == subj_id,];
-  t.test(mean_rt_easy,mean_rt_diff, paired = T);
-  hist(clean_data_dm$reactiontime[clean_data_dm$easyP1difficultN1 == -1]);
-  hist(clean_data_dm$reactiontime[clean_data_dm$easyP1difficultN1 == 1])
+  tmpdata = clean_data_dm[clean_data_dm$subjectnumber == subj_id,]; # identify this person's data
+  
+  # test their easy trials vs. their difficult trials
+  stat_result = t.test(tmpdata$reactiontime[tmpdata$easyP1difficultN1 == 1], tmpdata$reactiontime[tmpdata$easyP1difficultN1 == -1])
+  
+  hist(tmpdata$reactiontime[tmpdata$easyP1difficultN1 == -1], 
+       breaks = seq(from = 0, to = 4, by = .25), col = rgb(1,0,0,0.6), xlim = c(0,4), ylim = c(0,30),
+       main = sprintf('Subject %g: p = %.03f', subj_id, stat_result$p.value));
+  hist(tmpdata$reactiontime[tmpdata$easyP1difficultN1 == 1], 
+       breaks = seq(from = 0, to = 4, by = .25), col = rgb(0,0,1,0.6), add = T)
 }
 
 #Variance test, to see differences in RT per person?? 
-var.test(mean_rt_easy, mean_rt_diff) #not sig difference 2/6/23
+var.test(mean_rt_easy, mean_rt_diff) # sig difference; RTs more variable across people for diff. than easy trials
 #A: HELP SECTION^^ 
 
 # test easy ACC vs. easy REJ RTs (and plot against each other)
 # Q: Can we treat easy ACC & REJ RTs as the same kind of thing? 
 t.test(mean_rt_easyACC,mean_rt_easyREJ, paired = T); #not sig. diff between easy types
-plot(mean_rt_easyACC, mean_rt_easyREJ, main = 'RT EASY REJ & EASY ACC', xlim = c(0,2), ylim = c(0,2))
-lines(c(0,2.0), c(0,2.0))
-points(mean_rt_easyACC, col = 'green') 
-points(mean_rt_easyREJ, col = 'red') 
-#UNSURE WHAT BLACK POINTS ARE?^^# 
+plot(mean_rt_easyACC, mean_rt_easyREJ, main = 'RT EASY REJ & EASY ACC', xlim = c(0,4), ylim = c(0,4))
+lines(c(0,4), c(0,4))
 
 # A: yes they are very similar & not significantly different, what we want to see. CAN collapse easy REJ and easy ACC as "easy"
 
@@ -454,15 +458,18 @@ for (subj in 1:number_of_clean_subjects){
   diff_diff_mean_rt[subj] = mean(tmpdata$reactiontime[(tmpdata$easyP1difficultN1[52:170] == -1) & 
                                                         (tmpdata$easyP1difficultN1[51:169] == -1)], na.rm = T);
   
-  easy_diff_mean_rt[subj] = mean(tmpdata$reactiontime[(tmpdata$easyP1difficultN1[52:170] == 1) & 
+  diff_easy_mean_rt[subj] = mean(tmpdata$reactiontime[(tmpdata$easyP1difficultN1[52:170] == 1) & 
                                                         (tmpdata$easyP1difficultN1[51:169] == -1)], na.rm = T);
   
-  diff_easy_mean_rt[subj] = mean(tmpdata$reactiontime[(tmpdata$easyP1difficultN1[52:170] == -1) &
+  easy_diff_mean_rt[subj] = mean(tmpdata$reactiontime[(tmpdata$easyP1difficultN1[52:170] == -1) &
                                                         (tmpdata$easyP1difficultN1[51:169] == 1)], na.rm = T);
 }
 
-t.test(easy_easy_mean_rt, easy_diff_mean_rt, paired = T); # not sig diff 2/6/23
-t.test(diff_diff_mean_rt, diff_easy_mean_rt, paired = T); # not sig diff 2/6/23
+# does prev. trial type influence RT on the current trial
+t.test(easy_easy_mean_rt, diff_easy_mean_rt, paired = T); # NOT for easy
+t.test(diff_diff_mean_rt, easy_diff_mean_rt, paired = T); # NOT for difficult
+# A: Not at this level, not with this dataset so far (2/7/23)
+
 t.test(diff_diff_mean_rt, easy_easy_mean_rt, paired = T); # not sig diff 2/6/23
 #A: TO BE DETERMINED, but right now it looks like RT based upon subsequent trials is not sig different 
 
@@ -495,7 +502,7 @@ for (subj in 1:number_of_clean_subjects){
 }  
 
 t.test(easy_easy_mean_pgamble, easy_diff_mean_pgamble, paired = T); # not sig diff 2/6/23
-t.test(diff_diff_mean_pgamble, diff_easy_mean_pgamble, paired = T); # not sig diff 2/6/23
+t.test(diff_diff_mean_pgamble, easy_diff_mean_pgamble, paired = T); # not sig diff 2/6/23
 t.test(diff_diff_mean_pgamble, easy_easy_mean_pgamble, paired = T); # not sig diff 2/6/23
 #A:TO BE DETERMINED, but right now it looks like RT based upon subsequent trials is not significant different 
 
@@ -504,6 +511,25 @@ t.test(diff_diff_mean_pgamble, easy_easy_mean_pgamble, paired = T); # not sig di
 #model1_reactiontime_choices <- glmer( XXX?? data = clean_data_dm, family = "binomial")
 #model2_difficulty_reactiontimes <- glmer(XXXXX data =clean_data_dm, family = "binomal" )
 #summary(model)
+
+library(lme4)
+library(lmerTest)
+
+# ADVICE ON REGRESSIONS
+# 1. work on RT instead of decisions
+# 2. work on sqrt(RT) instead of RT
+clean_data_dm$sqrtRT = sqrt(clean_data_dm$reactiontime);
+# 3. focus effort on creating good regressors
+
+m0 = lm(sqrtRT ~ 1 + easyP1difficultN1, data = clean_data_dm);
+summary(m0)
+
+m0rfx = lmer(sqrtRT ~ 1 + easyP1difficultN1 + (1 | subjectnumber), data = clean_data_dm);
+summary(m0rfx)
+
+m0_dynonly_rfx = lmer(sqrtRT ~ 1 + easyP1difficultN1 + (1 | subjectnumber),
+                      data = clean_data_dm[clean_data_dm$static0dynamic1 == 1,]);
+summary(m0_dynonly_rfx)
 
 #shifted version of easy and difficult 
 
