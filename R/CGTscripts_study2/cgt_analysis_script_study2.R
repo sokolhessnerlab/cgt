@@ -498,7 +498,6 @@ t.test(easy_easy_mean_pgamble, easy_diff_mean_pgamble, paired = T); # not sig di
 t.test(diff_diff_mean_pgamble, diff_easy_mean_pgamble, paired = T); # not sig diff 2/6/23
 t.test(diff_diff_mean_pgamble, easy_easy_mean_pgamble, paired = T); # not sig diff 2/6/23
 #A:TO BE DETERMINED, but right now it looks like RT based upon subsequent trials is not significant different 
-#plot???? 
 
 
 ### Regression LM (Contextual) ### 
@@ -509,30 +508,35 @@ t.test(diff_diff_mean_pgamble, easy_easy_mean_pgamble, paired = T); # not sig di
 
 #shifted version of easy and difficult 
 
-### WM Task ### TO BE WORKED ON THIS WEEKEND NEED TO RESEARCH
+### WM Task ### TO BE WORKED ON...
 
-## Probability correct (FS & BS) THIS DOESNT WORK! HELP!! ##
+## Probability correct (FS & BS)
 FS_correct = array(dim = c(number_of_clean_subjects,1));
 BS_correct = array(dim = c(number_of_clean_subjects,1));
 
 for (subj in 1:number_of_clean_subjects){
-subj_id = keep_participants[subj_id];
+subj_id = keep_participants[subj];
 tmpdata = data_wm[data_wm$subjectnumber == subj_id,]; # defines this person's data
-FS_correct[subj_id] = mean(tmpdata$correct[tmpdata$forward1backward0 == 1], na.rm=T);
-BS_correct[subj_id] = mean(tmpdata$correct[tmpdata$forward1backward0 == 0], na.rm=T);
+FS_correct[subj] = sum(tmpdata$correct[tmpdata$forward1backward0 == 1], na.rm=T);
+BS_correct[subj] = sum(tmpdata$correct[tmpdata$forward1backward0 == 0], na.rm=T);
 }
-
 #^^ I think we talked about removing if too high... for people with 14... #
 
 ## Forward span
-# max correct before 2 errors in a row @ a given length (BEST RELIABLE SPAN)
+# max correct before 2 errors in a row @ a given length (BEST RELIABLE SPAN)!
 best_reliable_span = array(dim = c(number_of_clean_subjects,1));
+error_in_a_row = array(dim = c(number_of_clean_subjects,1));
 
-for (subj in 1:number_of_clean_subjects){
-  subj_id = keep_participants[subj_id];
-  tmpdata = data_wm[data_wm$subjectnumber == subj_id,];
-  best_reliable_span[subj_id] = unique(data_wm$correctdigits[data_wm$correct == 1]);
-} 
+#for (subj in 1:number_of_clean_subjects){
+  #subj_id = keep_participants[subj];
+  #tmpdata = data_wm[data_wm$subjectnumber == subj_id,];
+  #best_reliable_span[subj] = sum(data_wm$correctdigits[data_wm$correct == 1]);
+  #filter(error_in_a_row > 0 );
+  #summarize(best_reliable_span = max(run_length));
+  #filter(error_in_a_row == 2); 
+  #summarize(best_reliable_span = max(correctdigits))
+  #} 
+
 # ^^ what function do I use here not unique and not max? ^^ 
 
 # total # of trials before 2 errors in a row @ a given length (QUALITY OF EF?)
