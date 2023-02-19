@@ -513,7 +513,6 @@ t.test(diff_diff_mean_pgamble, easy_easy_mean_pgamble, paired = T); # not sig di
 #summary(model)
 
 library(lme4)
-library(lmerTest)
 
 # ADVICE ON REGRESSIONS
 # 1. work on RT instead of decisions
@@ -532,6 +531,29 @@ m0_dynonly_rfx = lmer(sqrtRT ~ 1 + easyP1difficultN1 + (1 | subjectnumber),
 summary(m0_dynonly_rfx)
 
 #shifted version of easy and difficult 
+#create easyP1difficultN1_prev 
+easyP1difficultN1_prev = array(dim = c(number_of_clean_subjects, 1));
+
+
+for (subj in 1:number_of_clean_subjects){
+  subj_id = keep_participants[subj]
+  tmpdata = data_dm[data_dm$subjectnumber == subj_id,]
+  easyP1difficultN1_prev[subj] = slice_head(clean_data_dm, 51, .preserve = FALSE)
+}
+
+#install.packages('dplyr')
+library(dplyr)
+
+m1 = lm(sqrtRT ~ 1 + easyP1difficultN1_prev, data = clean_data_dm);
+summary(m1)
+
+m0rfx = lmer(sqrtRT ~ 1 + easyP1difficultN1_prev + (1 | subjectnumber), data = clean_data_dm);
+summary(m0rfx)
+
+m0_dynonly_rfx = lmer(sqrtRT ~ 1 + easyP1difficultN1_prev + (1 | subjectnumber),
+                      data = clean_data_dm[clean_data_dm$static0dynamic1 == 1,]);
+summary(m0_dynonly_rfx)
+
 
 ### WM Task ### TO BE WORKED ON...
 
