@@ -151,11 +151,11 @@ pgambleDiff = static_mean_pgamble - dynamic_mean_pgamble
 # Q: How did risk-taking compare across the different dynamic trial types?
 # e.g. easy accept vs. easy reject vs. difficult
 hist(easyACC_mean_pgamble,
-     col = 'green', breaks = seq(from = 0, to = 1, by = 0.05), xlim = c(0,1), );
+     col = rgb(0,1,0,.5), breaks = seq(from = 0, to = 1, by = 0.05), xlim = c(0,1), );
 hist(easyREJ_mean_pgamble,
-     col = 'red',   breaks = seq(from = 0, to = 1, by = 0.05), add = T);
+     col = rgb(1,0,0,.5), breaks = seq(from = 0, to = 1, by = 0.05), add = T);
 hist(diff_mean_pgamble,
-     col = 'blue',  breaks = seq(from = 0, to = 1, by = 0.05), add = T);
+     col = rgb(0,0,1,.5), breaks = seq(from = 0, to = 1, by = 0.05), add = T);
 # A: As expected red < blue < green (easy reject < difficult < easy acc)
 
 # Q: Can we collapse across easy accept & reject trials based on relative distance from 0.5?
@@ -513,6 +513,7 @@ t.test(diff_diff_mean_pgamble, easy_easy_mean_pgamble, paired = T); # not sig di
 #summary(model)
 
 library(lme4)
+library(lmerTest)
 
 # ADVICE ON REGRESSIONS
 # 1. work on RT instead of decisions
@@ -530,51 +531,48 @@ m0_dynonly_rfx = lmer(sqrtRT ~ 1 + easyP1difficultN1 + (1 | subjectnumber),
                       data = clean_data_dm[clean_data_dm$static0dynamic1 == 1,]);
 summary(m0_dynonly_rfx)
 
-#glmer?
-#m0 = glmer(sqrtRT ~ 1 + easyP1difficultN1, data = clean_data_dm);
-#summary(m0)
+# input shifted version of desired content
+clean_data_dm$easyP1difficultN1_prev = c(0,clean_data_dm$easyP1difficultN1[1:(length(clean_data_dm$easyP1difficultN1)-1)])
+# fix the few problematic trials (#1)
+clean_data_dm$easyP1difficultN1_prev[clean_data_dm$trialnumber == 1] = 0;
 
-#m0rfx = glmer(sqrtRT ~ 1 + easyP1difficultN1 + (1 | subjectnumber), data = clean_data_dm);
-#summary(m0rfx)
+# input shifted version of desired content
+clean_data_dm$sqrtRT_prev = c(NA,clean_data_dm$sqrtRT[1:(length(clean_data_dm$sqrtRT)-1)])
+# fix the few problematic trials (#1)
+clean_data_dm$sqrtRT_prev[clean_data_dm$trialnumber == 1] = NA;
 
-#m0_dynonly_rfx = glmer(sqrtRT ~ 1 + easyP1difficultN1 + (1 | subjectnumber),
-                      #data = clean_data_dm[clean_data_dm$static0dynamic1 == 1,]);
-#summary(m0_dynonly_rfx)
-  
-#shifted version of easy and difficult 
-install.packages('dplyr')
-library(dplyr)
 
-#create easyP1difficultN1_prev #HELP NOT WORKING# 
-easyP1difficultN1_prev = array(dim = c(number_of_clean_subjects, 1));
-
-library("dplyr")
-
-for (subj in 1:number_of_clean_subjects){
-  subj_id = keep_participants[subj]
-  tmpdata = data_dm[data_dm$subjectnumber == subj_id,]
-  easyP1difficultN1_prev[subj] = gsub('51',0,clean_data_dm$easyP1difficultN1)
-    #replace(clean_data_dm, 51, 0)
-}
-
-#for (subj in 1:number_of_clean_subjects){
- # subj_id = keep_participants[subj]
- # tmpdata = data_dm[data_dm$subjectnumber == subj_id,]
-#  easyP1difficultN1_filtered = filter(tmpdata, between(row_number(), 51, n())) 
- # easyP1difficultN1_prev[subj] = slice(easyP1difficultN1_filtered, -51, .preserve = TRUE, na.rm = TRUE)
-
-}
 
 #Run Regression
 #mean Rt after easy vs after hard trials?
 #account for previous trial RT (ALL trail basis)
-m1 = lm(sqrtRT ~ 1 + easyP1difficultN1_prev, data = clean_data_dm);
-summary(m1)
+m1_prev = lm(sqrtRT ~ 1 + easyP1difficultN1 + easyP1difficultN1_prev, data = clean_data_dm);
+summary(m1_prev)
 
-m0rfx = lmer(sqrtRT ~ 1 + easyP1difficultN1_prev + (1 | subjectnumber), data = clean_data_dm);
-summary(m0rfx)
+m1_prev_intxn = lm(sqrtRT ~ 1 + easyP1difficultN1 * easyP1difficultN1_prev, data = clean_data_dm);
+summary(m1_prev_intxn)
 
-m0_dynonly_rfx = lmer(sqrtRT ~ 1 + easyP1difficultN1_prev + (1 | subjectnumber),
+
+# RFX Versions (good b/c of high indiv. variability in baseline RTs!)
+m1_prev_rfx = lmer(sqrtRT ~ 1 + easyP1difficultN1 + easyP1difficultN1_prev + (1 | subjectnumber), data = clean_data_dm);
+summary(m1_prev_rfx)
+
+m1_prev_intxn_rfx = lmer(sqrtRT ~ 1 + easyP1difficultN1 * easyP1difficultN1_prev + (1 | subjectnumber), data = clean_data_dm);
+summary(m1_prev_intxn_rfx)
+
+
+# ways forward w/ regressions
+# - use previous reaction time as an index of EXPERIENCED difficulty
+# - use continuous or categorical difficulty metrics instead of easy/difficult design categories
+# - use digit span info to account for capacity
+
+m2_prev_intxn = lmer(sqrtRT ~ 1 + easyP1difficultN1 * sqrtRT_prev + (1 | subjectnumber), data = clean_data_dm);
+summary(m2_prev_intxn)
+# prev. reaction time predicts subsequent reaction time
+# BE CAREFUL - lots of things cause autocorrelation in RTs!
+
+
+m0_dynonly_rfx = lmer(sqrtRT ~ 1 + easyP1difficultN1 + easyP1difficultN1_prev + (1 | subjectnumber),
                       data = clean_data_dm[clean_data_dm$static0dynamic1 == 1,]);
 summary(m0_dynonly_rfx)
 
