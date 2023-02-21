@@ -538,7 +538,7 @@ summary(m0_dynonly_rfx)
 #summary(m0rfx)
 
 #m0_dynonly_rfx = glmer(sqrtRT ~ 1 + easyP1difficultN1 + (1 | subjectnumber),
-                      data = clean_data_dm[clean_data_dm$static0dynamic1 == 1,]);
+                      #data = clean_data_dm[clean_data_dm$static0dynamic1 == 1,]);
 #summary(m0_dynonly_rfx)
   
 #shifted version of easy and difficult 
@@ -613,6 +613,21 @@ error_in_a_row = array(dim = c(number_of_clean_subjects,1));
 # total # of trials before 2 errors in a row @ a given length (QUALITY OF EF?)
 quality_of_span_FS = array(dim = c(number_of_clean_subjects,1));
 quality_of_span_BS = array(dim = c(number_of_clean_subjects,1));
+
+n_trials <- 14 
+n_errors <- 0 
+last_error <-FALSE
+
+if (last_error){
+  n_errors <- 2;
+  print("number of trials before 2 errors in a row", n_trials)
+  } else{
+    n_errors <-1
+    last_error <-TRUE
+  } else { 
+    n_errors <-0 
+    last_error <- FALSE
+    }
 
 for (subj in 1:number_of_clean_subjects){
   subj_id = keep_participants[subj];
