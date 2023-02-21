@@ -578,6 +578,8 @@ m0_dynonly_rfx = lmer(sqrtRT ~ 1 + easyP1difficultN1_prev + (1 | subjectnumber),
                       data = clean_data_dm[clean_data_dm$static0dynamic1 == 1,]);
 summary(m0_dynonly_rfx)
 
+#Regression cog control & RT 
+
 
 ### WM Task ### TO BE WORKED ON...
 
@@ -639,11 +641,6 @@ for (subj in 1:number_of_clean_subjects){
 # max correct ever (BEST SPAN PERIOD)
 
 ## Backward span (max correct before 2 errors in a row; max correct ever)
-# max correct before 2 errors in a row @ a given length (BEST RELIABLE SPAN)
-
-# total # of trials before 2 errors in a row @ a given length (QUALITY OF EF?)
-
-# max correct ever (BEST SPAN PERIOD)
 
 ### Connecting Decision-Making & Working Memory #### (use glmr)
 #1st looks at RT and choice difficulty 
