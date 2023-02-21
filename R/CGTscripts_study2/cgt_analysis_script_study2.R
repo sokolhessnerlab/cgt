@@ -470,6 +470,10 @@ t.test(easy_easy_mean_rt, diff_easy_mean_rt, paired = T); # NOT for easy
 t.test(diff_diff_mean_rt, easy_diff_mean_rt, paired = T); # NOT for difficult
 # A: Not at this level, not with this dataset so far (2/21/23)
 
+# Plot the current trial as a function of prev. trial type
+plot(easy_easy_mean_rt, diff_easy_mean_rt); lines(c(1,2), c(1,2)); # NOT for easy
+plot(diff_diff_mean_rt, easy_diff_mean_rt); lines(c(1,2), c(1,2)); # NOT for difficult
+
 t.test(diff_diff_mean_rt, easy_easy_mean_rt, paired = T); # not sig diff 2/21/23
 #A: TO BE DETERMINED, but right now it looks like RT based upon subsequent trials is not sig different 
 
