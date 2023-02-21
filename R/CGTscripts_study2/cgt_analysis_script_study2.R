@@ -530,6 +530,17 @@ m0_dynonly_rfx = lmer(sqrtRT ~ 1 + easyP1difficultN1 + (1 | subjectnumber),
                       data = clean_data_dm[clean_data_dm$static0dynamic1 == 1,]);
 summary(m0_dynonly_rfx)
 
+#glmer?
+#m0 = glmer(sqrtRT ~ 1 + easyP1difficultN1, data = clean_data_dm);
+#summary(m0)
+
+#m0rfx = glmer(sqrtRT ~ 1 + easyP1difficultN1 + (1 | subjectnumber), data = clean_data_dm);
+#summary(m0rfx)
+
+#m0_dynonly_rfx = glmer(sqrtRT ~ 1 + easyP1difficultN1 + (1 | subjectnumber),
+                      data = clean_data_dm[clean_data_dm$static0dynamic1 == 1,]);
+#summary(m0_dynonly_rfx)
+  
 #shifted version of easy and difficult 
 install.packages('dplyr')
 library(dplyr)
@@ -546,7 +557,6 @@ for (subj in 1:number_of_clean_subjects){
     #replace(clean_data_dm, 51, 0)
 }
 
-
 #for (subj in 1:number_of_clean_subjects){
  # subj_id = keep_participants[subj]
  # tmpdata = data_dm[data_dm$subjectnumber == subj_id,]
@@ -556,6 +566,8 @@ for (subj in 1:number_of_clean_subjects){
 }
 
 #Run Regression
+#mean Rt after easy vs after hard trials?
+#account for previous trial RT (ALL trail basis)
 m1 = lm(sqrtRT ~ 1 + easyP1difficultN1_prev, data = clean_data_dm);
 summary(m1)
 
@@ -599,6 +611,15 @@ error_in_a_row = array(dim = c(number_of_clean_subjects,1));
 # ^^ what function do I use here not unique and not max? ^^ 
 
 # total # of trials before 2 errors in a row @ a given length (QUALITY OF EF?)
+quality_of_span_FS = array(dim = c(number_of_clean_subjects,1));
+quality_of_span_BS = array(dim = c(number_of_clean_subjects,1));
+
+for (subj in 1:number_of_clean_subjects){
+  subj_id = keep_participants[subj];
+  tmpdata = data_wm[data_wm$subjectnumber == subj_id,]; # defines this person's data
+  quality_of_span_FS[subj] = sum(tmpdata$correct[tmpdata$forward1backward0 == 1], na.rm=T);
+  quality_of_span_BS[subj] =sum(tmpdata$correct[tmpdata$forward1backward0 == 0], na.rm=T);
+}
 
 # max correct ever (BEST SPAN PERIOD)
 
@@ -614,8 +635,7 @@ error_in_a_row = array(dim = c(number_of_clean_subjects,1));
 #General Linear Regression mixed model analysis (group level analysis)
 #account for choice difficulty 
 #see how far back if at all previous choice difficulty mattered
-#mean Rt after easy vs after hard trials
-#account for previous trial RT (ALL trail basis)
+
 
 #2nd looks at cognitive capacity and choice behavior 
 #continuous variable of cog control? 
