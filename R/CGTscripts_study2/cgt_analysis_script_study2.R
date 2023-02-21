@@ -404,11 +404,11 @@ for (subj in 1:number_of_clean_subjects){
 
 #differences between averages
 mean_rt_difference = mean_rt_diff - mean_rt_easy;  # a negative number means on average hard was longer, positive number means on average easy was shorter duration 
-plot(mean_rt_diff, mean_rt_easy, main = 'AVG RT', xlim = c(0, 2), ylim = c(0, 2))
-lines(c(0, 2), c(0, 2))
+plot(mean_rt_diff, mean_rt_easy, main = 'AVG RT', xlim = c(0, 4), ylim = c(0, 4))
+lines(c(0, 4), c(0, 4))
 
 # test easy RTs vs. diff. RTs 
-t.test(mean_rt_easy,mean_rt_diff, paired = T); #significant difference between rt easy and hard, WOOHOO! 
+t.test(mean_rt_easy,mean_rt_diff, paired = T); #significant difference between rt easy and hard, WOOHOO! 2/21/23
 
 #A: yes, looks like on average rt of difficult decisions was slower than avg rt of easy decisions
 
@@ -435,7 +435,7 @@ var.test(mean_rt_easy, mean_rt_diff) # sig difference; RTs more variable across 
 
 # test easy ACC vs. easy REJ RTs (and plot against each other)
 # Q: Can we treat easy ACC & REJ RTs as the same kind of thing? 
-t.test(mean_rt_easyACC,mean_rt_easyREJ, paired = T); #not sig. diff between easy types
+t.test(mean_rt_easyACC,mean_rt_easyREJ, paired = T); #not sig. diff between easy types 2/21/23
 plot(mean_rt_easyACC, mean_rt_easyREJ, main = 'RT EASY REJ & EASY ACC', xlim = c(0,4), ylim = c(0,4))
 lines(c(0,4), c(0,4))
 
@@ -468,9 +468,9 @@ for (subj in 1:number_of_clean_subjects){
 # does prev. trial type influence RT on the current trial
 t.test(easy_easy_mean_rt, diff_easy_mean_rt, paired = T); # NOT for easy
 t.test(diff_diff_mean_rt, easy_diff_mean_rt, paired = T); # NOT for difficult
-# A: Not at this level, not with this dataset so far (2/7/23)
+# A: Not at this level, not with this dataset so far (2/21/23)
 
-t.test(diff_diff_mean_rt, easy_easy_mean_rt, paired = T); # not sig diff 2/6/23
+t.test(diff_diff_mean_rt, easy_easy_mean_rt, paired = T); # not sig diff 2/21/23
 #A: TO BE DETERMINED, but right now it looks like RT based upon subsequent trials is not sig different 
 
 #plot(diff_diff_mean_rt[subj],diff_easy_mean_rt[subj], main ='diff/diff RT', xlim = c(0,2), ylim = c(0,2))
@@ -501,10 +501,10 @@ for (subj in 1:number_of_clean_subjects){
                                                        (tmpdata$easyP1difficultN1[51:169] == 1)], na.rm = T);
 }  
 
-t.test(easy_easy_mean_pgamble, easy_diff_mean_pgamble, paired = T); # not sig diff 2/6/23
-t.test(diff_diff_mean_pgamble, easy_diff_mean_pgamble, paired = T); # not sig diff 2/6/23
-t.test(diff_diff_mean_pgamble, easy_easy_mean_pgamble, paired = T); # not sig diff 2/6/23
-#A:TO BE DETERMINED, but right now it looks like RT based upon subsequent trials is not significant different 
+t.test(easy_easy_mean_pgamble, easy_diff_mean_pgamble, paired = T); # not sig diff 2/21/23
+t.test(diff_diff_mean_pgamble, easy_diff_mean_pgamble, paired = T); # not sig diff 2/21/23
+t.test(diff_diff_mean_pgamble, easy_easy_mean_pgamble, paired = T); # not sig diff 2/21/23
+#A:TO BE DETERMINED, but right now it looks like RT based upon subsequent trials is not significantly differnt  
 
 ### Regression LM (Contextual) ### 
 #RT on trials regressions
@@ -531,19 +531,31 @@ m0_dynonly_rfx = lmer(sqrtRT ~ 1 + easyP1difficultN1 + (1 | subjectnumber),
 summary(m0_dynonly_rfx)
 
 #shifted version of easy and difficult 
-#create easyP1difficultN1_prev 
+install.packages('dplyr')
+library(dplyr)
+
+#create easyP1difficultN1_prev #HELP NOT WORKING# 
 easyP1difficultN1_prev = array(dim = c(number_of_clean_subjects, 1));
 
+library("dplyr")
 
 for (subj in 1:number_of_clean_subjects){
   subj_id = keep_participants[subj]
   tmpdata = data_dm[data_dm$subjectnumber == subj_id,]
-  easyP1difficultN1_prev[subj] = slice_head(clean_data_dm, 51, .preserve = FALSE)
+  easyP1difficultN1_prev[subj] = gsub('51',0,clean_data_dm$easyP1difficultN1)
+    #replace(clean_data_dm, 51, 0)
 }
 
-#install.packages('dplyr')
-library(dplyr)
 
+#for (subj in 1:number_of_clean_subjects){
+ # subj_id = keep_participants[subj]
+ # tmpdata = data_dm[data_dm$subjectnumber == subj_id,]
+#  easyP1difficultN1_filtered = filter(tmpdata, between(row_number(), 51, n())) 
+ # easyP1difficultN1_prev[subj] = slice(easyP1difficultN1_filtered, -51, .preserve = TRUE, na.rm = TRUE)
+
+}
+
+#Run Regression
 m1 = lm(sqrtRT ~ 1 + easyP1difficultN1_prev, data = clean_data_dm);
 summary(m1)
 
