@@ -633,40 +633,64 @@ summary(m0_dynonly_rfx)
 #m1_prev_intxn_rfx_RT = lmer(easyP1difficultN1 ~ 1 + sqrtRT_prev * easyP1difficultN1_prev + (1 | subjectnumber), data = clean_data_dm);
 #summary(m1_prev_intxn_rfx)
 
+# COG CONTROL REGRESSION & RT- use digit span info to account for capacity...
 
-# - use digit span info to account for capacity...
 
-#Regression cog control & RT 
+### WM Task ###
 
-### WM Task ### TO BE WORKED ON...
-
-## Probability correct (FS & BS)
+## TOTAL NUMBER FS & BS Correct (FS & BS)
 FS_correct = array(dim = c(number_of_clean_subjects,1));
 BS_correct = array(dim = c(number_of_clean_subjects,1));
 
+for (subj in 1:number_of_clean_subjects) {
+  subj_id = keep_participants[subj]
+  tmpdata = data_wm[data_wm$subjectnumber == subj_id, ]
+  # defines this person's data
+  FS_correct[subj] = sum(tmpdata$correct[tmpdata$forward1backward0 == 1], na.rm =
+                           T)
+  
+  BS_correct[subj] = sum(tmpdata$correct[tmpdata$forward1backward0 == 0], na.rm =
+                           T)
+}
+## Q:is there a statistically sig difference between number of FS and BS #correct/14? 
+t.test(FS_correct, BS_correct, paired = T);
+#A: not significant diff (2/27/23), suggestive that overall number of trials correct on either fs or bs is similar.
+
+# FS & BS max number_digits/length when correct
+#Q: is there a difference in max number of digits correct in FS vs BS (comparing fs max digit length correct to bs)
+max_number_digits_correct_FS = array(dim = c(number_of_clean_subjects,1));
+max_number_digits_correct_BS = array(dim = c(number_of_clean_subjects,1));
+
+
 for (subj in 1:number_of_clean_subjects){
-subj_id = keep_participants[subj];
-tmpdata = data_wm[data_wm$subjectnumber == subj_id,]; # defines this person's data
-FS_correct[subj] = sum(tmpdata$correct[tmpdata$forward1backward0 == 1], na.rm=T);
-BS_correct[subj] = sum(tmpdata$correct[tmpdata$forward1backward0 == 0], na.rm=T);
+  subj_id = keep_participants[subj]
+  tmpdata = data_wm[data_wm$subjectnumber == subj_id, ]
+  max_number_digits_correct_FS[subj] = max(tmpdata$number_digits[(tmpdata$forward1backward0 == 1) & (tmpdata$correct == 1)], na.rm = T);
+  max_number_digits_correct_BS[subj] = max(tmpdata$number_digits[(tmpdata$forward1backward0 == 0) & (tmpdata$correct == 1)], na.rm = T);
 }
 
+t.test(max_number_digits_correct_FS, max_number_digits_correct_BS, paired = T);
+#A: yes, sig differnce btween max digit number/length FS correct compared to BS correct (2/27/23)
+
 ## Forward span
-# max correct before 2 errors in a row @ a given length (BEST RELIABLE SPAN)!
-best_reliable_span = array(dim = c(number_of_clean_subjects,1));
-error_in_a_row = array(dim = c(number_of_clean_subjects,1));
+# Max correct before 2 errors in a row @ a given length (BEST RELIABLE SPAN)!
+best_reliable_span = array(dim = c(number_of_clean_subjects, 1));
+error_in_a_row = array(dim = c(number_of_clean_subjects, 1));
 
-#for (subj in 1:number_of_clean_subjects){
-  #subj_id = keep_participants[subj];
-  #tmpdata = data_wm[data_wm$subjectnumber == subj_id,];
-  #best_reliable_span[subj] = sum(data_wm$correctdigits[data_wm$correct == 1]);
-  #filter(error_in_a_row > 0 );
-  #summarize(best_reliable_span = max(run_length));
-  #filter(error_in_a_row == 2); 
-  #summarize(best_reliable_span = max(correctdigits))
-  #} 
+for (subj in 1:number_of_clean_subjects){
+  subj_id = keep_participants[subj];
+  tmpdata = data_wm[data_wm$subjectnumber == subj_id,];
+  best_reliable_span_FS[subj] = sum([data_wm$correct == 1] & ([tmpdata$forward1backward0 == 1]));
+  best_reliable_span_BS[subj]= sum([data_wm$correct == 1] & ([tmpdata$forward1backward0 == 0]));
+  
+  error_in_a_row[subj] = sum(data_wm$correctdigits[data_wm$correct == 0]);
+  filter(error_in_a_row > 0 );
+  summarize(best_reliable_span = max(run_length));
+  filter(error_in_a_row == 2); 
+  summarize(best_reliable_span = max(correctdigits))
+  } 
 
-# ^^ what function do I use here not unique and not max? ^^ 
+
 
 # total # of trials before 2 errors in a row @ a given length (QUALITY OF EF?)
 quality_of_span_FS = array(dim = c(number_of_clean_subjects,1));
