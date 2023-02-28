@@ -623,7 +623,24 @@ summary(m0_dynonly_rfx)
   # also no correlation between two predictors diff_cat & subjectnumber with sqrtRT_prev 
 
 
-# - use previous reaction time as an index of EXPERIENCED difficulty # is this correct or do I need to eliminate easy diff measure? 
+# use previous reaction time as an index of EXPERIENCED difficulty # is this correct or do I need to eliminate easy diff measure? 
+#max = 4 seconds 
+#min = 0.86 seconds
+#mean_rt_easy = array(dim = c(number_of_clean_subjects, 1));
+#mean_rt_diff
+
+max(tmpdata$number_digits[(tmpdata$forward1backward0 == 1) & (tmpdata$correct == 1)], na.rm = T);
+
+for (subj in 1:number_of_clean_subjects){
+  subj_id = keep_participants[subj]
+  tmpdata = data_dm[data_dm$subjectnumber == subj_id,]
+  slowest_RT_type = mean(tmpdata$reactiontime == 3-4 & (tmpdata$static0dynamic1 == 1);
+  next_slowest_RT_type = mean(tmpdata$reactiontime == 2-3) & (tmpdata$static0dynamic1 == 1); 
+  faster_RT_type = mean(tmpdata$reactiontime == 1-2) & (tmpdata$static0dynamic1 == 1);
+  fastest_RT_type= mean(tmpdata$reactiontime < 1 & (tmpdata$static0dynamic1 == 1);
+}
+
+
 #m1_prev_RT = lm(easyP1difficultN1 ~ 1 + sqrtRT_prev + easyP1difficultN1_prev, data = clean_data_dm);
 #summary(m1_prev_RT)
 
