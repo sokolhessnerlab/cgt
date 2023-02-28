@@ -156,19 +156,19 @@ hist(easyREJ_mean_pgamble,
      col = rgb(1,0,0,.5), breaks = seq(from = 0, to = 1, by = 0.05), add = T);
 hist(diff_mean_pgamble,
      col = rgb(0,0,1,.5), breaks = seq(from = 0, to = 1, by = 0.05), add = T);
-# A: As expected red < blue < green (easy reject < difficult < easy acc)
+# A: As expected red < blue < green (easy reject < difficult < easy acc), blue is more spread out 
 
 # Q: Can we collapse across easy accept & reject trials based on relative distance from 0.5?
 plot(abs(easyACC_mean_pgamble-.5),abs(easyREJ_mean_pgamble-.5),xlim = c(0,.5), ylim = c(0,.5),
      xlab = 'Distance from 0.5 for EASY ACC', ylab = 'Distance from 0.5 for EASY REJ')
 lines(x = c(0,1), y = c(0,1), col = 'blue')
 # ... we want these to be clustered together on the blue line, close to 0.5
-# ... and they are! As of 2/3/23
+# ... and they are! As of 2/27/23, except a few points
 
 # Statistically test relative difficulty observed in easy ACC vs. easy REJ
 t.test(abs(easyACC_mean_pgamble-.5), abs(easyREJ_mean_pgamble-.5), paired = T)
 
-# A: Yes, we can treat all easy trials as similarly easy (whether easy ACC or REJ)
+# A: Yes, we can treat all easy trials as similarly easy (whether easy ACC or REJ), not sig different
 
 
 #### Optimization Function Creation ####
@@ -408,7 +408,7 @@ plot(mean_rt_diff, mean_rt_easy, main = 'AVG RT', xlim = c(0, 4), ylim = c(0, 4)
 lines(c(0, 4), c(0, 4))
 
 # test easy RTs vs. diff. RTs 
-t.test(mean_rt_easy,mean_rt_diff, paired = T); #significant difference between rt easy and hard, WOOHOO! 2/21/23
+t.test(mean_rt_easy,mean_rt_diff, paired = T); #significant difference between rt easy and hard, WOOHOO! 2/27/23
 
 #A: yes, looks like on average rt of difficult decisions was slower than avg rt of easy decisions
 
@@ -430,12 +430,13 @@ for (subj in 1:number_of_clean_subjects){
 }
 
 #Variance test, to see differences in RT per person?? 
-var.test(mean_rt_easy, mean_rt_diff) # sig difference; RTs more variable across people for diff. than easy trials
-#A: HELP SECTION^^ 
+var.test(mean_rt_easy, mean_rt_diff) # sig difference 2/27/23
+#A:RTs more variable across people for diff. than easy trials
+
 
 # test easy ACC vs. easy REJ RTs (and plot against each other)
 # Q: Can we treat easy ACC & REJ RTs as the same kind of thing? 
-t.test(mean_rt_easyACC,mean_rt_easyREJ, paired = T); #not sig. diff between easy types 2/21/23
+t.test(mean_rt_easyACC,mean_rt_easyREJ, paired = T); #not sig. diff between easy types 2/27/23
 plot(mean_rt_easyACC, mean_rt_easyREJ, main = 'RT EASY REJ & EASY ACC', xlim = c(0,4), ylim = c(0,4))
 lines(c(0,4), c(0,4))
 
@@ -466,19 +467,16 @@ for (subj in 1:number_of_clean_subjects){
 }
 
 # does prev. trial type influence RT on the current trial
-t.test(easy_easy_mean_rt, diff_easy_mean_rt, paired = T); # NOT for easy
+t.test(easy_easy_mean_rt, diff_easy_mean_rt, paired = T); # NOT for easy 
 t.test(diff_diff_mean_rt, easy_diff_mean_rt, paired = T); # NOT for difficult
-# A: Not at this level, not with this dataset so far (2/21/23)
+# A: Not at this level, not with this dataset so far (2/27/23)
 
 # Plot the current trial as a function of prev. trial type
 plot(easy_easy_mean_rt, diff_easy_mean_rt); lines(c(1,2), c(1,2)); # NOT for easy
 plot(diff_diff_mean_rt, easy_diff_mean_rt); lines(c(1,2), c(1,2)); # NOT for difficult
 
-t.test(diff_diff_mean_rt, easy_easy_mean_rt, paired = T); # not sig diff 2/21/23
+t.test(diff_diff_mean_rt, easy_easy_mean_rt, paired = T); # not sig diff 2/27/23
 #A: TO BE DETERMINED, but right now it looks like RT based upon subsequent trials is not sig different 
-
-#plot(diff_diff_mean_rt[subj],diff_easy_mean_rt[subj], main ='diff/diff RT', xlim = c(0,2), ylim = c(0,2))
-#lines(c(0,2.0), c(0,2.0))
 
 #Q: Does gambling behavior change based upon previous trial difficulty? 
 #mean p_gamble subsequent 
@@ -505,17 +503,13 @@ for (subj in 1:number_of_clean_subjects){
                                                        (tmpdata$easyP1difficultN1[51:169] == 1)], na.rm = T);
 }  
 
-t.test(easy_easy_mean_pgamble, easy_diff_mean_pgamble, paired = T); # not sig diff 2/21/23
-t.test(diff_diff_mean_pgamble, easy_diff_mean_pgamble, paired = T); # not sig diff 2/21/23
-t.test(diff_diff_mean_pgamble, easy_easy_mean_pgamble, paired = T); # not sig diff 2/21/23
-#A:TO BE DETERMINED, but right now it looks like RT based upon subsequent trials is not significantly differnt  
+t.test(easy_easy_mean_pgamble, easy_diff_mean_pgamble, paired = T); # not sig diff 2/27/23
+t.test(diff_diff_mean_pgamble, easy_diff_mean_pgamble, paired = T); # not sig diff 2/27/23
+t.test(diff_diff_mean_pgamble, easy_easy_mean_pgamble, paired = T); # not sig diff 2/27/23
+#A:TO BE DETERMINED, but right now it looks like pgamble based upon subsequent trials is not significantly differnt  
 
 ### Regression LM (Contextual) ### 
 #RT on trials regressions
-#model1_reactiontime_choices <- glmer( XXX?? data = clean_data_dm, family = "binomial")
-#model2_difficulty_reactiontimes <- glmer(XXXXX data =clean_data_dm, family = "binomal" )
-#summary(model)
-
 library(lme4)
 library(lmerTest)
 
@@ -546,10 +540,8 @@ clean_data_dm$sqrtRT_prev = c(NA,clean_data_dm$sqrtRT[1:(length(clean_data_dm$sq
 clean_data_dm$sqrtRT_prev[clean_data_dm$trialnumber == 1] = NA;
 
 
-
 #Run Regression
-#mean Rt after easy vs after hard trials?
-#account for previous trial RT (ALL trail basis)
+#mean Rt after easy vs after hard trials?, account for previous trial RT (ALL trail basis)
 m1_prev = lm(sqrtRT ~ 1 + easyP1difficultN1 + easyP1difficultN1_prev, data = clean_data_dm);
 summary(m1_prev)
 
@@ -564,24 +556,23 @@ summary(m1_prev_rfx)
 m1_prev_intxn_rfx = lmer(sqrtRT ~ 1 + easyP1difficultN1 * easyP1difficultN1_prev + (1 | subjectnumber), data = clean_data_dm);
 summary(m1_prev_intxn_rfx)
 
-
-# ways forward w/ regressions
-# - use previous reaction time as an index of EXPERIENCED difficulty
-# - use continuous or categorical difficulty metrics instead of easy/difficult design categories
-# - use digit span info to account for capacity
-
 m2_prev_intxn = lmer(sqrtRT ~ 1 + easyP1difficultN1 * sqrtRT_prev + (1 | subjectnumber), data = clean_data_dm);
 summary(m2_prev_intxn)
 # prev. reaction time predicts subsequent reaction time
 # BE CAREFUL - lots of things cause autocorrelation in RTs!
 
-
 m0_dynonly_rfx = lmer(sqrtRT ~ 1 + easyP1difficultN1 + easyP1difficultN1_prev + (1 | subjectnumber),
                       data = clean_data_dm[clean_data_dm$static0dynamic1 == 1,]);
 summary(m0_dynonly_rfx)
 
-#Regression cog control & RT 
+# ways forward w/ regressions
+# - use previous reaction time as an index of EXPERIENCED difficulty
 
+# - use continuous or categorical difficulty metrics instead of easy/difficult design categories
+
+# - use digit span info to account for capacity...
+
+#Regression cog control & RT 
 
 ### WM Task ### TO BE WORKED ON...
 
@@ -595,7 +586,6 @@ tmpdata = data_wm[data_wm$subjectnumber == subj_id,]; # defines this person's da
 FS_correct[subj] = sum(tmpdata$correct[tmpdata$forward1backward0 == 1], na.rm=T);
 BS_correct[subj] = sum(tmpdata$correct[tmpdata$forward1backward0 == 0], na.rm=T);
 }
-#^^ I think we talked about removing if too high... for people with 14... #
 
 ## Forward span
 # max correct before 2 errors in a row @ a given length (BEST RELIABLE SPAN)!
