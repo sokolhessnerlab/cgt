@@ -538,15 +538,13 @@ clean_data_dm$sqrtRT_prev = c(NA,clean_data_dm$sqrtRT[1:(length(clean_data_dm$sq
 # fix the few problematic trials (#1)
 clean_data_dm$sqrtRT_prev[clean_data_dm$trialnumber == 1] = NA;
 
-
 #Run Regression
-#mean Rt after easy vs after hard trials?, account for previous trial RT (ALL trail basis)
+#mean Rt after easy vs after hard trials?
 m1_prev = lm(sqrtRT ~ 1 + easyP1difficultN1 + easyP1difficultN1_prev, data = clean_data_dm);
 summary(m1_prev)
 
 m1_prev_intxn = lm(sqrtRT ~ 1 + easyP1difficultN1 * easyP1difficultN1_prev, data = clean_data_dm);
 summary(m1_prev_intxn)
-
 
 # RFX Versions (good b/c of high indiv. variability in baseline RTs!)
 m1_prev_rfx = lmer(sqrtRT ~ 1 + easyP1difficultN1 + easyP1difficultN1_prev + (1 | subjectnumber), data = clean_data_dm);
@@ -565,14 +563,17 @@ m0_dynonly_rfx = lmer(sqrtRT ~ 1 + easyP1difficultN1 + easyP1difficultN1_prev + 
 summary(m0_dynonly_rfx)
 
 # ways forward w/ regressions
-# - use categorical difficulty metrics instead of easy/difficult design categories (diff_cat)
-m0 = lm(sqrtRT ~ 1 + diff_cat , data = clean_data_dm);
+# - use categorical difficulty metrics instead of easy/difficult design categories (diff_cat), still looking at RT after easy vs hard
+#DO I NEED TO FURTHER DEFINE THINGS IN DIFF_CAT/CONT??
+  # diff_cat easy = -1, diff_cat hard = 1, diff_cat medium = 0 
+
+m0 = lm(sqrtRT ~ 1 + diff_cat , data = clean_data_dm); # diff_cat easy = -1 
 summary(m0) 
 
 m0rfx = lmer(sqrtRT ~ 1 + diff_cat + (1 | subjectnumber), data = clean_data_dm);
 summary(m0rfx)
 
-m0_dynonly_rfx = lmer(sqrtRT ~ 1 + diff_cat + (1 | subjectnumber),
+m0_dynonly_rfx = lmer(sqrtRT ~ 1 + diff_cat  + (1 | subjectnumber),
                       data = clean_data_dm[clean_data_dm$static0dynamic1 == 1,]);
 summary(m0_dynonly_rfx)
 #A:correlation of fixed effects = 0 suggesting no correlation between sqrtRT with diff_cat & subject number
@@ -590,14 +591,26 @@ m0_dynonly_rfx = lmer(sqrtRT ~ 1 + diff_cont + (1 | subjectnumber),
                       data = clean_data_dm[clean_data_dm$static0dynamic1 == 1,]);
 summary(m0_dynonly_rfx)
 
-#A: correlation of fixed efffects = -0.151, a negative correlation between RT and continuous difficult metric, where easy = 0 diff = 1.
+#A: correlation of fixed effects = -0.151, a negative correlation between RT and continuous difficult metric, where easy = 0 diff = 1.
 #statistically significant diff_cont and intercept, so they are associated with RT??
 
 
+#Q: does previous RT predict current rt on normal easy diff & also categorical and continuous diff metrics? 
+#RT prev & easy diff and easy diff prev...RFX Versions (good b/c of high indiv. variability in baseline RTs!)
+m1_prev_rfx = lmer(sqrtRT_prev ~ 1 + easyP1difficultN1 + easyP1difficultN1_prev + (1 | subjectnumber), data = clean_data_dm);
+summary(m1_prev_rfx)
+
+m1_prev_intxn_rfx = lmer(sqrtRT_prev ~ 1 + easyP1difficultN1 * easyP1difficultN1_prev + (1 | subjectnumber), data = clean_data_dm);
+summary(m1_prev_intxn_rfx)
+
+m2_prev_intxn = lmer(sqrtRT_prev ~ 1 + easyP1difficultN1 * sqrtRT + (1 | subjectnumber), data = clean_data_dm);
+summary(m2_prev_intxn)
+#A: THIS MODEL & results  CONFUSED ME...^^^ 
+  # goal = to see if previous RT predicts current RT on easy diff trials in cont, cat, and predtermined easy diff trials... 
 
 # Q: does previous RT depend/relate/interact to categorical difficulty measure?  
 m0 = lm(sqrtRT_prev ~ 1 + diff_cat , data = clean_data_dm);
-summary(m0) 
+summary(m0)
 
 m0rfx = lmer(sqrtRT_prev ~ 1 + diff_cat + (1 | subjectnumber), data = clean_data_dm);
 summary(m0rfx)
@@ -606,11 +619,11 @@ m0_dynonly_rfx = lmer(sqrtRT_prev ~ 1 + diff_cat + (1 | subjectnumber),
                       data = clean_data_dm[clean_data_dm$static0dynamic1 == 1,]);
 summary(m0_dynonly_rfx)
 
-#A: p = 0.79 not significant, but intercept = significant so the rt is sig when diff_cat = 0(medium)
+#A: p = 0.79 not significant, but intercept = significant so the rt is sig when diff_cat = 0(medium)??
   # also no correlation between two predictors diff_cat & subjectnumber with sqrtRT_prev 
 
-# - use previous reaction time as an index of EXPERIENCED difficulty # is this correct or do I need to eliminate easy diff measure? 
 
+# - use previous reaction time as an index of EXPERIENCED difficulty # is this correct or do I need to eliminate easy diff measure? 
 #m1_prev_RT = lm(easyP1difficultN1 ~ 1 + sqrtRT_prev + easyP1difficultN1_prev, data = clean_data_dm);
 #summary(m1_prev_RT)
 
