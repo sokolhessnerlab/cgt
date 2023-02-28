@@ -671,8 +671,8 @@ for (subj in 1:number_of_clean_subjects){
 t.test(max_number_digits_correct_FS, max_number_digits_correct_BS, paired = T);
 #A: yes, significant difference between max digit number/length FS correct compared to BS correct (2/27/23)!
 
-
-# Max correct before 2 errors in a row @ a given length (BEST RELIABLE SPAN)! HELP WITH PREVIOUS TRiAL.. 
+#HELP
+# Max correct before 2 errors in a row @ a given length (BEST RELIABLE SPAN)! 
 best_reliable_span = array(dim = c(number_of_clean_subjects, 1));
 
 for (subj in 1:number_of_clean_subjects){
@@ -709,9 +709,36 @@ for (subj in 1:number_of_clean_subjects){
 }
 
 
-### Connecting Decision-Making & Working Memory #### (use glmr)
+### Connecting Decision-Making & Working Memory #### 
 #see how far back if at all previous choice difficulty mattered to cog capacity measures
-# see how RT as measure of choice diff relates to cog capacity 
+#see how RT as measure of choice diff relates to cog capacity 
+
+#Q: Do high controllers have diff avg RT (predicted faster avg) compared to low controllers? 
+MedianValueFS = array(dim = c(number_of_clean_subjects,1));
+MedianValueBS = array(dim = c(number_of_clean_subjects,1));
+highcontroller_FS_avgRT = array(dim = c(number_of_clean_subjects,1));
+lowcontroller_FS_avgRT = array(dim = c(number_of_clean_subjects,1));
+highcontroller_BS_avgRT = array(dim = c(number_of_clean_subjects,1));
+lowcontroller_BS_avgRT = array(dim = c(number_of_clean_subjects,1));
+
+#median value = 7.5 so want to do median split. 
+highcontroller_FS = best_span_FS > 7.5
+lowcontroller_FS = best_span_FS < 7.5
+
+highcontroller_BS = best_span_BS > 6.5
+lowcontroller_BS = best_span_BS < 6.5 
+
+for (subj in 1:number_of_clean_subjects){
+  subj_id = keep_participants[subj];
+  tmpdata = data_wm[data_wm$subjectnumber == subj_id,];
+  MedianValueFS[subj] <- median(best_span_FS);
+  MedianValueBS[subj] <- median(best_span_BS);
+  highcontroller_FS_avgRT = mean(tmpdata$reactiontime[tmpdata$highcontroller_FS = T]); # goal: mean RT for particpants who = highcontroller_FS
+  #lowcontroller_FS_avgRT = 
+  #highcontroller_BS_avgRT =
+  #lowcontroller_BS_avgRT =
+}
+
 
 
 #2nd looks at cognitive capacity and choice behavior 
