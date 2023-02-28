@@ -708,7 +708,6 @@ for (subj in 1:number_of_clean_subjects){
   quality_of_span_BS[subj] =sum(tmpdata$correct[tmpdata$forward1backward0 == 0], na.rm=T);
 }
 
-
 ### Connecting Decision-Making & Working Memory #### 
 #see how far back if at all previous choice difficulty mattered to cog capacity measures
 #see how RT as measure of choice diff relates to cog capacity 
@@ -740,8 +739,13 @@ for (subj in 1:number_of_clean_subjects){
 }
 
 
+#Q; Range of gap between easy/diff RT on per person basis is this related to cog capacity, high vs low controllers and thier behaivor on diff vs easy choices 
 
-#2nd looks at cognitive capacity and choice behavior 
+#Q: how does capacity relate to trial types (static/dynamic, easy only, hard only)
+
+#Q: 
+
+#2nd looks at cognitive capacity and choice behavior, do high controllers experince less gambling behvaior ie less risky? 
 #continuous variable of cog control? 
 #see behavioral (rt) variability in the regression based upon inc or dec of capacity?
 #see individual and group differences? 
