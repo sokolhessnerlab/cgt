@@ -533,7 +533,6 @@ summary(m0_dynonly_rfx)
 clean_data_dm$easyP1difficultN1_prev = c(0,clean_data_dm$easyP1difficultN1[1:(length(clean_data_dm$easyP1difficultN1)-1)])
 # fix the few problematic trials (#1)
 clean_data_dm$easyP1difficultN1_prev[clean_data_dm$trialnumber == 1] = 0;
-
 # input shifted version of desired content
 clean_data_dm$sqrtRT_prev = c(NA,clean_data_dm$sqrtRT[1:(length(clean_data_dm$sqrtRT)-1)])
 # fix the few problematic trials (#1)
@@ -566,9 +565,61 @@ m0_dynonly_rfx = lmer(sqrtRT ~ 1 + easyP1difficultN1 + easyP1difficultN1_prev + 
 summary(m0_dynonly_rfx)
 
 # ways forward w/ regressions
-# - use previous reaction time as an index of EXPERIENCED difficulty
+# - use categorical difficulty metrics instead of easy/difficult design categories (diff_cat)
+m0 = lm(sqrtRT ~ 1 + diff_cat , data = clean_data_dm);
+summary(m0) 
 
-# - use continuous or categorical difficulty metrics instead of easy/difficult design categories
+m0rfx = lmer(sqrtRT ~ 1 + diff_cat + (1 | subjectnumber), data = clean_data_dm);
+summary(m0rfx)
+
+m0_dynonly_rfx = lmer(sqrtRT ~ 1 + diff_cat + (1 | subjectnumber),
+                      data = clean_data_dm[clean_data_dm$static0dynamic1 == 1,]);
+summary(m0_dynonly_rfx)
+#A:correlation of fixed effects = 0 suggesting no correlation between sqrtRT with diff_cat & subject number
+#statistical significant diff_cat and intercept, so they are associated with RT?
+# as diff_cat changes,RT changes? 
+
+#use continuous diff metric instead of easy/difficult 
+m0 = lm(sqrtRT ~ 1 + diff_cont , data = clean_data_dm);
+summary(m0) 
+
+m0rfx = lmer(sqrtRT ~ 1 + diff_cont + (1 | subjectnumber), data = clean_data_dm);
+summary(m0rfx)
+
+m0_dynonly_rfx = lmer(sqrtRT ~ 1 + diff_cont + (1 | subjectnumber),
+                      data = clean_data_dm[clean_data_dm$static0dynamic1 == 1,]);
+summary(m0_dynonly_rfx)
+
+#A: correlation of fixed efffects = -0.151, a negative correlation between RT and continuous difficult metric, where easy = 0 diff = 1.
+#statistically significant diff_cont and intercept, so they are associated with RT??
+
+
+
+# Q: does previous RT depend/relate/interact to categorical difficulty measure?  
+m0 = lm(sqrtRT_prev ~ 1 + diff_cat , data = clean_data_dm);
+summary(m0) 
+
+m0rfx = lmer(sqrtRT_prev ~ 1 + diff_cat + (1 | subjectnumber), data = clean_data_dm);
+summary(m0rfx)
+
+m0_dynonly_rfx = lmer(sqrtRT_prev ~ 1 + diff_cat + (1 | subjectnumber),
+                      data = clean_data_dm[clean_data_dm$static0dynamic1 == 1,]);
+summary(m0_dynonly_rfx)
+
+#A: p = 0.79 not significant, but intercept = significant so the rt is sig when diff_cat = 0(medium)
+  # also no correlation between two predictors diff_cat & subjectnumber with sqrtRT_prev 
+
+# - use previous reaction time as an index of EXPERIENCED difficulty # is this correct or do I need to eliminate easy diff measure? 
+
+#m1_prev_RT = lm(easyP1difficultN1 ~ 1 + sqrtRT_prev + easyP1difficultN1_prev, data = clean_data_dm);
+#summary(m1_prev_RT)
+
+#m1_prev_intxn_RT = lm(easyP1difficultN1 ~ 1 + sqrtRT_prev * easyP1difficultN1_prev, data = clean_data_dm);
+#summary(m1_prev_intxn)
+
+#m1_prev_intxn_rfx_RT = lmer(easyP1difficultN1 ~ 1 + sqrtRT_prev * easyP1difficultN1_prev + (1 | subjectnumber), data = clean_data_dm);
+#summary(m1_prev_intxn_rfx)
+
 
 # - use digit span info to account for capacity...
 
