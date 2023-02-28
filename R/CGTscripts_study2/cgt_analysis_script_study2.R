@@ -656,43 +656,32 @@ for (subj in 1:number_of_clean_subjects) {
 t.test(FS_correct, BS_correct, paired = T);
 #A: not significant diff (2/27/23), suggestive that overall number of trials correct on either fs or bs is similar.
 
-# FS & BS max number_digits/length when correct
+# FS & BS max number_digits/length when correct (BEST SPAN)
 #Q: is there a difference in max number of digits correct in FS vs BS (comparing fs max digit length correct to bs)
-max_number_digits_correct_FS = array(dim = c(number_of_clean_subjects,1));
-max_number_digits_correct_BS = array(dim = c(number_of_clean_subjects,1));
-
+best_span_FS = array(dim = c(number_of_clean_subjects,1));
+best_span_BS = array(dim = c(number_of_clean_subjects,1));
 
 for (subj in 1:number_of_clean_subjects){
   subj_id = keep_participants[subj]
   tmpdata = data_wm[data_wm$subjectnumber == subj_id, ]
-  max_number_digits_correct_FS[subj] = max(tmpdata$number_digits[(tmpdata$forward1backward0 == 1) & (tmpdata$correct == 1)], na.rm = T);
-  max_number_digits_correct_BS[subj] = max(tmpdata$number_digits[(tmpdata$forward1backward0 == 0) & (tmpdata$correct == 1)], na.rm = T);
+  best_span_FS[subj] = max(tmpdata$number_digits[(tmpdata$forward1backward0 == 1) & (tmpdata$correct == 1)], na.rm = T);
+  best_span_BS[subj] = max(tmpdata$number_digits[(tmpdata$forward1backward0 == 0) & (tmpdata$correct == 1)], na.rm = T);
 }
 
 t.test(max_number_digits_correct_FS, max_number_digits_correct_BS, paired = T);
-#A: yes, sig differnce btween max digit number/length FS correct compared to BS correct (2/27/23)
+#A: yes, significant difference between max digit number/length FS correct compared to BS correct (2/27/23)!
 
-## Forward span
-# Max correct before 2 errors in a row @ a given length (BEST RELIABLE SPAN)!
+
+# Max correct before 2 errors in a row @ a given length (BEST RELIABLE SPAN)! HELP WITH PREVIOUS TRiAL.. 
 best_reliable_span = array(dim = c(number_of_clean_subjects, 1));
-error_in_a_row = array(dim = c(number_of_clean_subjects, 1));
 
 for (subj in 1:number_of_clean_subjects){
   subj_id = keep_participants[subj];
   tmpdata = data_wm[data_wm$subjectnumber == subj_id,];
-  best_reliable_span_FS[subj] = sum([data_wm$correct == 1] & ([tmpdata$forward1backward0 == 1]));
-  best_reliable_span_BS[subj]= sum([data_wm$correct == 1] & ([tmpdata$forward1backward0 == 0]));
-  
-  error_in_a_row[subj] = sum(data_wm$correctdigits[data_wm$correct == 0]);
-  filter(error_in_a_row > 0 );
-  summarize(best_reliable_span = max(run_length));
-  filter(error_in_a_row == 2); 
-  summarize(best_reliable_span = max(correctdigits))
-  } 
+  best_reliable_span_FS[subj] = max(tmpdata$number_digits[(tmpdata$forward1backward0 == 1) & (tmpdata$correct == 1) & (tmpdata$correct[2:14]- 1 == 1)], na.rm = T);
+}
 
-
-
-# total # of trials before 2 errors in a row @ a given length (QUALITY OF EF?)
+# total # of trials before 2 errors in a row @ a given length (QUALITY OF EFFORT?)
 quality_of_span_FS = array(dim = c(number_of_clean_subjects,1));
 quality_of_span_BS = array(dim = c(number_of_clean_subjects,1));
 
@@ -706,27 +695,23 @@ if (last_error){
   } else{
     n_errors <-1
     last_error <-TRUE
-  } else { 
-    n_errors <-0 
-    last_error <- FALSE
+  #} else { 
+   # n_errors <-0 
+   # last_error <- FALSE
     }
 
 for (subj in 1:number_of_clean_subjects){
   subj_id = keep_participants[subj];
   tmpdata = data_wm[data_wm$subjectnumber == subj_id,]; # defines this person's data
+  
   quality_of_span_FS[subj] = sum(tmpdata$correct[tmpdata$forward1backward0 == 1], na.rm=T);
   quality_of_span_BS[subj] =sum(tmpdata$correct[tmpdata$forward1backward0 == 0], na.rm=T);
 }
 
-# max correct ever (BEST SPAN PERIOD)
-
-## Backward span (max correct before 2 errors in a row; max correct ever)
 
 ### Connecting Decision-Making & Working Memory #### (use glmr)
-#1st looks at RT and choice difficulty 
-#General Linear Regression mixed model analysis (group level analysis)
-#account for choice difficulty 
-#see how far back if at all previous choice difficulty mattered
+#see how far back if at all previous choice difficulty mattered to cog capacity measures
+# see how RT as measure of choice diff relates to cog capacity 
 
 
 #2nd looks at cognitive capacity and choice behavior 
