@@ -361,7 +361,7 @@ hist(grid_bestMu - estimated_parameters[,2], xlim = c(-100,100),
 # This is supposed to look silly! Should cluster around 0
 # ... and it does, as of 2/3/23!
 
-t.test(grid_bestRho, estimated_parameters[,1], paired = T) # no sig. diff (rho)
+t.test(grid_bestRho, estimated_parameters[,1], paired = T) # sig diff BAD... 3/5/23 (rho)
 t.test(grid_bestMu, estimated_parameters[,2], paired = T) # no sig. diff (mu)
 
 # A: YES, grid-search values match optimized values very closely.
@@ -408,7 +408,7 @@ plot(mean_rt_diff, mean_rt_easy, main = 'AVG RT', xlim = c(0, 4), ylim = c(0, 4)
 lines(c(0, 4), c(0, 4))
 
 # test easy RTs vs. diff. RTs 
-t.test(mean_rt_easy,mean_rt_diff, paired = T); #significant difference between rt easy and hard, WOOHOO! 2/27/23
+t.test(mean_rt_easy,mean_rt_diff, paired = T); #significant difference between rt easy and hard, WOOHOO! 3/5/23
 
 #A: yes, looks like on average rt of difficult decisions was slower than avg rt of easy decisions
 
@@ -430,13 +430,13 @@ for (subj in 1:number_of_clean_subjects){
 }
 
 #Variance test, to see differences in RT per person?? 
-var.test(mean_rt_easy, mean_rt_diff) # sig difference 2/27/23
+var.test(mean_rt_easy, mean_rt_diff) # sig difference 3/5/23
 #A:RTs more variable across people for diff. than easy trials
 
 
 # test easy ACC vs. easy REJ RTs (and plot against each other)
 # Q: Can we treat easy ACC & REJ RTs as the same kind of thing? 
-t.test(mean_rt_easyACC,mean_rt_easyREJ, paired = T); #not sig. diff between easy types 2/27/23
+t.test(mean_rt_easyACC,mean_rt_easyREJ, paired = T); #not sig. diff between easy types 3/5/23
 plot(mean_rt_easyACC, mean_rt_easyREJ, main = 'RT EASY REJ & EASY ACC', xlim = c(0,4), ylim = c(0,4))
 lines(c(0,4), c(0,4))
 
@@ -469,13 +469,13 @@ for (subj in 1:number_of_clean_subjects){
 # does prev. trial type influence RT on the current trial
 t.test(easy_easy_mean_rt, diff_easy_mean_rt, paired = T); # NOT for easy 
 t.test(diff_diff_mean_rt, easy_diff_mean_rt, paired = T); # NOT for difficult
-# A: Not at this level, not with this dataset so far (2/27/23)
+# A: Not at this level, not with this dataset so far (3/5/23)
 
 # Plot the current trial as a function of prev. trial type
 plot(easy_easy_mean_rt, diff_easy_mean_rt); lines(c(1,2), c(1,2)); # NOT for easy
 plot(diff_diff_mean_rt, easy_diff_mean_rt); lines(c(1,2), c(1,2)); # NOT for difficult
 
-t.test(diff_diff_mean_rt, easy_easy_mean_rt, paired = T); # not sig diff 2/27/23
+t.test(diff_diff_mean_rt, easy_easy_mean_rt, paired = T); # not sig diff 3/5/23
 #A: TO BE DETERMINED, but right now it looks like RT based upon subsequent trials is not sig different 
 
 #Q: Does gambling behavior change based upon previous trial difficulty? 
@@ -503,9 +503,9 @@ for (subj in 1:number_of_clean_subjects){
                                                        (tmpdata$easyP1difficultN1[51:169] == 1)], na.rm = T);
 }  
 
-t.test(easy_easy_mean_pgamble, easy_diff_mean_pgamble, paired = T); # not sig diff 2/27/23
-t.test(diff_diff_mean_pgamble, easy_diff_mean_pgamble, paired = T); # not sig diff 2/27/23
-t.test(diff_diff_mean_pgamble, easy_easy_mean_pgamble, paired = T); # not sig diff 2/27/23
+t.test(easy_easy_mean_pgamble, easy_diff_mean_pgamble, paired = T); # not sig diff 3/5/23
+t.test(diff_diff_mean_pgamble, easy_diff_mean_pgamble, paired = T); # not sig diff 3/5/23
+t.test(diff_diff_mean_pgamble, easy_easy_mean_pgamble, paired = T); # not sig diff 3/5/23
 #A:TO BE DETERMINED, but right now it looks like pgamble based upon subsequent trials is not significantly differnt  
 
 ### Regression LM (Contextual) ### 
@@ -566,7 +566,7 @@ summary(m0_dynonly_rfx)
 # - use categorical difficulty metrics instead of easy/difficult design categories (diff_cat), still looking at RT after easy vs hard
 #DO I NEED TO FURTHER DEFINE THINGS IN DIFF_CAT/CONT??
   # diff_cat easy = -1, diff_cat hard = 1, diff_cat medium = 0 
-
+#same thing asd above!!
 m0 = lm(sqrtRT ~ 1 + diff_cat , data = clean_data_dm); # diff_cat easy = -1 
 summary(m0) 
 
