@@ -40,7 +40,7 @@ for (subj in 1:number_of_subjects){
   points(tmpdata$riskyopt1[tmpdata$choice == 0],tmpdata$safe[tmpdata$choice == 0], col = 'red')
 }
 
-check_trial_criterion = 0.2; # The maximum percent of check trials that can be missed
+check_trial_criterion = 0.1; # The maximum percent of check trials that can be missed
 # (there were 10 check trials)
 # chance is 0.5, perfect is 0.0.
 
@@ -138,7 +138,7 @@ plot(static_mean_pgamble,dynamic_mean_pgamble,xlim = c(0,1), ylim = c(0,1), asp 
 lines(x = c(0,1), y = c(0,1), col = 'red')
 
 pgambleDiff = static_mean_pgamble - dynamic_mean_pgamble
-mean(pgambleDiff) #0.048, so more gambling in static
+mean(pgambleDiff) #0.062, so more gambling in static
 # A: positive numbers, suggesting people gambled less in dynamic than static 
 
 
@@ -154,10 +154,11 @@ hist(diff_mean_pgamble,
 
 # Q: Can we collapse across easy accept & reject trials based on relative distance from 0.5?
 plot(abs(easyACC_mean_pgamble-.5),abs(easyREJ_mean_pgamble-.5),xlim = c(0,.5), ylim = c(0,.5),
-     xlab = 'Distance from 0.5 for EASY ACC', ylab = 'Distance from 0.5 for EASY REJ')
+     xlab = 'Distance from 0.5 for EASY ACC', ylab = 'Distance from 0.5 for EASY REJ', 
+     pch = 19, col = rgb(0,0,0,.2), cex = 2)
 lines(x = c(0,1), y = c(0,1), col = 'blue')
 # ... we want these to be clustered together on the blue line, close to 0.5
-# ... and they are! As of 2/27/23, except a few points
+# Mostly clustered near the blue line. A few points off. 
 
 # Statistically test relative difficulty observed in easy ACC vs. easy REJ
 t.test(abs(easyACC_mean_pgamble-.5), abs(easyREJ_mean_pgamble-.5), paired = T)
@@ -339,6 +340,8 @@ if (any((grid_bestRho - best_rhos) != 0)){
   print('Grid search values match (as expected)')
 }
 
+# Grid search replicates (which it should...)
+
 # Then check estimated parameters vs. grid search parameters
 plot(grid_bestRho,estimated_parameters[,1], main = 'RHO', xlim = c(0, 2), ylim = c(0, 2))
 lines(c(0, 2), c(0, 2))
@@ -355,7 +358,7 @@ hist(grid_bestMu - estimated_parameters[,2], xlim = c(-100,100),
 # This is supposed to look silly! Should cluster around 0
 # ... and it does, as of 3/7/23!
 
-t.test(grid_bestRho, estimated_parameters[,1], paired = T) # sig diff BAD... 3/7/23 (rho)
+t.test(grid_bestRho, estimated_parameters[,1], paired = T) # no sig. diff (rho)... 3/7/23
 t.test(grid_bestMu, estimated_parameters[,2], paired = T) # no sig. diff (mu)... 3/7/23
 
 # A: YES, grid-search values match optimized values very closely.
@@ -379,14 +382,18 @@ mean_rt_easy = array(dim = c(number_of_clean_subjects, 1));
 mean_rt_diff = array(dim = c(number_of_clean_subjects, 1));
 mean_rt_easyACC = array(dim = c(number_of_clean_subjects, 1));
 mean_rt_easyREJ = array(dim = c(number_of_clean_subjects, 1));
-
+var_rt_easy = array(dim = c(number_of_clean_subjects, 1));
+var_rt_diff = array(dim = c(number_of_clean_subjects, 1));
+  
+  
 for (subj in 1:number_of_clean_subjects){
   subj_id = keep_participants[subj];
   tmpdata = data_dm[data_dm$subjectnumber == subj_id,];
   tmpdata = tmpdata[tmpdata$easyP1difficultN1 == 1,];
   mean_rt_easy[subj] = mean(tmpdata$reactiontime, na.rm = T)
   mean_rt_easyACC[subj] = mean(tmpdata$reactiontime[(tmpdata$easyP1difficultN1 == 1) & (tmpdata$choiceP > .5)], na.rm = T);
-  mean_rt_easyREJ[subj] = mean(tmpdata$reactiontime[(tmpdata$easyP1difficultN1 == 1) & (tmpdata$choiceP < .5)], na.rm = T)
+  mean_rt_easyREJ[subj] = mean(tmpdata$reactiontime[(tmpdata$easyP1difficultN1 == 1) & (tmpdata$choiceP < .5)], na.rm = T);
+  var_rt_easy[subj] = var(tmpdata$reactiontime, na.rm = T);
 }
 
 for (subj in 1:number_of_clean_subjects){
@@ -394,6 +401,7 @@ for (subj in 1:number_of_clean_subjects){
   tmpdata = data_dm[data_dm$subjectnumber == subj_id,];
   tmpdata = tmpdata[tmpdata$easyP1difficultN1 == -1,];
   mean_rt_diff[subj] = mean(tmpdata$reactiontime, na.rm = T)
+  var_rt_diff[subj] = var(tmpdata$reactiontime, na.rm = T);
 }
 
 #differences between averages
@@ -402,10 +410,16 @@ plot(mean_rt_diff, mean_rt_easy, main = 'AVG RT', xlim = c(0, 4), ylim = c(0, 4)
 lines(c(0, 4), c(0, 4))
 
 # test easy RTs vs. diff. RTs 
-t.test(mean_rt_easy,mean_rt_diff, paired = T); #significant difference between rt easy and hard, WOOHOO! 3/7/23
+res = t.test(mean_rt_easy,mean_rt_diff, paired = T); #significant difference between rt easy and hard, WOOHOO! 3/7/23
+plot(var_rt_easy,var_rt_diff, main = sprintf('Difference in Variances; p = %.03f', res$p.value), 
+     xlim = c(0,.6), ylim = c(0,.6))
+lines(c(0,.6), c(0,.6), col = 'green', lwd = 2)
+# RTs on difficult trials are more variable WITHIN person than their RTs on easy trials
 
+# differences between variance of RTs in conditions
+plot()
+t.test(var_rt_easy,var_rt_diff, paired = T)
 #A: yes, looks like on average rt of difficult decisions was slower than avg rt of easy decisions
-
 
 # per person basis of easy RTs vs diff. RTs??
 #Q: are easy choices similarly fast across people & are difficult choices similarly slower across people? 
@@ -414,18 +428,19 @@ for (subj in 1:number_of_clean_subjects){
   tmpdata = clean_data_dm[clean_data_dm$subjectnumber == subj_id,]; # identify this person's data
   
   # test their easy trials vs. their difficult trials
-  stat_result = t.test(tmpdata$reactiontime[tmpdata$easyP1difficultN1 == 1], tmpdata$reactiontime[tmpdata$easyP1difficultN1 == -1])
+  diff_stat_result = t.test(tmpdata$reactiontime[tmpdata$easyP1difficultN1 == 1], tmpdata$reactiontime[tmpdata$easyP1difficultN1 == -1]);
+  var_stat_results = var.test(tmpdata$reactiontime[tmpdata$easyP1difficultN1 == 1], tmpdata$reactiontime[tmpdata$easyP1difficultN1 == -1]);
   
   hist(tmpdata$reactiontime[tmpdata$easyP1difficultN1 == -1], 
        breaks = seq(from = 0, to = 4, by = .25), col = rgb(1,0,0,0.6), xlim = c(0,4), ylim = c(0,30),
-       main = sprintf('Subject %g: p = %.03f', subj_id, stat_result$p.value));
+       main = sprintf('Subject %g: t-test p = %.03f; var test p = %.03f', subj_id, diff_stat_result$p.value, var_stat_results$p.value));
   hist(tmpdata$reactiontime[tmpdata$easyP1difficultN1 == 1], 
        breaks = seq(from = 0, to = 4, by = .25), col = rgb(0,0,1,0.6), add = T)
 }
 
 #Variance test, to see differences in RT per person?? 
 var.test(mean_rt_easy, mean_rt_diff) # sig difference 3/7/23
-#A:RTs more variable across people for diff. than easy trials
+# A:RTs more variable across people for diff. than easy trials
 
 
 # test easy ACC vs. easy REJ RTs (and plot against each other)
@@ -466,8 +481,10 @@ t.test(diff_diff_mean_rt, easy_diff_mean_rt, paired = T); # NOT for difficult 3/
 # A: Not at this level.
 
 # Plot the current trial as a function of prev. trial type
-plot(easy_easy_mean_rt, diff_easy_mean_rt); lines(c(1,2), c(1,2)); # NOT for easy
-plot(diff_diff_mean_rt, easy_diff_mean_rt); lines(c(1,2), c(1,2)); # NOT for difficult
+plot(easy_easy_mean_rt, diff_easy_mean_rt, xlim = c(0.75,2.2), ylim = c(0.75,2.2),
+     main = 'EASY TRIALS', xlab = 'Previous trial was EASY', ylab = 'Previous trial was DIFFICULT'); lines(c(0,3), c(0,3)); # NOT for easy
+plot(easy_diff_mean_rt, diff_diff_mean_rt, xlim = c(0.75,2.2), ylim = c(0.75,2.2),
+     main = 'DIFFICULT TRIALS', xlab = 'Previous trial was EASY', ylab = 'Previous trial was DIFFICULT'); lines(c(0,3), c(0,3)); # NOT for difficult
 
 t.test(diff_diff_mean_rt, easy_easy_mean_rt, paired = T); # not sig diff 3/7/23
 #A: it looks like RT based upon subsequent trials is not sig different at this level
@@ -497,9 +514,8 @@ for (subj in 1:number_of_clean_subjects){
                                                        (tmpdata$easyP1difficultN1[51:169] == 1)], na.rm = T);
 }  
 
-t.test(easy_easy_mean_pgamble, easy_diff_mean_pgamble, paired = T); # not sig diff 3/7/23
 t.test(diff_diff_mean_pgamble, easy_diff_mean_pgamble, paired = T); # not sig diff 3/7/23
-t.test(diff_diff_mean_pgamble, easy_easy_mean_pgamble, paired = T); # not sig diff 3/7/23
+t.test(diff_easy_mean_pgamble, easy_easy_mean_pgamble, paired = T); # not sig diff 3/7/23
 #A: it looks like pgamble based upon subsequent trials is not significantly differnt, difficulty doesnt show effect on p gamble.
 
 ### Regression LM (Contextual) ### 
