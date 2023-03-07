@@ -3,7 +3,7 @@
 # Script to process the data collected SONA SYSTEMS 2023
 # (Control & Gambling Task) study.
 
-# identify the working directory paths
+#identify the working directory paths
 main_wd = '/Volumes/shlab/Projects/CGT/CGT_study2/';
 
 rawdata_wd = paste0(main_wd,'rawdata_study2/');

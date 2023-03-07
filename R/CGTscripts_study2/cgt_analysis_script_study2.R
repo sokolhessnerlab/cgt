@@ -559,19 +559,20 @@ summary(m0_dynonly_rfx)
 # ways forward w/ regressions
 
 #use continuous diff metric instead of easy/difficult 
-m0 = lm(sqrtRT ~ 1 + diff_cont , data = clean_data_dm);
-summary(m0) 
+m1_cont = lm(sqrtRT ~ 1 + diff_cont , data = clean_data_dm);
+summary(m1_cont) 
 
-m0rfx = lmer(sqrtRT ~ 1 + diff_cont + (1 | subjectnumber), data = clean_data_dm);
-summary(m0rfx)
+m1_contrfx = lmer(sqrtRT ~ 1 + diff_cont + (1 | subjectnumber), data = clean_data_dm);
+summary(m1_contrfx)
 
-m0_dynonly_rfx = lmer(sqrtRT ~ 1 + diff_cont + (1 | subjectnumber),
+m1_cont_dynonly_rfx = lmer(sqrtRT ~ 1 + diff_cont + (1 | subjectnumber),
                       data = clean_data_dm[clean_data_dm$static0dynamic1 == 1,]);
-summary(m0_dynonly_rfx)
+summary(m1_cont_dynonly_rfx)
 
 #A: correlation of fixed effects = -0.151, a negative correlation between RT and continuous difficult metric, where easy = 0 diff = 1.
 #statistically significant diff_cont and intercept, so they are associated with RT??
-
+m1_contrfx = lmer(sqrtRT ~ 1 + easy_cont + (1 | subjectnumber), data = clean_data_dm);
+summary(m1_contrfx)
 
 #Q: does previous RT predict current rt on normal easy diff & also categorical and continuous diff metrics? 
 #RT prev & easy diff and easy diff prev...RFX Versions (good b/c of high indiv. variability in baseline RTs!)
@@ -601,7 +602,7 @@ summary(m0_dynonly_rfx)
   # also no correlation between two predictors diff_cat & subjectnumber with sqrtRT_prev 
 
 
-# use previous reaction time as an index of EXPERIENCED difficulty # is this correct or do I need to eliminate easy diff measure? 
+# use previous reaction time as an index of EXPERIENCED difficulty
 #max = 4 seconds 
 #min = 0.86 seconds
 #mean_rt_easy = array(dim = c(number_of_clean_subjects, 1));
@@ -611,13 +612,12 @@ max(tmpdata$number_digits[(tmpdata$forward1backward0 == 1) & (tmpdata$correct ==
 
 for (subj in 1:number_of_clean_subjects){
   subj_id = keep_participants[subj]
-  tmpdata = data_dm[data_dm$subjectnumber == subj_id,]
-  slowest_RT_type = mean(tmpdata$reactiontime == 3-4 & (tmpdata$static0dynamic1 == 1);
-  next_slowest_RT_type = mean(tmpdata$reactiontime == 2-3) & (tmpdata$static0dynamic1 == 1); 
-  faster_RT_type = mean(tmpdata$reactiontime == 1-2) & (tmpdata$static0dynamic1 == 1);
-  fastest_RT_type= mean(tmpdata$reactiontime < 1 & (tmpdata$static0dynamic1 == 1);
+  tmpdata = data_dm[data_dm$subjectnumber == subj_id]
+  slowest_RT_type = mean(tmpdata$reactiontime == 3-4) & (tmpdata$static0dynamic1 == 1));
+  next_slowest_RT_type = mean(tmpdata$reactiontime == 2-3) & (tmpdata$static0dynamic1 == 1)); 
+  faster_RT_type = mean(tmpdata$reactiontime == 1-2) & (tmpdata$static0dynamic1 == 1));
+  fastest_RT_type= mean(tmpdata$reactiontime < 1) & (tmpdata$static0dynamic1 == 1));
 }
-
 
 #m1_prev_RT = lm(easyP1difficultN1 ~ 1 + sqrtRT_prev + easyP1difficultN1_prev, data = clean_data_dm);
 #summary(m1_prev_RT)
