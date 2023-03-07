@@ -70,7 +70,7 @@ keep_dm_rt = mean_rts > 0.85;
 #this way worked 
 mean_rts[keep_dm_rt]
 hist(mean_rts[keep_dm_rt]) # histogram of mean rts
-mean(mean_rts[keep_dm_rt]) # new mean rt 1.39 seconds
+mean(mean_rts[keep_dm_rt]) # new mean rt 1.40 seconds
 
 # NOT excluding on the basis of WM task performance
 
@@ -138,7 +138,7 @@ plot(static_mean_pgamble,dynamic_mean_pgamble,xlim = c(0,1), ylim = c(0,1), asp 
 lines(x = c(0,1), y = c(0,1), col = 'red')
 
 pgambleDiff = static_mean_pgamble - dynamic_mean_pgamble
-mean(pgambleDiff) #0.049, so more gambling in static
+mean(pgambleDiff) #0.048, so more gambling in static
 # A: positive numbers, suggesting people gambled less in dynamic than static 
 
 
@@ -353,7 +353,7 @@ hist(grid_bestMu - estimated_parameters[,2], xlim = c(-100,100),
      breaks = seq(from = -100, to = 100, by = 1), main = 'Difference in Mu Estimates',
      ylab = 'Participants', xlab = 'Grid estimate - MLE estimate')
 # This is supposed to look silly! Should cluster around 0
-# ... and it does, as of 2/3/23!
+# ... and it does, as of 3/7/23!
 
 t.test(grid_bestRho, estimated_parameters[,1], paired = T) # sig diff BAD... 3/7/23 (rho)
 t.test(grid_bestMu, estimated_parameters[,2], paired = T) # no sig. diff (mu)... 3/7/23
@@ -571,8 +571,7 @@ summary(m1_cont_dynonly_rfx)
 
 #A: correlation of fixed effects = -0.151, a negative correlation between RT and continuous difficult metric, where easy = 0 diff = 1.
 #statistically significant diff_cont and intercept, so they are associated with RT??
-m1_contrfx = lmer(sqrtRT ~ 1 + easy_cont + (1 | subjectnumber), data = clean_data_dm);
-summary(m1_contrfx)
+
 
 #Q: does previous RT predict current rt on normal easy diff & also categorical and continuous diff metrics? 
 #RT prev & easy diff and easy diff prev...RFX Versions (good b/c of high indiv. variability in baseline RTs!)
@@ -587,48 +586,20 @@ summary(m2_prev_intxn)
 #A: THIS MODEL & results  CONFUSED ME...^^^ 
   # goal = to see if previous RT predicts current RT on easy diff trials in cont, cat, and predtermined easy diff trials... 
 
-# Q: does previous RT depend/relate/interact to categorical difficulty measure?  
-m0 = lm(sqrtRT_prev ~ 1 + diff_cat , data = clean_data_dm);
-summary(m0)
-
-m0rfx = lmer(sqrtRT_prev ~ 1 + diff_cat + (1 | subjectnumber), data = clean_data_dm);
-summary(m0rfx)
-
-m0_dynonly_rfx = lmer(sqrtRT_prev ~ 1 + diff_cat + (1 | subjectnumber),
-                      data = clean_data_dm[clean_data_dm$static0dynamic1 == 1,]);
-summary(m0_dynonly_rfx)
-
-#A: p = 0.79 not significant, but intercept = significant so the rt is sig when diff_cat = 0(medium)??
-  # also no correlation between two predictors diff_cat & subjectnumber with sqrtRT_prev 
-
 
 # use previous reaction time as an index of EXPERIENCED difficulty
-#max = 4 seconds 
-#min = 0.86 seconds
-#mean_rt_easy = array(dim = c(number_of_clean_subjects, 1));
-#mean_rt_diff
-
-max(tmpdata$number_digits[(tmpdata$forward1backward0 == 1) & (tmpdata$correct == 1)], na.rm = T);
+#maxRT = 4 seconds 
+#minRT = 0.86 seconds
 
 for (subj in 1:number_of_clean_subjects){
   subj_id = keep_participants[subj]
-  tmpdata = data_dm[data_dm$subjectnumber == subj_id]
-  slowest_RT_type = mean(tmpdata$reactiontime == 3-4) & (tmpdata$static0dynamic1 == 1));
-  next_slowest_RT_type = mean(tmpdata$reactiontime == 2-3) & (tmpdata$static0dynamic1 == 1)); 
-  faster_RT_type = mean(tmpdata$reactiontime == 1-2) & (tmpdata$static0dynamic1 == 1));
-  fastest_RT_type= mean(tmpdata$reactiontime < 1) & (tmpdata$static0dynamic1 == 1));
+  tmpdata = data_dm[data_dm$subjectnumber == subj_id,]
+  slowest_RT_type = mean[(tmpdata$reactiontime == 3-4) & (tmpdata$static0dynamic1 == 1)];
+  next_slowest_RT_type = mean[(tmpdata$reactiontime == 2-3) & (tmpdata$static0dynamic1 == 1)]; 
+  faster_RT_type = mean[(tmpdata$reactiontime == 1-2) & (tmpdata$static0dynamic1 == 1)];
+  fastest_RT_type= mean[(tmpdata$reactiontime < 1) & (tmpdata$static0dynamic1 == 1)];
 }
-
-#m1_prev_RT = lm(easyP1difficultN1 ~ 1 + sqrtRT_prev + easyP1difficultN1_prev, data = clean_data_dm);
-#summary(m1_prev_RT)
-
-#m1_prev_intxn_RT = lm(easyP1difficultN1 ~ 1 + sqrtRT_prev * easyP1difficultN1_prev, data = clean_data_dm);
-#summary(m1_prev_intxn)
-
-#m1_prev_intxn_rfx_RT = lmer(easyP1difficultN1 ~ 1 + sqrtRT_prev * easyP1difficultN1_prev + (1 | subjectnumber), data = clean_data_dm);
-#summary(m1_prev_intxn_rfx)
-
-# COG CONTROL REGRESSION & RT- use digit span info to account for capacity...
+#run regression...
 
 
 ### WM Task ###
@@ -649,7 +620,7 @@ for (subj in 1:number_of_clean_subjects) {
 }
 ## Q:is there a statistically sig difference between number of FS and BS #correct/14? 
 t.test(FS_correct, BS_correct, paired = T);
-#A: not significant diff (2/27/23), suggestive that overall number of trials correct on either fs or bs is similar.
+#A: not significant diff (3/7/23), suggestive that overall number of trials correct on either fs or bs is similar.
 
 # FS & BS max number_digits/length when correct (BEST SPAN)
 #Q: is there a difference in max number of digits correct in FS vs BS (comparing fs max digit length correct to bs)
@@ -663,8 +634,19 @@ for (subj in 1:number_of_clean_subjects){
   best_span_BS[subj] = max(tmpdata$number_digits[(tmpdata$forward1backward0 == 0) & (tmpdata$correct == 1)], na.rm = T);
 }
 
-t.test(max_number_digits_correct_FS, max_number_digits_correct_BS, paired = T);
-#A: yes, significant difference between max digit number/length FS correct compared to BS correct (2/27/23)!
+t.test(best_span_FS, best_span_BS, paired = T);
+#A: yes, significant difference between max digit number/length FS correct compared to BS correct (3/7/23)!
+
+# COG CONTROL REGRESSION & RT- use digit span info to account for capacity... #help says there are variablelengths!! 
+m2_span = lm(sqrtRT ~ 1 + best_span_FS , data = clean_data_dm);
+summary(m1_span) 
+
+m2_spanrfx = lmer(sqrtRT ~ 1 + best_span_FS + (1 | subjectnumber), data = clean_data_dm);
+summary(m1_spanrfx)
+
+m2_span_dynonly_rfx = lmer(sqrtRT ~ 1 + best_span_FS + (1 | subjectnumber),
+                           data = clean_data_dm[clean_data_dm$static0dynamic1 == 1,]);
+summary(m1_span_dynonly_rfx)
 
 #HELP
 # Max correct before 2 errors in a row @ a given length (BEST RELIABLE SPAN)! 
