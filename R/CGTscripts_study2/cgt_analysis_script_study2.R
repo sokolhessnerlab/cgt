@@ -417,7 +417,7 @@ lines(c(0,.6), c(0,.6), col = 'green', lwd = 2)
 # RTs on difficult trials are more variable WITHIN person than their RTs on easy trials
 
 # differences between variance of RTs in conditions
-plot()
+
 t.test(var_rt_easy,var_rt_diff, paired = T)
 #A: yes, looks like on average rt of difficult decisions was slower than avg rt of easy decisions
 
@@ -602,20 +602,33 @@ summary(m2_prev_intxn)
 #A: THIS MODEL & results  CONFUSED ME...^^^ 
   # goal = to see if previous RT predicts current RT on easy diff trials in cont, cat, and predtermined easy diff trials... 
 
-
 # use previous reaction time as an index of EXPERIENCED difficulty
 #maxRT = 4 seconds 
 #minRT = 0.86 seconds
+#should i be using the sqrt RT? 
 
 for (subj in 1:number_of_clean_subjects){
   subj_id = keep_participants[subj]
   tmpdata = data_dm[data_dm$subjectnumber == subj_id,]
-  slowest_RT_type = mean[(tmpdata$reactiontime == 3-4) & (tmpdata$static0dynamic1 == 1)];
-  next_slowest_RT_type = mean[(tmpdata$reactiontime == 2-3) & (tmpdata$static0dynamic1 == 1)]; 
-  faster_RT_type = mean[(tmpdata$reactiontime == 1-2) & (tmpdata$static0dynamic1 == 1)];
-  fastest_RT_type= mean[(tmpdata$reactiontime < 1) & (tmpdata$static0dynamic1 == 1)];
+  slowest_RT_type = mean(tmpdata$reactiontime[tmpdata$static0dynamic1 == 1 & tmpdata$reactiontime >= 3])
+  next_slowest_RT_type = mean(tmpdata$reactiontime[tmpdata$static0dynamic1 == 1 & tmpdata$reactiontime >= 2 & tmpdata$reactiontime < 3])
+  faster_RT_type = mean(tmpdata$reactiontime[tmpdata$static0dynamic1 == 1 & tmpdata$reactiontime >= 1 & tmpdata$reactiontime < 2])
+  fastest_RT_type = mean(tmpdata$reactiontime[tmpdata$static0dynamic1 == 1 & tmpdata$reactiontime < 1])
 }
+#sqrt rt ??
+clean_data_dm$sqrtRT = sqrt(clean_data_dm$reactiontime);
+
+for (subj in 1:number_of_clean_subjects){
+  subj_id = keep_participants[subj]
+  tmpdata = data_dm[data_dm$subjectnumber == subj_id,]
+  slowest_RT_type = mean(tmpdata$sqrtRT[tmpdata$static0dynamic1 == 1 & tmpdata$sqrtRT >= 3])
+  next_slowest_RT_type = mean(tmpdata$sqrtRT[tmpdata$static0dynamic1 == 1 & tmpdata$sqrtRT >= 2 & tmpdata$sqrtRT < 3])
+  faster_RT_type = mean(tmpdata$sqrtRT[tmpdata$static0dynamic1 == 1 & tmpdata$sqrtRT >= 1 & tmpdata$sqrtRT < 2])
+  fastest_RT_type = mean(tmpdata$sqrtRT[tmpdata$static0dynamic1 == 1 & tmpdata$sqrtRT < 1])
+}
+
 #run regression...
+
 
 
 ### WM Task ###
@@ -645,7 +658,7 @@ best_span_BS = array(dim = c(number_of_clean_subjects,1));
 
 for (subj in 1:number_of_clean_subjects){
   subj_id = keep_participants[subj]
-  tmpdata = data_wm[data_wm$subjectnumber == subj_id, ]
+  tmpdata = data_wm[data_wm$subjectnumber == subj_id,]
   best_span_FS[subj] = max(tmpdata$number_digits[(tmpdata$forward1backward0 == 1) & (tmpdata$correct == 1)], na.rm = T);
   best_span_BS[subj] = max(tmpdata$number_digits[(tmpdata$forward1backward0 == 0) & (tmpdata$correct == 1)], na.rm = T);
 }
