@@ -27,6 +27,7 @@ number_of_dm_trials_per_person = num_static_trials + num_dynamic_trials; # stati
 column_names_dm = c(
   'trialnumber',
   'subjectnumber',
+  'sonaID',
   'riskyopt1',
   'riskyopt2',
   'safe',
@@ -61,6 +62,7 @@ column_names_rawdata_wm = c(
 column_names_wm = c(
   'trialnumber',
   'subjectnumber',
+  'sonaID',
   'number_digits',
   'forward1backward0',
   'correct'
@@ -85,6 +87,7 @@ for(s in 1:number_of_subjects){
   
   dm_data_to_add[,1] = tmp_trialnum; # trial number
   dm_data_to_add[,2] = s; # subject number
+  dm_data_to_add[,3] = unique(tmpdata$participant);
   
   tmp_riskyopt1 = c(tmpdata$riskyoption1[dm_index_static],
                     tmpdata$riskyoption1[dm_index_dynamic]);
@@ -93,31 +96,31 @@ for(s in 1:number_of_subjects){
   tmp_safe = c(tmpdata$safeoption[dm_index_static],
                tmpdata$safeoption[dm_index_dynamic]);
   
-  dm_data_to_add[,3:5] = cbind(tmp_riskyopt1,tmp_riskyopt2,tmp_safe) # dollar amounts
+  dm_data_to_add[,4:6] = cbind(tmp_riskyopt1,tmp_riskyopt2,tmp_safe) # dollar amounts
   
-  dm_data_to_add[,6] = c(tmpdata$choices[dm_index_static],
+  dm_data_to_add[,7] = c(tmpdata$choices[dm_index_static],
                          tmpdata$choices[dm_index_dynamic]); # choices
   
-  dm_data_to_add[,7] = c(tmpdata$realChoice.rt[dm_index_static],
+  dm_data_to_add[,8] = c(tmpdata$realChoice.rt[dm_index_static],
                          tmpdata$realChoice.rt[dm_index_dynamic]); # RTs
   
-  dm_data_to_add[,8] = c(tmpdata$outcomes[dm_index_static],
+  dm_data_to_add[,9] = c(tmpdata$outcomes[dm_index_static],
                          tmpdata$outcomes[dm_index_dynamic]); # outcomes
   
-  dm_data_to_add[,9] = c(tmpdata$ischecktrial[dm_index_static],
+  dm_data_to_add[,10] = c(tmpdata$ischecktrial[dm_index_static],
                          array(data = 0, dim = c(1,num_dynamic_trials))); # is check trial
   
-  dm_data_to_add[,10] = c(array(data = 0, dim = c(1,num_static_trials)),
+  dm_data_to_add[,11] = c(array(data = 0, dim = c(1,num_static_trials)),
                           array(data = 1, dim = c(1,num_dynamic_trials))); # static 0, dynamic 1
   
-  dm_data_to_add[,11] = c(array(data = 0, dim = c(1,num_static_trials)),
+  dm_data_to_add[,12] = c(array(data = 0, dim = c(1,num_static_trials)),
                           tmpdata$easy0difficult1[dm_index_dynamic]*-2 + 1); # easy +1, difficult -1
   
-  dm_data_to_add[,12] = c(array(data = NA, dim = c(1,num_static_trials)),
+  dm_data_to_add[,13] = c(array(data = NA, dim = c(1,num_static_trials)),
                           tmpdata$choiceP[dm_index_dynamic]); # choice probability on easy/diff dynamic trials
   
-  dm_data_to_add[,13] = tmpdata$bestRho[is.finite(tmpdata$bestRho)];
-  dm_data_to_add[,14] = tmpdata$bestMu[is.finite(tmpdata$bestMu)];
+  dm_data_to_add[,14] = tmpdata$bestRho[is.finite(tmpdata$bestRho)];
+  dm_data_to_add[,15] = tmpdata$bestMu[is.finite(tmpdata$bestMu)];
   
   
   # Add this person's DM data to the total DM data.
@@ -130,13 +133,14 @@ for(s in 1:number_of_subjects){
   
   wm_data_to_add[,1] = 1:number_of_wm_trials_per_person; # trial numbers
   wm_data_to_add[,2] = s; # subject number
+  wm_data_to_add[,3] = unique(tmpdata$participant);
   
-  wm_data_to_add[,3] = (nchar(tmpdata$digitsForTrial[wm_trial_indices-1])-1)/2; # number of digits on the trial
+  wm_data_to_add[,4] = (nchar(tmpdata$digitsForTrial[wm_trial_indices-1])-1)/2; # number of digits on the trial
   
-  wm_data_to_add[1:14,4] = 1; # forward is always first
-  wm_data_to_add[15:28,4] = 0; # backward is always second
+  wm_data_to_add[1:14,5] = 1; # forward is always first
+  wm_data_to_add[15:28,5] = 0; # backward is always second
   
-  wm_data_to_add[,5] = tmpdata$correct[wm_trial_indices]; # correct = 1, incorrect = 0
+  wm_data_to_add[,6] = tmpdata$correct[wm_trial_indices]; # correct = 1, incorrect = 0
   
   data_wm = rbind(data_wm,wm_data_to_add);
 }
