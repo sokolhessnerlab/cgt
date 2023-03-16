@@ -59,11 +59,6 @@ for (subj in 1:number_of_subjects){
   
   mean_rts[subj] = mean(tmpdata$reactiontime, na.rm = T)
 }
-# correct_answers = (reactiontime >= 0.25) #I don't think we need a top cut off based upon distribution mainly around 1 second, anything above 0.2 seconds
-# incorrect_answers = (reactiontime == is.NaN) #if no response and not correct answers
-#reactiontime_criterion = (length((correct_answers)/(num_static_trials + num_dynamic_trials)) >= .80) #RT per participant must mostly be correct, so at least 80% of the RT must be greater than or equal to 250 ms.
-#keep_reactiontime == reactiontime_criterion
-# QUESTION: WHAT DO WE DO WITH NA TRIALS (MISSED, OR TOO FAST)? KEEP? DISCARD?
 
 keep_dm_rt = mean_rts > 0.85;
 
@@ -138,7 +133,7 @@ plot(static_mean_pgamble,dynamic_mean_pgamble,xlim = c(0,1), ylim = c(0,1), asp 
 lines(x = c(0,1), y = c(0,1), col = 'red')
 
 pgambleDiff = static_mean_pgamble - dynamic_mean_pgamble
-mean(pgambleDiff) #0.062, so more gambling in static
+mean(pgambleDiff) #0.063, so more gambling in static
 # A: positive numbers, suggesting people gambled less in dynamic than static 
 
 
@@ -162,7 +157,6 @@ lines(x = c(0,1), y = c(0,1), col = 'blue')
 
 # Statistically test relative difficulty observed in easy ACC vs. easy REJ
 t.test(abs(easyACC_mean_pgamble-.5), abs(easyREJ_mean_pgamble-.5), paired = T)
-
 # A: Yes, we can treat all easy trials as similarly easy (whether easy ACC or REJ), not sig different 3/7/23
 
 
@@ -358,8 +352,8 @@ hist(grid_bestMu - estimated_parameters[,2], xlim = c(-100,100),
 # This is supposed to look silly! Should cluster around 0
 # ... and it does, as of 3/7/23!
 
-t.test(grid_bestRho, estimated_parameters[,1], paired = T) # no sig. diff (rho)... 3/7/23
-t.test(grid_bestMu, estimated_parameters[,2], paired = T) # no sig. diff (mu)... 3/7/23
+t.test(grid_bestRho, estimated_parameters[,1], paired = T) # no sig. diff (rho)... 3/15/23
+t.test(grid_bestMu, estimated_parameters[,2], paired = T) # no sig. diff (mu)... 3/15/23
 
 # A: YES, grid-search values match optimized values very closely.
 
@@ -410,16 +404,16 @@ plot(mean_rt_diff, mean_rt_easy, main = 'AVG RT', xlim = c(0, 4), ylim = c(0, 4)
 lines(c(0, 4), c(0, 4))
 
 # test easy RTs vs. diff. RTs 
-res = t.test(mean_rt_easy,mean_rt_diff, paired = T); #significant difference between rt easy and hard, WOOHOO! 3/7/23
+res = t.test(mean_rt_easy,mean_rt_diff, paired = T); #significant difference between rt easy and hard, WOOHOO! 3/15/23
 plot(var_rt_easy,var_rt_diff, main = sprintf('Difference in Variances; p = %.03f', res$p.value), 
      xlim = c(0,.6), ylim = c(0,.6))
 lines(c(0,.6), c(0,.6), col = 'green', lwd = 2)
 # RTs on difficult trials are more variable WITHIN person than their RTs on easy trials
 
 # differences between variance of RTs in conditions
-plot()
+
 t.test(var_rt_easy,var_rt_diff, paired = T)
-#A: yes, looks like on average rt of difficult decisions was slower than avg rt of easy decisions
+#A: yes, looks like on average rt of difficult decisions was slower than avg rt of easy decisions 3/15/23
 
 # per person basis of easy RTs vs diff. RTs??
 #Q: are easy choices similarly fast across people & are difficult choices similarly slower across people? 
@@ -439,7 +433,7 @@ for (subj in 1:number_of_clean_subjects){
 }
 
 #Variance test, to see differences in RT per person?? 
-var.test(mean_rt_easy, mean_rt_diff) # sig difference 3/7/23
+var.test(mean_rt_easy, mean_rt_diff) # sig difference 3/15/23
 # A:RTs more variable across people for diff. than easy trials
 
 
@@ -476,8 +470,8 @@ for (subj in 1:number_of_clean_subjects){
 }
 
 # does prev. trial type influence RT on the current trial
-t.test(easy_easy_mean_rt, diff_easy_mean_rt, paired = T); # NOT for easy 3/7/23
-t.test(diff_diff_mean_rt, easy_diff_mean_rt, paired = T); # NOT for difficult 3/7/23
+t.test(easy_easy_mean_rt, diff_easy_mean_rt, paired = T); # NOT for easy 3/15/23
+t.test(diff_diff_mean_rt, easy_diff_mean_rt, paired = T); # NOT for difficult 3/15/23
 # A: Not at this level.
 
 # Plot the current trial as a function of prev. trial type
@@ -486,7 +480,7 @@ plot(easy_easy_mean_rt, diff_easy_mean_rt, xlim = c(0.75,2.2), ylim = c(0.75,2.2
 plot(easy_diff_mean_rt, diff_diff_mean_rt, xlim = c(0.75,2.2), ylim = c(0.75,2.2),
      main = 'DIFFICULT TRIALS', xlab = 'Previous trial was EASY', ylab = 'Previous trial was DIFFICULT'); lines(c(0,3), c(0,3)); # NOT for difficult
 
-t.test(diff_diff_mean_rt, easy_easy_mean_rt, paired = T); # not sig diff 3/7/23
+t.test(diff_diff_mean_rt, easy_easy_mean_rt, paired = T); # not sig diff 3/15/23
 #A: it looks like RT based upon subsequent trials is not sig different at this level
 
 #Q: Does gambling behavior change based upon previous trial difficulty? 
@@ -514,8 +508,8 @@ for (subj in 1:number_of_clean_subjects){
                                                        (tmpdata$easyP1difficultN1[51:169] == 1)], na.rm = T);
 }  
 
-t.test(diff_diff_mean_pgamble, easy_diff_mean_pgamble, paired = T); # not sig diff 3/7/23
-t.test(diff_easy_mean_pgamble, easy_easy_mean_pgamble, paired = T); # not sig diff 3/7/23
+t.test(diff_diff_mean_pgamble, easy_diff_mean_pgamble, paired = T); # not sig diff 3/15/23
+t.test(diff_easy_mean_pgamble, easy_easy_mean_pgamble, paired = T); # not sig diff 3/15/23
 #A: it looks like pgamble based upon subsequent trials is not significantly differnt, difficulty doesnt show effect on p gamble.
 
 ### Regression LM (Contextual) ### 
@@ -602,20 +596,33 @@ summary(m2_prev_intxn)
 #A: THIS MODEL & results  CONFUSED ME...^^^ 
   # goal = to see if previous RT predicts current RT on easy diff trials in cont, cat, and predtermined easy diff trials... 
 
-
 # use previous reaction time as an index of EXPERIENCED difficulty
 #maxRT = 4 seconds 
 #minRT = 0.86 seconds
+#should i be using the sqrt RT? 
 
 for (subj in 1:number_of_clean_subjects){
   subj_id = keep_participants[subj]
   tmpdata = data_dm[data_dm$subjectnumber == subj_id,]
-  slowest_RT_type = mean[(tmpdata$reactiontime == 3-4) & (tmpdata$static0dynamic1 == 1)];
-  next_slowest_RT_type = mean[(tmpdata$reactiontime == 2-3) & (tmpdata$static0dynamic1 == 1)]; 
-  faster_RT_type = mean[(tmpdata$reactiontime == 1-2) & (tmpdata$static0dynamic1 == 1)];
-  fastest_RT_type= mean[(tmpdata$reactiontime < 1) & (tmpdata$static0dynamic1 == 1)];
+  slowest_RT_type = mean(tmpdata$reactiontime[tmpdata$static0dynamic1 == 1 & tmpdata$reactiontime >= 3])
+  next_slowest_RT_type = mean(tmpdata$reactiontime[tmpdata$static0dynamic1 == 1 & tmpdata$reactiontime >= 2 & tmpdata$reactiontime < 3])
+  faster_RT_type = mean(tmpdata$reactiontime[tmpdata$static0dynamic1 == 1 & tmpdata$reactiontime >= 1 & tmpdata$reactiontime < 2])
+  fastest_RT_type = mean(tmpdata$reactiontime[tmpdata$static0dynamic1 == 1 & tmpdata$reactiontime < 1])
 }
+#sqrt rt ??
+#clean_data_dm$sqrtRT = sqrt(clean_data_dm$reactiontime);
+
+#for (subj in 1:number_of_clean_subjects){
+  subj_id = keep_participants[subj]
+  tmpdata = data_dm[data_dm$subjectnumber == subj_id,]
+  slowest_RT_type = mean(tmpdata$sqrtRT[tmpdata$static0dynamic1 == 1 & tmpdata$sqrtRT >= 3])
+  next_slowest_RT_type = mean(tmpdata$sqrtRT[tmpdata$static0dynamic1 == 1 & tmpdata$sqrtRT >= 2 & tmpdata$sqrtRT < 3])
+  faster_RT_type = mean(tmpdata$sqrtRT[tmpdata$static0dynamic1 == 1 & tmpdata$sqrtRT >= 1 & tmpdata$sqrtRT < 2])
+  fastest_RT_type = mean(tmpdata$sqrtRT[tmpdata$static0dynamic1 == 1 & tmpdata$sqrtRT < 1])
+}
+
 #run regression...
+
 
 
 ### WM Task ###
@@ -645,13 +652,13 @@ best_span_BS = array(dim = c(number_of_clean_subjects,1));
 
 for (subj in 1:number_of_clean_subjects){
   subj_id = keep_participants[subj]
-  tmpdata = data_wm[data_wm$subjectnumber == subj_id, ]
+  tmpdata = data_wm[data_wm$subjectnumber == subj_id,]
   best_span_FS[subj] = max(tmpdata$number_digits[(tmpdata$forward1backward0 == 1) & (tmpdata$correct == 1)], na.rm = T);
   best_span_BS[subj] = max(tmpdata$number_digits[(tmpdata$forward1backward0 == 0) & (tmpdata$correct == 1)], na.rm = T);
 }
 
 t.test(best_span_FS, best_span_BS, paired = T);
-#A: yes, significant difference between max digit number/length FS correct compared to BS correct (3/7/23)!
+#A: yes, significant difference between max digit number/length FS correct compared to BS correct (3/15/23)!
 
 # COG CONTROL REGRESSION & RT- use digit span info to account for capacity... #help says there are variablelengths!! 
 m2_span = lm(sqrtRT ~ 1 + best_span_FS , data = clean_data_dm);
@@ -666,12 +673,12 @@ summary(m1_span_dynonly_rfx)
 
 #HELP
 # Max correct before 2 errors in a row @ a given length (BEST RELIABLE SPAN)! 
-best_reliable_span = array(dim = c(number_of_clean_subjects, 1));
+#best_reliable_span = array(dim = c(number_of_clean_subjects, 1));
 
-for (subj in 1:number_of_clean_subjects){
-  subj_id = keep_participants[subj];
-  tmpdata = data_wm[data_wm$subjectnumber == subj_id,];
-  best_reliable_span_FS[subj] = max(tmpdata$number_digits[(tmpdata$forward1backward0 == 1) & (tmpdata$correct == 1) & (tmpdata$correct[2:14]- 1 == 1)], na.rm = T);
+#for (subj in 1:number_of_clean_subjects){
+  #subj_id = keep_participants[subj];
+  #tmpdata = data_wm[data_wm$subjectnumber == subj_id,];
+  #best_reliable_span_FS[subj] = max(tmpdata$number_digits[(tmpdata$forward1backward0 == 1) & (tmpdata$correct == 1) & (tmpdata$correct[2:14]- 1 == 1)], na.rm = T);
 }
 
 # total # of trials before 2 errors in a row @ a given length (QUALITY OF EFFORT?)
