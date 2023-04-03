@@ -656,6 +656,7 @@ for (subj in 1:number_of_clean_subjects) {
 ## Q:is there a statistically sig difference between number of FS and BS #correct/14? 
 t.test(FS_correct, BS_correct, paired = T);
 #A: not significant diff (3/7/23), suggestive that overall number of trials correct on either fs or bs is similar.
+#total number correct doesnt really tell us anything... exlcude from resutls manuscript! 
 
 # FS & BS max number_digits/length when correct (BEST SPAN)
 #Q: is there a difference in max number of digits correct in FS vs BS (comparing fs max digit length correct to bs)
@@ -670,9 +671,36 @@ for (subj in 1:number_of_clean_subjects){
 }
 
 t.test(best_span_FS, best_span_BS, paired = T);
-#A: yes, significant difference between max digit number/length FS correct compared to BS correct (3/15/23)!
+#A: yes, significant difference between max digit number/length FS correct compared to BS correct (4/2/23)!Suggestive that people have different capcities FS and BS
 
 # COG CONTROL REGRESSION & RT- use digit span info to account for capacity... #help says there are variablelengths!! 
+#must use median split
+#create median split values:
+medSplit_FS = array(dim = c(number_of_clean_subjects,1));
+medSplit_BS = array(dim = c(number_of_clean_subjects,1));
+
+isHighCCMedSplit_FS = array(dim = c(number_of_clean_subjects,1));
+isHighCCMedSplit_BS = array(dim = c(number_of_clean_subjects,1));
+
+isLowCCMedSplit_FS = array(dim = c(number_of_clean_subjects,1));
+isLowCCMedSplit_BS = array(dim = c(number_of_clean_subjects,1));
+
+for (subj in 1:number_of_clean_subjects){
+  subj_id = keep_participants[subj]
+  tmpdata = data_wm[data_wm$subjectnumber == subj_id,]
+  medSplit_FS[subj] = median(best_span_FS[subj], na.rm = T);
+  medSplit_BS[subj] = median(best_span_BS[subj], na.rm = T);
+  isHighCCMedSplit_FS[subj] = as.numeric(tmpdata$best_span_FS >= medSplit_FS)
+  isHighCCMedSplit_BS[subj] = as.numeric(tmpdata$best_span_BS >= medSplit_BS)
+  isLowCCMedSplit_FS[subj] = as.numeric(tmpdata$best_span_FS <= medSplit_FS)
+  isLowCCMedSplit_BS[subj] = as.numeric(tmpdata$best_span_BS <= medSplit_BS)
+}
+
+#combined high = median high fs + median high BS
+
+
+#Regression w best span only doesnt answer the questions I want. 
+
 m2_span = lm(sqrtRT ~ 1 + best_span_FS , data = clean_data_dm);
 summary(m1_span) 
 
@@ -683,42 +711,10 @@ m2_span_dynonly_rfx = lmer(sqrtRT ~ 1 + best_span_FS + (1 | subjectnumber),
                            data = clean_data_dm[clean_data_dm$static0dynamic1 == 1,]);
 summary(m1_span_dynonly_rfx)
 
-#HELP
+
 # Max correct before 2 errors in a row @ a given length (BEST RELIABLE SPAN)! 
-#best_reliable_span = array(dim = c(number_of_clean_subjects, 1));
-
-#for (subj in 1:number_of_clean_subjects){
-  #subj_id = keep_participants[subj];
-  #tmpdata = data_wm[data_wm$subjectnumber == subj_id,];
-  #best_reliable_span_FS[subj] = max(tmpdata$number_digits[(tmpdata$forward1backward0 == 1) & (tmpdata$correct == 1) & (tmpdata$correct[2:14]- 1 == 1)], na.rm = T);
-}
-
-# total # of trials before 2 errors in a row @ a given length (QUALITY OF EFFORT?)
-quality_of_span_FS = array(dim = c(number_of_clean_subjects,1));
-quality_of_span_BS = array(dim = c(number_of_clean_subjects,1));
-
-n_trials <- 14 
-n_errors <- 0 
-last_error <-FALSE
-
-if (last_error){
-  n_errors <- 2;
-  print("number of trials before 2 errors in a row", n_trials)
-  } else{
-    n_errors <-1
-    last_error <-TRUE
-  #} else { 
-   # n_errors <-0 
-   # last_error <- FALSE
-    }
-
-for (subj in 1:number_of_clean_subjects){
-  subj_id = keep_participants[subj];
-  tmpdata = data_wm[data_wm$subjectnumber == subj_id,]; # defines this person's data
-  
-  quality_of_span_FS[subj] = sum(tmpdata$correct[tmpdata$forward1backward0 == 1], na.rm=T);
-  quality_of_span_BS[subj] =sum(tmpdata$correct[tmpdata$forward1backward0 == 0], na.rm=T);
-}
+# total # of trials before 2 errors in a row @ a given length (QUALITY OF EFFORT?) NOT USING THIS
+#give the same as best span... 
 
 ### Connecting Decision-Making & Working Memory #### 
 #see how far back if at all previous choice difficulty mattered to cog capacity measures
