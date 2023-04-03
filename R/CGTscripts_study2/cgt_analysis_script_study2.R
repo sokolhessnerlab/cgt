@@ -388,13 +388,16 @@ mean_rt_dynamic = array(dim = c(number_of_clean_subjects, 1));
 for (subj in 1:number_of_clean_subjects){
   subj_id = keep_participants[subj];
   tmpdata = data_dm[data_dm$subjectnumber == subj_id,];
-  tmpdata = tmpdata[tmpdata$easyP1difficultN1 == 1,];
-  mean_rt_easy[subj] = mean(tmpdata$reactiontime, na.rm = T)
-  mean_rt_easyACC[subj] = mean(tmpdata$reactiontime[(tmpdata$easyP1difficultN1 == 1) & (tmpdata$choiceP > .5)], na.rm = T);
-  mean_rt_easyREJ[subj] = mean(tmpdata$reactiontime[(tmpdata$easyP1difficultN1 == 1) & (tmpdata$choiceP < .5)], na.rm = T);
-  var_rt_easy[subj] = var(tmpdata$reactiontime, na.rm = T);
-  #mean_rt_static[subj] = mean(tmpdata$reactiontime[(tmpdata$static0dynamic1 == 0)],na.rm = T); # HELP WITH THIS LINE, getting NaN, is this bc of 0's?
+  
+  mean_rt_static[subj] = mean(tmpdata$reactiontime[(tmpdata$static0dynamic1 == 0)],na.rm = T); # HELP WITH THIS LINE, getting NaN, is this bc of 0's?
   mean_rt_dynamic[subj] = mean(tmpdata$reactiontime[(tmpdata$static0dynamic1 == 1)], na.rm = T);
+  
+  tmpdataEasyDyn = tmpdata[tmpdata$easyP1difficultN1 == 1,];
+  mean_rt_easy[subj] = mean(tmpdataEasyDyn$reactiontime, na.rm = T)
+  mean_rt_easyACC[subj] = mean(tmpdataEasyDyn$reactiontime[(tmpdataEasyDyn$easyP1difficultN1 == 1) & (tmpdataEasyDyn$choiceP > .5)], na.rm = T);
+  mean_rt_easyREJ[subj] = mean(tmpdataEasyDyn$reactiontime[(tmpdataEasyDyn$easyP1difficultN1 == 1) & (tmpdataEasyDyn$choiceP < .5)], na.rm = T);
+  var_rt_easy[subj] = var(tmpdataEasyDyn$reactiontime, na.rm = T);
+
 }
 
 for (subj in 1:number_of_clean_subjects){
