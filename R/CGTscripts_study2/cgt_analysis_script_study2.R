@@ -517,6 +517,8 @@ for (subj in 1:number_of_clean_subjects){
 
 t.test(diff_diff_mean_pgamble, easy_diff_mean_pgamble, paired = T); # not sig diff 4/2/23
 t.test(diff_easy_mean_pgamble, easy_easy_mean_pgamble, paired = T); # not sig diff 4/2/23
+t.test(diff_diff_mean_pgamble, easy_easy_mean_pgamble, paired = T); # not sig diff 4/2/23
+
 #A: it looks like pgamble based upon subsequent trials is not significantly differnt, difficulty doesnt show effect on p gamble.
 
 ### Regression LM (Contextual) ### 
