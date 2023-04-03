@@ -134,6 +134,9 @@ lines(x = c(0,1), y = c(0,1), col = 'red')
 
 pgambleDiff = static_mean_pgamble - dynamic_mean_pgamble
 mean(pgambleDiff) #0.063, so more gambling in static
+t.test(static_mean_pgamble, dynamic_mean_pgamble)
+#significant difference in gambling behavior from static to dynamic 4/2/23
+
 # A: positive numbers, suggesting people gambled less in dynamic than static 
 
 
@@ -352,8 +355,8 @@ hist(grid_bestMu - estimated_parameters[,2], xlim = c(-100,100),
 # This is supposed to look silly! Should cluster around 0
 # ... and it does, as of 3/7/23!
 
-t.test(grid_bestRho, estimated_parameters[,1], paired = T) # no sig. diff (rho)... 3/15/23
-t.test(grid_bestMu, estimated_parameters[,2], paired = T) # no sig. diff (mu)... 3/15/23
+t.test(grid_bestRho, estimated_parameters[,1], paired = T) # no sig. diff (rho)... 4/2/23
+t.test(grid_bestMu, estimated_parameters[,2], paired = T) # no sig. diff (mu)... 4/2/23
 
 # A: YES, grid-search values match optimized values very closely.
 
@@ -378,6 +381,8 @@ mean_rt_easyACC = array(dim = c(number_of_clean_subjects, 1));
 mean_rt_easyREJ = array(dim = c(number_of_clean_subjects, 1));
 var_rt_easy = array(dim = c(number_of_clean_subjects, 1));
 var_rt_diff = array(dim = c(number_of_clean_subjects, 1));
+mean_rt_static = array(dim = c(number_of_clean_subjects, 1));
+mean_rt_dynamic = array(dim = c(number_of_clean_subjects, 1));
   
   
 for (subj in 1:number_of_clean_subjects){
@@ -388,6 +393,8 @@ for (subj in 1:number_of_clean_subjects){
   mean_rt_easyACC[subj] = mean(tmpdata$reactiontime[(tmpdata$easyP1difficultN1 == 1) & (tmpdata$choiceP > .5)], na.rm = T);
   mean_rt_easyREJ[subj] = mean(tmpdata$reactiontime[(tmpdata$easyP1difficultN1 == 1) & (tmpdata$choiceP < .5)], na.rm = T);
   var_rt_easy[subj] = var(tmpdata$reactiontime, na.rm = T);
+  #mean_rt_static[subj] = mean(tmpdata$reactiontime[(tmpdata$static0dynamic1 == 0)],na.rm = T); # HELP WITH THIS LINE, getting NaN, is this bc of 0's?
+  mean_rt_dynamic[subj] = mean(tmpdata$reactiontime[(tmpdata$static0dynamic1 == 1)], na.rm = T);
 }
 
 for (subj in 1:number_of_clean_subjects){
@@ -404,7 +411,7 @@ plot(mean_rt_diff, mean_rt_easy, main = 'AVG RT', xlim = c(0, 4), ylim = c(0, 4)
 lines(c(0, 4), c(0, 4))
 
 # test easy RTs vs. diff. RTs 
-res = t.test(mean_rt_easy,mean_rt_diff, paired = T); #significant difference between rt easy and hard, WOOHOO! 3/15/23
+res = t.test(mean_rt_easy,mean_rt_diff, paired = T); #significant difference between rt easy and hard, WOOHOO! 4/2/23
 plot(var_rt_easy,var_rt_diff, main = sprintf('Difference in Variances; p = %.03f', res$p.value), 
      xlim = c(0,.6), ylim = c(0,.6))
 lines(c(0,.6), c(0,.6), col = 'green', lwd = 2)
@@ -413,7 +420,7 @@ lines(c(0,.6), c(0,.6), col = 'green', lwd = 2)
 # differences between variance of RTs in conditions
 
 t.test(var_rt_easy,var_rt_diff, paired = T)
-#A: yes, looks like on average rt of difficult decisions was slower than avg rt of easy decisions 3/15/23
+#A: yes, looks like on average rt of difficult decisions was slower than avg rt of easy decisions 4/2/23
 
 # per person basis of easy RTs vs diff. RTs??
 #Q: are easy choices similarly fast across people & are difficult choices similarly slower across people? 
@@ -433,7 +440,7 @@ for (subj in 1:number_of_clean_subjects){
 }
 
 #Variance test, to see differences in RT per person?? 
-var.test(mean_rt_easy, mean_rt_diff) # sig difference 3/15/23
+var.test(mean_rt_easy, mean_rt_diff) # sig difference 4/2/23
 # A:RTs more variable across people for diff. than easy trials
 
 
@@ -470,8 +477,8 @@ for (subj in 1:number_of_clean_subjects){
 }
 
 # does prev. trial type influence RT on the current trial
-t.test(easy_easy_mean_rt, diff_easy_mean_rt, paired = T); # NOT for easy 3/15/23
-t.test(diff_diff_mean_rt, easy_diff_mean_rt, paired = T); # NOT for difficult 3/15/23
+t.test(easy_easy_mean_rt, diff_easy_mean_rt, paired = T); # NOT for easy 4/2/23
+t.test(diff_diff_mean_rt, easy_diff_mean_rt, paired = T); # NOT for difficult 4/2/23
 # A: Not at this level.
 
 # Plot the current trial as a function of prev. trial type
@@ -480,7 +487,7 @@ plot(easy_easy_mean_rt, diff_easy_mean_rt, xlim = c(0.75,2.2), ylim = c(0.75,2.2
 plot(easy_diff_mean_rt, diff_diff_mean_rt, xlim = c(0.75,2.2), ylim = c(0.75,2.2),
      main = 'DIFFICULT TRIALS', xlab = 'Previous trial was EASY', ylab = 'Previous trial was DIFFICULT'); lines(c(0,3), c(0,3)); # NOT for difficult
 
-t.test(diff_diff_mean_rt, easy_easy_mean_rt, paired = T); # not sig diff 3/15/23
+t.test(diff_diff_mean_rt, easy_easy_mean_rt, paired = T); # not sig diff 4/2/23
 #A: it looks like RT based upon subsequent trials is not sig different at this level
 
 #Q: Does gambling behavior change based upon previous trial difficulty? 
@@ -508,8 +515,8 @@ for (subj in 1:number_of_clean_subjects){
                                                        (tmpdata$easyP1difficultN1[51:169] == 1)], na.rm = T);
 }  
 
-t.test(diff_diff_mean_pgamble, easy_diff_mean_pgamble, paired = T); # not sig diff 3/15/23
-t.test(diff_easy_mean_pgamble, easy_easy_mean_pgamble, paired = T); # not sig diff 3/15/23
+t.test(diff_diff_mean_pgamble, easy_diff_mean_pgamble, paired = T); # not sig diff 4/2/23
+t.test(diff_easy_mean_pgamble, easy_easy_mean_pgamble, paired = T); # not sig diff 4/2/23
 #A: it looks like pgamble based upon subsequent trials is not significantly differnt, difficulty doesnt show effect on p gamble.
 
 ### Regression LM (Contextual) ### 
