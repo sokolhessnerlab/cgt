@@ -673,103 +673,36 @@ for (subj in 1:number_of_clean_subjects){
 t.test(best_span_FS, best_span_BS, paired = T);
 #A: yes, significant difference between max digit number/length FS correct compared to BS correct (4/2/23)!Suggestive that people have different capcities FS and BS
 
+cor.test(best_span_BS,best_span_FS)
+#A: yes, very correlated (r = 0.71, p = 7.9e-9)! 
+plot(best_span_BS,best_span_FS, 
+     pch = 19,col = rgb(.5,.5,.5,.5), 
+     xlim = c(0,12.5), ylim = c(0,12.5))
+lines(x = c(0, 12), y = c(0,12))
+
+# Collapse spans into a single span measure
+best_span_overall = rowMeans(cbind(best_span_FS,best_span_BS))
+
 # COG CONTROL REGRESSION & RT- use digit span info to account for capacity... #help says there are variablelengths!! 
 #must use median split
 #create median split values:
-MedianValueFS = array(dim = c(number_of_clean_subjects,1));
-MedianValueBS = array(dim = c(number_of_clean_subjects,1));
-isHighCC_FS = array(dim = c(number_of_clean_subjects,1));
-isHighCC_BS = array(dim = c(number_of_clean_subjects,1));
-isLowCC_FS = array(dim = c(number_of_clean_subjects,1));
-isLowCC_BS = array(dim = c(number_of_clean_subjects,1));
+medianSpan = median(best_span_overall);
+capacity_HighP1_lowN1 = (best_span_overall > medianSpan)*2-1;
 
+clean_data_dm$capacity_HighP1_lowN1 = NA;
 
-#calculate median values FS & BS
-for (subj in 1:number_of_clean_subjects){
-  subj_id = keep_participants[subj];
-  tmpdata = data_wm[data_wm$subjectnumber == subj_id,];
-  MedianValueFS[subj] <- median(best_span_FS);
-  MedianValueBS[subj] <- median(best_span_BS);
+for(s in 1:number_of_clean_subjects){
+  subj_id = keep_participants[s];
+  clean_data_dm$capacity_HighP1_lowN1[clean_data_dm$subjectnumber == subj_id] = capacity_HighP1_lowN1[s];
 }
 
-#median split to high and low controllers 
-for (subj in 1:number_of_clean_subjects){
-  subj_id = keep_participants[subj]
-  tmpdata = data_wm[data_wm$subjectnumber == subj_id,]
-  isHighCC_FS[subj] = as.numeric(tmpdata$best_span_FS >= MedianValueFS)
-  isHighCC_BS[subj] = as.numeric(tmpdata$best_span_BS >= MedianValueBS)
-  isLowCC_FS[subj] = as.numeric(tmpdata$best_span_FS <= MedianValueFS)
-  isLowCC_BS[subj] = as.numeric(tmpdata$best_span_BS <= MedianValueBS)
-}
-
-#option 3 median split 
-medianBestSpanFS = median(as.numeric(data_wm$best_span_FS), na.rm=T));
-medianBestSpanBS = median(as.numeric(data_wm$best_span_BS), na.rm=T));
-
-data_wm$isHighSpanFS = as.numeric(data_wm$best_span_FS >=medianBestSpanFS);
-data_wm$isLowSpanFS = as.numeric(data_wm$best_span_FS < medianBestSpanFS);
-data_wm$isHighSpanBS = as.numeric(data_wm$best_span_BS  >= medianBestSpanBS);
-data_wm$isLowSpanBS = as.numeric(data_wm$best_span_BS  < medianBestSpanBS);
-                                 
-# if best span > med value FS & BS = high controller 
-for (subj in 1:number_of_clean_subjects){
-  subj_id = keep_participants[subj]
-  tmpdata = data_wm[data_wm$subjectnumber == subj_id,]
-  if (tmpdata$best_span_FS >= MedianValueFS) {
-    stop("High controller FS")
-  } else {
-    stop("Low controller FS")
-  }
-}
-
-#Way that works but is less code smart... 
-MedianValueFS = array(dim = c(number_of_clean_subjects,1));
-MedianValueBS = array(dim = c(number_of_clean_subjects,1));
-highcontroller_FS = array(dim = c(number_of_clean_subjects,1));
-lowcontroller_FS = array(dim = c(number_of_clean_subjects,1));
-highcontroller_BS = array(dim = c(number_of_clean_subjects,1));
-lowcontroller_BS = array(dim = c(number_of_clean_subjects,1));
-
-#median value = 8 FS & 7 BS so want to do median split. 
-highcontroller_FS = best_span_FS >= 8
-lowcontroller_FS = best_span_FS < 8
-
-highcontroller_BS = best_span_BS >= 7
-lowcontroller_BS = best_span_BS < 7
-
-#these numbers dont make sense.... 
-sum(highcontroller_BS); # 29 
-sum(highcontroller_FS);# 28
-
-sum(lowcontroller_FS);#22
-sum(lowcontroller_BS);# 21
-
+mean((best_span_FS < median(best_span_FS)) == (best_span_BS < median(best_span_BS)))
+# median splits on only forward span & on only backward span agree about categorization 86% of the time - GOOD!
   
-#combined high controller =  high fs +  high BS
-for (subj in 1:number_of_clean_subjects) {
-  subj_id <- keep_participants[subj]
-  tmpdata <- data_wm[data_wm$subjectnumber == subj_id,]
-  
-  # Check if the subject is a high controller for both BS and FS conditions
-  if (tmpdata$high_controller_BS == TRUE && tmpdata$high_controller_FS == TRUE) {
-    isHighCC_FS[subj] <- TRUE
-  } else {
-    isHighCC_FS[subj] <- FALSE
-  }
-}
+m2_prev_rfx = lmer(sqrtRT_prev ~ 1 + easyP1difficultN1 + easyP1difficultN1_prev + capacity_HighP1_lowN1 + 
+                     (1 | subjectnumber), data = clean_data_dm);
+summary(m2_prev_rfx)
 
-#combined low controller = low fs + low BS 
-for (subj in 1:number_of_clean_subjects) {
-  subj_id <- keep_participants[subj]
-  tmpdata <- data_wm[data_wm$subjectnumber == subj_id,]
-  
-  # Check if the subject is a low controller for both BS and FS conditions
-  if (tmpdata$low_controller_BS == TRUE && tmpdata$low_controller_FS == TRUE) {
-    isLowCC_FS[subj] <- TRUE
-  } else {
-    isLowCC_FS[subj] <- FALSE
-  }
-}
 
 #look at average RT for differnt types of controllers 
 for (subj in 1:number_of_clean_subjects){
