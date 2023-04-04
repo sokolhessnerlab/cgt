@@ -683,6 +683,7 @@ isHighCC_BS = array(dim = c(number_of_clean_subjects,1));
 isLowCC_FS = array(dim = c(number_of_clean_subjects,1));
 isLowCC_BS = array(dim = c(number_of_clean_subjects,1));
 
+
 #calculate median values FS & BS
 for (subj in 1:number_of_clean_subjects){
   subj_id = keep_participants[subj];
@@ -701,6 +702,15 @@ for (subj in 1:number_of_clean_subjects){
   isLowCC_BS[subj] = as.numeric(tmpdata$best_span_BS <= MedianValueBS)
 }
 
+#option 3 median split 
+medianBestSpanFS = median(as.numeric(data_wm$best_span_FS), na.rm=T));
+medianBestSpanBS = median(as.numeric(data_wm$best_span_BS), na.rm=T));
+
+data_wm$isHighSpanFS = as.numeric(data_wm$best_span_FS >=medianBestSpanFS);
+data_wm$isLowSpanFS = as.numeric(data_wm$best_span_FS < medianBestSpanFS);
+data_wm$isHighSpanBS = as.numeric(data_wm$best_span_BS  >= medianBestSpanBS);
+data_wm$isLowSpanBS = as.numeric(data_wm$best_span_BS  < medianBestSpanBS);
+                                 
 # if best span > med value FS & BS = high controller 
 for (subj in 1:number_of_clean_subjects){
   subj_id = keep_participants[subj]
