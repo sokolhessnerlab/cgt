@@ -676,65 +676,92 @@ t.test(best_span_FS, best_span_BS, paired = T);
 # COG CONTROL REGRESSION & RT- use digit span info to account for capacity... #help says there are variablelengths!! 
 #must use median split
 #create median split values:
-medSplit_FS = array(dim = c(number_of_clean_subjects,1));
-medSplit_BS = array(dim = c(number_of_clean_subjects,1));
+MedianValueFS = array(dim = c(number_of_clean_subjects,1));
+MedianValueBS = array(dim = c(number_of_clean_subjects,1));
+isHighCC_FS = array(dim = c(number_of_clean_subjects,1));
+isHighCC_BS = array(dim = c(number_of_clean_subjects,1));
+isLowCC_FS = array(dim = c(number_of_clean_subjects,1));
+isLowCC_BS = array(dim = c(number_of_clean_subjects,1));
 
-isHighCCMedSplit_FS = array(dim = c(number_of_clean_subjects,1));
-isHighCCMedSplit_BS = array(dim = c(number_of_clean_subjects,1));
+#calculate median values FS & BS
+for (subj in 1:number_of_clean_subjects){
+  subj_id = keep_participants[subj];
+  tmpdata = data_wm[data_wm$subjectnumber == subj_id,];
+  MedianValueFS[subj] <- median(best_span_FS);
+  MedianValueBS[subj] <- median(best_span_BS);
+}
 
-isLowCCMedSplit_FS = array(dim = c(number_of_clean_subjects,1));
-isLowCCMedSplit_BS = array(dim = c(number_of_clean_subjects,1));
-
+#median split to high and low controllers 
 for (subj in 1:number_of_clean_subjects){
   subj_id = keep_participants[subj]
   tmpdata = data_wm[data_wm$subjectnumber == subj_id,]
-  medSplit_FS[subj] = median(best_span_FS[subj], na.rm = T);
-  medSplit_BS[subj] = median(best_span_BS[subj], na.rm = T);
-  isHighCCMedSplit_FS[subj] = as.numeric(tmpdata$best_span_FS >= medSplit_FS)
-  isHighCCMedSplit_BS[subj] = as.numeric(tmpdata$best_span_BS >= medSplit_BS)
-  isLowCCMedSplit_FS[subj] = as.numeric(tmpdata$best_span_FS <= medSplit_FS)
-  isLowCCMedSplit_BS[subj] = as.numeric(tmpdata$best_span_BS <= medSplit_BS)
+  isHighCC_FS[subj] = as.numeric(tmpdata$best_span_FS >= MedianValueFS)
+  isHighCC_BS[subj] = as.numeric(tmpdata$best_span_BS >= MedianValueBS)
+  isLowCC_FS[subj] = as.numeric(tmpdata$best_span_FS <= MedianValueFS)
+  isLowCC_BS[subj] = as.numeric(tmpdata$best_span_BS <= MedianValueBS)
 }
 
-#combined high = median high fs + median high BS
+# if best span > med value FS & BS = high controller 
+for (subj in 1:number_of_clean_subjects){
+  subj_id = keep_participants[subj]
+  tmpdata = data_wm[data_wm$subjectnumber == subj_id,]
+  if (tmpdata$best_span_FS >= MedianValueFS) {
+    stop("High controller FS")
+  } else {
+    stop("Low controller FS")
+  }
+}
 
-
-#Regression w best span only doesnt answer the questions I want. 
-
-m2_span = lm(sqrtRT ~ 1 + best_span_FS , data = clean_data_dm);
-summary(m1_span) 
-
-m2_spanrfx = lmer(sqrtRT ~ 1 + best_span_FS + (1 | subjectnumber), data = clean_data_dm);
-summary(m1_spanrfx)
-
-m2_span_dynonly_rfx = lmer(sqrtRT ~ 1 + best_span_FS + (1 | subjectnumber),
-                           data = clean_data_dm[clean_data_dm$static0dynamic1 == 1,]);
-summary(m1_span_dynonly_rfx)
-
-
-# Max correct before 2 errors in a row @ a given length (BEST RELIABLE SPAN)! 
-# total # of trials before 2 errors in a row @ a given length (QUALITY OF EFFORT?) NOT USING THIS
-#give the same as best span... 
-
-### Connecting Decision-Making & Working Memory #### 
-#see how far back if at all previous choice difficulty mattered to cog capacity measures
-#see how RT as measure of choice diff relates to cog capacity 
-
-#Q: Do high controllers have diff avg RT (predicted faster avg) compared to low controllers? 
+#Way that works but is less code smart... 
 MedianValueFS = array(dim = c(number_of_clean_subjects,1));
 MedianValueBS = array(dim = c(number_of_clean_subjects,1));
-highcontroller_FS_avgRT = array(dim = c(number_of_clean_subjects,1));
-lowcontroller_FS_avgRT = array(dim = c(number_of_clean_subjects,1));
-highcontroller_BS_avgRT = array(dim = c(number_of_clean_subjects,1));
-lowcontroller_BS_avgRT = array(dim = c(number_of_clean_subjects,1));
+highcontroller_FS = array(dim = c(number_of_clean_subjects,1));
+lowcontroller_FS = array(dim = c(number_of_clean_subjects,1));
+highcontroller_BS = array(dim = c(number_of_clean_subjects,1));
+lowcontroller_BS = array(dim = c(number_of_clean_subjects,1));
 
-#median value = 7.5 so want to do median split. 
-highcontroller_FS = best_span_FS > 7.5
-lowcontroller_FS = best_span_FS < 7.5
+#median value = 8 FS & 7 BS so want to do median split. 
+highcontroller_FS = best_span_FS >= 8
+lowcontroller_FS = best_span_FS < 8
 
-highcontroller_BS = best_span_BS > 6.5
-lowcontroller_BS = best_span_BS < 6.5 
+highcontroller_BS = best_span_BS >= 7
+lowcontroller_BS = best_span_BS < 7
 
+#these numbers dont make sense.... 
+sum(highcontroller_BS); # 29 
+sum(highcontroller_FS);# 28
+
+sum(lowcontroller_FS);#22
+sum(lowcontroller_BS);# 21
+
+  
+#combined high controller =  high fs +  high BS
+for (subj in 1:number_of_clean_subjects) {
+  subj_id <- keep_participants[subj]
+  tmpdata <- data_wm[data_wm$subjectnumber == subj_id,]
+  
+  # Check if the subject is a high controller for both BS and FS conditions
+  if (tmpdata$high_controller_BS == TRUE && tmpdata$high_controller_FS == TRUE) {
+    isHighCC_FS[subj] <- TRUE
+  } else {
+    isHighCC_FS[subj] <- FALSE
+  }
+}
+
+#combined low controller = low fs + low BS 
+for (subj in 1:number_of_clean_subjects) {
+  subj_id <- keep_participants[subj]
+  tmpdata <- data_wm[data_wm$subjectnumber == subj_id,]
+  
+  # Check if the subject is a low controller for both BS and FS conditions
+  if (tmpdata$low_controller_BS == TRUE && tmpdata$low_controller_FS == TRUE) {
+    isLowCC_FS[subj] <- TRUE
+  } else {
+    isLowCC_FS[subj] <- FALSE
+  }
+}
+
+#look at average RT for differnt types of controllers 
 for (subj in 1:number_of_clean_subjects){
   subj_id = keep_participants[subj];
   tmpdata = data_wm[data_wm$subjectnumber == subj_id,];
@@ -745,15 +772,46 @@ for (subj in 1:number_of_clean_subjects){
   #highcontroller_BS_avgRT =
   #lowcontroller_BS_avgRT =
 }
+#Q: Does rt vary significantly from high to low controllers regardelss of choice type/difficulty?
 
 
-#Q; Range of gap between easy/diff RT on per person basis is this related to cog capacity, high vs low controllers and thier behaivor on diff vs easy choices 
+### Connecting Decision-Making & Working Memory #### 
+#Regression 
+#see how RT as measure of choice diff relates to cog capacity 
+#Q: Does cognitive capacity influence reaction time?Do high controllers have diff avg RT (predicted faster avg) compared to low controllers? 
+#A: 
+
+#Q Is cognitive caocity (high or low) show differences in Rt on easy and difficult trials? 
+#A:
+
+#see how far back if at all previous choice difficulty mattered to cog capacity measures
+#Q: Does subsequent trial difficulty play a role in rt for high controllers compared to low controllers? 
+#A: 
 
 #Q: how does capacity relate to trial types (static/dynamic, easy only, hard only)
 
-#Q: 
+
 
 #2nd looks at cognitive capacity and choice behavior, do high controllers experince less gambling behvaior ie less risky? 
 #continuous variable of cog control? 
 #see behavioral (rt) variability in the regression based upon inc or dec of capacity?
 #see individual and group differences? 
+
+
+#Regression w best span only doesnt answer the questions I want. 
+m2_span = lm(sqrtRT ~ 1 + best_span_FS , data = clean_data_dm);
+summary(m1_span) 
+
+m2_spanrfx = lmer(sqrtRT ~ 1 + best_span_FS + (1 | subjectnumber), data = clean_data_dm);
+summary(m1_spanrfx)
+
+m2_span_dynonly_rfx = lmer(sqrtRT ~ 1 + best_span_FS + (1 | subjectnumber),
+                           data = clean_data_dm[clean_data_dm$static0dynamic1 == 1,]);
+summary(m1_span_dynonly_rfx)
+
+###Exploratory Analyses (Qualtrics Data) ###
+#1. import Qualtrics data 
+#2. quality check ie make sure pts are correct and match data 
+#3. score NFC & add it to measure of CC (see citations)
+#4. Run an analyses with CC see above with this measure instead? 
+
