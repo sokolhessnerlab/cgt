@@ -10,7 +10,7 @@ main_wd = '/Volumes/shlab/Projects/CGT/CGT_study2/';
 processeddata_wd = paste0(main_wd,'processeddata_study2/');
 
 #### Loading Data ####
-setwd(processeddata_wd) 
+setwd(processeddata_wd);
 fn = dir(pattern = glob2rx('cgt_processed*.csv'),full.names = T);
 
 data_dm = read.csv(fn[1]) # decision-making data
@@ -144,10 +144,18 @@ sem(mean_pgamble)
 sem(static_mean_pgamble)
 sem(dynamic_mean_pgamble)
 
+
+sem(easyACC_mean_pgamble)
+sem(easyREJ_mean_pgamble)
+sem(diff_mean_pgamble)
+
+
 mean(mean_pgamble)
 mean(static_mean_pgamble)
 mean(dynamic_mean_pgamble)
-
+mean(easyACC_mean_pgamble)
+mean(easyREJ_mean_pgamble)
+mean(diff_mean_pgamble)
 min(mean_pgamble)
 max(mean_pgamble)
 
@@ -439,7 +447,7 @@ t.test(var_rt_easy,var_rt_diff, paired = T)
 #differences between reaction times in static vs dynamic 
 t.test(mean_rt_static, mean_rt_dynamic, paired = T)
 mean_taskRT_diff = mean_rt_static - mean_rt_dynamic
-mean_rt_static
+
 
 # per person basis of easy RTs vs diff. RTs??
 #Q: are easy choices similarly fast across people & are difficult choices similarly slower across people? 
@@ -651,8 +659,6 @@ for (subj in 1:number_of_clean_subjects){
 
 #run regression...
 
-
-
 ### WM Task ###
 
 ## TOTAL NUMBER FS & BS Correct (FS & BS)
@@ -725,19 +731,36 @@ summary(m2_prev_rfx)
 #look at average RT for different types of controllers 
 meanRT_capacity_High = array(dim = c(number_of_clean_subjects,1))
 meanRT_capacity_Low = array(dim = c(number_of_clean_subjects,1))
+meanRT_diff_capacity_High = array(dim = c(number_of_clean_subjects,1))
+meanRT_diff_capacity_Low = array(dim = c(number_of_clean_subjects,1))
+meanRT_easy_capacity_High = array(dim = c(number_of_clean_subjects,1))
+meanRT_easy_capacity_Low = array(dim = c(number_of_clean_subjects,1))
 
 for (subj in 1:number_of_clean_subjects){
   subj_id = keep_participants[subj]
   tmpdata = clean_data_dm[clean_data_dm$subjectnumber == subj_id,]
-  meanRT_capacity_High[subj] = mean(tmpdata$reactiontime[tmpdata$capacity_HighP1_lowN1 == 1], na.rm = T) 
-  meanRT_capacity_Low[subj] = mean(tmpdata$reactiontime[tmpdata$capacity_HighP1_lowN1 == -1], na.rm = TRUE) 
-}
-  
-  tmpdata = data_wm[data_wm$subjectnumber == subj_id,]
-  best_span_FS[subj] = max(tmpdata$number_digits[(tmpdata$forward1backward0 == 1) & (tmpdata$correct == 1)], na.rm = T);
-  best_span_BS[subj] = max(tmpdata$number_digits[(tmpdata$forward1backward0 == 0) & (tmpdata$correct == 1)], na.rm = T);
+  meanRT_capacity_High[subj] = mean(tmpdata$reactiontime[tmpdata$capacity_HighP1_lowN1 == 1], na.rm = T); 
+  meanRT_capacity_Low[subj] = mean(tmpdata$reactiontime[tmpdata$capacity_HighP1_lowN1 == -1], na.rm = T);
+  meanRT_diff_capacity_High[subj] = mean(tmpdata$reactiontime[(tmpdata$capacity_HighP1_lowN1 == 1) && (tmpdata$easyP1difficultN1 == -1)], na.rm = T); 
+  meanRT_easy_capacity_High[subj] = mean(tmpdata$reactiontime[(tmpdata$capacity_HighP1_lowN1 == 1) && (tmpdata$easyP1difficultN1 == 1)], na.rm = T); 
+  meanRT_diff_capacity_Low[subj] = mean(tmpdata$reactiontime[(tmpdata$capacity_HighP1_lowN1 == -1) && (tmpdata$easyP1difficultN1 == -1)], na.rm = T); 
+  meanRT_easy_capacity_Low[subj] = mean(tmpdata$reactiontime[(tmpdata$capacity_HighP1_lowN1 == -1) && (tmpdata$easyP1difficultN1 == 1)], na.rm = T); 
 }
 
+# ^^ idea is to look at mean Rt differences of high and low controllers on 
+  
+  #tmpdata = data_wm[data_wm$subjectnumber == subj_id,]
+  #best_span_FS[subj] = max(tmpdata$number_digits[(tmpdata$forward1backward0 == 1) & (tmpdata$correct == 1)], na.rm = T);
+  #best_span_BS[subj] = max(tmpdata$number_digits[(tmpdata$forward1backward0 == 0) & (tmpdata$correct == 1)], na.rm = T);
+}
+
+mean(meanRT_capacity_Low, na.rm = T)
+sd(meanRT_capacity_Low, na.rm = T)
+
+mean(meanRT_capacity_High, na.rm = T)
+sd(meanRT_capacity_High, na.rm = T)
+
+t.test(meanRT_capacity_High, meanRT_capacity_Low, na.rm = T)
 
 #Q: Does rt vary significantly from high to low controllers regardelss of choice type/difficulty?
 
@@ -782,3 +805,4 @@ summary(m1_span_dynonly_rfx)
 #3. score NFC & add it to measure of CC (see citations)
 #4. Run an analyses with CC see above with this measure instead? 
 
+#NFC scoring = sum of what they reported on all 18 , highest 72 lowest -72 
