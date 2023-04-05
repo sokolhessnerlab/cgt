@@ -138,7 +138,18 @@ t.test(static_mean_pgamble, dynamic_mean_pgamble)
 #significant difference in gambling behavior from static to dynamic 4/2/23
 
 # A: positive numbers, suggesting people gambled less in dynamic than static 
+#Q:standard error, means, range for gambling behavior for particpants
+sem <- function(x) sd(x)/sqrt(length(x));
+sem(mean_pgamble)
+sem(static_mean_pgamble)
+sem(dynamic_mean_pgamble)
 
+mean(mean_pgamble)
+mean(static_mean_pgamble)
+mean(dynamic_mean_pgamble)
+
+min(mean_pgamble)
+max(mean_pgamble)
 
 # Q: How did risk-taking compare across the different dynamic trial types?
 # e.g. easy accept vs. easy reject vs. difficult
@@ -161,6 +172,7 @@ lines(x = c(0,1), y = c(0,1), col = 'blue')
 # Statistically test relative difficulty observed in easy ACC vs. easy REJ
 t.test(abs(easyACC_mean_pgamble-.5), abs(easyREJ_mean_pgamble-.5), paired = T)
 # A: Yes, we can treat all easy trials as similarly easy (whether easy ACC or REJ), not sig different 3/7/23
+
 
 
 #### Optimization Function Creation ####
@@ -389,7 +401,7 @@ for (subj in 1:number_of_clean_subjects){
   subj_id = keep_participants[subj];
   tmpdata = data_dm[data_dm$subjectnumber == subj_id,];
   
-  mean_rt_static[subj] = mean(tmpdata$reactiontime[(tmpdata$static0dynamic1 == 0)],na.rm = T); # HELP WITH THIS LINE, getting NaN, is this bc of 0's?
+  mean_rt_static[subj] = mean(tmpdata$reactiontime[(tmpdata$static0dynamic1 == 0)],na.rm = T); 
   mean_rt_dynamic[subj] = mean(tmpdata$reactiontime[(tmpdata$static0dynamic1 == 1)], na.rm = T);
   
   tmpdataEasyDyn = tmpdata[tmpdata$easyP1difficultN1 == 1,];
@@ -421,9 +433,13 @@ lines(c(0,.6), c(0,.6), col = 'green', lwd = 2)
 # RTs on difficult trials are more variable WITHIN person than their RTs on easy trials
 
 # differences between variance of RTs in conditions
-
 t.test(var_rt_easy,var_rt_diff, paired = T)
 #A: yes, looks like on average rt of difficult decisions was slower than avg rt of easy decisions 4/2/23
+
+#differences between reaction times in static vs dynamic 
+t.test(mean_rt_static, mean_rt_dynamic, paired = T)
+mean_taskRT_diff = mean_rt_static - mean_rt_dynamic
+mean_rt_static
 
 # per person basis of easy RTs vs diff. RTs??
 #Q: are easy choices similarly fast across people & are difficult choices similarly slower across people? 
@@ -698,23 +714,31 @@ for(s in 1:number_of_clean_subjects){
 
 mean((best_span_FS < median(best_span_FS)) == (best_span_BS < median(best_span_BS)))
 # median splits on only forward span & on only backward span agree about categorization 86% of the time - GOOD!
-  
+
+#regression 
+#Q:
 m2_prev_rfx = lmer(sqrtRT_prev ~ 1 + easyP1difficultN1 + easyP1difficultN1_prev + capacity_HighP1_lowN1 + 
                      (1 | subjectnumber), data = clean_data_dm);
 summary(m2_prev_rfx)
+#A: 
 
+#look at average RT for different types of controllers 
+meanRT_capacity_High = array(dim = c(number_of_clean_subjects,1))
+meanRT_capacity_Low = array(dim = c(number_of_clean_subjects,1))
 
-#look at average RT for differnt types of controllers 
 for (subj in 1:number_of_clean_subjects){
-  subj_id = keep_participants[subj];
-  tmpdata = data_wm[data_wm$subjectnumber == subj_id,];
-  MedianValueFS[subj] <- median(best_span_FS);
-  MedianValueBS[subj] <- median(best_span_BS);
-  highcontroller_FS_avgRT = mean(tmpdata$reactiontime[tmpdata$highcontroller_FS = T]); # goal: mean RT for particpants who = highcontroller_FS
-  #lowcontroller_FS_avgRT = 
-  #highcontroller_BS_avgRT =
-  #lowcontroller_BS_avgRT =
+  subj_id = keep_participants[subj]
+  tmpdata = clean_data_dm[clean_data_dm$subjectnumber == subj_id,]
+  meanRT_capacity_High[subj] = mean(tmpdata$reactiontime[tmpdata$capacity_HighP1_lowN1 == 1], na.rm = T) 
+  meanRT_capacity_Low[subj] = mean(tmpdata$reactiontime[tmpdata$capacity_HighP1_lowN1 == -1], na.rm = TRUE) 
 }
+  
+  tmpdata = data_wm[data_wm$subjectnumber == subj_id,]
+  best_span_FS[subj] = max(tmpdata$number_digits[(tmpdata$forward1backward0 == 1) & (tmpdata$correct == 1)], na.rm = T);
+  best_span_BS[subj] = max(tmpdata$number_digits[(tmpdata$forward1backward0 == 0) & (tmpdata$correct == 1)], na.rm = T);
+}
+
+
 #Q: Does rt vary significantly from high to low controllers regardelss of choice type/difficulty?
 
 
