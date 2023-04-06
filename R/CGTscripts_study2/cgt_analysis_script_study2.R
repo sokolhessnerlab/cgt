@@ -559,6 +559,7 @@ library(lmerTest)
 clean_data_dm$sqrtRT = sqrt(clean_data_dm$reactiontime);
 # 3. focus effort on creating good regressors
 
+#current rt based on current easy difficult
 m0 = lm(sqrtRT ~ 1 + easyP1difficultN1, data = clean_data_dm);
 summary(m0)
 
@@ -615,6 +616,9 @@ m1_cont_dynonly_rfx = lmer(sqrtRT ~ 1 + diff_cont + (1 | subjectnumber),
                       data = clean_data_dm[clean_data_dm$static0dynamic1 == 1,]);
 summary(m1_cont_dynonly_rfx)
 
+#continuous diff metric & previous trial? is this an
+
+
 #A: correlation of fixed effects = -0.151, a negative correlation between RT and continuous difficult metric, where easy = 0 diff = 1.
 #statistically significant diff_cont and intercept, so they are associated with RT??
 
@@ -629,6 +633,7 @@ summary(m1_prev_intxn_rfx)
 
 m2_prev_intxn = lmer(sqrtRT_prev ~ 1 + easyP1difficultN1 * sqrtRT + (1 | subjectnumber), data = clean_data_dm);
 summary(m2_prev_intxn)
+
 #A: THIS MODEL & results  CONFUSED ME...^^^ 
   # goal = to see if previous RT predicts current RT on easy diff trials in cont, cat, and predtermined easy diff trials... 
 
@@ -729,22 +734,22 @@ summary(m2_prev_rfx)
 #A: 
 
 #look at average RT for different types of controllers 
-meanRT_capacity_High = array(dim = c(number_of_clean_subjects,1))
-meanRT_capacity_Low = array(dim = c(number_of_clean_subjects,1))
-meanRT_diff_capacity_High = array(dim = c(number_of_clean_subjects,1))
-meanRT_diff_capacity_Low = array(dim = c(number_of_clean_subjects,1))
-meanRT_easy_capacity_High = array(dim = c(number_of_clean_subjects,1))
-meanRT_easy_capacity_Low = array(dim = c(number_of_clean_subjects,1))
+meanRT_capacity_High <- numeric(number_of_clean_subjects)
+meanRT_capacity_Low <- numeric(number_of_clean_subjects)
+meanRT_diff_capacity_High <- numeric(number_of_clean_subjects)
+meanRT_diff_capacity_Low <- numeric(number_of_clean_subjects)
+meanRT_easy_capacity_High <- numeric(number_of_clean_subjects)
+meanRT_easy_capacity_Low <- numeric(number_of_clean_subjects)
 
-for (subj in 1:number_of_clean_subjects){
-  subj_id = keep_participants[subj]
-  tmpdata = clean_data_dm[clean_data_dm$subjectnumber == subj_id,]
-  meanRT_capacity_High[subj] = mean(tmpdata$reactiontime[tmpdata$capacity_HighP1_lowN1 == 1], na.rm = T); 
-  meanRT_capacity_Low[subj] = mean(tmpdata$reactiontime[tmpdata$capacity_HighP1_lowN1 == -1], na.rm = T);
-  meanRT_diff_capacity_High[subj] = mean(tmpdata$reactiontime[(tmpdata$capacity_HighP1_lowN1 == 1) && (tmpdata$easyP1difficultN1 == -1)], na.rm = T); 
-  meanRT_easy_capacity_High[subj] = mean(tmpdata$reactiontime[(tmpdata$capacity_HighP1_lowN1 == 1) && (tmpdata$easyP1difficultN1 == 1)], na.rm = T); 
-  meanRT_diff_capacity_Low[subj] = mean(tmpdata$reactiontime[(tmpdata$capacity_HighP1_lowN1 == -1) && (tmpdata$easyP1difficultN1 == -1)], na.rm = T); 
-  meanRT_easy_capacity_Low[subj] = mean(tmpdata$reactiontime[(tmpdata$capacity_HighP1_lowN1 == -1) && (tmpdata$easyP1difficultN1 == 1)], na.rm = T); 
+for (subj in 1:number_of_clean_subjects) {
+  subj_id <- keep_participants[subj]
+  tmpdata <- clean_data_dm[clean_data_dm$subjectnumber == subj_id, ]
+  meanRT_capacity_High[subj] <- mean(tmpdata$reactiontime[tmpdata$capacity_HighP1_lowN1 == 1], na.rm = TRUE)
+  meanRT_capacity_Low[subj] <- mean(tmpdata$reactiontime[tmpdata$capacity_HighP1_lowN1 == -1], na.rm = TRUE)
+  meanRT_diff_capacity_High[subj] <- mean(tmpdata$reactiontime[(tmpdata$capacity_HighP1_lowN1 == 1) & (tmpdata$easyP1difficultN1 == -1)], na.rm = TRUE)
+  meanRT_easy_capacity_High[subj] <- mean(tmpdata$reactiontime[(tmpdata$capacity_HighP1_lowN1 == 1) & (tmpdata$easyP1difficultN1 == 1)], na.rm = TRUE)
+  meanRT_diff_capacity_Low[subj] <- mean(tmpdata$reactiontime[(tmpdata$capacity_HighP1_lowN1 == -1) & (tmpdata$easyP1difficultN1 == -1)], na.rm = TRUE)
+  meanRT_easy_capacity_Low[subj] <- mean(tmpdata$reactiontime[(tmpdata$capacity_HighP1_lowN1 == -1) & (tmpdata$easyP1difficultN1 == 1)], na.rm = TRUE)
 }
 
 # ^^ idea is to look at mean Rt differences of high and low controllers on 
@@ -762,28 +767,49 @@ sd(meanRT_capacity_High, na.rm = T)
 
 t.test(meanRT_capacity_High, meanRT_capacity_Low, na.rm = T)
 
+mean((meanRT_diff_capacity_High), na.rm = T);
+sd((meanRT_diff_capacity_High), na.rm = T);
+mean((meanRT_easy_capacity_High), na.rm = T);
+sd((meanRT_easy_capacity_High), na.rm = T);
+mean((meanRT_diff_capacity_Low), na.rm = T);
+sd((meanRT_diff_capacity_Low), na.rm = T);
+mean((meanRT_easy_capacity_Low), na.rm = T);
+sd((meanRT_easy_capacity_Low), na.rm = T);
+
 #Q: Does rt vary significantly from high to low controllers regardelss of choice type/difficulty?
+#Q: Does cognitive capacity influence reaction time?Do high controllers have diff avg RT (predicted faster avg) compared to low controllers? 
+t.test(meanRT_diff_capacity_High, meanRT_diff_capacity_Low, na.rm = T);
+t.test(meanRT_easy_capacity_High, meanRT_easy_capacity_Low, na.rm = T)
+
+#A: not significantly different, suggesting that cognitive capacity on this level, does not effect reatction time. 
 
 
 ### Connecting Decision-Making & Working Memory #### 
 #Regression 
 #see how RT as measure of choice diff relates to cog capacity 
-#Q: Does cognitive capacity influence reaction time?Do high controllers have diff avg RT (predicted faster avg) compared to low controllers? 
-#A: 
 
-#Q Is cognitive caocity (high or low) show differences in Rt on easy and difficult trials? 
+
+#Q Is cognitive capacity (high or low) show differences in Rt on easy and difficult trials? 
 #A:
 
 #see how far back if at all previous choice difficulty mattered to cog capacity measures
 #Q: Does subsequent trial difficulty play a role in rt for high controllers compared to low controllers? 
 #A: 
+m1_prev_rfx_CC = lmer(sqrtRT ~ 1 + easyP1difficultN1 + easyP1difficultN1_prev + capacity_HighP1_lowN1 +(1 | subjectnumber), data = clean_data_dm);
+summary(m1_prev_rfx_CC)
 
 #Q: how does capacity relate to trial types (static/dynamic, easy only, hard only)
 
+m1_SD_rfx_CC = lmer(sqrtRT ~ 1 + static0dynamic1 + capacity_HighP1_lowN1 +(1 | subjectnumber), data = clean_data_dm);
+summary(m1_SD_rfx_CC)
+#A: no signifincat difference in RT between high and low controllers on static and dynamic choice sets 
 
 
 #2nd looks at cognitive capacity and choice behavior, do high controllers experince less gambling behvaior ie less risky? 
 #continuous variable of cog control? 
+m1_pgamble_rfx_CC <- lmer(mean_pgamble ~ 1 + capacity_HighP1_lowN1 + (1 | subjectnumber), data = clean_data_dm)
+summary(m1_pgamble_rfx_CC)
+
 #see behavioral (rt) variability in the regression based upon inc or dec of capacity?
 #see individual and group differences? 
 
@@ -801,6 +827,7 @@ summary(m1_span_dynonly_rfx)
 
 ###Exploratory Analyses (Qualtrics Data) ###
 #1. import Qualtrics data 
+
 #2. quality check ie make sure pts are correct and match data 
 #3. score NFC & add it to measure of CC (see citations)
 #4. Run an analyses with CC see above with this measure instead? 
