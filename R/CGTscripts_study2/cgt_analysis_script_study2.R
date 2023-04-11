@@ -640,29 +640,30 @@ summary(m2_prev_intxn)
 # use previous reaction time as an index of EXPERIENCED difficulty
 #maxRT = 4 seconds 
 #minRT = 0.86 seconds
-#should i be using the sqrt RT? 
 
+#categorizing RT type on current trial 
 for (subj in 1:number_of_clean_subjects){
   subj_id = keep_participants[subj]
   tmpdata = data_dm[data_dm$subjectnumber == subj_id,]
-  slowest_RT_type = mean(tmpdata$reactiontime[tmpdata$static0dynamic1 == 1 & tmpdata$reactiontime >= 3])
-  next_slowest_RT_type = mean(tmpdata$reactiontime[tmpdata$static0dynamic1 == 1 & tmpdata$reactiontime >= 2 & tmpdata$reactiontime < 3])
-  faster_RT_type = mean(tmpdata$reactiontime[tmpdata$static0dynamic1 == 1 & tmpdata$reactiontime >= 1 & tmpdata$reactiontime < 2])
-  fastest_RT_type = mean(tmpdata$reactiontime[tmpdata$static0dynamic1 == 1 & tmpdata$reactiontime < 1])
+  slowest_RT_type[subj] = mean(tmpdata$reactiontime[tmpdata$static0dynamic1 == 1 & tmpdata$reactiontime >= 3])
+  next_slowest_RT_type[subj] = mean(tmpdata$reactiontime[tmpdata$static0dynamic1 == 1 & tmpdata$reactiontime >= 2 & tmpdata$reactiontime < 3])
+  faster_RT_type[subj] = mean(tmpdata$reactiontime[tmpdata$static0dynamic1 == 1 & tmpdata$reactiontime >= 1 & tmpdata$reactiontime < 2])
+  fastest_RT_type[subj] = mean(tmpdata$reactiontime[tmpdata$static0dynamic1 == 1 & tmpdata$reactiontime < 1])
 }
-#sqrt rt ??
-#clean_data_dm$sqrtRT = sqrt(clean_data_dm$reactiontime);
 
-#for (subj in 1:number_of_clean_subjects){
+#categorizing RT on previous trial? (sqrt_prev?)
+  #should i be using the sqrt RT instead? HELP!!
+for (subj in 1:number_of_clean_subjects){
   subj_id = keep_participants[subj]
   tmpdata = data_dm[data_dm$subjectnumber == subj_id,]
-  slowest_RT_type = mean(tmpdata$sqrtRT[tmpdata$static0dynamic1 == 1 & tmpdata$sqrtRT >= 3])
-  next_slowest_RT_type = mean(tmpdata$sqrtRT[tmpdata$static0dynamic1 == 1 & tmpdata$sqrtRT >= 2 & tmpdata$sqrtRT < 3])
-  faster_RT_type = mean(tmpdata$sqrtRT[tmpdata$static0dynamic1 == 1 & tmpdata$sqrtRT >= 1 & tmpdata$sqrtRT < 2])
-  fastest_RT_type = mean(tmpdata$sqrtRT[tmpdata$static0dynamic1 == 1 & tmpdata$sqrtRT < 1])
+  slowest_RT_type[subj] = mean(tmpdata$sqrtRT_prev[tmpdata$static0dynamic1 == 1 & tmpdata$sqrtRT_prev >= 3])
+  next_slowest_RT_type[subj] = mean(tmpdata$sqrtRT_prev[tmpdata$static0dynamic1 == 1 & tmpdata$sqrtRT_prev >= 2 & tmpdata$sqrtRT_prev < 3])
+  faster_RT_type[subj] = mean(tmpdata$sqrtRT_prev[tmpdata$static0dynamic1 == 1 & tmpdata$sqrtRT_prev >= 1 & tmpdata$sqrtRT_prev < 2])
+  fastest_RT_type[subj] = mean(tmpdata$sqrtRT_prev[tmpdata$static0dynamic1 == 1 & tmpdata$sqrtRT_prev < 1])
 }
 
 #run regression...
+#Q: does experinced difficulty 
 
 ### WM Task ###
 
@@ -753,11 +754,7 @@ for (subj in 1:number_of_clean_subjects) {
 }
 
 # ^^ idea is to look at mean Rt differences of high and low controllers on 
-  
-  #tmpdata = data_wm[data_wm$subjectnumber == subj_id,]
-  #best_span_FS[subj] = max(tmpdata$number_digits[(tmpdata$forward1backward0 == 1) & (tmpdata$correct == 1)], na.rm = T);
-  #best_span_BS[subj] = max(tmpdata$number_digits[(tmpdata$forward1backward0 == 0) & (tmpdata$correct == 1)], na.rm = T);
-}
+
 
 mean(meanRT_capacity_Low, na.rm = T)
 sd(meanRT_capacity_Low, na.rm = T)
@@ -783,11 +780,9 @@ t.test(meanRT_easy_capacity_High, meanRT_easy_capacity_Low, na.rm = T)
 
 #A: not significantly different, suggesting that cognitive capacity on this level, does not effect reatction time. 
 
-
 ### Connecting Decision-Making & Working Memory #### 
 #Regression 
 #see how RT as measure of choice diff relates to cog capacity 
-
 
 #Q Is cognitive capacity (high or low) show differences in Rt on easy and difficult trials? 
 #A:
@@ -806,7 +801,7 @@ summary(m1_SD_rfx_CC)
 
 
 #2nd looks at cognitive capacity and choice behavior, do high controllers experince less gambling behvaior ie less risky? 
-#continuous variable of cog control? 
+#continuous variable of cog control? HELP
 m1_pgamble_rfx_CC <- lmer(mean_pgamble ~ 1 + capacity_HighP1_lowN1 + (1 | subjectnumber), data = clean_data_dm)
 summary(m1_pgamble_rfx_CC)
 
@@ -814,7 +809,7 @@ summary(m1_pgamble_rfx_CC)
 #see individual and group differences? 
 
 
-#Regression w best span only doesnt answer the questions I want. 
+#Regression w best span only doesnt answer the questions I want & doesnt work, just extra 
 m2_span = lm(sqrtRT ~ 1 + best_span_FS , data = clean_data_dm);
 summary(m1_span) 
 
