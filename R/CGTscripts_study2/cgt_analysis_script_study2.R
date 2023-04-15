@@ -129,8 +129,10 @@ data_rdm <- data.frame(mean_pgamble,static_mean_pgamble,dynamic_mean_pgamble,eas
 
 # Q: How did risk-taking compare from static to dynamic conditions?
 par(pty="s")
-plot(static_mean_pgamble,dynamic_mean_pgamble,xlim = c(0,1), ylim = c(0,1), asp = 1)
-lines(x = c(0,1), y = c(0,1), col = 'red')
+plot(static_mean_pgamble,dynamic_mean_pgamble, 
+    xlab = 'Mean Probability of Gambling (Static)' , ylab= 'Mean Probability of Gambling (Dynamic)',
+    main = 'Gambling Behavior Across Decision-Making Task', xlim = c(0,1), ylim = c(0,1), asp = 1)
+lines(x = c(0,1), y = c(0,1), col = 'orange')
 
 pgambleDiff = static_mean_pgamble - dynamic_mean_pgamble
 mean(pgambleDiff) #0.063, so more gambling in static
@@ -162,24 +164,32 @@ max(mean_pgamble)
 # Q: How did risk-taking compare across the different dynamic trial types?
 # e.g. easy accept vs. easy reject vs. difficult
 hist(easyACC_mean_pgamble,
-     col = rgb(0,1,0,.5), breaks = seq(from = 0, to = 1, by = 0.05), xlim = c(0,1), );
+     col = rgb(0,1,0,.5), breaks = seq(from = 0, to = 1, by = 0.05), xlim = c(0,1),
+     xlab = 'Mean Probability of Gambling', ylab = 'Frequency of Gamble', main = 'Average Gambling Behavior Across Trial Types')
+
 hist(easyREJ_mean_pgamble,
-     col = rgb(1,0,0,.5), breaks = seq(from = 0, to = 1, by = 0.05), add = T);
+     col = rgb(1,0,0,.5), breaks = seq(from = 0, to = 1, by = 0.05), add = TRUE)
 hist(diff_mean_pgamble,
-     col = rgb(0,0,1,.5), breaks = seq(from = 0, to = 1, by = 0.05), add = T);
+     col = rgb(0,0,1,.5), breaks = seq(from = 0, to = 1, by = 0.05), add = TRUE)
 # A: As expected red < blue < green (easy reject < difficult < easy acc), blue is more spread out 
 
 # Q: Can we collapse across easy accept & reject trials based on relative distance from 0.5?
 plot(abs(easyACC_mean_pgamble-.5),abs(easyREJ_mean_pgamble-.5),xlim = c(0,.5), ylim = c(0,.5),
-     xlab = 'Distance from 0.5 for EASY ACC', ylab = 'Distance from 0.5 for EASY REJ', 
+     xlab = 'Distance from 0.5 for Easy Accept', ylab = 'Distance from 0.5 for Easy Reject', main = 'Easy Subtypes are EASY',
      pch = 19, col = rgb(0,0,0,.2), cex = 2)
 lines(x = c(0,1), y = c(0,1), col = 'blue')
+
 # ... we want these to be clustered together on the blue line, close to 0.5
 # Mostly clustered near the blue line. A few points off. 
 
 # Statistically test relative difficulty observed in easy ACC vs. easy REJ
 t.test(abs(easyACC_mean_pgamble-.5), abs(easyREJ_mean_pgamble-.5), paired = T)
 # A: Yes, we can treat all easy trials as similarly easy (whether easy ACC or REJ), not sig different 3/7/23
+ 
+#statisically test realtivve gambling behacior across categories 
+t.test(diff_mean_pgamble, easyACC_mean_pgamble, paired = T); 
+t.test(diff_mean_pgamble, easyREJ_mean_pgamble, paired = T)
+
 
 
 
@@ -252,8 +262,6 @@ estimated_parameters = array(dim = c(number_of_clean_subjects,2));
 estimated_parameter_errors = array(dim = c(number_of_clean_subjects,2));
 NLLs = array(dim = c(number_of_clean_subjects,1));
 
-clean_data_dm$all_choiceP = NA;
-
 for (subj in 1:number_of_clean_subjects){
   subj_id = keep_participants[subj];
   print(subj_id)
@@ -297,16 +305,6 @@ for (subj in 1:number_of_clean_subjects){
   
   estimated_parameters[subj,] = temp_parameters[best_ind,] # the parameters
   estimated_parameter_errors[subj,] = sqrt(diag(solve(temp_hessians[best_ind,,]))); # the SEs
-  
-  
-  # Calculating all choice probabilities for this participant, given best-fit parameters
-  all_choice_ind = (clean_data_dm$subjectnumber == subj_id) & is.finite(clean_data_dm$choice)
-  tmpdata = clean_data_dm[all_choice_ind,]; # defines this person's data
-  
-  choiceset = as.data.frame(cbind(tmpdata$riskyopt1, tmpdata$riskyopt2, tmpdata$safe));
-  colnames(choiceset) <- c('riskyoption1', 'riskyoption2', 'safeoption');
-  
-  clean_data_dm$all_choiceP[all_choice_ind] = choice_probability(temp_parameters[best_ind,],choiceset);
 }
 
 ### Q: Does optimized analysis match grid search analysis?###
@@ -394,11 +392,7 @@ t.test(grid_bestMu, estimated_parameters[,2], paired = T) # no sig. diff (mu)...
 
 ### Create Continuous difficulty metric ###
 
-clean_data_dm$diff_cont = abs(abs(clean_data_dm$choiceP - 0.5)*2-1); # JUST for the easy/difficult dynamic trials
-clean_data_dm$all_diff_cont = abs(abs(clean_data_dm$all_choiceP - 0.5)*2-1); # for ALL trials
-
-clean_data_dm$prev_all_diff_cont = c(NA,clean_data_dm$all_diff_cont[1:(length(clean_data_dm$all_diff_cont)-1)]) # for ALL trials
-clean_data_dm$prev_all_diff_cont[clean_data_dm$trialnumber == 1] = NA;
+clean_data_dm$diff_cont = abs(abs(clean_data_dm$choiceP - 0.5)*2-1);
 # EASY = 0
 # DIFFICULT = 1
 
@@ -446,15 +440,21 @@ for (subj in 1:number_of_clean_subjects){
 
 #differences between averages
 mean_rt_difference = mean_rt_diff - mean_rt_easy;  # a negative number means on average hard was longer, positive number means on average easy was shorter duration 
-plot(mean_rt_diff, mean_rt_easy, main = 'AVG RT', xlim = c(0, 4), ylim = c(0, 4))
-lines(c(0, 4), c(0, 4))
+plot(mean_rt_diff, mean_rt_easy, main = 'Average RT Across Trial Type', xlab = "Mean RT Difficult", ylab = "Mean RT Easy", xlim = c(0.75, 2.75), ylim = c(0.75, 2.75))
+lines(c(0, 2.75), c(0, 2.75))
 
 # test easy RTs vs. diff. RTs 
 res = t.test(mean_rt_easy,mean_rt_diff, paired = T); #significant difference between rt easy and hard, WOOHOO! 4/2/23
-plot(var_rt_easy,var_rt_diff, main = sprintf('Difference in Variances; p = %.03f', res$p.value), 
+
+plot(var_rt_easy, var_rt_diff, xlab = 'Variance in RT Easy', ylab = 'Variance in RT Difficult',
+     main = sprintf('Difference in Variances; p = %.03f', res$p.value), 
      xlim = c(0,.6), ylim = c(0,.6))
-lines(c(0,.6), c(0,.6), col = 'green', lwd = 2)
+#points(var_rt_easy[tmpdata$easyP1difficultN1 == 1], var_rt_diff[tmpdata$easyP1difficultN1 == 1], col = 'green')
+#points(var_rt_easy[tmpdata$easyP1difficultN1 == -1], var_rt_diff[tmpdata$easyP1difficultN1 == -1], col = 'red')
+lines(c(0,.6), c(0,.6), col = 'green', lwd = 1.5)
+
 # RTs on difficult trials are more variable WITHIN person than their RTs on easy trials
+
 
 # differences between variance of RTs in conditions
 t.test(var_rt_easy,var_rt_diff, paired = T)
@@ -734,15 +734,11 @@ medianSpan = median(best_span_overall);
 capacity_HighP1_lowN1 = (best_span_overall > medianSpan)*2-1;
 
 clean_data_dm$capacity_HighP1_lowN1 = NA;
-clean_data_dm$best_span_overall = NA;
 
 for(s in 1:number_of_clean_subjects){
   subj_id = keep_participants[s];
   clean_data_dm$capacity_HighP1_lowN1[clean_data_dm$subjectnumber == subj_id] = capacity_HighP1_lowN1[s];
-  clean_data_dm$best_span_overall[clean_data_dm$subjectnumber == subj_id] = best_span_overall[s];
 }
-
-clean_data_dm$best_span_overall = clean_data_dm$best_span_overall - mean(clean_data_dm$best_span_overall)
 
 mean((best_span_FS < median(best_span_FS)) == (best_span_BS < median(best_span_BS)))
 # median splits on only forward span & on only backward span agree about categorization 86% of the time - GOOD!
@@ -753,53 +749,6 @@ m2_prev_rfx = lmer(sqrtRT_prev ~ 1 + easyP1difficultN1 + easyP1difficultN1_prev 
                      (1 | subjectnumber), data = clean_data_dm);
 summary(m2_prev_rfx)
 #A: 
-
-
-# NEW REGRESSIONS 4/11/23
-m1_prev_capacityCat_intxn_rfx = lmer(sqrtRT ~ 1 + easyP1difficultN1 * easyP1difficultN1_prev * capacity_HighP1_lowN1 + 
-                                    (1 | subjectnumber), data = clean_data_dm);
-summary(m1_prev_capacityCat_intxn_rfx)
-
-m1_prev_capacityCont_intxn_rfx = lmer(sqrtRT ~ 1 + easyP1difficultN1 * easyP1difficultN1_prev * best_span_overall + 
-                                    (1 | subjectnumber), data = clean_data_dm);
-summary(m1_prev_capacityCont_intxn_rfx)
-
-
-clean_data_dm$easy = as.double(clean_data_dm$easyP1difficultN1 == 1)
-clean_data_dm$difficult = as.double(clean_data_dm$easyP1difficultN1 == -1)
-m1_capacityCat_intxn_rfx = lmer(sqrtRT ~ 1 + easy * capacity_HighP1_lowN1 + difficult * capacity_HighP1_lowN1 + 
-                               (1 | subjectnumber), data = clean_data_dm);
-summary(m1_capacityCat_intxn_rfx)
-
-m1_capacityCont_intxn_rfx = lmer(sqrtRT ~ 1 + easy * best_span_overall + difficult * best_span_overall + 
-                                  (1 | subjectnumber), data = clean_data_dm);
-summary(m1_capacityCont_intxn_rfx)
-
-
-m1_diffCont_capacityCat_intxn_rfx = lmer(sqrtRT ~ 1 + all_diff_cont * capacity_HighP1_lowN1 + 
-                                       (1 | subjectnumber), data = clean_data_dm);
-summary(m1_diffCont_capacityCat_intxn_rfx)
-
-m1_diffCont_capacityCont_intxn_rfx = lmer(sqrtRT ~ 1 + all_diff_cont * best_span_overall + 
-                                           (1 | subjectnumber), data = clean_data_dm);
-summary(m1_diffCont_capacityCont_intxn_rfx)
-
-# Continuous difficulty (including previous) and categorical capacity
-m1_prev_diffCont_capacityCat_intxn_rfx = lmer(sqrtRT ~ 1 + all_diff_cont * prev_all_diff_cont * capacity_HighP1_lowN1 + 
-                                           (1 | subjectnumber), data = clean_data_dm);
-summary(m1_prev_diffCont_capacityCat_intxn_rfx)
-
-# Continuous difficulty (including previous) and continuous capacity
-m1_prev_diffCont_capacityCont_intxn_rfx = lmer(sqrtRT ~ 1 + all_diff_cont * prev_all_diff_cont * best_span_overall + 
-                                            (1 | subjectnumber), data = clean_data_dm);
-summary(m1_prev_diffCont_capacityCont_intxn_rfx)
-
-# Continuous difficulty (including previous) and continuous capacity and categorical capacity
-m1_prev_diffCont_capacityCont_capacityCat_intxn_rfx = lmer(sqrtRT ~ 1 + all_diff_cont * prev_all_diff_cont * best_span_overall + 
-                                                 all_diff_cont * prev_all_diff_cont * capacity_HighP1_lowN1 + 
-                                                 (1 | subjectnumber), data = clean_data_dm);
-summary(m1_prev_diffCont_capacityCont_capacityCat_intxn_rfx)
-
 
 #look at average RT for different types of controllers 
 meanRT_capacity_High <- numeric(number_of_clean_subjects)
@@ -869,8 +818,7 @@ summary(m1_SD_rfx_CC)
 
 #2nd looks at cognitive capacity and choice behavior, do high controllers experince less gambling behvaior ie less risky? 
 #continuous variable of cog control? HELP
-m1_pgamble_rfx_CC <- glmer(choice ~ 1 + capacity_HighP1_lowN1 + (1 | subjectnumber), data = clean_data_dm, 
-                          family = 'binomial')
+m1_pgamble_rfx_CC <- lmer(mean_pgamble ~ 1 + capacity_HighP1_lowN1 + (1 | subjectnumber), data = clean_data_dm)
 summary(m1_pgamble_rfx_CC)
 
 #see behavioral (rt) variability in the regression based upon inc or dec of capacity?
@@ -891,7 +839,8 @@ summary(m1_span_dynonly_rfx)
 ###Exploratory Analyses (Qualtrics Data) ###
 #1. import Qualtrics data 
 
-#2. quality check ie make sure pts are correct and match data 
+
+#2. quality check ie make sure pts are correct and match data  
 #3. score NFC & add it to measure of CC (see citations)
 #4. Run an analyses with CC see above with this measure instead? 
 
