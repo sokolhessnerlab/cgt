@@ -307,17 +307,16 @@ for (subj in 1:number_of_clean_subjects){
   
   estimated_parameters[subj,] = temp_parameters[best_ind,] # the parameters
   estimated_parameter_errors[subj,] = sqrt(diag(solve(temp_hessians[best_ind,,]))); # the SEs
+
+  # Calculating all choice probabilities for this participant, given best-fit parameters
+  all_choice_ind = (clean_data_dm$subjectnumber == subj_id) & is.finite(clean_data_dm$choice)
+  tmpdata = clean_data_dm[all_choice_ind,]; # defines this person's data
+  
+  choiceset = as.data.frame(cbind(tmpdata$riskyopt1, tmpdata$riskyopt2, tmpdata$safe));
+  colnames(choiceset) <- c('riskyoption1', 'riskyoption2', 'safeoption');
+  
+  clean_data_dm$all_choiceP[all_choice_ind] = choice_probability(temp_parameters[best_ind,],choiceset);
 }
-
-# Calculating all choice probabilities for this participant, given best-fit parameters
-all_choice_ind = (clean_data_dm$subjectnumber == subj_id) & is.finite(clean_data_dm$choice)
-tmpdata = clean_data_dm[all_choice_ind,]; # defines this person's data
-
-choiceset = as.data.frame(cbind(tmpdata$riskyopt1, tmpdata$riskyopt2, tmpdata$safe));
-colnames(choiceset) <- c('riskyoption1', 'riskyoption2', 'safeoption');
-
-clean_data_dm$all_choiceP[all_choice_ind] = choice_probability(temp_parameters[best_ind,],choiceset);
-
 
 ### Q: Does optimized analysis match grid search analysis?###
 
