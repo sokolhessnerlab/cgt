@@ -388,6 +388,9 @@ hist(grid_bestMu - estimated_parameters[,2], xlim = c(-100,100),
 t.test(grid_bestRho, estimated_parameters[,1], paired = T) # no sig. diff (rho)... 4/2/23
 t.test(grid_bestMu, estimated_parameters[,2], paired = T) # no sig. diff (mu)... 4/2/23
 
+cor.test(grid_bestRho, estimated_parameters[,1])
+cor.test(grid_bestMu, estimated_parameters[,2])
+
 # A: YES, grid-search values match optimized values very closely.
 
 ### Create Continuous difficulty metric ###
@@ -719,10 +722,12 @@ t.test(best_span_FS, best_span_BS, paired = T);
 
 cor.test(best_span_BS,best_span_FS)
 #A: yes, very correlated (r = 0.71, p = 7.9e-9)! 
-plot(best_span_BS,best_span_FS, 
-     pch = 19,col = rgb(.5,.5,.5,.5), 
-     xlim = c(0,12.5), ylim = c(0,12.5))
-lines(x = c(0, 12), y = c(0,12))
+plot(best_span_BS, best_span_FS, 
+     pch = 19, col = rgb(.5, .5, .5, .5), 
+     xlim = c(0, 12.5), ylim = c(0, 12.5), 
+     xlab = 'Best Forwards Span', ylab = 'Best Backwards Span', 
+     main = 'Forward vs Backwards Capacity')
+lines(x = c(0, 12), y = c(0, 12))
 
 # Collapse spans into a single span measure
 best_span_overall = rowMeans(cbind(best_span_FS,best_span_BS))
