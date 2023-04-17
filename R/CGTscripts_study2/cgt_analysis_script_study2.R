@@ -772,7 +772,7 @@ mean((best_span_FS < median(best_span_FS)) == (best_span_BS < median(best_span_B
 #summary(m2_prev_rfx)
 #A: 
 
-# NEW REGRESSIONS 4/11/23
+# NEW REGRESSIONS 4/11/23 ### Connecting Decision-Making & Working Memory #### 
 m1_prev_capacityCat_intxn_rfx = lmer(sqrtRT ~ 1 + easyP1difficultN1 * easyP1difficultN1_prev * capacity_HighP1_lowN1 + 
                                        (1 | subjectnumber), data = clean_data_dm);
 summary(m1_prev_capacityCat_intxn_rfx)
@@ -817,11 +817,6 @@ m1_prev_diffCont_capacityCont_capacityCat_intxn_rfx = lmer(sqrtRT ~ 1 + all_diff
                                                              all_diff_cont * prev_all_diff_cont * capacity_HighP1_lowN1 + 
                                                              (1 | subjectnumber), data = clean_data_dm);
 summary(m1_prev_diffCont_capacityCont_capacityCat_intxn_rfx)
-
-
-
-
-
 
 
 #look at average RT for different types of controllers 
@@ -870,18 +865,6 @@ t.test(meanRT_easy_capacity_High, meanRT_easy_capacity_Low, na.rm = T)
 
 #A: not significantly different, suggesting that cognitive capacity on this level, does not effect reatction time. 
 
-### Connecting Decision-Making & Working Memory #### 
-#Regression 
-#see how RT as measure of choice diff relates to cog capacity 
-
-#Q Is cognitive capacity (high or low) show differences in Rt on easy and difficult trials? 
-#A:
-
-#see how far back if at all previous choice difficulty mattered to cog capacity measures
-#Q: Does subsequent trial difficulty play a role in rt for high controllers compared to low controllers? 
-#A: 
-m1_prev_rfx_CC = lmer(sqrtRT ~ 1 + easyP1difficultN1 + easyP1difficultN1_prev + capacity_HighP1_lowN1 +(1 | subjectnumber), data = clean_data_dm);
-summary(m1_prev_rfx_CC)
 
 #Q: how does capacity relate to trial types (static/dynamic, easy only, hard only)
 
@@ -899,19 +882,10 @@ summary(m1_pgamble_rfx_CC)
 #see individual and group differences? 
 
 
-#Regression w best span only doesnt answer the questions I want & doesnt work, just extra 
-m2_span = lm(sqrtRT ~ 1 + best_span_FS , data = clean_data_dm);
-summary(m1_span) 
-
-m2_spanrfx = lmer(sqrtRT ~ 1 + best_span_FS + (1 | subjectnumber), data = clean_data_dm);
-summary(m1_spanrfx)
-
-m2_span_dynonly_rfx = lmer(sqrtRT ~ 1 + best_span_FS + (1 | subjectnumber),
-                           data = clean_data_dm[clean_data_dm$static0dynamic1 == 1,]);
-summary(m1_span_dynonly_rfx)
 
 ###Exploratory Analyses (Qualtrics Data) ###
 #1. import Qualtrics data 
+
 
 
 #2. quality check ie make sure pts are correct and match data  
