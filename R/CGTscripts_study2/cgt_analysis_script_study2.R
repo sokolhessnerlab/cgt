@@ -600,9 +600,9 @@ summary(m0)
 m0rfx = lmer(sqrtRT ~ 1 + easyP1difficultN1 + (1 | subjectnumber), data = clean_data_dm);
 summary(m0rfx)
 
-m0_dynonly_rfx = lmer(sqrtRT ~ 1 + easyP1difficultN1 + (1 | subjectnumber),
+m0_cat_dynonly_rfx = lmer(sqrtRT ~ 1 + easyP1difficultN1 + (1 | subjectnumber),
                       data = clean_data_dm[clean_data_dm$static0dynamic1 == 1,]);
-summary(m0_dynonly_rfx)
+summary(m0_cat_dynonly_rfx)
 
 # input shifted version of desired content
 clean_data_dm$easyP1difficultN1_prev = c(0,clean_data_dm$easyP1difficultN1[1:(length(clean_data_dm$easyP1difficultN1)-1)])
@@ -650,6 +650,11 @@ m1_cont_dynonly_rfx = lmer(sqrtRT ~ 1 + diff_cont + (1 | subjectnumber),
                       data = clean_data_dm[clean_data_dm$static0dynamic1 == 1,]);
 summary(m1_cont_dynonly_rfx)
 
+
+m1_allcont_rfx = lmer(sqrtRT ~ 1 + all_diff_cont + (1 | subjectnumber), data = clean_data_dm);
+summary(m1_allcont_rfx)
+
+
 #continuous diff metric & previous trial? is this an
 
 
@@ -659,14 +664,14 @@ summary(m1_cont_dynonly_rfx)
 
 #Q: does previous RT predict current rt on normal easy diff & also categorical and continuous diff metrics? 
 #RT prev & easy diff and easy diff prev...RFX Versions (good b/c of high indiv. variability in baseline RTs!)
-m1_prev_rfx = lmer(sqrtRT_prev ~ 1 + easyP1difficultN1 + easyP1difficultN1_prev + (1 | subjectnumber), data = clean_data_dm);
-summary(m1_prev_rfx)
-
-m1_prev_intxn_rfx = lmer(sqrtRT_prev ~ 1 + easyP1difficultN1 * easyP1difficultN1_prev + (1 | subjectnumber), data = clean_data_dm);
-summary(m1_prev_intxn_rfx)
-
-m2_prev_intxn = lmer(sqrtRT_prev ~ 1 + easyP1difficultN1 * sqrtRT + (1 | subjectnumber), data = clean_data_dm);
-summary(m2_prev_intxn)
+# m1_prev_rfx = lmer(sqrtRT_prev ~ 1 + easyP1difficultN1 + easyP1difficultN1_prev + (1 | subjectnumber), data = clean_data_dm);
+# summary(m1_prev_rfx)
+# 
+# m1_prev_intxn_rfx = lmer(sqrtRT_prev ~ 1 + easyP1difficultN1 * easyP1difficultN1_prev + (1 | subjectnumber), data = clean_data_dm);
+# summary(m1_prev_intxn_rfx)
+# 
+# m2_prev_intxn = lmer(sqrtRT_prev ~ 1 + easyP1difficultN1 * sqrtRT + (1 | subjectnumber), data = clean_data_dm);
+# summary(m2_prev_intxn)
   # goal = to see if previous RT predicts current RT on easy diff trials in cont, cat, and predtermined easy diff trials... 
 
 # use previous reaction time as an index of EXPERIENCED difficulty
@@ -783,6 +788,20 @@ m1_prev_capacityCont_intxn_rfx = lmer(sqrtRT ~ 1 + easyP1difficultN1 * easyP1dif
 summary(m1_prev_capacityCont_intxn_rfx)
 #A: same current trial thats it.. 
 
+m1_capacityCatDiff_intxn_rfx = lmer(sqrtRT ~ 1 + easyP1difficultN1 * capacity_HighP1_lowN1 + 
+                                  (1 | subjectnumber), data = clean_data_dm);
+summary(m1_capacityCatDiff_intxn_rfx)
+(1.183 + 1*-0.03029 + 1*0.01499 + 1*1*-0.006186)^2 # easy, high cap
+(1.183 + -1*-0.03029 + 1*0.01499 + -1*1*-0.006186)^2 # diff, high cap
+
+(1.183 + 1*-0.03029 + -1*0.01499 + 1*-1*-0.006186)^2 # easy, low cap
+(1.183 + -1*-0.03029 + -1*0.01499 + -1*-1*-0.006186)^2 # diff, low cap
+
+m1_capacityContDiff_intxn_rfx = lmer(sqrtRT ~ 1 + all_diff_cont * capacity_HighP1_lowN1 + 
+                                      (1 | subjectnumber), data = clean_data_dm);
+summary(m1_capacityContDiff_intxn_rfx)
+
+
 #Q: seperate easy and difficult based upon experinced difficulty
 clean_data_dm$easy = as.double(clean_data_dm$easyP1difficultN1 == 1)
 clean_data_dm$difficult = as.double(clean_data_dm$easyP1difficultN1 == -1)
@@ -795,9 +814,15 @@ m1_capacityCont_intxn_rfx = lmer(sqrtRT ~ 1 + easy * best_span_overall + difficu
 summary(m1_capacityCont_intxn_rfx)
 #A: best span overall has a very weak significant effect on RT for easY! 
 
-m1_diffCont_capacity_Cat_intxn_rfx = lmer(sqrtRT ~ 1 + all_diff_cont * capacity_HighP1_lowN1 + 
-                                           (1 | subjectnumber), data = clean_data_dm);
-summary(m1_diffCont_capacity_Cat_intxn_rfx)
+# m1_diffCont_capacity_Cat_intxn_rfx = lmer(sqrtRT ~ 1 + all_diff_cont * capacity_HighP1_lowN1 + 
+#                                            (1 | subjectnumber), data = clean_data_dm);
+# summary(m1_diffCont_capacity_Cat_intxn_rfx)
+
+## Using Best Span Overall
+m1_diffCat_capacityCont_intxn_rfx = lmer(sqrtRT ~ 1 + easyP1difficultN1 * best_span_overall + 
+                                            (1 | subjectnumber), data = clean_data_dm);
+summary(m1_diffCat_capacityCont_intxn_rfx)
+
 
 m1_diffCont_capacityCont_intxn_rfx = lmer(sqrtRT ~ 1 + all_diff_cont * best_span_overall + 
                                             (1 | subjectnumber), data = clean_data_dm);
