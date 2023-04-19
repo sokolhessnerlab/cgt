@@ -74,13 +74,14 @@ Calculation of continuous difficulty metric given optimized parameters. Neatly a
 ##### Sequential Effects
 Additional predictions of previous ease & difficult influencing choices on subsequent trial types. Modified regressions above to include previous difficult in addition to current difficult (and span where applicable).
 
-**Basic Categorical w/ Prev. Categorical**
+**Basic Categorical w/ Prev. Categorical**('m1_prev_intxn_rfx'): No main effect of previous categorical chioce difficulty on reaction tme. No interaction bewteen current choice difficulty and previous choice difficulty. 
 
-**Basic Continuous w/ Prev. Continuous**
+**Basic Continuous w/ Prev. Continuous** ('m1_diff_contPrev_all_diff_cont_rfx') significnat main effect of continous difficulty on reaction time for current choice, AND main effect of previous chioce difficulty continous on reaction time. 
 
-**Relationship of Categorical difficulty & Prev. Categorical Difficulty to Categorical Span**
+**Relationship of Categorical difficulty & Prev. Categorical Difficulty to Categorical Span**('m1_prev_capacityCat_intxn_rfx') see consistency with categorical choice difficult on current choice. ALSO a significant interaction between categorical easy difficuly and categorical capacity, high and low. (negative direction). High controllers XXXX
 
-**Relationship of Continuous difficulty & Prev. Continuous Difficulty to Categorical Span**
+**Relationship of Continuous difficulty & Prev. Continuous Difficulty to Categorical Span** ('m1_prev_diffCont_capacityCat_intxn_rfx'): Main effect of previous continous difficulty (includes static) HELP DIRECTION. Significant interaction between continuous difficulty and categorical span. 
+
 
 **TAKEAWAY:**
 
