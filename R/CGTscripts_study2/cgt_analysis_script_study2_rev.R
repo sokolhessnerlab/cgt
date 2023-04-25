@@ -649,6 +649,7 @@ for(s in 1:number_of_clean_subjects){
   clean_data_dm$best_span_overall[clean_data_dm$subjectnumber == subj_id] = best_span_overall[s];
 }
 
+clean_data_dm$best_span_overall_original = clean_data_dm$best_span_overall;
 clean_data_dm$best_span_overall = clean_data_dm$best_span_overall - mean(clean_data_dm$best_span_overall)
 
 # Two options for visualizing Span.
@@ -656,7 +657,7 @@ hist(best_span_overall, breaks = seq(from = 4.25, to = 11.75, by = .5))
 abline(v = medianSpan, col = 'red', lwd = 4)
 
 plot(sort(best_span_overall))
-abline(v = 25.5, col = 'red', lwd = 4)
+abline(h = medianSpan, col = 'red', lwd = 4)
 
 
 mean((best_span_FS < median(best_span_FS)) == (best_span_BS < median(best_span_BS)))
@@ -952,9 +953,41 @@ summary(m3_prev_diffCont_capacityCat_intxn_LOWONLYrfx)
 
 
 
+# Examine best-fitting threshold values
+possible_threshold_values = sort(unique(best_span_overall))+.25;
+possible_threshold_values = possible_threshold_values[1:(length(possible_threshold_values)-1)];
 
+all_aic_values = array(data = NA, dim = length(possible_threshold_values));
 
+clean_data_dm$capacity_HighP1_lowN1_temp = NA;
 
+for(ind in 1:length(possible_threshold_values)){
+  break_val = possible_threshold_values[ind];
+  clean_data_dm$capacity_HighP1_lowN1_temp[clean_data_dm$best_span_overall_original > break_val] = 1;
+  clean_data_dm$capacity_HighP1_lowN1_temp[clean_data_dm$best_span_overall_original < break_val] = -1;
+
+  cat(sprintf('This many people are < break_val: %g\n',sum(best_span_overall<break_val)))
+  
+  if((sum(best_span_overall<break_val) == 1) | (sum(best_span_overall>break_val) == 1)){
+    next # don't use any categorizations that create a 'group' with just 1 person
+  }
+  
+  m3_tmp = lmer(sqrtRT ~ 1 + all_diff_cont * prev_all_diff_cont * capacity_HighP1_lowN1_temp + 
+                                                  (1 | subjectnumber), data = clean_data_dm, REML = F);
+  all_aic_values[ind] = AIC(m3_tmp)
+}
+
+best_aic = min(all_aic_values, na.rm = T);
+best_threshold = possible_threshold_values[which(all_aic_values == best_aic)];
+
+cat(sprintf('The best fitting model uses a threshold value of %g.\n', best_threshold))
+
+plot(sort(best_span_overall), xlab = 'Participants', ylab = 'Span')
+abline(h = best_threshold, col = 'blue', lwd = 4)
+abline(h = medianSpan, col = 'red', lwd = 4, lty = 'dotted') # median value
+legend('topleft', legend = c('Span','Best threshold','Median span'), col = c('black','blue', 'red'), lty = 1)
+
+plot(x = possible_threshold_values, y = all_aic_values, type = 'l', col = 'green', xlab = 'Thresholds', ylab = 'AIC values (lower better)')
 
 
 ################ MOST STUFF BELOW HERE CAN BE IGNORED ################
