@@ -678,6 +678,21 @@ summary(m0_diffcat_dynonly_rfx)
 # Takeaway: 
 # In all cases, difficult is slower than easy! Use: m0_catdiff_rfx
 
+#attempt to graph m0_catdiff_rfx 
+# Create a scatter plot of the actual data points HELP!!!
+par(mar = c(5, 5, 2, 2))
+plot(clean_data_dm$easyP1difficultN1, clean_data_dm$sqrtRT,
+     main = "Regression Model of sqrtRT",
+     xlab = "EasyP1difficultN1",
+     ylab = "sqrtRT",
+     pch = 16)
+points((clean_data_dm$easyP1difficultN1 == 1), col = 'blue')
+#abline((m0_diffcat_rfx, col = "red"))
+
+
+# Add the regression line to the plot^^ HELP 
+
+
 
 # Create Shifted versions of difficulty for use in regressions
 
@@ -860,12 +875,9 @@ sd((meanRT_easy_capacity_Low), na.rm = T);
 
 #Q: Does rt vary significantly from high to low controllers regardelss of choice type/difficulty?
 #Q: Does cognitive capacity influence reaction time?Do high controllers have diff avg RT (predicted faster avg) compared to low controllers? 
-t.test(meanRT_diff_capacity_High, meanRT_diff_capacity_Low, na.rm = T);
-t.test(meanRT_easy_capacity_High, meanRT_easy_capacity_Low, na.rm = T)
-
+#t.test(meanRT_diff_capacity_High, meanRT_diff_capacity_Low, na.rm = T);
+#t.test(meanRT_easy_capacity_High, meanRT_easy_capacity_Low, na.rm = T)
 #A: not significantly different, suggesting that cognitive capacity on this level, does not effect reatction time. 
-
-
 
 
 #see behavioral (rt) variability in the regression based upon inc or dec of capacity?
