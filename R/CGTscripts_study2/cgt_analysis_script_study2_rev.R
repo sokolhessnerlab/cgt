@@ -651,6 +651,14 @@ for(s in 1:number_of_clean_subjects){
 
 clean_data_dm$best_span_overall = clean_data_dm$best_span_overall - mean(clean_data_dm$best_span_overall)
 
+# Two options for visualizing Span.
+hist(best_span_overall, breaks = seq(from = 4.25, to = 11.75, by = .5))
+abline(v = medianSpan, col = 'red', lwd = 4)
+
+plot(sort(best_span_overall))
+abline(v = 25.5, col = 'red', lwd = 4)
+
+
 mean((best_span_FS < median(best_span_FS)) == (best_span_BS < median(best_span_BS)))
 # median splits on only forward span & on only backward span agree about categorization 86% of the time - GOOD!
 
@@ -664,7 +672,7 @@ library(lmerTest)
 
 clean_data_dm$sqrtRT = sqrt(clean_data_dm$reactiontime);
 
-#current rt based on current easy difficult
+## Model 0: Current RT based on current easy difficult
 m0_diffcat = lm(sqrtRT ~ 1 + easyP1difficultN1, data = clean_data_dm); # LM
 summary(m0_diffcat)
 
@@ -675,26 +683,56 @@ m0_diffcat_dynonly_rfx = lmer(sqrtRT ~ 1 + easyP1difficultN1 + (1 | subjectnumbe
                           data = clean_data_dm[clean_data_dm$static0dynamic1 == 1,]);
 summary(m0_diffcat_dynonly_rfx)
 
-# Takeaway: 
-# In all cases, difficult is slower than easy! Use: m0_catdiff_rfx
+# Takeaway: In all cases, difficult is slower than easy! Use: m0_diffcat_rfx
 
-#attempt to graph m0_catdiff_rfx 
-# Create a scatter plot of the actual data points HELP!!!
-par(mar = c(5, 5, 2, 2))
-plot(clean_data_dm$easyP1difficultN1, clean_data_dm$sqrtRT,
-     main = "Regression Model of sqrtRT",
-     xlab = "EasyP1difficultN1",
-     ylab = "sqrtRT",
-     pch = 16)
-points((clean_data_dm$easyP1difficultN1 == 1), col = 'blue')
-#abline((m0_diffcat_rfx, col = "red"))
+# use continuous diff metric instead of easy/difficult 
+m0_diffcont = lm(sqrtRT ~ 1 + diff_cont , data = clean_data_dm);
+summary(m0_diffcont) # matches categorical
+
+m0_diffcont_rfx = lmer(sqrtRT ~ 1 + diff_cont + (1 | subjectnumber), data = clean_data_dm);
+summary(m0_diffcont_rfx) # matches categorical
+
+m0_diffcont_dynonly_rfx = lmer(sqrtRT ~ 1 + diff_cont + (1 | subjectnumber),
+                               data = clean_data_dm[clean_data_dm$static0dynamic1 == 1,]);
+summary(m0_diffcont_dynonly_rfx) # matches categorical
+
+# TAKEAWAY: Nothing new here, matches categorical, as expected (diff_cont is practically categorical!)
+m0_alldiffcont = lm(sqrtRT ~ 1 + all_diff_cont, data = clean_data_dm);
+summary(m0_alldiffcont) # matches categorical
+
+m0_alldiffcont_rfx = lmer(sqrtRT ~ 1 + all_diff_cont + (1 | subjectnumber), data = clean_data_dm);
+summary(m0_alldiffcont_rfx) # matches categorical
+
+# Which model should we use? 
+# It's between m0_diffcat_rfx and m0_alldiffcont_rfx
+AIC(m0_diffcat_rfx) # -4898.179
+AIC(m0_alldiffcont_rfx) # -4924.883 <- BETTER (more negative)
+
+anova(m0_diffcat_rfx,m0_alldiffcont_rfx) # CONFIRMS that all_diff_cont outperforms easyp1difficuln1
+
+# Plot the simple main effect of difficulty
+xval_plot = seq(from = 0, to = 1, by = .1);
+coef_vals = fixef(m0_alldiffcont_rfx)
+
+plot(x = xval_plot, y = (coef_vals["(Intercept)"] + xval_plot*coef_vals["all_diff_cont"])^2, 
+     type = 'l', lwd = 5, col = 'purple', 
+     main = 'Effect of current difficulty', xlab = 'Difficulty (0 = easy, 1 = difficult)', ylab = 'Reaction Time (seconds)')
+
+# # Alternative Approach using data points and abline function
+# plot(x = clean_data_dm$all_diff_cont, y = clean_data_dm$sqrtRT)
+# abline(reg = m0_alldiffcont, col = 'red') # regression must be an LM or GLM, not LMER or GLMER
 
 
-# Add the regression line to the plot^^ HELP 
+
+# BIG TAKEAWAY:
+# Across categorical and two kinds of continuous difficulty, difficult trials are slower. 
+#
+# m0_alldiffcont_rfx is best (AIC: -4924.883; AIC(m0_diffcat_rfx) is -4898.179)
 
 
 
-# Create Shifted versions of difficulty for use in regressions
+
+## Model 1: PREVIOUS DIFFICULTY: Create Shifted versions of difficulty for use in regressions
 
 # input shifted version of desired content
 clean_data_dm$easyP1difficultN1_prev = c(0,clean_data_dm$easyP1difficultN1[1:(length(clean_data_dm$easyP1difficultN1)-1)])
@@ -706,7 +744,7 @@ clean_data_dm$sqrtRT_prev = c(NA,clean_data_dm$sqrtRT[1:(length(clean_data_dm$sq
 clean_data_dm$sqrtRT_prev[clean_data_dm$trialnumber == 1] = NA;
 
 
-# Previous Difficulty Influences Subsequent RT? 
+# Does previous difficulty influence subsequent RT? 
 # LMs
 m1_diffcat_prev = lm(sqrtRT ~ 1 + easyP1difficultN1 + easyP1difficultN1_prev, data = clean_data_dm);
 summary(m1_diffcat_prev) # no effect
@@ -724,45 +762,54 @@ summary(m1_diffcat_prev_intxn_rfx) # no effect
 
 # TAKEAWAY: Previous categorical difficulty has no effect on subsequent RTs
 
+m1_prev_alldiffCont_intxn_rfx = lmer(sqrtRT ~ 1 + 
+                                                all_diff_cont * prev_all_diff_cont + 
+                                                (1 | subjectnumber), data = clean_data_dm);
+summary(m1_prev_alldiffCont_intxn_rfx) # Previous CONTINUOUS difficulty is significant (p < 0.03), no interaction w/ current diff
+# Sign is negative: the more difficult the prev. trial was, the faster people were on the current trial
+# ... facilitatory? 
+#
+# 
+# Thinking this through... restricting the above RFX regression to JUST static or JUST dynamic data does not yield a significant
+# effect of previous difficulty (static: -0.003, p = .86; dynamic: 0.01, p = 0.24). Both alternative regressions return, as 
+# expected, positive effects of current difficulty on reaction time. 
+
+AIC(m1_prev_alldiffCont_intxn_rfx) # -4931.999
+AIC(m1_diffcat_prev_intxn_rfx) # -4875.277
+
+# Note that accounting for previous difficulty does outperform a model that does not (i.e. m0_alldiffcont_rfx, which had AIC 
+# of -4924.883)!
 
 
-#use continuous diff metric instead of easy/difficult 
-m1_diffcont = lm(sqrtRT ~ 1 + diff_cont , data = clean_data_dm);
-summary(m1_diffcont) # matches categorical
+# Categorically, there is no apparent effect of PREVIOUS difficulty on subsequent choices. 
+# HOWEVER, using continuous difficulty (including all trials, static & dynamic), we find a small effect of 
+# previous (continuous) difficulty on subsequent RTs. It's facilitatory! 
 
-m1_diffcont_rfx = lmer(sqrtRT ~ 1 + diff_cont + (1 | subjectnumber), data = clean_data_dm);
-summary(m1_diffcont_rfx) # matches categorical
+# Plot it!
+xval_plot = seq(from = 0, to = 1, by = .1);
+prev_trial_diff = c(0,1);
+coef_vals = fixef(m1_prev_alldiffCont_intxn_rfx)
 
-m1_diffcont_dynonly_rfx = lmer(sqrtRT ~ 1 + diff_cont + (1 | subjectnumber),
-                           data = clean_data_dm[clean_data_dm$static0dynamic1 == 1,]);
-summary(m1_diffcont_dynonly_rfx) # matches categorical
-
-# TAKEAWAY: Nothing new here, matches categorical, as expected (diff_cont is practically categorical!)
-
-
-m1_alldiffcont_rfx = lmer(sqrtRT ~ 1 + all_diff_cont + (1 | subjectnumber), data = clean_data_dm);
-summary(m1_alldiffcont_rfx) # matches categorical
-
-
-# BIG TAKEAWAY:
-# Across categorical and two kinds of continuous difficulty, difficult trials are slower. There is no 
-# apparent effect of PREVIOUS difficulty on subsequent choices. 
-# At this level, it does not matter how you conceive of difficulty. 
-
+plot(x = xval_plot, y = (coef_vals["(Intercept)"] + 
+                           xval_plot*coef_vals["all_diff_cont"] + 
+                           prev_trial_diff[1]*coef_vals["prev_all_diff_cont"])^2, 
+     type = 'l', lwd = 5, col = 'blue', 
+     main = 'Effect of current & previous difficulty', xlab = 'Current difficulty (0 = easy, 1 = difficult)', ylab = 'Reaction Time (seconds)',
+     ylim = c(1.25, 1.5))
+lines(x = xval_plot, y = (coef_vals["(Intercept)"] + 
+                            xval_plot*coef_vals["all_diff_cont"] + 
+                            prev_trial_diff[2]*coef_vals["prev_all_diff_cont"])^2, 
+      lwd = 5, col = 'red')
+# RED = previous trial difficult
+# BLUE = previous trial easy
 
 
-# What role does high/low cognitive capacity have here? 
-m1_prev_capacityCat_intxn_rfx = lmer(sqrtRT ~ 1 + 
-                                       easyP1difficultN1 * easyP1difficultN1_prev * capacity_HighP1_lowN1 + 
-                                       (1 | subjectnumber), data = clean_data_dm);
-summary(m1_prev_capacityCat_intxn_rfx)
-# No effect of previous difficulty.
-# Current difficulty predicts higher RT
-# Current difficulty predicts EVEN HIGHER RT for people with high capacity. 
 
-m1_capacityCatDiff_intxn_rfx = lmer(sqrtRT ~ 1 + easyP1difficultN1 * capacity_HighP1_lowN1 + 
+
+## Model 2: What role does high/low cognitive capacity have on CURRENT TRIAL EFFECTS
+m2_capacityCatDiff_intxn_rfx = lmer(sqrtRT ~ 1 + easyP1difficultN1 * capacity_HighP1_lowN1 + 
                                       (1 | subjectnumber), data = clean_data_dm);
-summary(m1_capacityCatDiff_intxn_rfx)
+summary(m2_capacityCatDiff_intxn_rfx)
 (1.183 + 1*-0.03029 + 1*0.01499 + 1*1*-0.006186)^2 # easy, high cap
 (1.183 + -1*-0.03029 + 1*0.01499 + -1*1*-0.006186)^2 # diff, high cap
 
@@ -770,35 +817,155 @@ summary(m1_capacityCatDiff_intxn_rfx)
 (1.183 + -1*-0.03029 + -1*0.01499 + -1*-1*-0.006186)^2 # diff, low cap
 
 
-m1_capacityContDiff_intxn_rfx = lmer(sqrtRT ~ 1 + all_diff_cont * capacity_HighP1_lowN1 + 
+m2_capacityContDiff_intxn_rfx = lmer(sqrtRT ~ 1 + all_diff_cont * capacity_HighP1_lowN1 + 
                                        (1 | subjectnumber), data = clean_data_dm);
-summary(m1_capacityContDiff_intxn_rfx)
+summary(m2_capacityContDiff_intxn_rfx)
 # SAME PATTERN If you use continuous difficulty instead of categorical difficulty
 
+AIC(m2_capacityCatDiff_intxn_rfx) # AIC: -4885.503
+AIC(m2_capacityContDiff_intxn_rfx) # AIC: -4914.515 (BETTER)
 
-#Q: seperate easy and difficult based upon experinced difficulty
+
+# Model 3: What role does high/low cognitive capacity have on CURRENT AND PREVIOUS TRIAL EFFECTS
+
+m3_prev_capacityCat_intxn_rfx = lmer(sqrtRT ~ 1 + 
+                                       easyP1difficultN1 * easyP1difficultN1_prev * capacity_HighP1_lowN1 + 
+                                       (1 | subjectnumber), data = clean_data_dm);
+summary(m3_prev_capacityCat_intxn_rfx)
+# No effect of previous difficulty.
+# Current difficulty predicts higher RT
+# Current difficulty predicts EVEN HIGHER RT for people with high capacity. 
+
+#Q: separate easy and difficult based upon experienced difficulty
 clean_data_dm$easy = as.double(clean_data_dm$easyP1difficultN1 == 1)
 clean_data_dm$difficult = as.double(clean_data_dm$easyP1difficultN1 == -1)
 
-m1_capacityCat_intxn_rfx = lmer(sqrtRT ~ 1 + easy * capacity_HighP1_lowN1 + difficult * capacity_HighP1_lowN1 + 
+m3_capacityCat_intxn_rfx = lmer(sqrtRT ~ 1 + easy * capacity_HighP1_lowN1 + difficult * capacity_HighP1_lowN1 + 
                                   (1 | subjectnumber), data = clean_data_dm);
-summary(m1_capacityCat_intxn_rfx)
+summary(m3_capacityCat_intxn_rfx)
 # Trend interaction between difficult and capacity, suggesting that the above effect is due to 
 # higher RTs for people with higher capacity on DIFFICULT trials specifically.
 
 
 # Continuous difficulty (including previous) and categorical capacity
-m1_prev_diffCont_capacityCat_intxn_rfx = lmer(sqrtRT ~ 1 + 
+m3_prev_diffCont_capacityCat_intxn_rfx = lmer(sqrtRT ~ 1 + 
                                                 all_diff_cont * prev_all_diff_cont * capacity_HighP1_lowN1 + 
                                                 (1 | subjectnumber), data = clean_data_dm);
-summary(m1_prev_diffCont_capacityCat_intxn_rfx)
-# There is an effect of previous difficulty here??
+summary(m3_prev_diffCont_capacityCat_intxn_rfx)
+
+
+# DON'T COMPARE m3_prev_capacityCat_intxn_rfx AND m3_prev_diffCont_capacityCat_intxn_rfx (HAVE DIFFERENT
+# NUMBERS OF TRIALS B/C OF HOW PREVIOUS DIFFICULTY WAS CODED; USED 0'S AT OVERLAP POINTS INSTEAD OF
+# NAs AS USED IN CONTINUOUS DIFFICULTY)
+# AIC(m3_prev_capacityCat_intxn_rfx)
+AIC(m3_prev_diffCont_capacityCat_intxn_rfx) # Be careful when reporting; has fewer datapoints b/c of NAs
+
+
+# Plot this??
+# 
+# MODEL OUTPUT
+# Estimate Std. Error         df t value Pr(>|t|)    
+# (Intercept)                                               1.156e+00  1.771e-02  5.594e+01  65.293  < 2e-16 ***
+#   all_diff_cont                                           6.818e-02  7.912e-03  8.307e+03   8.617  < 2e-16 ***
+#   prev_all_diff_cont                                     -1.946e-02  7.932e-03  8.307e+03  -2.453  0.01418 *  
+#   capacity_HighP1_lowN1                                   1.383e-03  1.771e-02  5.594e+01   0.078  0.93802    
+# all_diff_cont:prev_all_diff_cont                          2.624e-03  1.170e-02  8.305e+03   0.224  0.82253    
+# all_diff_cont:capacity_HighP1_lowN1                       2.375e-02  7.912e-03  8.307e+03   3.002  0.00269 ** 
+#   prev_all_diff_cont:capacity_HighP1_lowN1                1.387e-02  7.932e-03  8.307e+03   1.749  0.08036 .  
+# all_diff_cont:prev_all_diff_cont:capacity_HighP1_lowN1   -1.810e-02  1.170e-02  8.305e+03  -1.547  0.12193    
+#
+# Current difficulty = slower RTs (found previously)
+# Prev. difficulty = faster RTs (found previously)
+# Curr. & prev. difficulty do NOT interact to influence reaction time. 
+# 
+# Capacity = no net effect! [contrary to hypotheses]
+#
+# Capacity does interact with CURRENT difficulty to potentiate slowing due to difficulty for high capacity 
+# people, and attenuate that effect for low capacity people.
+# 
+# Capacity has trending interaction with previous difficulty to almost eliminate the effect of prev. difficulty
+# for high capacity folks, but potentiate it for low capacity folks. 
+
+
+xval_plot = seq(from = 0, to = 1, by = .1); # current difficulty (easy = 0, difficult = 1)
+prev_trial_diff = c(0,1); # easy = 0, difficult = 1
+capacity = c(1, -1); # HIGH = 1, low = -1
+coef_vals = fixef(m3_prev_diffCont_capacityCat_intxn_rfx)
+
+# First plot PREV easy & CAPACITY high
+plot(x = xval_plot, y = (coef_vals["(Intercept)"] + 
+                           xval_plot*coef_vals["all_diff_cont"] + 
+                           prev_trial_diff[1]*coef_vals["prev_all_diff_cont"] + 
+                           xval_plot*capacity[1]* coef_vals["all_diff_cont:capacity_HighP1_lowN1"] + 
+                           prev_trial_diff[1]*capacity[1]*coef_vals["prev_all_diff_cont:capacity_HighP1_lowN1"])^2, 
+     type = 'l', lwd = 5, col = 'blue', 
+     main = 'Effect of current & previous difficulty', xlab = 'Current difficulty (0 = easy, 1 = difficult)', ylab = 'Reaction Time (seconds)',
+     ylim = c(1.25, 1.575))
+# Second plot PREV diff & CAPACITY high
+lines(x = xval_plot, y = (coef_vals["(Intercept)"] + 
+                            xval_plot*coef_vals["all_diff_cont"] + 
+                            prev_trial_diff[2]*coef_vals["prev_all_diff_cont"] + 
+                            xval_plot*capacity[1]* coef_vals["all_diff_cont:capacity_HighP1_lowN1"] + 
+                            prev_trial_diff[2]*capacity[1]*coef_vals["prev_all_diff_cont:capacity_HighP1_lowN1"])^2, 
+      lwd = 5, col = 'red')
+# Third plot PREV easy & CAPACITY low
+lines(x = xval_plot, y = (coef_vals["(Intercept)"] + 
+                            xval_plot*coef_vals["all_diff_cont"] + 
+                            prev_trial_diff[1]*coef_vals["prev_all_diff_cont"] + 
+                            xval_plot*capacity[2]* coef_vals["all_diff_cont:capacity_HighP1_lowN1"] + 
+                            prev_trial_diff[1]*capacity[2]*coef_vals["prev_all_diff_cont:capacity_HighP1_lowN1"])^2, 
+      lwd = 5, col = 'blue', lty = 'dashed')
+# Fourth (last) plot PREV diff & CAPACITY low
+lines(x = xval_plot, y = (coef_vals["(Intercept)"] + 
+                            xval_plot*coef_vals["all_diff_cont"] + 
+                            prev_trial_diff[2]*coef_vals["prev_all_diff_cont"] + 
+                            xval_plot*capacity[2]* coef_vals["all_diff_cont:capacity_HighP1_lowN1"] + 
+                            prev_trial_diff[2]*capacity[2]*coef_vals["prev_all_diff_cont:capacity_HighP1_lowN1"])^2, 
+      lwd = 5, col = 'red', lty = 'dashed')
+# RED = previous trial difficult
+# BLUE = previous trial easy
+
+
+m3_prev_diffCont_capacityCat_intxn_HIGHONLYrfx = lmer(sqrtRT ~ 1 + 
+                                                all_diff_cont * prev_all_diff_cont + 
+                                                (1 | subjectnumber), data = clean_data_dm[clean_data_dm$capacity_HighP1_lowN1 == 1,]);
+summary(m3_prev_diffCont_capacityCat_intxn_HIGHONLYrfx)
+# Fixed effects:
+#                                       Estimate Std. Error         df t value Pr(>|t|)    
+#   (Intercept)                       1.158e+00  2.802e-02  2.675e+01  41.318   <2e-16 ***
+#   all_diff_cont                     9.199e-02  1.105e-02  4.129e+03   8.326   <2e-16 ***
+#   prev_all_diff_cont               -5.525e-03  1.109e-02  4.129e+03  -0.498    0.619    
+#   all_diff_cont:prev_all_diff_cont -1.551e-02  1.657e-02  4.128e+03  -0.936    0.349    
+
+m3_prev_diffCont_capacityCat_intxn_LOWONLYrfx = lmer(sqrtRT ~ 1 + 
+                                                        all_diff_cont * prev_all_diff_cont + 
+                                                        (1 | subjectnumber), data = clean_data_dm[clean_data_dm$capacity_HighP1_lowN1 == -1,]);
+summary(m3_prev_diffCont_capacityCat_intxn_LOWONLYrfx)
+# Fixed effects:
+#                                       Estimate Std. Error         df t value Pr(>|t|)    
+#   (Intercept)                         1.15489    0.02164   30.01978  53.377  < 2e-16 ***
+#   all_diff_cont                       0.04437    0.01123 4178.80666   3.950 7.95e-05 ***
+#   prev_all_diff_cont                 -0.03339    0.01125 4178.83886  -2.969    0.003 ** 
+#   all_diff_cont:prev_all_diff_cont    0.02077    0.01641 4177.22139   1.266    0.206    
+
+# THESE FINDINGS TOTALLY PARALLEL THE COMPLEX INTERACTIVE MODEL ABOVE AND BACK UP THE OBSERVATIONS MADE THERE.
+
+
+
+
+
+
+
+
+################ MOST STUFF BELOW HERE CAN BE IGNORED ################
+
 
 # Continuous difficulty (including previous) and continuous capacity and categorical capacity
 m1_prev_diffCont_capacityCont_capacityCat_intxn_rfx = lmer(sqrtRT ~ 1 + all_diff_cont * prev_all_diff_cont * best_span_overall + 
                                                              all_diff_cont * prev_all_diff_cont * capacity_HighP1_lowN1 + 
                                                              (1 | subjectnumber), data = clean_data_dm);
 summary(m1_prev_diffCont_capacityCont_capacityCat_intxn_rfx)
+
 
 
 
