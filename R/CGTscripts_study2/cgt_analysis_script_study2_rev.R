@@ -918,7 +918,7 @@ plot(x = xval_plot, y = (coef_vals["(Intercept)"] +
                             prev_trial_diff[1]*coef_vals["prev_all_diff_cont"] + 
                             xval_plot*capacity[2]* coef_vals["all_diff_cont:capacity_HighP1_lowN1"] + 
                             prev_trial_diff[1]*capacity[2]*coef_vals["prev_all_diff_cont:capacity_HighP1_lowN1"])^2, 
-     type = 'l',lwd = 5, col = 'red', lty = 'dashed',
+     type = 'l',lwd = 5, col = 'red',
      main = 'Effect of current & previvous difficulty', xlab = 'Current difficulty (0 = easy, 1 = difficult)', ylab = 'Reaction Time (seconds)',
      ylim = c(1.25,1.575))
 # Fourth (last) plot PREV diff & CAPACITY low
@@ -927,7 +927,7 @@ lines(x = xval_plot, y = (coef_vals["(Intercept)"] +
                             prev_trial_diff[2]*coef_vals["prev_all_diff_cont"] + 
                             xval_plot*capacity[2]* coef_vals["all_diff_cont:capacity_HighP1_lowN1"] + 
                             prev_trial_diff[2]*capacity[2]*coef_vals["prev_all_diff_cont:capacity_HighP1_lowN1"])^2, 
-      lwd = 5, col = 'blue', lty = 'dashed')
+      lwd = 5, col = 'blue')
 
 # RED = previous trial easy
 # BLUE = previous trial difficult
