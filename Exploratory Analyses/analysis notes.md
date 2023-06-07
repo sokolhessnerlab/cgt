@@ -1,22 +1,22 @@
-## END OF TASK DATA ORGANiZATION ##
+# END OF TASK DATA ORGANIZATION #
 
-# NFC SCORING
+## NFC SCORING
 The highest possible score 72, lowest = -72. High scoring is a "thinker" 
 Reverse score these columns NeedForCog... 3,4,5,7,8,9,12,16,17 (on raw data file see S drive)
 Answers ranged 1-5: 1 extremeley un characterstic of me to  5 extremely characteristic
 
-# id = particpant id from sona systems 
+## id = particpant id from sona systems 
 
-# Ethnicity 
+## Ethnicity 
 1 = Hispanic/Latinx
 2 = Not Hispanic/Latinx
 3 = Prefer Not to Say
 
-# Gender 
+## Gender 
 1 = male 
 2 = female 
 
-# Race 
+## Race 
 1 = American Indian/Alaska Native 
 2 = Black/Aftican American 
 3 = East Asian 
@@ -27,7 +27,7 @@ Answers ranged 1-5: 1 extremeley un characterstic of me to  5 extremely characte
 8 = Other 
 9 = Prefer Not to Say 
 
-# Education
+## Education
 1 = no schooling completed 
 2 = nursey school to 8th grade 
 3 = some high school, no dipolma 
@@ -39,26 +39,26 @@ Answers ranged 1-5: 1 extremeley un characterstic of me to  5 extremely characte
 9 = professional degree 
 10 = doctors degree 
 
-# Political Orientation 
+## Political Orientation 
 1 = extremely conservative 
 9 = extremly liberal 
 
-# Starting Energy 
+## Starting Energy 
 1 = extremely tired 
 4 = nuetral 
 7 = extremely energized 
 
-# Current Energy 
+## Current Energy 
 1 = extremely tired 
 4 = nuetral 
 7 = extremely energized 
 
-# Estimating perfomance on RDM
+## Estimating perfomance on RDM
 1 = extremely poor 
 4 = average 
 7 = extremely great 
 
-# Estimating performance on digit span 
+## Estimating performance on digit span 
 1 = extremely poor 
 4 = average 
 7 = extremely great 
