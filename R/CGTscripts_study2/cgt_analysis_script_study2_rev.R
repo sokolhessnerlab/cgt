@@ -1016,17 +1016,28 @@ data<- filtered_data # dont know how to get it just the file I want
 nfc_items <- data[, c("needForCog_1", "needForCog_2", "needForCog_3", "needForCog_4", "needForCog_5", "needForCog_6", "needForCog_7", 
                       "needForCog_8", "needForCog_9", "needForCog_10", "needForCog_11", "needForCog_12","needForCog_12", "needForCog_13", 
                       "needForCog_14", "needForCog_15", "needForCog_16", "needForCog_17","needForCog_18")]
+#sum on per participant 
+for (subj in 1:number_of_clean_subjects) {
+  subj_id = keep_participants[subj]
+  tmpdata = data_wm[data_wm$subjectnumber == subj_id, ]
+  nfc_score<- filtered_data %>%
+    select(nfc_items) %>%
+    rowSums(na.rm = TRUE)
+
 
 nfc_scale <- alpha(nfc_items_reversed)$total$raw_alpha
 
 #notes for scoring 
-#highest possible score 72, lowest = -72.
 #high scoring is a "thinker" 
+#5 x 18 = highest score = 90 
+
 
 #reverse score these columns 3,4,5,7,8,9,12,16,17
+  # 1 = extremely characteristic 
+  # 5 = extremely uncharacteristic
 
-#answers ranged 1-5 
-  # extremeley un characterstic of me to extremely characteristic
+# Normal answers ranged 1-5 
+  # extremely uncharacteristic of me to extremely characteristic of me 
 
 
 
