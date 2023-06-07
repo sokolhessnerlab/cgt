@@ -995,6 +995,44 @@ legend('topleft', legend = c('Span','Best threshold','Median span'), col = c('bl
 
 plot(x = possible_threshold_values, y = all_aic_values, type = 'l', col = 'green', xlab = 'Thresholds', ylab = 'AIC values (lower better)')
 
+#####EXPLORATORY ANALYSES ##########
+
+## NEED HELP WITH PARTICIPANT SITUATION ## 
+library(dplyr) 
+data <- read.csv("CGT_END_OF_TASK_Q_RAWDATA")
+
+#attempt to set file without pts we eliminated, i am unsure how to get the other peoples ids that we elimnated in data quality checks or if it doesnt matter?? 
+filtered_data <- data %>%
+  filter(id != "20615", "20623", "20517", "20638", "18705")
+
+##NFC
+install.packages("psych")
+library(psych)
+
+
+data <- read.csv("CGT_END_OF_TASK_Q_RAWDATA")
+data<- filtered_data # dont know how to get it just the file I want 
+
+nfc_items <- data[, c("needForCog_1", "needForCog_2", "needForCog_3", "needForCog_4", "needForCog_5", "needForCog_6", "needForCog_7", 
+                      "needForCog_8", "needForCog_9", "needForCog_10", "needForCog_11", "needForCog_12","needForCog_12", "needForCog_13", 
+                      "needForCog_14", "needForCog_15", "needForCog_16", "needForCog_17","needForCog_18")]
+
+nfc_scale <- alpha(nfc_items_reversed)$total$raw_alpha
+
+#notes for scoring 
+#highest possible score 72, lowest = -72.
+#high scoring is a "thinker" 
+
+#reverse score these columns 3,4,5,7,8,9,12,16,17
+
+#answers ranged 1-5 
+  # extremeley un characterstic of me to extremely characteristic
+
+
+
+
+
+
 
 ################ MOST STUFF BELOW HERE CAN BE IGNORED ################
 
