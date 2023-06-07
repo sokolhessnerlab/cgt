@@ -997,34 +997,6 @@ plot(x = possible_threshold_values, y = all_aic_values, type = 'l', col = 'green
 
 #####EXPLORATORY ANALYSES ##########
 
-## NEED HELP WITH PARTICIPANT SITUATION ## 
-library(dplyr) 
-data <- read.csv("EndOfTaskQ_RawData_CGT")
-
-#attempt to set file without pts we eliminated, I am unsure how to get the other peoples ids that we elimnated in data quality checks or if it doesnt matter?? 
-filtered_data <- data %>%
-  filter(id != "20615", "20623", "20517", "20638", "18705")
-
-##NFC
-install.packages("psych")
-library(psych)
-
-
-data <- read.csv("EndOfTaskQ_RawData_CGT")
-data<- filtered_data 
-
-nfc_items <- data[, c("needForCog_1", "needForCog_2", "needForCog_3", "needForCog_4", "needForCog_5", "needForCog_6", "needForCog_7", 
-                      "needForCog_8", "needForCog_9", "needForCog_10", "needForCog_11", "needForCog_12","needForCog_12", "needForCog_13", 
-                      "needForCog_14", "needForCog_15", "needForCog_16", "needForCog_17","needForCog_18")]
-#sum on per participant 
-for (subj in 1:number_of_clean_subjects) {
-  subj_id = keep_participants[subj]
-  tmpdata = data_wm[data_wm$subjectnumber == subj_id, ] # am I using tmpdata? 
-  nfc_score<- filtered_data %>%
-    select(nfc_items) %>%
-    rowSums(na.rm = TRUE)}
-
-nfc_scale <- alpha(nfc_items_reversed)$total$raw_alpha
 
 #notes for scoring 
 #high scoring is a "thinker" 

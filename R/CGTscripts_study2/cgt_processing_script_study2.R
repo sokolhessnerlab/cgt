@@ -148,6 +148,60 @@ for(s in 1:number_of_subjects){
 data_dm = as.data.frame(data_dm) # make it a data frame so it plays nice
 data_wm = as.data.frame(data_wm)
 
+
+# Load End of Task Questionnaire Data
+
+raw_eot_data <- read.csv("EndOfTaskQ_RawData_CGT.csv") # End Of Task (EOT)
+raw_eot_data = raw_eot_data[-1,]
+
+column_names_eot = c(
+  'nfc_sum',
+  'fraction_attn_check_correct',
+  'energy_level_beginning',
+  'energy_level_end',
+  'performance_riskydecisionmaking',
+  'performance_digitspan',
+  'age',
+  'gender',
+  'ethnicity',
+  'race',
+  'highest_degree_attained',
+  'political_orientation',
+  'sona_ID'
+);
+
+number_of_qualtrics_subjects = dim(raw_eot_data)[1]; # is 64
+
+data_eot = array(data = NA, dim = c(number_of_qualtrics_subjects, length(column_names_eot)));
+colnames(data_eot) <- column_names_eot
+data_eot = as.data.frame(data_eot)
+
+# Forward coded: 1, 2, 6, 10, 11, 13, 14, 15, 18
+# Reverse coded: 3, 4, 5, 7, 8, 9, 12, 16, 17
+#
+# Final scores can range from 18 (low NFC) to 90 (high NFC)
+
+data_eot$nfc_sum =  as.numeric(raw_eot_data$needForCog_1) + 
+                    as.numeric(raw_eot_data$needForCog_2) + 
+                    as.numeric(raw_eot_data$needForCog_6) + 
+                    as.numeric(raw_eot_data$needForCog_10) + 
+                    as.numeric(raw_eot_data$needForCog_11) + 
+                    as.numeric(raw_eot_data$needForCog_13) + 
+                    as.numeric(raw_eot_data$needForCog_14) + 
+                    as.numeric(raw_eot_data$needForCog_15) + 
+                    as.numeric(raw_eot_data$needForCog_18) + 
+                    -as.numeric(raw_eot_data$needForCog_3) + 6 +
+                    -as.numeric(raw_eot_data$needForCog_4) + 6 +
+                    -as.numeric(raw_eot_data$needForCog_5) + 6 +
+                    -as.numeric(raw_eot_data$needForCog_7) + 6 +
+                    -as.numeric(raw_eot_data$needForCog_8) + 6 +
+                    -as.numeric(raw_eot_data$needForCog_9) + 6 +
+                    -as.numeric(raw_eot_data$needForCog_12) + 6 +
+                    -as.numeric(raw_eot_data$needForCog_16) + 6 +
+                    -as.numeric(raw_eot_data$needForCog_17) + 6;
+
+
+
 # save out CSVs with the clean, compiled data!
 setwd(processeddata_wd);
 
@@ -155,6 +209,9 @@ write.csv(data_dm, file=sprintf('cgt_processed_decisionmaking_data_%s.csv',forma
           row.names = F);
 write.csv(data_wm, file=sprintf('cgt_processed_workingmemory_data_%s.csv',format(Sys.Date(), format="%Y%m%d")),
           row.names = F);
+# write.csv(data_eot, file=sprintf('cgt_processed_end_of_task_data_%s.csv',format(Sys.Date(), format="%Y%m%d")),
+          # row.names = F);
+
 
 # all done!
 
