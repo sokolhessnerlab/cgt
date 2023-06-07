@@ -999,7 +999,7 @@ plot(x = possible_threshold_values, y = all_aic_values, type = 'l', col = 'green
 
 ## NEED HELP WITH PARTICIPANT SITUATION ## 
 library(dplyr) 
-data <- read.csv("CGT_END_OF_TASK_Q_RAWDATA")
+data <- read.csv("EndOfTaskQ_RawData_CGT")
 
 #attempt to set file without pts we eliminated, i am unsure how to get the other peoples ids that we elimnated in data quality checks or if it doesnt matter?? 
 filtered_data <- data %>%
@@ -1022,8 +1022,7 @@ for (subj in 1:number_of_clean_subjects) {
   tmpdata = data_wm[data_wm$subjectnumber == subj_id, ]
   nfc_score<- filtered_data %>%
     select(nfc_items) %>%
-    rowSums(na.rm = TRUE)
-
+    rowSums(na.rm = TRUE)}
 
 nfc_scale <- alpha(nfc_items_reversed)$total$raw_alpha
 
