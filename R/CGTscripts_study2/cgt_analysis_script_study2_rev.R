@@ -1030,7 +1030,7 @@ nfc_scale <- alpha(nfc_items_reversed)$total$raw_alpha
 #high scoring is a "thinker" 
 #5 x 18 = highest score = 90 
 
-#reverse score these columns 3,4,5,7,8,9,12,16,17
+#reverse score these columns needForCog_ 3,4,5,7,8,9,12,16,17
   # 1 = extremely characteristic 
   # 5 = extremely uncharacteristic
 
