@@ -175,7 +175,6 @@ number_of_qualtrics_subjects = dim(raw_eot_data)[1]; # is 64
 data_eot = array(data = NA, dim = c(number_of_qualtrics_subjects, length(column_names_eot)));
 colnames(data_eot) <- column_names_eot
 data_eot = as.data.frame(data_eot)
-
 # Forward coded: 1, 2, 6, 10, 11, 13, 14, 15, 18
 # Reverse coded: 3, 4, 5, 7, 8, 9, 12, 16, 17
 #
@@ -200,6 +199,45 @@ data_eot$nfc_sum =  as.numeric(raw_eot_data$needForCog_1) +
                     -as.numeric(raw_eot_data$needForCog_16) + 6 +
                     -as.numeric(raw_eot_data$needForCog_17) + 6;
 
+data_eot$fraction_attn_check_correct =  (as.numeric(raw_eot_data$attentionCheck1) +
+                                        as.numeric(raw_eot_data$attentionCheck2) + 
+                                        as.numeric(raw_eot_data$attentionCheck3))/3;
+
+
+data_eot$energy_level_beginning = as.numeric(raw_eot_data$startEnergy);
+#1 = extremely tired 4 = nuetral 7 = extremely energized
+
+data_eot$energy_level_end = as.numeric(raw_eot_data$currentEnergy);
+#1 = extremely tired 4 = nuetral 7 = extremely energized
+
+data_eot$performance_riskydecisionmaking = as.numeric(raw_eot_data$rdmPerformance);
+#1 = extremely poor 4 = average 7 = extremely great
+
+data_eot$performance_digitspan = as.numeric(raw_eot_data$digitPerformance);
+#1 = extremely poor 4 = average 7 = extremely great
+
+data_eot$age = as.numeric(raw_eot_data$Age);
+
+data_eot$gender = as.numeric(raw_eot_data$Gender);
+  #1 = male 2 = female
+
+#HELP WITH ETHNICITY COLUMN
+#data_eot$ethnicity = as.numeric(raw_eot_data$ethnicity);
+#1 = Hispanic/Latinx 2 = Not Hispanic/Latinx 3 = Prefer Not to Say
+
+data_eot$race = as.numeric(raw_eot_data$Race);
+#1 = American Indian/Alaska Native 2 = Black/Aftican American 3 = East Asian 4 = Native Hawaiian/Paciifc Islander 
+#5 = South Asian 6 = white 7 = Bi-multiracial (please specify) 8 = Other 9 = Prefer Not to Say
+
+data_eot$political_orientation = as.numeric(raw_eot_data$political.o);
+#1 = extremely conservative 9 = extremly liberal
+
+data_eot$highest_degree_attained = as.numeric(raw_eot_data$Education.level.);
+#1 = no schooling completed 2 = nursey school to 8th grade 3 = some high school, no dipolma 
+#4 = high school graduate 5 = trade/technical/vociational traiing 6 = associates degree 
+#7 = bacherlors degree 8 = masters degree 9 = professional degree 10 = doctors degree
+
+data_eot$sona_ID = as.numeric(raw_eot_data$id);
 
 
 # save out CSVs with the clean, compiled data!
