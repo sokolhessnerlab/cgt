@@ -14,10 +14,16 @@ processeddata_wd = paste0(main_wd,'processeddata_study2/');
 
 #### Loading Data ####
 setwd(processeddata_wd);
-fn = dir(pattern = glob2rx('cgt_processed*.csv'),full.names = T);
 
-data_dm = read.csv(fn[1]) # decision-making data
-data_wm = read.csv(fn[2]) # working memory data 
+# Load Decision-Making Data
+fn = dir(pattern = glob2rx('cgt_processed_decisionmaking*.csv'),full.names = T);
+number_of_files = length(fn) # ASSUMES YOU WANT THE MOST-RECENT PROCESSED DATA
+data_dm = read.csv(fn[number_of_files]) # decision-making data
+
+# Load Working Memory Data
+fn = dir(pattern = glob2rx('cgt_processed_workingmemory*.csv'),full.names = T);
+number_of_files = length(fn) # ASSUMES YOU WANT THE MOST-RECENT PROCESSED DATA
+data_wm = read.csv(fn[number_of_files]) # working memory data 
 
 number_of_subjects = length(unique(data_dm$subjectnumber));
 
